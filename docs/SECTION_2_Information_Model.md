@@ -888,10 +888,10 @@ The *`Item`* can be hierarchic and so one *`Item`* can have child *`Item`s*. The
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| *`ItemScheme`* | Inherits from: *`MaintainableArtefact`* <br/>Direct sub classes are:  `CategoryScheme` `ConceptScheme` `Codelist`  `ReportingTaxonomy`  *`OrganisationScheme`*  `TransformationScheme`  `CustomTypeScheme`  `NamePersonalisationScheme`  `RulesetScheme`  `VtlMappingScheme`  `UserDefinedOperatorScheme` | The descriptive information for an arrangement or division of objects into groups based on characteristics, which the objects have in common. |
+| *`ItemScheme`* | Inherits from: <br/>*`MaintainableArtefact`* <br/>Direct sub classes are: <br/>`CategoryScheme` <br/>`ConceptScheme` <br/>`Codelist`  <br/>`ReportingTaxonomy` <br/>*`OrganisationScheme`*  <br/>`TransformationScheme` <br/>`CustomTypeScheme` <br/>`NamePersonalisationScheme` <br/>`RulesetScheme` <br/>`VtlMappingScheme` <br/>`UserDefinedOperatorScheme` | The descriptive information for an arrangement or division of objects into groups based on characteristics, which the objects have in common. |
 |  | `isPartial` | Denotes whether the Item Scheme contains a subset of the full set of Items in the maintained scheme. |
 |  | `/items` | Association to the Items in the scheme. |
-| *`Item`* | Inherits from:  *`NameableArtefact`* <br/>Direct sub classes are  `Category` `Concept` `Code` `ReportingCategory` *`Organisation`* `Transformation` `CustomType` `NamePersonalisation` `Ruleset` `VtlMapping` `UserDefinedOperator` | The Item is an item of content in an Item Scheme. This may be a node in a taxonomy or ontology, a code in a code list etc.  Node that at the conceptual level the Organisation is not hierarchic. |
+| *`Item`* | Inherits from: <br/>*`NameableArtefact`* <br/>Direct sub classes are <br/>`Category` <br/>`Concept` <br/>`Code` <br/>`ReportingCategory` <br/>*`Organisation`* <br/>`Transformation` <br/>`CustomType` <br/>`NamePersonalisation` <br/>`Ruleset` <br/>`VtlMapping` <br/>`UserDefinedOperator` | The Item is an item of content in an Item Scheme. This may be a node in a taxonomy or ontology, a code in a code list etc.  Node that at the conceptual level the Organisation is not hierarchic. |
 |  | `hierarchy` | This allows an Item optionally to have one or more child Items. |
 
 ## 3.6 The Structure Pattern
@@ -918,100 +918,99 @@ The Structure Pattern is a basic architectural pattern which allows the specific
 
 #### 3.6.3.1 Narrative
 
-The *Structure* is an abstract class which contains a set of one or more ComponentList(s) (this class is also abstract). An example of a concrete Structure is DataStructureDefinition.
+The *`Structure`* is an abstract class which contains a set of one or more *`ComponentList`*(s) (this class is also abstract). An example of a concrete `Structure` is `DataStructureDefinition`.
 
-The ComponentList is a list of one or more *Component*(s*)*. The ComponentList has several concrete descriptor classes based on it: DimensionDescriptor, GroupDimensionDescriptor, MeasureDescriptor, and AttributeDescriptor of the DataStructureDefinition and MetadataAttributeDescriptor of the MetadataStructureDefinition.
+The *`ComponentList`* is a list of one or more *`Component`*(s). The *`ComponentList`* has several concrete descriptor classes based on it: `DimensionDescriptor`, `GroupDimensionDescriptor`, `MeasureDescriptor`, and `AttributeDescriptor` of the `DataStructureDefinition` and `MetadataAttributeDescriptor` of the `MetadataStructureDefinition`.
 
-The Component is contained in a ComponentList. The type of Component in a ComponentList is dependent on the concrete class of the ComponentList as follows:
+The *`Component`* is contained in a *`ComponentList`*. The type of *`Component`* in a *`ComponentList`* is dependent on the concrete class of the *`ComponentList`* as follows:
 
-DimensionDescriptor: Dimension, TimeDimension  
-GroupDimensionDescriptor: Dimension, TimeDimension  
-MeasureDescriptor: Measure  
-AttributeDescriptor: DataAttribute, MetadataAttributeRef  
-MetadataAttributeDescriptor: MetadataAttribute  
+`DimensionDescriptor`: `Dimension`, `TimeDimension`  
+`GroupDimensionDescriptor`: `Dimension`, `TimeDimension`  
+`MeasureDescriptor`: `Measure`  
+`AttributeDescriptor`: `DataAttribute`, `MetadataAttributeRef`  
+`MetadataAttributeDescriptor`: `MetadataAttribute`  
 
-Each Component takes its semantic (and possibly also its representation) from a Concept in a ConceptScheme. This is represented by the conceptIdentity association to Concept.
+Each *`Component`* takes its semantic (and possibly also its representation) from a `Concept` in a `ConceptScheme`. This is represented by the `conceptIdentity` association to `Concept`.
 
-The *Component* may also have a localRepresentation. This allows a concrete class, such as Dimension, to specify its representation which is local to the Structure in which it is contained (for Dimension this will be DataStructureDefinition), and thus overrides any coreRepresentation specified for the Concept.
+The *`Component`* may also have a `localRepresentation`. This allows a concrete class, such as `Dimension`, to specify its representation which is local to the *`Structure`* in which it is contained (for `Dimension` this will be `DataStructureDefinition`), and thus overrides any `coreRepresentation` specified for the `Concept`.
 
-The Representation can be enumerated or non-enumerated. The valid content of an enumerated representation is specified either in an ItemScheme which can be one of Codelist, ValueList or GeoCodelist. The valid content of a non-enumerated representation is specified as one or more Facet(s) (for example, these may specify minimum and maximum values). For any Attribute this is achieved by one of more ExtendedFacet(s), which allow the additional representation of XHTML.
+The `Representation` can be enumerated or non-enumerated. The valid content of an enumerated representation is specified either in an *`ItemScheme`* which can be one of `Codelist`, `ValueList` or `GeoCodelist`. The valid content of a non-enumerated representation is specified as one or more *`Facet`*(s) (for example, these may specify minimum and maximum values). For any `Attribute` this is achieved by one of more `ExtendedFacet`(s), which allow the additional representation of XHTML.
 
 The types of representation that are valid for specific components is expressed in the model as a constraint on the association:
 
-* The Dimension, DataAttribute, Measure, MetadataAttribute may be enumerated and, if so, use an EnumeratedList.
-* The Dimension and Measure may be non-enumerated and, if so, use one or more Facet(s), note that the FacetValueType applicable to the TimeDimension is restricted to those that represent time.
-* The MetadataAttribute and DataAttribute may be non-enumerated and, if so, use one or more ExtendedFacet(s).
+* The `Dimension`, `DataAttribute`, `Measure`, `MetadataAttribute` may be enumerated and, if so, use an *`EnumeratedList`*.
+* The `Dimension` and `Measure` may be non-enumerated and, if so, use one or more `Facet`(s), note that the `FacetValueType` applicable to the `TimeDimension` is restricted to those that represent time.
+* The `MetadataAttribute` and `DataAttribute` may be non-enumerated and, if so, use one or more `ExtendedFacet`(s).
 
-The Structure may be used by one or more StructureUsage(s). An example of this, in terms of concrete classes, is that a Dataflow (sub class of StructureUsage) may use a particular DataStructureDefinition (sub class of Structure), and similar constructs apply for the Metadataflow (link to MetadataStructureDefinition).
+The *`Structure`* may be used by one or more *`StructureUsage`*(s). An example of this, in terms of concrete classes, is that a `Dataflow` (sub class of *`StructureUsage`*) may use a particular `DataStructureDefinition` (sub class of *`Structure`*), and similar constructs apply for the `Metadataflow` (link to `MetadataStructureDefinition`).
 
 #### 3.6.3.2 Definitions
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| StructureUsage | Inherits from:  MaintainableArtefact  Sub classes are:  Dataflow Metadataflow | An artefact whose components are described by a Structure. In concrete terms (sub-classes) an example would be a Dataflow which is linked to a given structure – in this case the Data Structure Definition. |
-|  | structure | An association to a Structure specifying the structure of the artefact. |
-| Structure | Inherits from:  MaintainableArtefact  Sub classes are:  DataStructureDefinition MetadataStructureDefinition | Abstract specification of a list of lists to define a complex tabular structure. A concrete example of this would be statistical concepts, code lists, and their organisation in a data or metadata structure definition, defined by a centre institution, usually for the exchange of statistical information with its partners. |
-|  | grouping | A composite association to one or more component lists. |
-| ComponentList | Inherits from:  IdentifiableArtefact  Sub classes are:  DimensionDescriptor GroupDimensionDescriptor MeasureDescriptor AttributeDescriptor MetadataAttributeDescriptor | An abstract definition of a list of components. A concrete example is a Dimension Descriptor, which defines the list of Dimensions in a Data Structure Definition. |
-|  | components | An aggregate association to one or more components which make up the list. |
-| Component | Inherits from:  IdentifiableArtefact  Sub classes are:  Measure AttributeComponent  DimensionComponent | A Component is an abstract super class used to define qualitative and quantitative data and metadata items that belong to a Component List and hence a Structure. Component is refined through its sub-classes. |
-|  | conceptIdentity | Association to a Concept in a Concept Scheme that identifies and defines the semantic of the Component. |
-|  | localRepresentation | Association to the Representation of the Component if this is different from the coreRepresentation of the Concept, which the Component uses (ConceptUsage). |
-| Representation |  | The allowable value or format for Component or Concept |
-|  | +enumerated | Association to an enumerated list that contains the allowable content for the Component when reported in a data or metadata set. The type of enumerated list that is allowed for any concrete Component is shown in the constraints on the association. |
-|  | +nonEnumerated | Association to a set of Facets that define the allowable format for the content of the Component when reported in a data or metadata set. |
-| Facet |  | Defines the format for the content of the Component when reported in a data or metadata set. |
-|  | facetType | A specific content type, which is constrained by the Facet Type enumeration. |
-|  | facetValueType | The format of the value of a Component when reported in a data or metadata set. This is constrained by the Facet Value Type enumeration. |
-|  | +itemSchemeFacet | Defines the format of the identifiers in an Item Scheme used by a Component. Typically, this would define the number of characters (length) of the identifier. |
-| ExtendedFacet |  | This has the same function as Facet but allows additionally an XHTML representation. This is constrained for use with a Metadata Attribute and a Data Attribute. |
+| `StructureUsage` | Inherits from:  *`MaintainableArtefact`* <br/>Sub classes are: <br/>`Dataflow` <br/>`Metadataflow` | An artefact whose components are described by a Structure. In concrete terms (sub-classes) an example would be a Dataflow which is linked to a given structure – in this case the Data Structure Definition. |
+|  | `structure` | An association to a Structure specifying the structure of the artefact. |
+| `Structure` | Inherits from:  *`MaintainableArtefact`*  <br/>Sub classes are:  <br/>`DataStructureDefinition` <br/>`MetadataStructureDefinition` | Abstract specification of a list of lists to define a complex tabular structure. A concrete example of this would be statistical concepts, code lists, and their organisation in a data or metadata structure definition, defined by a centre institution, usually for the exchange of statistical information with its partners. |
+|  | `grouping` | A composite association to one or more component lists. |
+| *`ComponentList`* | Inherits from:  *`IdentifiableArtefact`* <br/>Sub classes are: <br/>`DimensionDescriptor` <br/>`GroupDimensionDescriptor` <br/>`MeasureDescriptor` <br/>`AttributeDescriptor` <br/>`MetadataAttributeDescriptor` | An abstract definition of a list of components. A concrete example is a Dimension Descriptor, which defines the list of Dimensions in a Data Structure Definition. |
+|  | `components` | An aggregate association to one or more components which make up the list. |
+| *`Component`* | Inherits from:  *`IdentifiableArtefact`* <br/>Sub classes are: <br/>`Measure` <br/>`AttributeComponent` <br/>`DimensionComponent` | A Component is an abstract super class used to define qualitative and quantitative data and metadata items that belong to a Component List and hence a Structure. Component is refined through its sub-classes. |
+|  | `conceptIdentity` | Association to a Concept in a Concept Scheme that identifies and defines the semantic of the Component. |
+|  | `localRepresentation` | Association to the Representation of the Component if this is different from the coreRepresentation of the Concept, which the Component uses (ConceptUsage). |
+| `Representation` |  | The allowable value or format for Component or Concept |
+|  | `+enumerated` | Association to an enumerated list that contains the allowable content for the Component when reported in a data or metadata set. The type of enumerated list that is allowed for any concrete Component is shown in the constraints on the association. |
+|  | `+nonEnumerated` | Association to a set of Facets that define the allowable format for the content of the Component when reported in a data or metadata set. |
+| `Facet` |  | Defines the format for the content of the Component when reported in a data or metadata set. |
+|  | `facetType` | A specific content type, which is constrained by the Facet Type enumeration. |
+|  | `facetValueType` | The format of the value of a Component when reported in a data or metadata set. This is constrained by the Facet Value Type enumeration. |
+|  | `+itemSchemeFacet` | Defines the format of the identifiers in an Item Scheme used by a Component. Typically, this would define the number of characters (length) of the identifier. |
+| `ExtendedFacet` |  | This has the same function as Facet but allows additionally an XHTML representation. This is constrained for use with a Metadata Attribute and a Data Attribute. |
 
-The specification of the content and use of the sub classes to ComponentList and Component can be found in the section in which they are used (DataStructureDefinition and MetadataStructureDefinition). Moreover, the FacetType SentinelValues is explained in the datastructure representation diagram (see 5.3.2.2), since it only concerns DataStructureDefinitions.
+The specification of the content and use of the sub classes to *`ComponentList`* and *`Component`* can be found in the section in which they are used (`DataStructureDefinition` and `MetadataStructureDefinition`). Moreover, the `FacetType` `SentinelValues` is explained in the datastructure representation diagram (see [5.3.2.2](#5322-definitions)), since it only concerns `DataStructureDefinitions`.
 
 #### 3.6.3.3 Representation Constructs
 
-The majority of SDMX FacetValueTypes are compatible with those found in XML Schema, and have equivalents in most current implementation platforms:
+The majority of SDMX `FacetValueType`s are compatible with those found in XML Schema, and have equivalents in most current implementation platforms:
 
 | **SDMX Facet Value Type** | **XML Schema Data Type** | **JSON Schema Data Type** | **.NET Framework Type** | **Java Data Type** |
 | --- | --- | --- | --- | --- |
-| String | xsd:string | string | System.String | java.lang.String |
-| Big Integer | xsd:integer | integer | System.Decimal | java.math.BigInteger |
-| Integer | xsd:int | integer | System.Int32 | int |
-| Long | xsd.long | integer | System.Int64 | long |
-| Short | xsd:short | integer | System.Int16 | short |
-| Decimal | xsd:decimal | number | System.Decimal | java.math.BigDecimal |
-| Float | xsd:float | number | System.Single | float |
-| Double | xsd:double | number | System.Double | double |
-| Boolean | xsd:boolean | boolean | System.Boolean | boolean |
-| URI | xsd:anyURI | string:uri | System.Uri | Java.net.URI or java.lang.String |
-| DateTime | xsd:dateTime | string:date-time | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
-| Time | xsd:time | string:time | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
-| GregorianYear | xsd:gYear | string[^2] | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
-| GregorianMonth | xsd:gYearMonth | string | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
-| GregorianDay | xsd:date | string | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
-| Day, MonthDay, Month | xsd:g\* | string | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
-| Duration | xsd:duration | string | System.TimeSpan | javax.xml.datatype.Duration |
+| `String` | `xsd:string` | `string` | `System.String` | `java.lang.String` |
+| `Big Integer` | `xsd:integer` | `integer` | `System.Decimal` | `java.math.BigInteger` |
+| `Integer` | `xsd:int` | `integer` | `System.Int32` | `int` |
+| `Long` | `xsd.long` | `integer` | `System.Int64` | `long` |
+| `Short` | `xsd:short` | `integer` | `System.Int16` | `short` |
+| `Decimal` | `xsd:decimal` | `number` | `System.Decimal` | `java.math.BigDecimal` |
+| `Float` | `xsd:float` | `number` | `System.Single` | `float` |
+| `Double` | `xsd:double` | `number` | `System.Double` | `double` |
+| `Boolean` | `xsd:boolean` | `boolean` | `System.Boolean` | `boolean` |
+| `URI` | `xsd:anyURI` | `string:uri` | `System.Uri` | `Java.net.URI or java.lang.String` |
+| `DateTime` | `xsd:dateTime` | `string:date-time` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `Time` | `xsd:time` | `string:time` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `GregorianYear` | `xsd:gYear` | `string`[^2] | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `GregorianMonth` | `xsd:gYearMonth` | `string` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `GregorianDay` | `xsd:date` | `string` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `Day`, `MonthDay`, `Month` | `xsd:g`\* | `string` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `Duration` | `xsd:duration` | `string` | `System.TimeSpan` | `javax.xml.datatype.Duration` |
 
 There are also a number of SDMX data types which do not have these direct correspondences, often because they are composite representations or restrictions of a broader data type. These are detailed in Section 6 of the standards.
 
-The Representation is composed of Facets, each of which conveys characteristic information related to the definition of a value domain. Often a set of Facets are needed to convey the required semantic. For example, a sequence is defined by a minimum of two Facets: one to define the start value, and one to define the interval.
+The `Representation` is composed of `Facet`s, each of which conveys characteristic information related to the definition of a value domain. Often a set of `Facet`s are needed to convey the required semantic. For example, a sequence is defined by a minimum of two `Facet`s: one to define the start value, and one to define the interval.
 
-|  |  |
-| --- | --- |
 | Facet Type | Explanation |
-| isSequence | The isSequence facet indicates whether the values are intended to be ordered, and it may work in combination with the interval, startValue, and endValue facet or the timeInterval, startTime, and endTime, facets. If this attribute holds a value of true, a start value or time and a numeric or time interval must be supplied. If an end value is not given, then the sequence continues indefinitely. |
-| interval | The interval attribute specifies the permitted interval (increment) in a sequence. In order for this to be used, the isSequence attribute must have a value of true. |
-| startValue | The startValue facet is used in conjunction with the isSequence and interval facets (which must be set in order to use this facet). This facet is used for a numeric sequence and indicates the starting point of the sequence. This value is mandatory for a numeric sequence to be expressed. |
-| endValue | The endValue facet is used in conjunction with the isSequence and interval facets (which must be set in order to use this facet). This facet is used for a numeric sequence and indicates that ending point (if any) of the sequence. |
-| timeInterval | The timeInterval facet indicates the permitted duration in a time sequence. In order for this to be used, the isSequence facet must have a value of true. |
-| startTime | The startTime facet is used in conjunction with the isSequence and timeInterval facets (which must be set in order to use this facet). This attribute is used for a time sequence and indicates the start time of the sequence. This value is mandatory for a time sequence to be expressed. |
-| endTime | The endTime facet is used in conjunction with the isSequence and timeInterval facets (which must be set in order to use this facet). This facet is used for a time sequence and indicates that ending point (if any) of the sequence. |
-| minLength | The minLength facet specifies the minimum and length of the value in characters. |
-| maxLength | The maxLength facet specifies the maximum length of the value in characters. |
-| minValue | The minValue facet is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. If the inclusive and exclusive data type is not specified (e.g., this facet is used with an integer data type), the value is assumed to be inclusive. |
-| maxValue | The maxValue facet is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. If the inclusive and exclusive data type is not specified (e.g., this facet is used with an integer data type), the value is assumed to be inclusive. |
-| decimals | The decimals facet indicates the number of characters allowed after the decimal separator. |
-| pattern | The pattern attribute holds any regular expression permitted in the implementation syntax (e.g., W3C XML Schema). |
+| --- | --- |
+| `isSequence` | The `isSequence` facet indicates whether the values are intended to be ordered, and it may work in combination with the `interval`, `startValue`, and `endValue` facet or the `timeInterval`, `startTime`, and `endTime` facets. If this attribute holds a value of `true`, a start value or time and a numeric or time interval must be supplied. If an end value is not given, then the sequence continues indefinitely. |
+| `interval` | The `interval` attribute specifies the permitted `interval` (increment) in a sequence. In order for this to be used, the `isSequence` attribute must have a value of true. |
+| `startValue` | The `startValue` facet is used in conjunction with the `isSequence` and `interval` facets (which must be set in order to use this facet). This facet is used for a numeric sequence and indicates the starting point of the sequence. This value is mandatory for a numeric sequence to be expressed. |
+| `endValue` | The `endValue` facet is used in conjunction with the `isSequence` and `interval` facets (which must be set in order to use this facet). This facet is used for a numeric sequence and indicates that ending point (if any) of the sequence. |
+| `timeInterval` | The `timeInterval` facet indicates the permitted duration in a time sequence. In order for this to be used, the `isSequence` facet must have a value of true. |
+| `startTime` | The `startTime` facet is used in conjunction with the `isSequence` and `timeInterval` facets (which must be set in order to use this facet). This attribute is used for a time sequence and indicates the start time of the sequence. This value is mandatory for a time sequence to be expressed. |
+| `endTime` | The `endTime` facet is used in conjunction with the `isSequence` and `timeInterval` facets (which must be set in order to use this facet). This facet is used for a time sequence and indicates that ending point (if any) of the sequence. |
+| `minLength` | The `minLength` facet specifies the minimum and length of the value in characters. |
+| `maxLength` | The `maxLength` facet specifies the maximum length of the value in characters. |
+| `minValue` | The `minValue` facet is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. If the inclusive and exclusive data type is not specified (e.g., this facet is used with an integer data type), the value is assumed to be inclusive. |
+| `maxValue` | The `maxValue` facet is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. If the inclusive and exclusive data type is not specified (e.g., this facet is used with an integer data type), the value is assumed to be inclusive. |
+| `decimals` | The `decimals` facet indicates the number of characters allowed after the decimal separator. |
+| `pattern` | The `pattern` attribute holds any regular expression permitted in the implementation syntax (e.g., W3C XML Schema). |
 
 # 4 Specific Item Schemes
 
