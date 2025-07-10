@@ -878,7 +878,7 @@ In an exchange environment an *`ItemScheme`* is allowed to contain a sub-set of 
 
 A “partial” *`ItemScheme`* cannot be maintained independently in its partial form i.e., it cannot contain *`Item`s* that are not present in the full *`ItemScheme`* and the content of any one *`Item`* (e.g., names and descriptions) cannot deviate from the content in the full *`ItemScheme`*. Furthermore, the `id` of the *`ItemScheme`* where `isPartial` is set to "`true`" is the same as the `id` of the full *`ItemScheme`* (`agencyId`, `id`, `version`). This is important as this is the `id` that that is referenced in other structures (e.g., a `Codelist` referenced in a DSD) and this `id` is always the same, regardless of whether the disseminated *`ItemScheme`* is the full *`ItemScheme`* or a partial *`ItemScheme`*.
 
-The purpose of a partial *`ItemScheme`* is to support the exchange and dissemination of a sub-set *`ItemScheme`* without the need to maintain multiple *`ItemScheme`s* which contain the same *`Item`s*. For instance, when a `Codelist` is used in a `DataStructureDefinition` it is sometimes the case that only a sub-set of the `Codes` in a `Codelist` are relevant. In this case a partial `Codelist` can be constructed using the Constraint mechanism explained later in this document.
+The purpose of a partial *`ItemScheme`* is to support the exchange and dissemination of a sub-set *`ItemScheme`* without the need to maintain multiple *`ItemScheme`s* which contain the same *`Item`s*. For instance, when a `Codelist` is used in a `DataStructureDefinition` it is sometimes the case that only a sub-set of the `Code`s in a `Codelist` are relevant. In this case a partial `Codelist` can be constructed using the Constraint mechanism explained later in this document.
 
 *`Item`* inherits from *`NameableArtefact`* which gives it the ability to be annotated and have identity, and therefore has `id`, `uri` and `urn` attributes, a name and a description in the form of an `InternationalString`. Unlike the parent *`ItemScheme`*, the *`Item`* itself is not a *`MaintainableArtefact`* and therefore cannot have an independent `Agency` (i.e., it implicitly has the same `agencyId` as the *`ItemScheme`*).
 
@@ -934,7 +934,7 @@ Each *`Component`* takes its semantic (and possibly also its representation) fro
 
 The *`Component`* may also have a `localRepresentation`. This allows a concrete class, such as `Dimension`, to specify its representation which is local to the *`Structure`* in which it is contained (for `Dimension` this will be `DataStructureDefinition`), and thus overrides any `coreRepresentation` specified for the `Concept`.
 
-The `Representation` can be enumerated or non-enumerated. The valid content of an enumerated representation is specified either in an *`ItemScheme`* which can be one of `Codelist`, `ValueList` or `GeoCodelist`. The valid content of a non-enumerated representation is specified as one or more *`Facet`*(s) (for example, these may specify minimum and maximum values). For any `Attribute` this is achieved by one of more `ExtendedFacet`(s), which allow the additional representation of XHTML.
+The `Representation` can be enumerated or non-enumerated. The valid content of an enumerated representation is specified either in an *`ItemScheme`* which can be one of `Codelist`, `ValueList` or `Geo`Codelist``. The valid content of a non-enumerated representation is specified as one or more *`Facet`*(s) (for example, these may specify minimum and maximum values). For any `Attribute` this is achieved by one of more `ExtendedFacet`(s), which allow the additional representation of XHTML.
 
 The types of representation that are valid for specific components is expressed in the model as a constraint on the association:
 
@@ -963,7 +963,7 @@ The *`Structure`* may be used by one or more *`StructureUsage`*(s). An example o
 | `Facet` |  | Defines the format for the content of the Component when reported in a data or metadata set. |
 |  | `facetType` | A specific content type, which is constrained by the Facet Type enumeration. |
 |  | `facetValueType` | The format of the value of a Component when reported in a data or metadata set. This is constrained by the Facet Value Type enumeration. |
-|  | `+itemSchemeFacet` | Defines the format of the identifiers in an Item Scheme used by a Component. Typically, this would define the number of characters (length) of the identifier. |
+|  | `+`itemScheme`Facet` | Defines the format of the identifiers in an Item Scheme used by a Component. Typically, this would define the number of characters (length) of the identifier. |
 | `ExtendedFacet` |  | This has the same function as Facet but allows additionally an XHTML representation. This is constrained for use with a Metadata Attribute and a Data Attribute. |
 
 The specification of the content and use of the sub classes to *`ComponentList`* and *`Component`* can be found in the section in which they are used (`DataStructureDefinition` and `MetadataStructureDefinition`). Moreover, the `FacetType` `SentinelValues` is explained in the datastructure representation diagram (see [5.3.2.2](#5322-definitions)), since it only concerns `DataStructureDefinitions`.
@@ -1016,32 +1016,32 @@ The `Representation` is composed of `Facet`s, each of which conveys characterist
 
 ## 4.1 Introduction
 
-The structures that are an arrangement of objects into hierarchies or lists based on characteristics, and which are maintained as a group inherit from ItemScheme. These concrete classes are:
+The structures that are an arrangement of objects into hierarchies or lists based on characteristics, and which are maintained as a group inherit from `ItemScheme`. These concrete classes are:
 <ul>
 
-Codelist
+`Codelist`
 
-ConceptScheme
+`ConceptScheme`
 
-CategoryScheme
+`CategoryScheme`
 
-AgencyScheme, DataProviderScheme, MetadataProviderScheme, DataConsumerScheme, OrganisationUnitScheme, **which all inherit from the abstract class** OrganisationScheme
+`AgencyScheme`, `DataProviderScheme`, `MetadataProviderScheme`, `DataConsumerScheme`, `OrganisationUnitScheme`, which all inherit from the abstract class `OrganisationScheme`
 
-ReportingTaxonomy
+`ReportingTaxonomy`
 
-TransformationScheme
+`TransformationScheme`
 
-RulesetScheme
+`RulesetScheme`
 
-UserDefinedOperatorScheme
+`UserDefinedOperatorScheme`
 
-NamePersonalisationScheme
+`NamePersonalisationScheme`
 
-CustomTypeScheme
+`CustomTypeScheme`
 
-VtlMappingScheme</ul>
+`VtlMappingScheme`</ul>
 
-Note that the VTL related schemes (the last 6 of the above list) are detailed in a dedicated section below (section 15).
+Note that the VTL related schemes (the last 6 of the above list) are detailed in a dedicated section below ([section 15](#15-validation-and-transformation-language)).
 
 ## 4.2 Inheritance View
 
@@ -1062,53 +1062,53 @@ The inheritance and relationship views are shown together in each of the diagram
 
 #### 4.3.2.1 Narrative
 
-The Codelist inherits from the ItemScheme and therefore has the following attributes:
+The `Codelist` inherits from the `ItemScheme` and therefore has the following attributes:
 <ul>
 
-id
+`id`
 
-uri
+`uri`
 
-urn
+`urn`
 
-version
+`version`
 
-validFrom
+`validFrom`
 
-validTo
+`validTo`
 
-isExternalReference
+`isExternalReference`
 
-serviceURL
+`serviceURL`
 
-structureURL
+`structureURL`
 
-isPartial</ul>
+`isPartial`</ul>
 
-The Code inherits from Item and has the following attributes:
+The `Code` inherits from `Item` and has the following attributes:
 <ul>
 
-id
+`id`
 
-uri
+`uri`
 
-urn</ul>
+`urn`</ul>
 
-Both Codelist and Code have the association to InternationalString to support a multi-lingual name, an optional multi-lingual description, and an association to Annotation to support notes (not shown).
+Both `Codelist` and `Code` have the association to `InternationalString` to support a multi-lingual name, an optional multi-lingual description, and an association to `Annotation` to support notes (not shown).
 
-Through the inheritance the Codelist comprise one or more Codes, and the Code itself can have one or more child Codes in the (inherited) hierarchy association. Note that a child Code can have only one parent Code in this association. A more complex Hierarhcy, which allows multiple parents is described later.
+Through the inheritance the `Codelist` comprise one or more `Code`s, and the `Code` itself can have one or more child `Code`s in the (inherited) `hierarchy` association. Note that a child `Code` can have only one parent `Code` in this association. A more complex `Hierarchy`, which allows multiple parents is described later.
 
-A partial Codelist (where isPartial is set to 'true') is identical to a Codelist and contains the Code and associated names and descriptions, just as in a normal Codelist. However, its content is a subset of the full Codelist. The way this works is described in section 3.5.3.1 on ItemScheme.
+A partial `Codelist` (where `isPartial` is set to '`true`') is identical to a `Codelist` and contains the `Code` and associated names and descriptions, just as in a normal `Codelist`. However, its content is a subset of the full `Codelist`. The way this works is described in section [3.5.3.1](#3531-narrative) on `ItemScheme`.
 
 #### 4.3.2.2 Definitions
 
 |  |  |  |
 | --- | --- | --- |
 | Class | Feature | Description |
-| Codelist | Inherits from  ItemScheme | A list from which some statistical concepts (coded concepts) take their values. |
-| Code | Inherits from  Item | A language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. |
-|  | hierarchy | Associates the parent and the child codes. |
-|  | extends | Associates a Codelist with any Codelists that it may extend. |
+| `Codelist` | Inherits from  `ItemScheme` | A list from which some statistical concepts (coded concepts) take their values. |
+| `Code` | Inherits from  `Item` | A language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. |
+|  | `hierarchy` | Associates the parent and the child codes. |
+|  | `extends` | Associates a `Codelist` with any `Codelist`s that it may extend. |
 
 ### 4.3.3 Class Diagram – Codelist Extension
 <div align="center">
@@ -1121,27 +1121,27 @@ A partial Codelist (where isPartial is set to 'true') is identical to a Codelist
 
 #### 4.3.3.1 Narrative
 
-A Codelist may extend other Codelists via the CodelistExtension class. The latter, via the sequence, indicates the order of precedence of the extended Codelists for conflict resolution of Codes. Besides that, the prefix property is used to ensure uniqueness of inherited Codes in the extending[^3] Codelist in case conflicting Codes must be included in the latter. Each CodelistExtension association may include one InclusiveCodeSelection or one ExclusiveCodeSelection; those allow including or excluding a specific selection of Codes from the extended Codelists.
+A `Codelist` may extend other `Codelist`s via the `CodelistExtension` class. The latter, via the `sequence`, indicates the order of precedence of the extended `Codelist`s for conflict resolution of `Code`s. Besides that, the `prefix` property is used to ensure uniqueness of inherited `Code`s in the extending[^3] `Codelist` in case conflicting `Code`s must be included in the latter. Each `CodelistExtension` association may include one `InclusiveCodeSelection` or one `ExclusiveCodeSelection`; those allow including or excluding a specific selection of `Code`s from the extended `Codelist`s.
 
-The code selection classes may have MemberValues in order to specify the subset of the Codes that should be included or excluded from the extended Codelist. A MemberValue may have a value that corresponds to a Code, including its children Codes (via the cascadeValues property), or even include instances of the wildcard character ‘%’ in order to point to a set of Codes with common parts in their identifiers.
+The code selection classes may have `MemberValue`s in order to specify the subset of the `Code`s that should be included or excluded from the extended `Codelist`. A `MemberValue` may have a value that corresponds to a `Code`, including its children `Code`s (via the `cascadeValues` property), or even include instances of the wildcard character ‘%’ in order to point to a set of `Code`s with common parts in their identifiers.
 
 #### 4.3.3.2 Definitions
 
 |  |  |  |
 | --- | --- | --- |
 | Class | Feature | Description |
-| CodelistExtension |  | The association between Codelists that may extend other Codelists. |
-|  | prefix | A prefix to be used for a Codelist used in a extension, in order to avoid Code Conflicts. |
-|  | sequence | The order that will be used when extending a Codelist, for resolving Code conflicts. The latest Codelist used overrides any previous Codelist. |
-| InclusiveCodeSelection |  | The subset of Codes to be included when extending a Codelist. |
-| ExclusiveCodeSelection |  | The subset of Codes to be excluded when extending a Codelist. |
-| MemberValue | Inherits from:  SelectionValue | A collection of values based on Codes and their children. |
-|  | cascadeValues | A property to indicate if the child Codes of the selected Code shall be included in the selection. It is also possible to include children and exclude the Code by using the 'excluderoot' value. |
-|  | value | The value of the Code to include in the selection. It may include the ‘%’ character as a wildcard. |
+| `Codelist`Extension |  | The association between `Codelist`s that may extend other `Codelist`s. |
+|  | `prefix` | A prefix to be used for a `Codelist` used in a extension, in order to avoid Code Conflicts. |
+|  | `sequence` | The order that will be used when extending a `Codelist`, for resolving Code conflicts. The latest `Codelist` used overrides any previous `Codelist`. |
+| `InclusiveCodeSelection` |  | The subset of Codes to be included when extending a `Codelist`. |
+| `ExclusiveCodeSelection` |  | The subset of Codes to be excluded when extending a `Codelist`. |
+| `MemberValue` | Inherits from:  `SelectionValue` | A collection of values based on Codes and their children. |
+|  | `cascadeValues` | A property to indicate if the child Codes of the selected Code shall be included in the selection. It is also possible to include children and exclude the Code by using the 'excluderoot' value. |
+|  | `value` | The value of the Code to include in the selection. It may include the ‘%’ character as a wildcard. |
 
 ### 4.3.4 Class Diagram – Geospatial Codelist
 
-The geospatial support is implemented via an extension of the normal Codelist. This is illustrated in the following diagrams.
+The geospatial support is implemented via an extension of the normal `Codelist`. This is illustrated in the following diagrams.
 <div align="center">
 
 |  |
@@ -1157,32 +1157,32 @@ The geospatial support is implemented via an extension of the normal Codelist. T
 
 #### 4.3.4.1 Narrative
 
-A GeoCodelist is a specialisation of Codelist that includes geospatial information, by comprising a set of special Codes, i.e., GeoRefCodes. A GeoCodelist may be implemented by any of the two following classes, via the geoType property:
+A `GeoCodelist` is a specialisation of `Codelist` that includes geospatial information, by comprising a set of special `Code`s, i.e., `GeoRefCode`s. A `GeoCodelist` may be implemented by any of the two following classes, via the `geoType` property:
 <ul>
 
-GeographicCodelist
+`GeographicCodelist`
 
-GeoGridCodelist</ul>
+`GeoGridCodelist`</ul>
 
-The former, i.e., GeographicCodelist, comprises a set of GeoFeatureSetCodes, by adding a value in the Code that follows a pattern to represent a geo feature set.
+The former, i.e., `GeographicCodelist`, comprises a set of `GeoFeatureSetCode`s, by adding a value in the `Code` that follows a pattern to represent a geo feature set.
 
-The latter, i.e., GeoGridCodelist, comprises a set of GridCodes, which are related to the gridDefinition specified in the GeoGridCodelist.
+The latter, i.e., `GeoGridCodelist`, comprises a set of `GridCode`s, which are related to the `gridDefinition` specified in the `GeoGridCodelist`.
 
 #### 4.3.4.2 Definitions
 
 |  |  |  |
 | --- | --- | --- |
 | Class | Feature | Description |
-| GeoCodelist | Abstract Class  Sub Classes:  GeographicCodelist  GeoGridCodelist | The abstract class that represents a special type of Codelist, which includes geospatial information. |
-|  | geoType | The type of Geo Codelist that the Codelist will become. |
-| GeoRefCode | Abstract Class  Sub Classes:  GeoFeatureSetCode  GeoGridCode | The abstract class that represents a special type of Code, which includes geospatial information. |
-| GeographicCodelist |  | A special Codelist that has been extended to add a geographical feature set to each of its items, typically, this would include all types of administrative geographies. |
-| GeoGridCodelist |  | A code list that has defined a geographical grid composed of cells representing regular squared portions of the Earth. |
-|  | gridDefinition | Contains a regular expression string corresponding to the grid definition for the GeoGrid Codelist. |
-| GeoFeatureSetCode |  | A Code that has a geo feature set. |
-|  | value | The geo feature set of the Code, which represents a set of points defining a feature in a format defined a predefined pattern (see section 6). |
-| GeoGridCode |  | A Code that represents a Geo Grid Cell belonging in a specific grid definition. |
-|  | geoCell | The value used to assign the Code to one cell in the grid. |
+| `GeoCodelist` | Abstract Class  Sub Classes:  `GeographicCodelist`  `GeoGridCodelist` | The abstract class that represents a special type of Codelist, which includes geospatial information. |
+|  | `geoType` | The type of Geo Codelist that the Codelist will become. |
+| `GeoRefCode` | Abstract Class  Sub Classes:  `GeoFeatureSetCode`  `GeoGridCode` | The abstract class that represents a special type of Code, which includes geospatial information. |
+| `GeographicCodelist` |  | A special Codelist that has been extended to add a geographical feature set to each of its items, typically, this would include all types of administrative geographies. |
+| `GeoGridCodelist` |  | A code list that has defined a geographical grid composed of cells representing regular squared portions of the Earth. |
+|  | `gridDefinition` | Contains a regular expression string corresponding to the grid definition for the GeoGrid Codelist. |
+| `GeoFeatureSetCode` |  | A Code that has a geo feature set. |
+|  | `value` | The geo feature set of the Code, which represents a set of points defining a feature in a format defined a predefined pattern (see section 6). |
+| `GeoGridCode` |  | A Code that represents a Geo Grid Cell belonging in a specific grid definition. |
+|  | `geoCell` | The value used to assign the Code to one cell in the grid. |
 
 ## 4.4 ValueList
 
@@ -1199,42 +1199,42 @@ The latter, i.e., GeoGridCodelist, comprises a set of GridCodes, which are relat
 
 #### 4.4.2.1 Narrative
 
-A ValueList inherits from EnumeratedList (and hence the MaintenableArtefact) and thus has the following attributes:
+A `ValueList` inherits from `EnumeratedList` (and hence the `MaintenableArtefact`) and thus has the following attributes:
 <ul>
 
-id
+`id`
 
-uri
+`uri`
 
-urn
+`urn`
 
-version
+`version`
 
-validFrom
+`validFrom`
 
-validTo
+`validTo`
 
-isExternalReference
+`isExternalReference`
 
-registryURL
+`registryURL`
 
-structureURL
+`structureURL`
 
-repositoryURL</ul>
+`repositoryURL`</ul>
 
-ValueItem inherits from EnumeratedItem, which adds an id, with relaxed constraints, to the former.
+`ValueItem` inherits from `EnumeratedItem`, which adds an `id`, with relaxed constraints, to the former.
 
-Through the inheritance from NameableArtefact the ValueList has the association to InternationalString to support a multi-lingual name, an optional multi-lingual description, and an association to Annotation to support notes (not shown). Similarly, the ValueItem, inherits the association to InternationalString and to the Annotation from the EnumeratedItem.
+Through the inheritance from `NameableArtefact` the `ValueList` has the association to `InternationalString` to support a multi-lingual name, an optional multi-lingual description, and an association to `Annotation` to support notes (not shown). Similarly, the `ValueItem`, inherits the association to `InternationalString` and to the `Annotation` from the `EnumeratedItem`.
 
-The ValueList can have one or more ValueItems.
+The `ValueList` can have one or more `ValueItem`s.
 
 #### 4.4.2.2 Definitions
 
 |  |  |  |
 | --- | --- | --- |
 | **Class** | **Feature** | **Description** |
-| ValueList | Inherits from  EnumeratedList | A list from which some statistical concepts (enumerated concepts) take their values. |
-| ValueItem | Inherits from  EnumeratedItem | A language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. |
+| `ValueList` | Inherits from  `EnumeratedList` | A list from which some statistical concepts (enumerated concepts) take their values. |
+| `ValueItem` | Inherits from  `EnumeratedItem` | A language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. |
 
 ## 4.5 Concept Scheme and Concepts
 
@@ -1249,45 +1249,45 @@ The ValueList can have one or more ValueItems.
 
 ### 4.5.2 Explanation of the Diagram
 
-The ConceptScheme inherits from the *ItemScheme* and therefore has the following attributes:
+The `ConceptScheme` inherits from the *`ItemScheme`* and therefore has the following attributes:
 <ul>
 
-id
+`id`
 
-uri
+`uri`
 
-urn
+`urn`
 
-version
+`version`
 
-validFrom
+`validFrom`
 
-validTo
+`validTo`
 
-isExternalReference
+`isExternalReference`
 
-registryURL
+`registryURL`
 
-structureURL
+`structureURL`
 
-repositoryURL
+`repositoryURL`
 
-isPartial</ul>
+`isPartial`</ul>
 
-Concept inherits from Item and has the following attributes:
+`Concept` inherits from `Item` and has the following attributes:
 <ul>
 
-id
+`id`
 
-uri
+`uri`
 
-urn</ul>
+`urn`</ul>
 
-Through the inheritance from *NameableArtefact* both ConceptScheme and Concept have the association to InternationalString to support a multi-lingual name, an optional multi-lingual description, and an association to Annotation to support notes (not shown).
+Through the inheritance from *`NameableArtefact`* both `ConceptScheme` and `Concept` have the association to `InternationalString` to support a multi-lingual name, an optional multi-lingual description, and an association to `Annotation` to support notes (not shown).
 
-Through the inheritance from *ItemScheme* the ConceptScheme comprise one or more Concepts, and the Concept itself can have one or more child Concepts in the (inherited) hierarchy association. Note that a child Concept can have only one parent Concept in this association.
+Through the inheritance from *`ItemScheme`* the `ConceptScheme` comprise one or more `Concept`s, and the `Concept` itself can have one or more child `Concept`s in the (inherited) `hierarchy` association. Note that a child `Concept` can have only one parent `Concept` in this association.
 
-A partial ConceptScheme (where isPartial is set to “true”) is identical to a ConceptScheme and contains the Concept and associated names and descriptions, just as in a normal ConceptScheme. However, its content is a subset of the full ConceptScheme. The way this works is described in section 3.5.3.1 on ItemScheme.
+A partial `ConceptScheme` (where `isPartial` is set to “true”) is identical to a `ConceptScheme` and contains the `Concept` and associated names and descriptions, just as in a normal `ConceptScheme`. However, its content is a subset of the full `ConceptScheme`. The way this works is described in section [3.5.3.1](#3531-narrative) on `ItemScheme`.
 
 ### 4.5.3 Class Diagram - Relationship
 <div align="center">
@@ -1314,7 +1314,7 @@ The Concept may be related to a concept described in terms of the ISO/IEC 11179 
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| ConceptScheme | Inherits from  ItemScheme | The descriptive information for an arrangement or division of concepts into groups based on characteristics, which the objects have in common. |
+| ConceptScheme | Inherits from  `ItemScheme` | The descriptive information for an arrangement or division of concepts into groups based on characteristics, which the objects have in common. |
 | Concept | Inherits from  Item | A concept is a unit of knowledge created by a unique combination of characteristics. |
 |  | /hierarchy | Associates the parent and the child concept. |
 |  | coreRepresentation | Associates a Representation. |
@@ -1343,7 +1343,7 @@ This package defines the structure that supports the definition of and relations
 
 #### 4.6.3.1 Narrative
 
-The categories are modelled as a hierarchical *ItemScheme*. The CategoryScheme inherits from the *ItemScheme* and has the following attributes:
+The categories are modelled as a hierarchical *`ItemScheme`*. The CategoryScheme inherits from the *`ItemScheme`* and has the following attributes:
 <ul>
 
 id
@@ -1380,7 +1380,7 @@ Both CategoryScheme and Category have the association to InternationalString to 
 
 Through the inheritance the CategoryScheme comprise one or more Categorys, and the Category itself can have one or more child Category in the (inherited) hierarchy association. Note that a child Category can have only one parent Category in this association.
 
-A partial CategoryScheme (where isPartial is set to “true”) is identical to a CategoryScheme and contains the Category and associated names and descriptions, just as in a normal CategoryScheme. However, its content is a subset of the full CategoryScheme. The way this works is described in section 3.5.3.1 on ItemScheme.
+A partial CategoryScheme (where isPartial is set to “true”) is identical to a CategoryScheme and contains the Category and associated names and descriptions, just as in a normal CategoryScheme. However, its content is a subset of the full CategoryScheme. The way this works is described in section 3.5.3.1 on `ItemScheme`.
 
 ### 4.6.4 Class diagram - Relationship
 <div align="center">
@@ -1397,7 +1397,7 @@ The CategoryScheme can have one or more Categorys. The Category is Identifiable 
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| CategoryScheme | Inherits from  ItemScheme | The descriptive information for an arrangement or division of categories into groups based on characteristics, which the objects have in common. |
+| CategoryScheme | Inherits from  `ItemScheme` | The descriptive information for an arrangement or division of categories into groups based on characteristics, which the objects have in common. |
 |  | /items | Associates the categories. |
 | Category | Inherits from  Item | An item at any level within a classification, typically tabulation categories, sections, subsections, divisions, subdivisions, groups, subgroups, classes and subclasses. |
 |  | /hierarchy | Associates the parent and the child Category. |
@@ -1432,13 +1432,13 @@ The OrganisationScheme can be one of five types:
 
 Reference metadata can be attached to the Organisation by means of the metadata attachment mechanism. This mechanism is explained in the Reference Metadata section of this document (see section 7). This means that the model does not specify the specific reference metadata that can be attached to a DataProvider, MetadataProvider, DataConsumer, OrganisationUnit or Agency, except for limited Contact information.
 
-A partial OrganisationScheme (where isPartial is set to “true”) is identical to an OrganisationScheme and contains the Organisation and associated names and descriptions, just as in a normal OrganisationScheme. However, its content is a subset of the full OrganisationScheme. The way this works is described in section 3.5.3.1 on ItemScheme.
+A partial OrganisationScheme (where isPartial is set to “true”) is identical to an OrganisationScheme and contains the Organisation and associated names and descriptions, just as in a normal OrganisationScheme. However, its content is a subset of the full OrganisationScheme. The way this works is described in section 3.5.3.1 on `ItemScheme`.
 
 #### 4.7.2.2 Definitions
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| OrganisationScheme | Abstract Class  Inherits from  ItemScheme  Sub classes are:  AgencyScheme DataProviderScheme  MetadataProviderScheme DataConsumerScheme OrganisationUnitScheme | A maintained collection of Organisations. |
+| OrganisationScheme | Abstract Class  Inherits from  `ItemScheme`  Sub classes are:  AgencyScheme DataProviderScheme  MetadataProviderScheme DataConsumerScheme OrganisationUnitScheme | A maintained collection of Organisations. |
 |  | /items | Association to the Organisations in the scheme. |
 | Organisation | Abstract Class  Inherits from  Item  Sub classes are:  Agency DataProvider MetadataProvider DataConsumer OrganisationUnit | An organisation is a unique framework of authority within which a person or persons act, or are designated to act, towards some purpose. |
 |  | +contact | Association to the Contact information. |
@@ -1486,7 +1486,7 @@ A partial OrganisationScheme (where isPartial is set to “true”) is identical
 
 In some data reporting environments, and in particular those in primary reporting, a report may comprise a variety of heterogeneous data, each described by a different Structure. Equally, a specific disseminated or published report may also comprise a variety of heterogeneous data. The definition of the set of linked sub reports is supported by the ReportingTaxonomy.
 
-The ReportingTaxonomy is a specialised form of ItemScheme. Each ReportingCategory of the ReportingTaxonomy can link to one or more StructureUsage which itself can be one of Dataflow, or Metadataflow, and one or more Structure, which itself can be one of DataStructureDefinition or MetadataStructureDefinition. It is expected that within a specific ReportingTaxonomy each Category that is linked in this way will be linked to the same class (e.g. all Category in the scheme will link to a Dataflow). Note that a ReportingCategory can have child ReportingCategory and in this way it is possible to define a hierarchical ReportingTaxonomy. It is possible in this taxonomy that some ReportingCategory are defined just to give a reporting structure. For instance:
+The ReportingTaxonomy is a specialised form of `ItemScheme`. Each ReportingCategory of the ReportingTaxonomy can link to one or more StructureUsage which itself can be one of Dataflow, or Metadataflow, and one or more Structure, which itself can be one of DataStructureDefinition or MetadataStructureDefinition. It is expected that within a specific ReportingTaxonomy each Category that is linked in this way will be linked to the same class (e.g. all Category in the scheme will link to a Dataflow). Note that a ReportingCategory can have child ReportingCategory and in this way it is possible to define a hierarchical ReportingTaxonomy. It is possible in this taxonomy that some ReportingCategory are defined just to give a reporting structure. For instance:
 
 Section 1
 1. linked to Datafow\_1
@@ -1498,13 +1498,13 @@ Section 2
 
 Here, the nodes of Section 1 and Section 2 would not be linked to Dataflow but the other would be linked to a Dataflow (and hence the DataStructureDefinition).
 
-A partial ReportingTaxonomy (where isPartial is set to “true”) is identical to a ReportingTaxonomy and contains the ReportingCategory and associated names and descriptions, just as in a normal ReportingTaxonomy. However, its content is a sub set of the full ReportingTaxonomy The way this works is described in section 3.5.3.1 on ItemScheme.
+A partial ReportingTaxonomy (where isPartial is set to “true”) is identical to a ReportingTaxonomy and contains the ReportingCategory and associated names and descriptions, just as in a normal ReportingTaxonomy. However, its content is a sub set of the full ReportingTaxonomy The way this works is described in section 3.5.3.1 on `ItemScheme`.
 
 #### 4.8.2.2 Definitions
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| ReportingTaxonomy | Inherits from  ItemScheme | A scheme which defines the composition structure of a data report where each component can be described by an independent Dataflow or Metadataflow. |
+| ReportingTaxonomy | Inherits from  `ItemScheme` | A scheme which defines the composition structure of a data report where each component can be described by an independent Dataflow or Metadataflow. |
 |  | /items | Associates the Reporting Category |
 | ReportingCategory | Inherits from  *Item* | A component that gives structure to the report and links to data and metadata. |
 |  | /hierarchy | Associates child Reporting Category. |
@@ -1593,7 +1593,7 @@ StructureUsage
 
 Structure
 
-ItemScheme
+`ItemScheme`
 </ul>
 
 All the above classes are abstract. The key to understanding the class diagrams presented in this section are the concrete classes that inherit from these abstract classes.
@@ -1799,7 +1799,7 @@ A DataSet is a collection of a set of Observations that share the same dimension
 
 The Observation can be the value(s) of the variable(s) being measured for the Concept associated to the Measure(s) in the MeasureDescriptor of the DataStructureDefinition. Each Observation associates one or more ObservationValues with a KeyValue (+observationDimension) which is the value for the “Dimension at the Observation Level”. Any Dimension can be specified as being the “Dimension at the Observation Level”, and this specification is made at the level of the DataSet (i.e., it must be the same Dimension for the entire DataSet).
 
-The KeyValue is a value for one of TimeDimension or Dimension specified in the DataStructureDefinition. If it is a Dimension, it can be coded (CodedKeyValue) or uncoded (UncodedKeyValue). If it is the TimeDimension then it is a TimeKeyValue. The actual value that the CodedDimensionValue can take must be one of the Codes in the Codelist specified as the Representation of the Dimension in the DataStructureDefinition.
+The KeyValue is a value for one of TimeDimension or Dimension specified in the DataStructureDefinition. If it is a Dimension, it can be coded (CodedKeyValue) or uncoded (UncodedKeyValue). If it is the TimeDimension then it is a TimeKeyValue. The actual value that the CodedDimensionValue can take must be one of the Codes in the `Codelist` specified as the Representation of the Dimension in the DataStructureDefinition.
 
 An ObservationValue can be coded – this is the CodedObservation – or it can be uncoded – this is the UncodedObservation. In the case of uncoded observations, the values may be multilingual – expressed via the TextMeasureValue – or not (OtherUncodedMeasureValue).
 
@@ -1854,7 +1854,7 @@ The AttributeValue links to the object type (SeriesKey, GroupKey, Observation) t
 | TextMeasureValue | Inherits from  UncodedObservationValue | An observation that has a localised text value |
 |  | text | The localised text values. |
 | CodedObservation | Inherits from  ObservationValue | An Observation that takes its value from a code in a Code list. |
-|  | +valueOf | Association to the Code that is the value of the Observation.  Note that this is a conceptual association showing that the Code must exist in the Codelist(s) associated with the Measure(s) in the Data Structure Definition. In the actual Data Set the value of the Code is placed in the Observation. |
+|  | +valueOf | Association to the Code that is the value of the Observation.  Note that this is a conceptual association showing that the Code must exist in the `Codelist`(s) associated with the Measure(s) in the Data Structure Definition. In the actual Data Set the value of the Code is placed in the Observation. |
 | AttributeValue | Abstract class  Sub classes  DataAttributeValue MetadataAttributeValue | Represents the value for any Attribute reported in the Dataset, i.e., Data or Metadata Attribute. |
 | DataAttributeValue | Abstract class  Inherits from  AttributeValue  Sub classes  UncodedAttributeValue CodedAttributeValue | The value of a Data Attribute, such as the instance of a Coded Attribute or of an Uncoded Attribute in a structure such as a Data Structure Definition. |
 |  | +valueFor | Association to the Data Attribute defined in the Data Structure Definition. Note that this is conceptual association as the Concept is identified explicitly in the data set.  The source multiplicity (1..\*) indicates the possibility to provide more than one values for a Data Attribute, if the latter allows it. |
@@ -1883,7 +1883,7 @@ Data reported using a Data Structure Definition structure (where each dimension 
 * The Hierarchy defines the (often complex) hierarchies of codes.
 * If required:
   + The StructureMap can group DataStructureDefinition that describe the cube
-  + The HierarchyAssociation can provide a mechanism to apply a Hierarchy to the Codes in the Codelists used by the DataStructureDefinition, providing also the context of which the hierarchy applies (e.g., a Dataflow).
+  + The HierarchyAssociation can provide a mechanism to apply a Hierarchy to the Codes in the `Codelist`s used by the DataStructureDefinition, providing also the context of which the hierarchy applies (e.g., a Dataflow).
 
 # 7 Metadata Structure Definition and Metadata Set
 
@@ -1974,7 +1974,7 @@ It can be seen from this, that the specification of the objects to which a Metad
 
 Each MetadataAttribute can have a Representation specified (using the /localRepresentation association). If this is not specified in the MetadataStructureDefinition then the Representation is taken from that defined for the Concept (the coreRepresentation association).
 
-The definition of the various types of Representation can be found in the specification of the Base constructs. Note that if the Representation is non-enumerated then the association is to the ExtendedFacet (which allows for XHTML as a FacetValueType). If the Representation is enumerated, then is must use a Codelist.
+The definition of the various types of Representation can be found in the specification of the Base constructs. Note that if the Representation is non-enumerated then the association is to the ExtendedFacet (which allows for XHTML as a FacetValueType). If the Representation is enumerated, then is must use a `Codelist`.
 
 The Metadataflow is linked to a MetadataStructureDefinition. The Metadataflow, in addition to the attributes inherited from the Base classes, it also has a list of IdentifiableObjectSelection constructs, which resolve into the IdentifiableArtefacts that the Metadatasets will refer to. The IdentifiableObjectSelection acts like a reference, but it may also include wildcarding part of the reference terms.
 
@@ -2074,7 +2074,7 @@ The CodedMetadataAttributeValue contains a value for a Code specified as the Rep
 
 ## 8.1 Scope
 
-The Codelist described in the section on structural definitions supports a simple hierarchy of Codes and restricts any child Code to having just one parent Code. Whilst this structure is useful for supporting the needs of the DataStructureDefinition and the MetadataStructureDefinition, it may not be sufficient for supporting the more complex associations between codes that are often found in coding schemes such as a classification scheme. Often, the Codelist used in a DataStructureDefinition is derived from a more complex coding scheme. Access to such a coding scheme can aid applications, such as OLAP applications or data visualisation systems, to give more views of the data than would be possible with the simple Codelist used in the DataStructureDefinition. A Hierarchy may be linked to an IndentifiableArtefact, in order to assist
+The `Codelist` described in the section on structural definitions supports a simple hierarchy of Codes and restricts any child Code to having just one parent Code. Whilst this structure is useful for supporting the needs of the DataStructureDefinition and the MetadataStructureDefinition, it may not be sufficient for supporting the more complex associations between codes that are often found in coding schemes such as a classification scheme. Often, the `Codelist` used in a DataStructureDefinition is derived from a more complex coding scheme. Access to such a coding scheme can aid applications, such as OLAP applications or data visualisation systems, to give more views of the data than would be possible with the simple `Codelist` used in the DataStructureDefinition. A Hierarchy may be linked to an IndentifiableArtefact, in order to assist
 
 Note that a Hierarchy is not necessarily a balanced tree. A balanced tree is where levels are pre-defined and fixed, (i.e. a level always has the same set of codes, and any code has a fixed parent and child relationship to other codes). A statistical classification is an example of a balanced tree, and the support for a balanced hierarchy is a subset, and special case, of hierarchies.
 
@@ -2105,7 +2105,7 @@ The principal features of the Hierarchy are:
 
 The Hierarchy and HierarchyAssociation inherit from MaintainableArtefact and thus have identification, naming, versioning and a maintenance agency. The Level is a NameableArtefact and therefore has an Id, multi-lingual name and multi-lingual description. A HierachicalCode is an IdentifiableArtefact.
 
-It is important to understand that the Codes participating in a Hierarchy are not themselves contained in the list – they are referenced from the list and are maintained in one or more Codelists. This is explained in the narrative of the relationship class diagram below.
+It is important to understand that the Codes participating in a Hierarchy are not themselves contained in the list – they are referenced from the list and are maintained in one or more `Codelist`s. This is explained in the narrative of the relationship class diagram below.
 
 #### 8.2.2.2 Definitions
 
@@ -2130,7 +2130,7 @@ The basic principles of the Hierarchy are:
 
 1. The Hierarchy is a specification of the structure of the Codes.
 
-2. The Codes in the Hierarchy are not themselves a part of the artefact, rather they are references to Codes in one or more external Codelists.
+2. The Codes in the Hierarchy are not themselves a part of the artefact, rather they are references to Codes in one or more external `Codelist`s.
 
 3. The hierarchy of Codes is specified in HierarchicalCode. This references the Code and its immediate child HierarchicalCodes.
 
@@ -2164,7 +2164,7 @@ A HierarchyAssociation links an IdentifiableArtefact (+linkedObject), that needs
 |  | +level | Association to a Level where levels have been defined for the Hierarchy. |
 | Code |  | The Code to be used at this point in the hierarchy. |
 |  | /items | Association to the Code list containing the Code. |
-| Codelist |  | The Code list containing the Code. |
+| `Codelist` |  | The Code list containing the Code. |
 | HierarchyAssociation | Inherits from:  MaintainableArtefact | An association between an Identifiable Artefact and a Hierarchy, within a specific context. |
 |  | +contextObject | The context within which the association is performed. |
 |  | +linkedObject | Associates the Identifiable Artefact that needs the Hierarchy. |
@@ -2255,7 +2255,7 @@ If the Frequency Identifier aligns with standard SDMX frequencies the output dat
 
 ## 10.1 Scope
 
-A RepresentationMap describes a mapping between source value(s) and target value(s) where the values are restricted to those in a Codelist, ValueList or be of a certain data type, e.g., Integer.
+A RepresentationMap describes a mapping between source value(s) and target value(s) where the values are restricted to those in a `Codelist`, ValueList or be of a certain data type, e.g., Integer.
 
 The RepresentationMap maps information from one or more sources, where the values for each source are used in combination to derive the output value for one or more targets. Each source value may match a substring of the original data (using startIndex and/or endIndex) or define a pattern matching rule described by a regular expression. The target value is provided as an absolute string, although it can make use of regular expression groups to carry across values from the source string to the target string without having to explicitly state the value to carry. An example is a regular expression which states ‘match a value starting with AB followed by anything, where the anything is marked a capture group’, the target can state ‘take the anything value and postfix it with AB’ thus enabling the mapping of ABX to XAB and ABY to YAB.
 
@@ -2274,15 +2274,15 @@ The absence of an output for an input is interpreted as ‘no output value for t
 
 #### 10.1.2.1 Narrative
 
-The RepresentationMap is a MaintainableArtefact. It maps one or more source values to one or more target values, where values that are being mapped are defined by the ValueRepresentation. A ValueRepresentation is an abstract container which is either a Codelist, ValueList or a FacetValueType. Source and target values are in a list where the list order is important as the RepresentationMapping sourceValues and targetValues must match the order. It is permissible to mix types for both source and target values, allowing for example a Codelist to map to an Integer (which is a FacetValueType). The list of source or targets can also be mixed, for example a Codelist in conjunction with a FacetValueType and ValueList and can be defined as the source of a mapping, thus allowing rules such as ‘When CL\_AREA=UK AND AGE=26 CURRENCY=$’.
+The RepresentationMap is a MaintainableArtefact. It maps one or more source values to one or more target values, where values that are being mapped are defined by the ValueRepresentation. A ValueRepresentation is an abstract container which is either a `Codelist`, ValueList or a FacetValueType. Source and target values are in a list where the list order is important as the RepresentationMapping sourceValues and targetValues must match the order. It is permissible to mix types for both source and target values, allowing for example a `Codelist` to map to an Integer (which is a FacetValueType). The list of source or targets can also be mixed, for example a `Codelist` in conjunction with a FacetValueType and ValueList and can be defined as the source of a mapping, thus allowing rules such as ‘When CL\_AREA=UK AND AGE=26 CURRENCY=$’.
 
 #### 10.1.2.2 Definitions
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| RepresentationMap | Inherits from MaintainableArtefact | Links source and target representations, whose values may conform to a linked Codelist, ValueList or enumerated type such as Integer. |
-|  | source | Association to one or more Codelist, ValueList, or FacetValue – mixed types are permissible |
-|  | target | Association to one or more Codelist, ValueList, or FacetValue – mixed types are permissible |
+| RepresentationMap | Inherits from MaintainableArtefact | Links source and target representations, whose values may conform to a linked `Codelist`, ValueList or enumerated type such as Integer. |
+|  | source | Association to one or more `Codelist`, ValueList, or FacetValue – mixed types are permissible |
+|  | target | Association to one or more `Codelist`, ValueList, or FacetValue – mixed types are permissible |
 | RepresentationMapping | Inherits from AnnotableArtefact | Describes how the source value(s) map to the target value(s) |
 |  | validFrom | Optional period describing when the mapping is applicable |
 |  | validTo | Optional period describing which the mapping is no longer applicable. |
@@ -2296,11 +2296,11 @@ The RepresentationMap is a MaintainableArtefact. It maps one or more source valu
 | TargetValue |  | Describes the target value that is part of the targetValues of a RepresentationMapping |
 |  | value | Represents a value for the targetValues of a RepresenationMapping |
 
-# 11 ItemSchemeMap
+# 11 `ItemScheme`Map
 
 ## 11.1 Scope
 
-An ItemSchemeMap is an abstract container to describe mapping rules between any item scheme, with the exception of Codelists and ValueLists which are mapped using the RepresentationMap. A single source ItemScheme is mapped to a single target ItemScheme. The ItemSchemeMap then contains the rules for how the values from the source ItemScheme map to the values in the target ItemScheme. Each source value may match a substring of the original data (using startIndex and/or endIndex) or define a pattern matching rule described by a regular expression. The target value is provided as an absolute string, although it can make use of regular expression groups to carry across values from the source string to the target string without having to explicitly state the value to carry. An example is a regular expression which states ‘match a value starting with AB followed by anything, where the *anything* is marked a capture group’, the target can state ‘take the *anything* value and postfix it with AB’ thus enabling the mapping of ABX to XAB and ABY to YAB.
+An `ItemScheme`Map is an abstract container to describe mapping rules between any item scheme, with the exception of `Codelist`s and ValueLists which are mapped using the RepresentationMap. A single source `ItemScheme` is mapped to a single target `ItemScheme`. The `ItemScheme`Map then contains the rules for how the values from the source `ItemScheme` map to the values in the target `ItemScheme`. Each source value may match a substring of the original data (using startIndex and/or endIndex) or define a pattern matching rule described by a regular expression. The target value is provided as an absolute string, although it can make use of regular expression groups to carry across values from the source string to the target string without having to explicitly state the value to carry. An example is a regular expression which states ‘match a value starting with AB followed by anything, where the *anything* is marked a capture group’, the target can state ‘take the *anything* value and postfix it with AB’ thus enabling the mapping of ABX to XAB and ABY to YAB.
 
 The absence of an output for an input is interpreted as ‘no output value for the given source value(s)’.
 <div align="center">
@@ -2315,7 +2315,7 @@ The absence of an output for an input is interpreted as ‘no output value for t
 
 #### 11.1.1.1 Narrative
 
-An ItemSchemeMap is an abstract type which inherits from Maintainable. It is subclassed by the 4 concrete classes:
+An `ItemScheme`Map is an abstract type which inherits from Maintainable. It is subclassed by the 4 concrete classes:
 
 * OrganisationSchemeMap
 * ConceptSchemeMap
@@ -2334,9 +2334,9 @@ A ReportingTaxonomyMap maps a source ReportingTaxonomy to a target ReportingTaxo
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| ItemSchemeMap | Inherits from MaintainableArtefact | Links source and target ItemSchemes |
-|  | +source | Association to a source ItemScheme |
-|  | +target | Association to a target ItemScheme |
+| `ItemScheme`Map | Inherits from MaintainableArtefact | Links source and target `ItemScheme`s |
+|  | +source | Association to a source `ItemScheme` |
+|  | +target | Association to a target `ItemScheme` |
 | ItemMap | Inherits from AnnotableArtefact | Describes how the source value maps to the target value |
 |  | validFrom | Optional period describing when the mapping is applicable |
 |  | validTo | Optional period describing which the mapping is no longer applicable. |
@@ -2345,16 +2345,16 @@ A ReportingTaxonomyMap maps a source ReportingTaxonomy to a target ReportingTaxo
 |  | isRegEx | If true, the sourceValue field should be treated as a regular expression when comparing with the source data |
 |  | startIndex | If provided, a substring of the source data should be taken, starting from this index (starting at zero) before comparing with the *value* field for matching |
 |  | endIndex | If provided, a substring of the source data should be taken, ending at this index (starting at zero) before comparing with the *value* field for matching |
-| OrganisationSchemeMap | Inherits from  ItemSchemeMap | Concrete Maintainable subtype of ItemSchemeMap |
-| ConceptSchemeMap | Inherits from  ItemSchemeMap | Concrete Maintainable subtype of ItemSchemeMap |
-| CategorySchemeMap | Inherits from  ItemSchemeMap | Concrete Maintainable subtype of ItemSchemeMap |
-| ReportingTaxonomyMap | Inherits from  ItemSchemeMap | Concrete Maintainable subtype of ItemSchemeMap |
+| OrganisationSchemeMap | Inherits from  `ItemScheme`Map | Concrete Maintainable subtype of `ItemScheme`Map |
+| ConceptSchemeMap | Inherits from  `ItemScheme`Map | Concrete Maintainable subtype of `ItemScheme`Map |
+| CategorySchemeMap | Inherits from  `ItemScheme`Map | Concrete Maintainable subtype of `ItemScheme`Map |
+| ReportingTaxonomyMap | Inherits from  `ItemScheme`Map | Concrete Maintainable subtype of `ItemScheme`Map |
 
 # 12 Constraints
 
 ## 12.1 Scope
 
-The scope of this section is to describe the support in the metamodel for specifying both the access to and the content of a data source. The information may be stored in a resource such as a registry for use by applications wishing to locate data and metadata which are available via the Internet. The Constraint is also used to specify a subset of a Codelist which may be used as a partial Codelist, relevant in the context of the artefact to which the Constraint is attached e.g., DataStructureDefinition, Dataflow, ProvisionAgreement, MetadataStructureDefinition, Metadataflow, MetadataProvisionAgreement.
+The scope of this section is to describe the support in the metamodel for specifying both the access to and the content of a data source. The information may be stored in a resource such as a registry for use by applications wishing to locate data and metadata which are available via the Internet. The Constraint is also used to specify a subset of a `Codelist` which may be used as a partial `Codelist`, relevant in the context of the artefact to which the Constraint is attached e.g., DataStructureDefinition, Dataflow, ProvisionAgreement, MetadataStructureDefinition, Metadataflow, MetadataProvisionAgreement.
 
 Note that in this metamodel the term data provider refers to both data and metadata providers.
 
@@ -2462,7 +2462,7 @@ In both CubeRegion and MetadataTargetRegion, the value in ComponentValue.value a
 
 It is possible to define for the DataKeySet, DataKey, CubeRegion, MetadataTargetRegion and MemberSelection whether the set is included (isIncluded = "true", default) or excluded (isIncluded = "false") from the Constraint definition. This attribute is useful if, for example, only a small sub-set of the possible values are not included in the set, then this smaller sub-set can be defined and excluded from the constraint. Note that if the child construct is “included” and the parent construct is “excluded” then the child construct is included in the list of constructs that are “excluded”.
 
-In any MemberSelection that the corresponding Component was using Codelist with extensions, it is possible to remove the prefix that has been used, in order to refer to the original Codes. This is achieved via property removePrefix, which defaults to “false”.
+In any MemberSelection that the corresponding Component was using `Codelist` with extensions, it is possible to remove the prefix that has been used, in order to refer to the original Codes. This is achieved via property removePrefix, which defaults to “false”.
 
 In DataKeys and MemberValues it is possible, via the validFrom and validTo properties, to set a validity period for which the selected key or value is constrained.
 
@@ -2505,7 +2505,7 @@ In DataKeys and MemberValues it is possible, via the validFrom and validTo prope
 |  | +member | Associates the set of Components that define the subset of values. |
 | MemberSelection |  | A set of permissible values for one component of the axis. |
 |  | isIncluded | Indicates whether the Member Selection is included in the constraint definition or excluded from the constraint definition. |
-|  | removePrefix | Indicates whether the Codes should keep or not the prefix, as defined in the extension of Codelist. |
+|  | removePrefix | Indicates whether the Codes should keep or not the prefix, as defined in the extension of `Codelist`. |
 |  | +valuesFor | Association to the Component in the Structure to which the Constrainable Artefact is linked, which defines the valid Representation for the Member Values. |
 | SelectionValue | Abstract class. Sub classes are:  MemberValue TimeRangeValue  LocalisedMemberValue | A collection of values for the Member Selections that, combined with other Member Selections, comprise the value content of the Cube Region. |
 |  | validFrom | Date from which the Selection Value is valid. |
@@ -2671,9 +2671,9 @@ The SDMX model represented below is consistent with the VTL 2.0 specification. H
 
 #### 15.2.2.1 Narrative
 
-The model artefacts TransformationScheme, RulesetScheme, UserDefinedOperatorScheme, NamePersonalisationScheme, CustomTypeScheme, and VtlMappingScheme inherit from ItemScheme
+The model artefacts TransformationScheme, RulesetScheme, UserDefinedOperatorScheme, NamePersonalisationScheme, CustomTypeScheme, and VtlMappingScheme inherit from `ItemScheme`
 
-These schemes inherit from the *ItemScheme* and therefore have the following attributes:
+These schemes inherit from the *`ItemScheme`* and therefore have the following attributes:
 <ul>
 
 id
@@ -2779,12 +2779,12 @@ Some VTL Operators can invoke rulesets, i.e., sets of previously defined rules t
 The Ruleset model artefact contains the following attributes:
 
 1. rulesetType – the type of the ruleset according to VTL (VTL 2.0 allows two types: “datapoint” and “hierarchical” ruleset);
-2. rulesetScope – the VTL artefact on which the ruleset is defined; VTL 2.0 allows rulesets defined on Value Domains, which correspond to SDMX Codelists and rulesets defined on Variables, which correspond to SDMX Concepts for which a definite Representation is assumed;
+2. rulesetScope – the VTL artefact on which the ruleset is defined; VTL 2.0 allows rulesets defined on Value Domains, which correspond to SDMX `Codelist`s and rulesets defined on Variables, which correspond to SDMX Concepts for which a definite Representation is assumed;
 3. rulesetDefinition – the VTL statement that defines the ruleset according to the syntax of the VTL definition language.
 
 The RulesetScheme can have an association with zero or more VtlMappingScheme. These mappings define the correspondence between the references to the SDMX artefacts contained in the rulesetDefinition and the structured identifiers of these SDMX artefacts.
 
-The rulesets defined on Value Domains reference Codelists. The rulesets defined on Variables reference Concepts (for which a definite Representation is assumed). In conclusion, in the VTL rulesets there can exist mappings for: Codelists and Concepts.
+The rulesets defined on Value Domains reference `Codelist`s. The rulesets defined on Variables reference Concepts (for which a definite Representation is assumed). In conclusion, in the VTL rulesets there can exist mappings for: `Codelist`s and Concepts.
 
 **User Defined Operator Scheme**
 
@@ -2792,7 +2792,7 @@ The UserDefinedOperatorScheme is a container for zero of more UserDefinedOperato
 
 The attribute operatorDefinition contains the VTL statement that defines the operator according to the syntax of the VTL definition language.
 
-Although the VTL user defined operators are conceived to be defined on generic operands, so that the specific artefacts to be manipulated are passed as parameters at the invocation, it is also possible that they reference specific SDMX artefacts like Dataflows and Codelists. Therefore, the UserDefinedOperatorScheme can link to zero or one VtlMappingScheme, which must contain the mappings between the VTL references and the structured URN of the corresponding SDMX artefacts (see also the “*VTL mapping*” section below).
+Although the VTL user defined operators are conceived to be defined on generic operands, so that the specific artefacts to be manipulated are passed as parameters at the invocation, it is also possible that they reference specific SDMX artefacts like Dataflows and `Codelist`s. Therefore, the UserDefinedOperatorScheme can link to zero or one VtlMappingScheme, which must contain the mappings between the VTL references and the structured URN of the corresponding SDMX artefacts (see also the “*VTL mapping*” section below).
 
 The definition of a UserDefinedOperator can also make use of VTL rulesets; therefore, the UserDefinedOperatorScheme can link to zero, one or more RulesetScheme, which must contain the definition of these Rulesets (see also the “*Ruleset Scheme*” section above).
 
@@ -2806,7 +2806,7 @@ The mappings between SDMX and VTL can be relevant to the names of the artefacts 
 
 The VTL assumes that the operands are directly referenced through their actual names (unique identifiers). In the VTL transformations, rulesets, user defined operators, the SDMX artefacts are referenced through VTL aliases. The alias can be the complete URN of the artefact, an abbreviated URN, or another user-defined name, as described in the Section 6 of the SDMX Standards.[^11]
 
-The VTLmapping defines the correspondence between the VTL alias and the structured identifier of the SDMX artefact, for each referenced SDMX artefact. This correspondence is needed for the following kinds of SDMX artefacts: Dataflows, Codelists and Concepts. Therefore, there are the following corresponding mapping subclasses: VtlDataflowMapping, VtlCodelistMapping and VtlConceptMapping.
+The VTLmapping defines the correspondence between the VTL alias and the structured identifier of the SDMX artefact, for each referenced SDMX artefact. This correspondence is needed for the following kinds of SDMX artefacts: Dataflows, `Codelist`s and Concepts. Therefore, there are the following corresponding mapping subclasses: VtlDataflowMapping, Vtl`Codelist`Mapping and VtlConceptMapping.
 
 As for the Dataflows, it is also possible to specify the method to convert the Data Structure of the Dataflow. This kind of conversion can happen in two directions, from SDMX to VTL when a SDMX Dataflow is accessed by a VTL Transformation (toVtlMappingMethod), or from VTL to SDMX when a SDMX derived Dataflow is calculated through VTL (fromVtlMappingMethod).[^12]
 
@@ -2845,36 +2845,36 @@ Regarding the management of NULLs, in the conversions between SDMX and VTL, by d
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| Transformation Scheme | Inherits from  ItemScheme | Contains the definitions of transformations meant to produce some derived data and be executed together |
+| Transformation Scheme | Inherits from  `ItemScheme` | Contains the definitions of transformations meant to produce some derived data and be executed together |
 |  | vtlVersion | The version of the VTL language used for defining transformations |
 | Transformation | Inherits from  *Item* | A VTL statement which assigns the outcome of an expression to a result. |
 |  | result | The left-hand side of the VTL statement, which identifies the result artefact. |
 |  | isPersistent | A boolean that indicates whether the result is permanently stored or not, depending on the VTL assignment operator. |
 |  | expression | The right-hand side of the VTL statement that is the expression to be evaluated, which includes the references to the operands of the Transformation. |
-| RulesetScheme | Inherits from  *ItemScheme* | Container of rulesets. |
+| RulesetScheme | Inherits from  *`ItemScheme`* | Container of rulesets. |
 |  | vtlVersion | The version of the VTL language used for defining the rulesets |
 | Ruleset | Inherits from  *Item* | A persistent set of rules which can be invoked by means of appropriate VTL operators. |
 |  | rulesetDefinition | A VTL statement for the definition of a ruleset (according to the syntax of the VTL definition language) |
 |  | rulesetType | The VTL type of the ruleset (e.g., in VTL 2.0, datapoint or hierarchical) |
 |  | rulesetScope | The model artefact on which the ruleset is defined (e.g., in VTL 2.0, valuedomain or variable) |
-| UserDefinedOperatorScheme | Inherits from  *ItemScheme* | Container of user defined operators |
+| UserDefinedOperatorScheme | Inherits from  *`ItemScheme`* | Container of user defined operators |
 |  | vtlVersion | The version of the VTL language used for defining the user defined operators |
 | UserDefinedOperator | Inherits from  *Item* | Custom VTL operator (not existing in the standard library) that extends the VTL standard library for specific purposes. |
 |  | operatorDefinition | A VTL statement for the definition of a new operator: it specifies the operator name, its parameters and their data types, the VTL expression that defines its behaviour. |
-| NamePersonalisationScheme | Inherits from  *ItemScheme* | Container of name personalisations. |
+| NamePersonalisationScheme | Inherits from  *`ItemScheme`* | Container of name personalisations. |
 |  | vtlVersion | The VTL version which the VTL default names to be personalised belong to. |
 | NamePersonalisation | Inherits from  *Item* | Definition of personalised name to be used in place of a VTL default name. |
 |  | vtlArtefact | VTL model artefact to which the VTL default name to be personalised refers, e.g. variable, value domain. |
 |  | vtlDefaultName | The VTL default name to be personalised. |
 |  | personalisedName | The personalised name to be used in place of the VTL default name. |
-| VtlMappingScheme | Inherits from  *ItemScheme* | Container of VTL mappings. |
-| VtlMapping | Inherits from  *Item*  Sub classes are:  VtlDataflowMapping  VtlCodelistMapping  VtlConceptMapping | Single mapping between the reference to a SDMX artefact made from VTL transformations, rulesets, user defined operators and the corresponding SDMX structure identifier. |
+| VtlMappingScheme | Inherits from  *`ItemScheme`* | Container of VTL mappings. |
+| VtlMapping | Inherits from  *Item*  Sub classes are:  VtlDataflowMapping  Vtl`Codelist`Mapping  VtlConceptMapping | Single mapping between the reference to a SDMX artefact made from VTL transformations, rulesets, user defined operators and the corresponding SDMX structure identifier. |
 | VtlDataflowMapping | Inherits from  *VtlMapping* | Single mapping between the reference to a SDMX dataflow and the corresponding SDMX structure identifier |
 |  | dataflowAlias | Alias used in VTL to reference a SDMX dataflow (it can be the URN, the abbreviated URN or a user defined alias). The alias must be univocal: different SDMX artefacts cannot have the same VTL alias. |
 |  | toVtlMappingMethod | Custom specification of the mapping method from SDMX to VTL data structures for the dataflow (overriding the default “basic” method). |
 |  | fromVtlMappingMethod | Custom specification of the mapping method from VTL to SDMX data structures for the dataflow (overriding the default “basic” method). |
-| VtlCodelistMapping | Inherits from  *VtlMapping* | Single mapping between the VTL reference to a SDMX codelist and the SDMX structure identifier of the codelist. |
-|  | codelistAlias | Name used in VTL to reference a SDMX codelist. The name/alias must be univocal: different SDMX artefacts cannot have the same VTL alias. |
+| Vtl`Codelist`Mapping | Inherits from  *VtlMapping* | Single mapping between the VTL reference to a SDMX `codelist` and the SDMX structure identifier of the `codelist`. |
+|  | `codelist`Alias | Name used in VTL to reference a SDMX `codelist`. The name/alias must be univocal: different SDMX artefacts cannot have the same VTL alias. |
 | VtlConceptMapping | Inherits from  *VtlMapping* | Single mapping between the VTL reference to a SDMX concept and the SDMX structure identifier of the concept. |
 |  | conceptAlias | Name used in VTL to reference a SDMX concept. The name/alias must be univocal: different SDMX artefacts cannot have the same VTL alias. |
 | ToVtlSubspace |  | Subspace of the dimensions of the SDMX dataflow used to identify the parts of the dataflow to be mapped to distinct VTL datasets |
@@ -2883,7 +2883,7 @@ Regarding the management of NULLs, in the conversions between SDMX and VTL, by d
 | FromVtlSuperspace |  | Superspace is composed of the dimensions to be added to the data structure of the VTL result dataset in order to obtain the data structure of the derived SDMX dataflow (in case the latter is a superset of distinct VTL datasets calculated independently). |
 | FromVtlSpaceKey |  | A SDMX dimension to be added to the data structure of the VTL result dataset in order to obtain the data structure of the derived SDMX dataflow |
 |  | Key | The identity of the dimension to be added to the data structure of the VTL result dataset in order to obtain the data structure of the derived SDMX dataflow. |
-| CustomTypeScheme | Inherits from  *ItemScheme* | Container of custom specifications for VTL basic scalar types. |
+| CustomTypeScheme | Inherits from  *`ItemScheme`* | Container of custom specifications for VTL basic scalar types. |
 |  | vtlVersion | The VTL version, which the VTL scalar types belong to. |
 | CustomType | Inherits from  *Item* | Custom specification for a VTL basic scalar type. |
 |  | vtlScalarType | VTL scalar type for which the custom specifications are given. |
@@ -3021,7 +3021,7 @@ the child class's instance lifecycle is dependent on the parent class's instance
 
 ### 16.4.4 Association Names and Association-end (role) Names
 
-It can be useful to name associations as this gives some more semantic meaning to the model i.e. the purpose of the association. It is possible for two classes to be joined by two (or more) associations, and in this case it is extremely useful to name the purpose of the association. Figure 58 shows a simple aggregation between CategoryScheme and Category called /items (this means it is derived from the association between the super classes – in this case between the *ItemScheme* and the *Item,* and another between Category called /hierarchy.
+It can be useful to name associations as this gives some more semantic meaning to the model i.e. the purpose of the association. It is possible for two classes to be joined by two (or more) associations, and in this case it is extremely useful to name the purpose of the association. Figure 58 shows a simple aggregation between CategoryScheme and Category called /items (this means it is derived from the association between the super classes – in this case between the *`ItemScheme`* and the *Item,* and another between Category called /hierarchy.
 <div align="center">
 
 |  |
@@ -3077,7 +3077,7 @@ It is often useful in a relationship diagram to show associations between sub cl
 
 [^1] OLAP: On line analytical processing  
 [^2] In the JSON schemas, more complex data types are complemented with regular expressions, whenever no direct mapping to a standard type exists.  
-[^3] The Codelist that extends 0..\* Codelists is the 'extending' Codelist, while the Codelist(s) that are inherited is/are the 'extended' Codelist(s).  
+[^3] The `Codelist` that extends 0..\* `Codelist`s is the 'extending' `Codelist`, while the `Codelist`(s) that are inherited is/are the 'extended' `Codelist`(s).  
 [^4] Referencing the latest minor version of the Data Structure is achieved by the reference including the plus operator on the minor version to indicate it links to the latest stable version, for example 2.0+.0 will resolve to the highest version 2.x.y.  
 [^5] Source and target Data Structure Definition are either directly linked from the StructureMap or indirectly via the linked source and target Dataflow   
 [^6] Provider Scheme, Provider, Provision Agreement and Registered source refer both to data and reference metadata.  
