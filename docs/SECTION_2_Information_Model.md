@@ -723,9 +723,9 @@ The constructs in the SDMX Base package comprise the fundamental building blocks
 The motivation for establishing the SDMX Base package is as follows:
 <ul>
 
-it is accepted “Best Practise” to identify fundamental archetypes occurring in a model
+it is accepted "Best Practise" to identify fundamental archetypes occurring in a model
 
-identification of commonly found structures or “patterns” leads to easier understanding
+identification of commonly found structures or "patterns" leads to easier understanding
 
 identification of patterns encourages re-use</ul>
 
@@ -764,7 +764,7 @@ The inheritance chain from *`AnnotableArtefact`* through to *`MaintainableArtefa
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| *`AnnotableArtefact`* | Base inheritance sub classes are:  *`IdentifiableArtefact`* | Objects of classes derived from this can have attached annotations. |
+| *`AnnotableArtefact`* | Base inheritance sub classes are: <br/>*`IdentifiableArtefact`* | Objects of classes derived from this can have attached annotations. |
 | `Annotation` |  | Additional descriptive information attached to an object. |
 |  | `id` | Identifier for the Annotation. It can be used to disambiguate one Annotation from another where there are several Annotations for the same annotated object. |
 |  | `title` | A title used to identify an annotation. |
@@ -775,22 +775,22 @@ The inheritance chain from *`AnnotableArtefact`* through to *`MaintainableArtefa
 |  | `+text` | An International String provides the multilingual text content of the annotation via this role. |
 | `InternationalUri` |  | The International Uri is a collection of Localised URIs and supports linking to external descriptions in multiple locales. |
 | `LocalisedUri` |  | The Localised URI supports the link to an external description in one locale (locale is similar to language but includes geographic variations such as Canadian French, US English etc.). |
-| *`IdentifiableArtefact`* | Superclass is *`AnnotableArtefact`*  <br/><br/>Base inheritance sub classes are:  *`NameableArtefact`* | Provides identity to all derived classes. It also provides annotations to derived classes because it is a subclass of Annotable Artefact. |
+| *`IdentifiableArtefact`* | Superclass is <br/>*`AnnotableArtefact`*  <br/><br/>Base inheritance sub classes are: <br/>*`NameableArtefact`* | Provides identity to all derived classes. It also provides annotations to derived classes because it is a subclass of Annotable Artefact. |
 |  | `id` | The unique identifier of the object. |
 |  | `uri` | Universal resource identifier that may or may not be resolvable. |
 |  | `urn` | Universal resource name – this is for use in registries: all registered objects have a urn. |
-| *`NameableArtefact`* | Superclass is *`IdentifiableArtefact`*  <br/><br/>Base inheritance sub classes are:  *`VersionableArtefact`* | Provides a Name and Description to all derived classes in addition to identification and annotations. |
+| *`NameableArtefact`* | Superclass is <br/>*`IdentifiableArtefact`*  <br/><br/>Base inheritance sub classes are: <br/>*`VersionableArtefact`* | Provides a Name and Description to all derived classes in addition to identification and annotations. |
 |  | `+description` | A multi-lingual description is provided by this role via the International String class. |
 |  | `+name` | A multi-lingual name is provided by this role via the International String class |
 | `InternationalString` |  | The International String is a collection of Localised Strings and supports the representation of text in multiple locales. |
 | `LocalisedString` |  | The Localised String supports the representation of text in one locale (locale is similar to language but includes geographic variations such as Canadian French, US English etc.). |
 |  | `label` | Label of the string. |
 |  | `locale` | The geographic locale of the string e.g French, Canadian French. |
-| *`VersionableArtefact`* | Superclass is *`NameableArtefact`* <br/><br/>Base inheritance sub classes are:  *`MaintainableArtefact`* | Provides versioning information for all derived objects. |
+| *`VersionableArtefact`* | Superclass is <br/>*`NameableArtefact`* <br/><br/>Base inheritance sub classes are: <br/>*`MaintainableArtefact`* | Provides versioning information for all derived objects. |
 |  | `version` | A version string following SDMX versioning rules. |
 |  | `validFrom` | Date from which the version is valid |
 |  | `validTo` | Date from which version is superseded |
-| *`MaintainableArtefact`* | Inherits from  *`VersionableArtefact`* | An abstract class to group together primary structural metadata artefacts that are maintained by an Agency. |
+| *`MaintainableArtefact`* | Inherits from <br/>*`VersionableArtefact`* | An abstract class to group together primary structural metadata artefacts that are maintained by an Agency. |
 |  | `isExternalReference` | If set to “true” it indicates that the content of the object is held externally. |
 |  | `structureURL` | The URL of an SDMX-ML document containing the external object. |
 |  | `serviceURL` | The URL of an SDMX-compliant web service from which the external object can be retrieved. |
@@ -833,8 +833,10 @@ The `FacetType` and `FacetValueType` enumerations are used to specify the valid 
 
 The `ActionType` enumeration is used to specify the action that a receiving system should take when processing the content that is the object of the action. It is enumerated as follows:
 
-- `Merge`: Data or data-related reference metadata is to be merged, through either update or insertion depending on already existing information. This operation does not allow deleting any component values. Updating individual values in multi-valued measure, attribute or data-related reference metadata values is not supported either. The complete multi-valued value is to be provided. Only non-dimensional components (measure, attribute or data-related reference metadata values) can be **omitted** as long as at least one of those components is present. Bulk merges are thus not supported. Only the provided values are merged. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off** (using `~`) when those are not attached to these dimensions. All observations as well as the sets of data-related reference metadata attributes at specific dimension combinations impacted by the `Merge` action change their time stamp when used to update an SDMX storage system.
-- `Replace`: Data or data-related reference metadata is to be replaced, through either update, insert or delete depending on already existing information. A full replacement is hereby assumed to take place at specific “replacement levels”: for entire observations and for any specific dimension combination for data-related reference metadata attributes. Within these “replacement levels” the provided values are inserted or updated, and omitted values are deleted. Values provided for the other attributes (those above the observation level) are merged (see `Merge` action). Only non-dimensional components (measure, attribute or data-related reference metadata values) can be **omitted**. Bulk replacing is thus not supported. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off** (using `~`) when those are not attached to these dimensions. Replacing non-existing elements is not resulting in an error. All observations as well as the sets of data-related reference metadata attributes at specific dimension combinations impacted by the replace action change their time stamp when used to update an SDMX storage system. Because the `Replace` action always takes place at specific levels, it cannot be used to replace a whole dataset or a whole series. However, a “replace all” effect can be achieved by combining a `Delete` dataset containing a completely wildcarded key (where all dimension values are omitted) with a `Merge` or `Replace` dataset within the same data message. Similarly, to replace a whole series, a message can combine a `Delete` dataset containing only the partial key of the series (where the not used dimension values are omitted) with a `Merge` or `Replace` dataset for that series.
+- `Merge`: Data or data-related reference metadata is to be merged, through either update or insertion depending on already existing information.  
+  This operation does not allow deleting any component values. Updating individual values in multi-valued measure, attribute or data-related reference metadata values is not supported either. The complete multi-valued value is to be provided. Only non-dimensional components (measure, attribute or data-related reference metadata values) can be **omitted** as long as at least one of those components is present. Bulk merges are thus not supported. Only the provided values are merged. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off** (using `~`) when those are not attached to these dimensions. All observations as well as the sets of data-related reference metadata attributes at specific dimension combinations impacted by the `Merge` action change their time stamp when used to update an SDMX storage system.
+- `Replace`: Data or data-related reference metadata is to be replaced, through either update, insert or delete depending on already existing information.  
+  A full replacement is hereby assumed to take place at specific “replacement levels”: for entire observations and for any specific dimension combination for data-related reference metadata attributes. Within these “replacement levels” the provided values are inserted or updated, and omitted values are deleted. Values provided for the other attributes (those above the observation level) are merged (see `Merge` action). Only non-dimensional components (measure, attribute or data-related reference metadata values) can be **omitted**. Bulk replacing is thus not supported. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off** (using `~`) when those are not attached to these dimensions. Replacing non-existing elements is not resulting in an error. All observations as well as the sets of data-related reference metadata attributes at specific dimension combinations impacted by the replace action change their time stamp when used to update an SDMX storage system. Because the `Replace` action always takes place at specific levels, it cannot be used to replace a whole dataset or a whole series. However, a “replace all” effect can be achieved by combining a `Delete` dataset containing a completely wildcarded key (where all dimension values are omitted) with a `Merge` or `Replace` dataset within the same data message. Similarly, to replace a whole series, a message can combine a `Delete` dataset containing only the partial key of the series (where the not used dimension values are omitted) with a `Merge` or `Replace` dataset for that series.
 - `Delete`: Data or data-related reference metadata is to be deleted. Deletion is hereby assumed to take place at the lowest level of detail provided in the message.  
   Any component (including dimensions) can be **omitted**. Omitting dimension values allows for bulk deletions. Partially omitting non-dimension component values allows restricting the deletion of measure, attribute or data-related reference metadata values to the ones being present. Instead of real values for non-dimensional components, it is sufficient to use any valid value. With this, whole datasets, any slices of observations for dimension groups such as time series, observations or individual measure, attribute and data-related reference metadata attributes values can be deleted. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off** (using `~`) when those are not attached to these dimensions. Deleting non-existing elements or values is not resulting in an error. All observations as well as the sets of attributes and data-related reference metadata at higher partial keys impacted by the `Delete` action change their time stamp when used to update an SDMX storage system.
 - `Append`: Deprecated. When used to update an SDMX storage system, the `Merge` action is assumed.
@@ -876,7 +878,7 @@ The *`ItemScheme`* is an abstract class which defines a set of *`Item`* (this cl
 
 In an exchange environment an *`ItemScheme`* is allowed to contain a sub-set of the *`Item`s* in the maintained *`ItemScheme`*. If such an *`ItemScheme`* is disseminated with a sub-set of the *`Item`s* then the fact that this is a sub-set is denoted by setting the `isPartial` attribute to "`true`".
 
-A “partial” *`ItemScheme`* cannot be maintained independently in its partial form i.e., it cannot contain *`Item`s* that are not present in the full *`ItemScheme`* and the content of any one *`Item`* (e.g., names and descriptions) cannot deviate from the content in the full *`ItemScheme`*. Furthermore, the `id` of the *`ItemScheme`* where `isPartial` is set to "`true`" is the same as the `id` of the full *`ItemScheme`* (`agencyId`, `id`, `version`). This is important as this is the `id` that that is referenced in other structures (e.g., a `Codelist` referenced in a DSD) and this `id` is always the same, regardless of whether the disseminated *`ItemScheme`* is the full *`ItemScheme`* or a partial *`ItemScheme`*.
+A "partial" *`ItemScheme`* cannot be maintained independently in its partial form i.e., it cannot contain *`Item`s* that are not present in the full *`ItemScheme`* and the content of any one *`Item`* (e.g., names and descriptions) cannot deviate from the content in the full *`ItemScheme`*. Furthermore, the `id` of the *`ItemScheme`* where `isPartial` is set to "`true`" is the same as the `id` of the full *`ItemScheme`* (`agencyId`, `id`, `version`). This is important as this is the `id` that that is referenced in other structures (e.g., a `Codelist` referenced in a DSD) and this `id` is always the same, regardless of whether the disseminated *`ItemScheme`* is the full *`ItemScheme`* or a partial *`ItemScheme`*.
 
 The purpose of a partial *`ItemScheme`* is to support the exchange and dissemination of a sub-set *`ItemScheme`* without the need to maintain multiple *`ItemScheme`s* which contain the same *`Item`s*. For instance, when a `Codelist` is used in a `DataStructureDefinition` it is sometimes the case that only a sub-set of the `Code`s in a `Codelist` are relevant. In this case a partial `Codelist` can be constructed using the Constraint mechanism explained later in this document.
 
@@ -918,7 +920,7 @@ The Structure Pattern is a basic architectural pattern which allows the specific
 
 #### 3.6.3.1 Narrative
 
-The *`Structure`* is an abstract class which contains a set of one or more *`ComponentList`*(s) (this class is also abstract). An example of a concrete `Structure` is `DataStructureDefinition`.
+The *`Structure`* is an abstract class which contains a set of one or more *`ComponentList`*(s) (this class is also abstract). An example of a concrete *`Structure`* is `DataStructureDefinition`.
 
 The *`ComponentList`* is a list of one or more *`Component`*(s). The *`ComponentList`* has several concrete descriptor classes based on it: `DimensionDescriptor`, `GroupDimensionDescriptor`, `MeasureDescriptor`, and `AttributeDescriptor` of the `DataStructureDefinition` and `MetadataAttributeDescriptor` of the `MetadataStructureDefinition`.
 
@@ -934,7 +936,7 @@ Each *`Component`* takes its semantic (and possibly also its representation) fro
 
 The *`Component`* may also have a `localRepresentation`. This allows a concrete class, such as `Dimension`, to specify its representation which is local to the *`Structure`* in which it is contained (for `Dimension` this will be `DataStructureDefinition`), and thus overrides any `coreRepresentation` specified for the `Concept`.
 
-The `Representation` can be enumerated or non-enumerated. The valid content of an enumerated representation is specified either in an *`ItemScheme`* which can be one of `Codelist`, `ValueList` or `Geo`Codelist``. The valid content of a non-enumerated representation is specified as one or more *`Facet`*(s) (for example, these may specify minimum and maximum values). For any `Attribute` this is achieved by one of more `ExtendedFacet`(s), which allow the additional representation of XHTML.
+The `Representation` can be enumerated or non-enumerated. The valid content of an enumerated representation is specified either in an *`ItemScheme`* which can be one of `Codelist`, `ValueList` or *`GeoCodelist`*. The valid content of a non-enumerated representation is specified as one or more `Facet`(s) (for example, these may specify minimum and maximum values). For any `Attribute` this is achieved by one of more `ExtendedFacet`(s), which allow the additional representation of XHTML.
 
 The types of representation that are valid for specific components is expressed in the model as a constraint on the association:
 
@@ -948,13 +950,13 @@ The *`Structure`* may be used by one or more *`StructureUsage`*(s). An example o
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `StructureUsage` | Inherits from:  *`MaintainableArtefact`* <br/>Sub classes are: <br/>`Dataflow` <br/>`Metadataflow` | An artefact whose components are described by a Structure. In concrete terms (sub-classes) an example would be a Dataflow which is linked to a given structure – in this case the Data Structure Definition. |
+| `StructureUsage` | Inherits from: <br/>*`MaintainableArtefact`* <br/>Sub classes are: <br/>`Dataflow` <br/>`Metadataflow` | An artefact whose components are described by a Structure. In concrete terms (sub-classes) an example would be a Dataflow which is linked to a given structure – in this case the Data Structure Definition. |
 |  | `structure` | An association to a Structure specifying the structure of the artefact. |
-| `Structure` | Inherits from:  *`MaintainableArtefact`*  <br/>Sub classes are:  <br/>`DataStructureDefinition` <br/>`MetadataStructureDefinition` | Abstract specification of a list of lists to define a complex tabular structure. A concrete example of this would be statistical concepts, code lists, and their organisation in a data or metadata structure definition, defined by a centre institution, usually for the exchange of statistical information with its partners. |
+| `Structure` | Inherits from: <br/>*`MaintainableArtefact`*  <br/>Sub classes are:  <br/>`DataStructureDefinition` <br/>`MetadataStructureDefinition` | Abstract specification of a list of lists to define a complex tabular structure. A concrete example of this would be statistical concepts, code lists, and their organisation in a data or metadata structure definition, defined by a centre institution, usually for the exchange of statistical information with its partners. |
 |  | `grouping` | A composite association to one or more component lists. |
-| *`ComponentList`* | Inherits from:  *`IdentifiableArtefact`* <br/>Sub classes are: <br/>`DimensionDescriptor` <br/>`GroupDimensionDescriptor` <br/>`MeasureDescriptor` <br/>`AttributeDescriptor` <br/>`MetadataAttributeDescriptor` | An abstract definition of a list of components. A concrete example is a Dimension Descriptor, which defines the list of Dimensions in a Data Structure Definition. |
+| *`ComponentList`* | Inherits from: <br/>*`IdentifiableArtefact`* <br/>Sub classes are: <br/>`DimensionDescriptor` <br/>`GroupDimensionDescriptor` <br/>`MeasureDescriptor` <br/>`AttributeDescriptor` <br/>`MetadataAttributeDescriptor` | An abstract definition of a list of components. A concrete example is a Dimension Descriptor, which defines the list of Dimensions in a Data Structure Definition. |
 |  | `components` | An aggregate association to one or more components which make up the list. |
-| *`Component`* | Inherits from:  *`IdentifiableArtefact`* <br/>Sub classes are: <br/>`Measure` <br/>`AttributeComponent` <br/>`DimensionComponent` | A Component is an abstract super class used to define qualitative and quantitative data and metadata items that belong to a Component List and hence a Structure. Component is refined through its sub-classes. |
+| *`Component`* | Inherits from: <br/>*`IdentifiableArtefact`* <br/>Sub classes are: <br/>`Measure` <br/>*`AttributeComponent`* <br/>*`DimensionComponent`* | A Component is an abstract super class used to define qualitative and quantitative data and metadata items that belong to a Component List and hence a Structure. Component is refined through its sub-classes. |
 |  | `conceptIdentity` | Association to a Concept in a Concept Scheme that identifies and defines the semantic of the Component. |
 |  | `localRepresentation` | Association to the Representation of the Component if this is different from the coreRepresentation of the Concept, which the Component uses (ConceptUsage). |
 | `Representation` |  | The allowable value or format for Component or Concept |
@@ -1016,7 +1018,7 @@ The `Representation` is composed of `Facet`s, each of which conveys characterist
 
 ## 4.1 Introduction
 
-The structures that are an arrangement of objects into hierarchies or lists based on characteristics, and which are maintained as a group inherit from `ItemScheme`. These concrete classes are:
+The structures that are an arrangement of objects into hierarchies or lists based on characteristics, and which are maintained as a group inherit from *`ItemScheme`*. These concrete classes are:
 <ul>
 
 `Codelist`
@@ -1025,7 +1027,7 @@ The structures that are an arrangement of objects into hierarchies or lists base
 
 `CategoryScheme`
 
-`AgencyScheme`, `DataProviderScheme`, `MetadataProviderScheme`, `DataConsumerScheme`, `OrganisationUnitScheme`, which all inherit from the abstract class `OrganisationScheme`
+`AgencyScheme`, `DataProviderScheme`, `MetadataProviderScheme`, `DataConsumerScheme`, `OrganisationUnitScheme`, which all inherit from the abstract class *`OrganisationScheme`*
 
 `ReportingTaxonomy`
 
@@ -1062,7 +1064,7 @@ The inheritance and relationship views are shown together in each of the diagram
 
 #### 4.3.2.1 Narrative
 
-The `Codelist` inherits from the `ItemScheme` and therefore has the following attributes:
+The `Codelist` inherits from the *`ItemScheme`* and therefore has the following attributes:
 <ul>
 
 `id`
@@ -1085,7 +1087,7 @@ The `Codelist` inherits from the `ItemScheme` and therefore has the following at
 
 `isPartial`</ul>
 
-The `Code` inherits from `Item` and has the following attributes:
+The `Code` inherits from *`Item`* and has the following attributes:
 <ul>
 
 `id`
@@ -1098,17 +1100,17 @@ Both `Codelist` and `Code` have the association to `InternationalString` to supp
 
 Through the inheritance the `Codelist` comprise one or more `Code`s, and the `Code` itself can have one or more child `Code`s in the (inherited) `hierarchy` association. Note that a child `Code` can have only one parent `Code` in this association. A more complex `Hierarchy`, which allows multiple parents is described later.
 
-A partial `Codelist` (where `isPartial` is set to '`true`') is identical to a `Codelist` and contains the `Code` and associated names and descriptions, just as in a normal `Codelist`. However, its content is a subset of the full `Codelist`. The way this works is described in section [3.5.3.1](#3531-narrative) on `ItemScheme`.
+A partial `Codelist` (where `isPartial` is set to '`true`') is identical to a `Codelist` and contains the `Code` and associated names and descriptions, just as in a normal `Codelist`. However, its content is a subset of the full `Codelist`. The way this works is described in section [3.5.3.1](#3531-narrative) on *`ItemScheme`*.
 
 #### 4.3.2.2 Definitions
 
 |  |  |  |
 | --- | --- | --- |
 | Class | Feature | Description |
-| `Codelist` | Inherits from  `ItemScheme` | A list from which some statistical concepts (coded concepts) take their values. |
-| `Code` | Inherits from  `Item` | A language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. |
+| `Codelist` | Inherits from <br/>*`ItemScheme`* | A list from which some statistical concepts (coded concepts) take their values. |
+| `Code` | Inherits from <br/>*`Item`* | A language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. |
 |  | `hierarchy` | Associates the parent and the child codes. |
-|  | `extends` | Associates a `Codelist` with any `Codelist`s that it may extend. |
+|  | `extends` | Associates a Codelist with any Codelists that it may extend. |
 
 ### 4.3.3 Class Diagram – Codelist Extension
 <div align="center">
@@ -1130,12 +1132,12 @@ The code selection classes may have `MemberValue`s in order to specify the subse
 |  |  |  |
 | --- | --- | --- |
 | Class | Feature | Description |
-| `Codelist`Extension |  | The association between `Codelist`s that may extend other `Codelist`s. |
-|  | `prefix` | A prefix to be used for a `Codelist` used in a extension, in order to avoid Code Conflicts. |
-|  | `sequence` | The order that will be used when extending a `Codelist`, for resolving Code conflicts. The latest `Codelist` used overrides any previous `Codelist`. |
+| `CodelistExtension` |  | The association between Codelists that may extend other Codelists. |
+|  | `prefix` | A prefix to be used for a Codelist used in a extension, in order to avoid Code Conflicts. |
+|  | `sequence` | The order that will be used when extending a Codelist, for resolving Code conflicts. The latest Codelist used overrides any previous Codelist. |
 | `InclusiveCodeSelection` |  | The subset of Codes to be included when extending a `Codelist`. |
 | `ExclusiveCodeSelection` |  | The subset of Codes to be excluded when extending a `Codelist`. |
-| `MemberValue` | Inherits from:  `SelectionValue` | A collection of values based on Codes and their children. |
+| `MemberValue` | Inherits from: <br/>`SelectionValue` | A collection of values based on Codes and their children. |
 |  | `cascadeValues` | A property to indicate if the child Codes of the selected Code shall be included in the selection. It is also possible to include children and exclude the Code by using the 'excluderoot' value. |
 |  | `value` | The value of the Code to include in the selection. It may include the ‘%’ character as a wildcard. |
 
@@ -1157,7 +1159,7 @@ The geospatial support is implemented via an extension of the normal `Codelist`.
 
 #### 4.3.4.1 Narrative
 
-A `GeoCodelist` is a specialisation of `Codelist` that includes geospatial information, by comprising a set of special `Code`s, i.e., `GeoRefCode`s. A `GeoCodelist` may be implemented by any of the two following classes, via the `geoType` property:
+A *`GeoCodelist`* is a specialisation of `Codelist` that includes geospatial information, by comprising a set of special `Code`s, i.e., *`GeoRefCode`s*. A *`GeoCodelist`* may be implemented by any of the two following classes, via the `geoType` property:
 <ul>
 
 `GeographicCodelist`
@@ -1173,9 +1175,9 @@ The latter, i.e., `GeoGridCodelist`, comprises a set of `GridCode`s, which are r
 |  |  |  |
 | --- | --- | --- |
 | Class | Feature | Description |
-| `GeoCodelist` | Abstract Class <br/>Sub Classes: <br/>`GeographicCodelist`  `GeoGridCodelist` | The abstract class that represents a special type of Codelist, which includes geospatial information. |
+| *`GeoCodelist`* | Abstract Class <br/>Sub Classes: <br/>`GeographicCodelist`  `GeoGridCodelist` | The abstract class that represents a special type of Codelist, which includes geospatial information. |
 |  | `geoType` | The type of Geo Codelist that the Codelist will become. |
-| `GeoRefCode` | Abstract Class <br/>Sub Classes: <br/>`GeoFeatureSetCode`  `GeoGridCode` | The abstract class that represents a special type of Code, which includes geospatial information. |
+| *`GeoRefCode`* | Abstract Class <br/>Sub Classes: <br/>`GeoFeatureSetCode` <br/>`GeoGridCode` | The abstract class that represents a special type of Code, which includes geospatial information. |
 | `GeographicCodelist` |  | A special Codelist that has been extended to add a geographical feature set to each of its items, typically, this would include all types of administrative geographies. |
 | `GeoGridCodelist` |  | A code list that has defined a geographical grid composed of cells representing regular squared portions of the Earth. |
 |  | `gridDefinition` | Contains a regular expression string corresponding to the grid definition for the GeoGrid Codelist. |
@@ -1199,7 +1201,7 @@ The latter, i.e., `GeoGridCodelist`, comprises a set of `GridCode`s, which are r
 
 #### 4.4.2.1 Narrative
 
-A `ValueList` inherits from `EnumeratedList` (and hence the `MaintenableArtefact`) and thus has the following attributes:
+A `ValueList` inherits from *`EnumeratedList`* (and hence the *`MaintenableArtefact`*) and thus has the following attributes:
 <ul>
 
 `id`
@@ -1222,9 +1224,9 @@ A `ValueList` inherits from `EnumeratedList` (and hence the `MaintenableArtefact
 
 `repositoryURL`</ul>
 
-`ValueItem` inherits from `EnumeratedItem`, which adds an `id`, with relaxed constraints, to the former.
+`ValueItem` inherits from *`EnumeratedItem`*, which adds an `id`, with relaxed constraints, to the former.
 
-Through the inheritance from `NameableArtefact` the `ValueList` has the association to `InternationalString` to support a multi-lingual name, an optional multi-lingual description, and an association to `Annotation` to support notes (not shown). Similarly, the `ValueItem`, inherits the association to `InternationalString` and to the `Annotation` from the `EnumeratedItem`.
+Through the inheritance from *`NameableArtefact`* the `ValueList` has the association to `InternationalString` to support a multi-lingual name, an optional multi-lingual description, and an association to `Annotation` to support notes (not shown). Similarly, the `ValueItem`, inherits the association to `InternationalString` and to the `Annotation` from the *`EnumeratedItem`*.
 
 The `ValueList` can have one or more `ValueItem`s.
 
@@ -1233,8 +1235,8 @@ The `ValueList` can have one or more `ValueItem`s.
 |  |  |  |
 | --- | --- | --- |
 | **Class** | **Feature** | **Description** |
-| `ValueList` | Inherits from <br/>`EnumeratedList` | A list from which some statistical concepts (enumerated concepts) take their values. |
-| `ValueItem` | Inherits from <br/>`EnumeratedItem` | A language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. |
+| `ValueList` | Inherits from <br/>*`EnumeratedList`* | A list from which some statistical concepts (enumerated concepts) take their values. |
+| `ValueItem` | Inherits from <br/>*`EnumeratedItem`* | A language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. |
 
 ## 4.5 Concept Scheme and Concepts
 
@@ -1274,7 +1276,7 @@ The `ConceptScheme` inherits from the *`ItemScheme`* and therefore has the follo
 
 `isPartial`</ul>
 
-`Concept` inherits from `Item` and has the following attributes:
+`Concept` inherits from *`Item`* and has the following attributes:
 <ul>
 
 `id`
@@ -1287,7 +1289,7 @@ Through the inheritance from *`NameableArtefact`* both `ConceptScheme` and `Conc
 
 Through the inheritance from *`ItemScheme`* the `ConceptScheme` comprise one or more `Concept`s, and the `Concept` itself can have one or more child `Concept`s in the (inherited) `hierarchy` association. Note that a child `Concept` can have only one parent `Concept` in this association.
 
-A partial `ConceptScheme` (where `isPartial` is set to “true”) is identical to a `ConceptScheme` and contains the `Concept` and associated names and descriptions, just as in a normal `ConceptScheme`. However, its content is a subset of the full `ConceptScheme`. The way this works is described in section [3.5.3.1](#3531-narrative) on `ItemScheme`.
+A partial `ConceptScheme` (where `isPartial` is set to "`true`") is identical to a `ConceptScheme` and contains the `Concept` and associated names and descriptions, just as in a normal `ConceptScheme`. However, its content is a subset of the full `ConceptScheme`. The way this works is described in section [3.5.3.1](#3531-narrative) on *`ItemScheme`*.
 
 ### 4.5.3 Class Diagram - Relationship
 <div align="center">
@@ -1314,9 +1316,9 @@ The `Concept` may be related to a concept described in terms of the ISO/IEC 1117
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `ConceptScheme` | Inherits from <br/>`ItemScheme` | The descriptive information for an arrangement or division of concepts into groups based on characteristics, which the objects have in common. |
-| `Concept` | Inherits from <br/>`Item` | A concept is a unit of knowledge created by a unique combination of characteristics. |
-|  | /`hierarchy` | Associates the parent and the child concept. |
+| `ConceptScheme` | Inherits from <br/>*`ItemScheme`* | The descriptive information for an arrangement or division of concepts into groups based on characteristics, which the objects have in common. |
+| `Concept` | Inherits from <br/>*`Item`* | A concept is a unit of knowledge created by a unique combination of characteristics. |
+|  | `/hierarchy` | Associates the parent and the child concept. |
 |  | `coreRepresentation` | Associates a Representation. |
 |  | `+ISOConcept` | Association to an ISO concept reference. |
 | `ISOConceptReference` |  | The identity of an ISO concept definition. |
@@ -1328,7 +1330,7 @@ The `Concept` may be related to a concept described in terms of the ISO/IEC 1117
 
 ### 4.6.1 Context
 
-This package defines the structure that supports the definition of and relationships between categories in a category scheme. It is similar to the package for concept scheme. An example of a category scheme is one which categorises data – sometimes known as a subject matter domain scheme or a data category scheme. Importantly, as will be seen later, the individual nodes in the scheme (the “categories”) can be associated to any set of `IdentiableArtefacts` in a `Categorisation`.
+This package defines the structure that supports the definition of and relationships between categories in a category scheme. It is similar to the package for concept scheme. An example of a category scheme is one which categorises data – sometimes known as a subject matter domain scheme or a data category scheme. Importantly, as will be seen later, the individual nodes in the scheme (the `Category`s) can be associated to any set of `IdentiableArtefacts` in a `Categorisation`.
 
 ### 4.6.2 Class diagram - Inheritance
 <div align="center">
@@ -1343,7 +1345,7 @@ This package defines the structure that supports the definition of and relations
 
 #### 4.6.3.1 Narrative
 
-The categories are modelled as a hierarchical *`ItemScheme`*. The CategoryScheme inherits from the *`ItemScheme`* and has the following attributes:
+The `Category`s are modelled as a hierarchical *`ItemScheme`*. The `CategoryScheme` inherits from the *`ItemScheme`* and has the following attributes:
 <ul>
 
 `id`
@@ -1380,7 +1382,7 @@ Both `CategoryScheme` and `Category` have the association to `InternationalStrin
 
 Through the inheritance the `CategoryScheme` comprise one or more `Category`s, and the `Category` itself can have one or more child `Category` in the (inherited) `hierarchy` association. Note that a child `Category` can have only one parent `Category` in this association.
 
-A partial `CategoryScheme` (where `isPartial` is set to “true”) is identical to a `CategoryScheme` and contains the `Category` and associated names and descriptions, just as in a normal `CategoryScheme`. However, its content is a subset of the full `CategoryScheme`. The way this works is described in section [3.5.3.1](#3531-narrative) on `ItemScheme`.
+A partial `CategoryScheme` (where `isPartial` is set to "`true`") is identical to a `CategoryScheme` and contains the `Category` and associated names and descriptions, just as in a normal `CategoryScheme`. However, its content is a subset of the full `CategoryScheme`. The way this works is described in section [3.5.3.1](#3531-narrative) on *`ItemScheme`*.
 
 ### 4.6.4 Class diagram - Relationship
 <div align="center">
@@ -1397,11 +1399,11 @@ The `CategoryScheme` can have one or more `Category`s. The `Category` is Identif
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `CategoryScheme` | Inherits from <br/>`ItemScheme` | The descriptive information for an arrangement or division of categories into groups based on characteristics, which the objects have in common. |
-|  | /`items` | Associates the categories. |
-| `Category` | Inherits from <br/>`Item` | An item at any level within a classification, typically tabulation categories, sections, subsections, divisions, subdivisions, groups, subgroups, classes and subclasses. |
-|  | /`hierarchy` | Associates the parent and the child Category. |
-| `Categorisation` | Inherits from <br/>`MaintainableArtefact` | Associates an Identifable Artefact with a Category. |
+| `CategoryScheme` | Inherits from <br/>*`ItemScheme`* | The descriptive information for an arrangement or division of categories into groups based on characteristics, which the objects have in common. |
+|  | `/items` | Associates the categories. |
+| `Category` | Inherits from <br/>*`Item`* | An item at any level within a classification, typically tabulation categories, sections, subsections, divisions, subdivisions, groups, subgroups, classes and subclasses. |
+|  | `/hierarchy` | Associates the parent and the child Category. |
+| `Categorisation` | Inherits from <br/>*`MaintainableArtefact`* | Associates an Identifable Artefact with a Category. |
 |  | `+categorisedArtefact` | Associates the Identifable Artefact. |
 |  | `+categorisedBy` | Associates the Category. |
 
@@ -1420,9 +1422,9 @@ The `CategoryScheme` can have one or more `Category`s. The `Category` is Identif
 
 #### 4.7.2.1 Narrative
 
-The `OrganisationScheme` is abstract. It contains `Organisation` which is also abstract. The `Organisation` can have child `Organisation`.
+The *`OrganisationScheme`* is abstract. It contains *`Organisation`* which is also abstract. The *`Organisation`* can have child *`Organisation`*.
 
-The `OrganisationScheme` can be one of five types:
+The *`OrganisationScheme`* can be one of five types:
 
 1. `AgencyScheme` – contains `Agency` which is restricted to a flat list of agencies (i.e., there is no hierarchy). Note that the SDMX system of (Maintenance) Agency can be hierarchic and this is explained in more detail in the SDMX Standards Section 6 “Technical Notes”.
 2. `DataProviderScheme` – contains `DataProvider` which is restricted to a flat list of agencies (i.e., there is no hierarchy).
@@ -1430,19 +1432,19 @@ The `OrganisationScheme` can be one of five types:
 4. `DataConsumerScheme` – contains `DataConsumer` which is restricted to a flat list of agencies (i.e., there is no hierarchy).
 5. `OrganisationUnitScheme` – contains `OrganisationUnit` which does inherit the `/hierarchy` association from `Organisation`.
 
-Reference metadata can be attached to the `Organisation` by means of the metadata attachment mechanism. This mechanism is explained in the Reference Metadata section of this document (see section [7](#7-metadata-structure-definition-and-metadata-set)). This means that the model does not specify the specific reference metadata that can be attached to a `DataProvider`, `MetadataProvider`, `DataConsumer`, `OrganisationUnit` or `Agency`, except for limited `Contact` information.
+Reference metadata can be attached to the *`Organisation`* by means of the metadata attachment mechanism. This mechanism is explained in the Reference Metadata section of this document (see section [7](#7-metadata-structure-definition-and-metadata-set)). This means that the model does not specify the specific reference metadata that can be attached to a `DataProvider`, `MetadataProvider`, `DataConsumer`, `OrganisationUnit` or `Agency`, except for limited `Contact` information.
 
-A partial `OrganisationScheme` (where `isPartial` is set to “true”) is identical to an `OrganisationScheme` and contains the `Organisation` and associated names and descriptions, just as in a normal `OrganisationScheme`. However, its content is a subset of the full `OrganisationScheme`. The way this works is described in section [3.5.3.1](#3531-narrative) on `ItemScheme`.
+A partial *`OrganisationScheme*` (where `isPartial` is set to "`true`") is identical to an *`OrganisationScheme`* and contains the *`Organisation`* and associated names and descriptions, just as in a normal *`OrganisationScheme`*. However, its content is a subset of the full *`OrganisationScheme`*. The way this works is described in section [3.5.3.1](#3531-narrative) on *`ItemScheme`*.
 
 #### 4.7.2.2 Definitions
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `OrganisationScheme` | Abstract Class <br/>Inherits from <br/>`ItemScheme` <br/>Sub classes are:  <br/>`AgencyScheme` <br/>`DataProviderScheme`  <br/>`MetadataProviderScheme` <br/>`DataConsumerScheme` <br/>`OrganisationUnitScheme` | A maintained collection of Organisations. |
-|  | /`items` | Association to the Organisations in the scheme. |
-| `Organisation` | Abstract Class <br/>Inherits from <br/>`Item` <br/>Sub classes are:  <br/>`Agency` <br/>`DataProvider` <br/>`MetadataProvider` <br/>`DataConsumer` <br/>`OrganisationUnit` | An organisation is a unique framework of authority within which a person or persons act, or are designated to act, towards some purpose. |
+| *`OrganisationScheme`* | Abstract Class <br/>Inherits from <br/>*`ItemScheme`* <br/>Sub classes are:  <br/>`AgencyScheme` <br/>`DataProviderScheme`  <br/>`MetadataProviderScheme` <br/>`DataConsumerScheme` <br/>`OrganisationUnitScheme` | A maintained collection of Organisations. |
+|  | `/items` | Association to the Organisations in the scheme. |
+| *`Organisation`* | Abstract Class <br/>Inherits from <br/>*`Item`* <br/>Sub classes are:  <br/>`Agency` <br/>`DataProvider` <br/>`MetadataProvider` <br/>`DataConsumer` <br/>`OrganisationUnit` | An organisation is a unique framework of authority within which a person or persons act, or are designated to act, towards some purpose. |
 |  | `+contact` | Association to the Contact information. |
-|  | /`hierarchy` | Association to child Organisations. |
+|  | `/hierarchy` | Association to child Organisations. |
 | `Contact` |  | An instance of a role of an individual or an organization (or organization part or organization person) to whom an information item(s), a material object(s) and/or person(s) can be sent to or from in a specified context. |
 |  | `name` | The designation of the Contact person by a linguistic expression. |
 |  | `organisationUnit` | The designation of the organisational structure by a linguistic expression, within which Contact person works. |
@@ -1453,21 +1455,21 @@ A partial `OrganisationScheme` (where `isPartial` is set to “true”) is ident
 |  | `X400` | The X400 address of the Contact. |
 |  | `uri` | The URL address of the Contact. |
 | `AgencyScheme` |  | A maintained collection of Maintenance Agencies. |
-|  | /`items` | Association to the Maintenance Agency in the scheme. |
+|  | `/items` | Association to the Maintenance Agency in the scheme. |
 | `DataProviderScheme` |  | A maintained collection of Data Providers. |
-|  | /`items` | Association to the Data Providers in the scheme. |
+|  | `/items` | Association to the Data Providers in the scheme. |
 | `MetadataProviderScheme` |  | A maintained collection of Metadata Providers. |
-|  | /`items` | Association to the Metadata Providers in the scheme. |
+|  | `/items` | Association to the Metadata Providers in the scheme. |
 | `DataConsumerScheme` |  | A maintained collection of Data Consumers. |
-|  | /`items` | Association to the Data Consumers in the scheme. |
+|  | `/items` | Association to the Data Consumers in the scheme. |
 | `OrganisationUnitScheme` |  | A maintained collection of Organisation Units. |
-|  | /`items` | Association to the Organisation Units in the scheme. |
-| `Agency` | Inherits from <br/>`Organisation` | Responsible agency for maintaining artefacts such as statistical classifications, glossaries, structural metadata such as Data and Metadata Structure Definitions, Concepts and Code lists. |
-| `DataProvider` | Inherits from <br/>`Organisation` | An organisation that produces data. |
-| `MetadataProvider` | Inherits from <br/>`Organisation` | An organisation that produces reference metadata. |
-| `DataConsumer` | Inherits from <br/>`Organisation` | An organisation using data as input for further processing. |
-| `OrganisationUnit` | Inherits from <br/>`Organisation` | A designation in the organisational structure. |
-|  | /`hierarchy` | Association to child Organisation Units |
+|  | `/items` | Association to the Organisation Units in the scheme. |
+| `Agency` | Inherits from <br/>``Organisation`` | Responsible agency for maintaining artefacts such as statistical classifications, glossaries, structural metadata such as Data and Metadata Structure Definitions, Concepts and Code lists. |
+| `DataProvider` | Inherits from <br/>``Organisation`` | An organisation that produces data. |
+| `MetadataProvider` | Inherits from <br/>``Organisation`` | An organisation that produces reference metadata. |
+| `DataConsumer` | Inherits from <br/>``Organisation`` | An organisation using data as input for further processing. |
+| `OrganisationUnit` | Inherits from <br/>``Organisation`` | A designation in the organisational structure. |
+|  | `/hierarchy` | Association to child Organisation Units |
 
 ## 4.8 Reporting Taxonomy
 
@@ -1484,9 +1486,9 @@ A partial `OrganisationScheme` (where `isPartial` is set to “true”) is ident
 
 #### 4.8.2.1 Narrative
 
-In some data reporting environments, and in particular those in primary reporting, a report may comprise a variety of heterogeneous data, each described by a different `Structure`. Equally, a specific disseminated or published report may also comprise a variety of heterogeneous data. The definition of the set of linked sub reports is supported by the `ReportingTaxonomy`.
+In some data reporting environments, and in particular those in primary reporting, a report may comprise a variety of heterogeneous data, each described by a different *`Structure`*. Equally, a specific disseminated or published report may also comprise a variety of heterogeneous data. The definition of the set of linked sub reports is supported by the `ReportingTaxonomy`.
 
-The `ReportingTaxonomy` is a specialised form of `ItemScheme`. Each `ReportingCategory` of the `ReportingTaxonomy` can link to one or more `StructureUsage` which itself can be one of `Dataflow`, or `Metadataflow`, and one or more `Structure`, which itself can be one of `DataStructureDefinition` or `MetadataStructureDefinition`. It is expected that within a specific `ReportingTaxonomy` each `Category` that is linked in this way will be linked to the same class (e.g. all `Category` in the scheme will link to a `Dataflow`). Note that a `ReportingCategory` can have child `ReportingCategory` and in this way it is possible to define a hierarchical `ReportingTaxonomy`. It is possible in this taxonomy that some `ReportingCategory` are defined just to give a reporting structure. For instance:
+The `ReportingTaxonomy` is a specialised form of *`ItemScheme`*. Each `ReportingCategory` of the `ReportingTaxonomy` can link to one or more *`StructureUsage`* which itself can be one of `Dataflow`, or `Metadataflow`, and one or more *`Structure`*, which itself can be one of `DataStructureDefinition` or `MetadataStructureDefinition`. It is expected that within a specific `ReportingTaxonomy` each `Category` that is linked in this way will be linked to the same class (e.g. all `Category` in the scheme will link to a `Dataflow`). Note that a `ReportingCategory` can have child `ReportingCategory` and in this way it is possible to define a hierarchical `ReportingTaxonomy`. It is possible in this taxonomy that some `ReportingCategory` are defined just to give a reporting structure. For instance:
 
 Section 1
 1. linked to Datafow\_1
@@ -1498,16 +1500,16 @@ Section 2
 
 Here, the nodes of Section 1 and Section 2 would not be linked to `Dataflow` but the other would be linked to a `Dataflow` (and hence the `DataStructureDefinition`).
 
-A partial `ReportingTaxonomy` (where `isPartial` is set to “true”) is identical to a `ReportingTaxonomy` and contains the `ReportingCategory` and associated names and descriptions, just as in a normal `ReportingTaxonomy`. However, its content is a sub set of the full `ReportingTaxonomy` The way this works is described in section [3.5.3.1](#3531-narrative) on `ItemScheme`.
+A partial `ReportingTaxonomy` (where `isPartial` is set to "`true`") is identical to a `ReportingTaxonomy` and contains the `ReportingCategory` and associated names and descriptions, just as in a normal `ReportingTaxonomy`. However, its content is a sub set of the full `ReportingTaxonomy` The way this works is described in section [3.5.3.1](#3531-narrative) on *`ItemScheme`*.
 
 #### 4.8.2.2 Definitions
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `ReportingTaxonomy` | Inherits from <br/>`ItemScheme` | A scheme which defines the composition structure of a data report where each component can be described by an independent Dataflow or Metadataflow. |
-|  | /`items` | Associates the Reporting Category |
+| `ReportingTaxonomy` | Inherits from <br/>*`ItemScheme`* | A scheme which defines the composition structure of a data report where each component can be described by an independent Dataflow or Metadataflow. |
+|  | `/items` | Associates the Reporting Category |
 | `ReportingCategory` | Inherits from <br/>*`Item`* | A component that gives structure to the report and links to data and metadata. |
-|  | /`hierarchy` | Associates child Reporting Category. |
+|  | `/hierarchy` | Associates child Reporting Category. |
 |  | `+flow` | Association to the data and metadata flows that link to metadata about the provisioning and related data and metadata sets, and the structures that define them. |
 |  | `+structure` | Association to the Data Structure Definition and Metadata Structure Definitions which define the structural metadata describing the data and metadata that are contained at this part of the report. |
 
@@ -1524,15 +1526,15 @@ There are very few additional classes in this sub model other than those shown i
 The actual SDMX Base construct from which the concrete classes inherit depends upon the requirements of the class for:
 <ul>
 
-Annotation – `AnnotableArtefact`
+Annotation – *`AnnotableArtefact`*
 
-Identification – `IdentifiableArtefact`
+Identification – *`IdentifiableArtefact`*
 
-Naming – `NameableArtefact`
+Naming – *`NameableArtefact`*
 
-Versioning – `VersionableArtefact`
+Versioning – *`VersionableArtefact`*
 
-Maintenance – `MaintainableArtefact`
+Maintenance – *`MaintainableArtefact`*
 </ul>
 
 ## 5.2 Inheritance View
@@ -1550,55 +1552,55 @@ Maintenance – `MaintainableArtefact`
 
 #### 5.2.2.1 Narrative
 
-Those classes in the SDMX metamodel which require annotations inherit from `AnnotableArtefact`. These are:
+Those classes in the SDMX metamodel which require annotations inherit from *`AnnotableArtefact`*. These are:
 <ul>
 
-`IdentifiableArtefact`
+*`IdentifiableArtefact`*
 
-`DataSet`
+*`DataSet`*
 
-`Key` (and therefore `SeriesKey` and `GroupKey`)
+*`Key`* (and therefore *`SeriesKey`* and *`GroupKey`*)
 
-`Observation`
+*`Observation`*
 </ul>
 
-Those classes in the SDMX metamodel which require annotations and global identity are derived from `IdentifiableArtefact`. These are:
+Those classes in the SDMX metamodel which require annotations and global identity are derived from *`IdentifiableArtefact`*. These are:
 <ul>
 
-`NameableArtefact`
+*`NameableArtefact`*
 
-`ComponentList`
+*`ComponentList`*
 
-`Component`
+*`Component`*
 </ul>
 
-Those classes in the SDMX metamodel which require annotations, global identity, multilingual name and multilingual description are derived from `NameableArtefact`. These are:
+Those classes in the SDMX metamodel which require annotations, global identity, multilingual name and multilingual description are derived from *`NameableArtefact`*. These are:
 <ul>
 
-`VersionableArtefact`
+*`VersionableArtefact`*
 
-`Item`
+*`Item`*
 </ul>
 
-The classes in the SDMX metamodel which require annotations, global identity, multilingual name and multilingual description, and versioning are derived from `VersionableArtefact`. These are:
+The classes in the SDMX metamodel which require annotations, global identity, multilingual name and multilingual description, and versioning are derived from *`VersionableArtefact`*. These are:
 <ul>
 
-`MaintainableArtefact`
+*`MaintainableArtefact`*
 </ul>
 
-Abstract classes which represent information that is maintained by Maintenance Agencies all inherit from `MaintainableArtefact`, they also inherit all the features of a `VersionableArtefact`, and are:
+Abstract classes which represent information that is maintained by Maintenance Agencies all inherit from *`MaintainableArtefact`*, they also inherit all the features of a *`VersionableArtefact`*, and are:
 <ul>
 
-`StructureUsage`
+*`StructureUsage`*
 
-`Structure`
+*`Structure`*
 
-`ItemScheme`
+*`ItemScheme`*
 </ul>
 
 All the above classes are abstract. The key to understanding the class diagrams presented in this section are the concrete classes that inherit from these abstract classes.
 
-Those concrete classes in the SDMX Data Structure Definition and Dataset packages of the metamodel which require to be maintained by Agencies all inherit (via other abstract classes) from `MaintainableArtefact`, these are:
+Those concrete classes in the SDMX Data Structure Definition and Dataset packages of the metamodel which require to be maintained by Agencies all inherit (via other abstract classes) from *`MaintainableArtefact`*, these are:
 <ul>
 
 `Dataflow`
@@ -1606,7 +1608,7 @@ Those concrete classes in the SDMX Data Structure Definition and Dataset package
 `DataStructureDefinition`
 </ul>
 
-The component structures that are lists of lists, inherit directly from `Structure`. A `Structure` contains several lists of components. The concrete class that inherits from `Structure` is:
+The component structures that are lists of lists, inherit directly from *`Structure`*. A *`Structure`* contains several lists of components. The concrete class that inherits from *`Structure`* is:
 <ul>
 
 `DataStructureDefinition`
@@ -1614,7 +1616,7 @@ The component structures that are lists of lists, inherit directly from `Structu
 
 A `DataStructureDefinition` contains a list of dimensions, a list of measures and a list of attributes.
 
-The concrete classes which inherit from `ComponentList` and are subcomponents of the `DataStructureDefinition` are:
+The concrete classes which inherit from *`ComponentList`* and are subcomponents of the `DataStructureDefinition` are:
 <ul>
 
 `DimensionDescriptor` – content is `Dimension` and `TimeDimension`
@@ -1626,14 +1628,14 @@ The concrete classes which inherit from `ComponentList` and are subcomponents of
 `AttributeDescriptor` – content is `DataAttribute` and an association to `MetadataAttribute`
 </ul>
 
-The classes that inherit from `Component` are:
+The classes that inherit from *`Component`* are:
 <ul>
 
 `Measure`
 
-`DimensionComponent` and thereby its sub classes of `Dimension` and `TimeDimension`
+*`DimensionComponent`* and thereby its sub classes of `Dimension` and `TimeDimension`
 
-`Attribute` and thereby its sub classes of `DataAttribute` and `MetadataAttribute`
+*`AttributeComponent`* and thereby its sub classes of `DataAttribute` and `MetadataAttribute`
 </ul>
 
 The concrete classes identified above are the majority of the classes required to define the metamodel for the `DataStructureDefinition`. The diagrams and explanations in the rest of this section show how these concrete classes are related in order to support the functionality required.
@@ -1653,42 +1655,42 @@ The concrete classes identified above are the majority of the classes required t
 
 #### 5.3.2.1 Narrative
 
-A `DataStructureDefinition` defines the `Dimension`s, `TimeDimension`, `DataAttribute`s, and `Measure`s, and associated `Representation`s, that comprise the valid structure of data and related attributes that are contained in a `DataSet`, which is defined by a `Dataflow`. In addition, a `DataStructureDefinition` may be related to one `MetadataStructureDefinition`, in order to use the latter’s `MetadataAttribute`s, by relating them to other `Component`s within the DSD, as explained below.
+A `DataStructureDefinition` defines the `Dimension`s, `TimeDimension`, `DataAttribute`s, and `Measure`s, and associated `Representation`s, that comprise the valid structure of data and related attributes that are contained in a `DataSet`, which is defined by a `Dataflow`. In addition, a `DataStructureDefinition` may be related to one `MetadataStructureDefinition`, in order to use the latter’s `MetadataAttribute`s, by relating them to other *`Component`s* within the DSD, as explained below.
 
-The `Dataflow` may also have additional metadata attached that define qualitative information and `Constraint`s on the use of the `DataStructureDefinition` such as the subset of `Code`s used in a `Dimension` (this is covered later in this document – see sections [“Constraints”](#12-constraints) and [“Data Provisioning”](#13-data-provisioning)). Each `Dataflow` has a maximum of one `DataStructureDefinition` specified which defines the structure of any `DataSet`s to be reported/disseminated. A `Dataflow` may optionally define which `Dimension`s it uses, by defining a `DimensionConstraint` (this is a mandatory requirement if the `DataStructureDefinition` sets its evolvingStructure property to ‘true’ and is sematically referenced by the `Dataflow`).
+The `Dataflow` may also have additional metadata attached that define qualitative information and `Constraint`s on the use of the `DataStructureDefinition` such as the subset of `Code`s used in a `Dimension` (this is covered later in this document – see sections ["Constraints"](#12-constraints) and ["Data Provisioning"](#13-data-provisioning)). Each `Dataflow` has a maximum of one `DataStructureDefinition` specified which defines the structure of any `DataSet`s to be reported/disseminated. A `Dataflow` may optionally define which `Dimension`s it uses, by defining a `DimensionConstraint` (this is a mandatory requirement if the `DataStructureDefinition` sets its `evolvingStructure` property to "`true`" and is semantically referenced by the `Dataflow`).
 
 There are two types of dimensions each having a common association to `Concept`:
 
 * `Dimension`
 * `TimeDimension`
 
-Note that `DimensionComponent` can be any or all its sub classes i.e., `Dimension`, `TimeDimension`.
+Note that *`DimensionComponent`* can be any or all its sub classes i.e., `Dimension`, `TimeDimension`.
 
-The `DimensionComponent`, `DataAttribute`, `MetadataAttribute` and `Measure` link to the `Concept` that defines its name and semantic (/`conceptIdentity` association to `Concept`). The `DataAttribute`, `Dimension` (but not `TimeDimension`) and `Measure` can optionally have a `+conceptRole` association with a `Concept` that identifies its role in the `DataStructureDefinition`, or one of the standard pre-defined roles, i.e., those published in "GUIDELINES FOR SDMX CONCEPT ROLES" by the SDMX SWG. The use of these roles is to enable applications to process the data in a meaningful way (e.g., relating a dimension value to a mapping vector). It is expected, beyond the standard roles published by the SWG, that communities (such as the official statistics community) will harmonise such roles within their community so that data can be exchanged and shared in a meaningful way within that community.
+The *`DimensionComponent`*, `DataAttribute`, `MetadataAttribute` and `Measure` link to the `Concept` that defines its name and semantic (`/conceptIdentity` association to `Concept`). The `DataAttribute`, `Dimension` (but not `TimeDimension`) and `Measure` can optionally have a `+conceptRole` association with a `Concept` that identifies its role in the `DataStructureDefinition`, or one of the standard pre-defined roles, i.e., those published in "GUIDELINES FOR SDMX CONCEPT ROLES" by the SDMX SWG. The use of these roles is to enable applications to process the data in a meaningful way (e.g., relating a dimension value to a mapping vector). It is expected, beyond the standard roles published by the SWG, that communities (such as the official statistics community) will harmonise such roles within their community so that data can be exchanged and shared in a meaningful way within that community.
 
-The valid values for a `DimensionComponent`, `Measure`, `DataAttribute` or `MetadataAttribute`, when used in this `DataStructureDefinition`, are defined by the `Representation`. This `Representation` is taken from the `Concept` definition (`coreRepresentation`) unless it is overridden in this `DataStructureDefinition` (`localRepresentation`) – see Figure 28. Note also that `TimeDimension` is constrained to specific `FacetValueType`s. Moreover, the `Representation`s of `MetadataAttribute`s are specified in the corresponding `MetadataStructureDefinition`, linked by the `DataStructureDefinition`.
+The valid values for a *`DimensionComponent`*, `Measure`, `DataAttribute` or `MetadataAttribute`, when used in this `DataStructureDefinition`, are defined by the `Representation`. This `Representation` is taken from the `Concept` definition (`coreRepresentation`) unless it is overridden in this `DataStructureDefinition` (`localRepresentation`) – see Figure 28. Note also that `TimeDimension` is constrained to specific `FacetValueType`s. Moreover, the `Representation`s of `MetadataAttribute`s are specified in the corresponding `MetadataStructureDefinition`, linked by the `DataStructureDefinition`.
 
 There will always be a `DimensionDescriptor` grouping that identifies all of the `Dimension` comprising the full key. Together the `Dimension`s specify the key of an `Observation`.
 
-The `DimensionComponent` can optionally be grouped by multiple `GroupDimensionDescriptor`s each of which identifies the group of `Dimension`s that can form a partial key. The `GroupDimensionDescriptor` must be identified (`GroupDimensionDescriptor`.`id`) and this is used in the `GroupKey` of the `DataSet` to declare which `DataAttribute`s or `MetadataAttribute`s are reported at this group level in the `DataSet`.
+The *`DimensionComponent`* can optionally be grouped by multiple `GroupDimensionDescriptor`s each of which identifies the group of `Dimension`s that can form a partial key. The `GroupDimensionDescriptor` must be identified (`GroupDimensionDescriptor`.`id`) and this is used in the `GroupKey` of the `DataSet` to declare which `DataAttribute`s or `MetadataAttribute`s are reported at this group level in the `DataSet`.
 
 There can be a maximum of one `TimeDimension` specified in the `DimensionDescriptor`. The `TimeDimension` is used to specify the `Concept` used to convey the time period of the observation in a data set. The `TimeDimension` must contain a valid representation of time and cannot be coded.
 
 There can be one or more `Measure`s under the `MeasureDescriptor`. `Measure`s represent the observable phenomena. Each `Measure` may have a valid representation, a `maxOccurs` attribute limiting the maximum number of values per `Measure` (which may be set to 'unbounded' for unlimited occurrences), as well as a `minOccurs` attribute, indicating the minimum required number of values, when the `Measure` is reported. If `minOccurs` or `maxOccurs` are omitted (they both default to ‘1’), the `Measure` is considered to take a single value; otherwise, it is an array. Moreover, the `usage` attribute indicates whether a `Measure` must be reported or not, by the corresponding values: `mandatory` or `optional`.
 
-The `AttributeDescriptor` may contain one or more `Attribute`s, i.e., at least one `DataAttribute` definition or one `MetadataAttribute` reference.
+The `AttributeDescriptor` may contain one or more *`AttributeComponent`s*, i.e., at least one `DataAttribute` definition or one `MetadataAttribute` reference.
 
 The `DataAttribute` defines a characteristic of data that are collected or disseminated and is grouped in the `DataStructureDefinition` by a single `AttributeDescriptor`. The `DataAttribute` can be indicated if it must be reported or not, by the corresponding value of the `usage` attribute: i.e., `mandatory` or `optional`. The property `minOccurs` specifies the minimum number of array values to be included when the `DataAttribute` is reported. Moreover, a `maxOccurs` attribute indicates whether the `DataAttribute` may need to report more than one values, i.e., an array of values. The `DataAttribute` may play a specific role in the structure and this is specified by the `+role` association to the `Concept` that identifies its role.
 
 The `MetadataAttribute` defines reference metadata that may be collected or disseminated and is grouped together with `DataAttribute` under the `AttributeDescriptor`.
 
-A `DataAttribute` or a `MetadataAttribute` (i.e., an `AttributeComponent`) is specified as being `+relatedTo` an `AttributeRelationship`, which defines the constructs to which the `AttributeComponent` is to be reported within a `DataSet`. An `AttributeComponent` can be specified as being related to one of the following artefacts:
+A `DataAttribute` or a `MetadataAttribute` (i.e., an *`AttributeComponent`*) is specified as being `+relatedTo` an `AttributeRelationship`, which defines the constructs to which the *`AttributeComponent`* is to be reported within a *`DataSet`*. An *`AttributeComponent`* can be specified as being related to one of the following artefacts:
 
-* All data within the dataset (`DataflowRelationship`) – this is equivalent to attaching an `Attribute` to all data within the `Dataflow`.
+* All data within the dataset (`DataflowRelationship`) – this is equivalent to attaching an *`AttributeComponent`* to all data within the `Dataflow`.
 * `Dimension` or set of `Dimension`s (`DimensionRelationship`)
 * Set of `Dimension`s specified by a `GroupKey` (`GroupRelationship` – this is retained for compatibility reasons – or `+groupKey` of the `DimensionRelationship`)
 * `Observation` (`ObservationRelationship`)
-* In addition to the positioning of an `AttributeComponent` within a `DataSet`, another relationship indicates the `Measure`(s) for which the `AttributeComponent` is reported. Regardless of the position of the `AttributeComponent` within the `DataSet`, the `AttributeComponent` may concern one, more than one, or all `Measure`s included in the DSD. This is expressed using the `MeasureRelationship` class, which relates a `DataAttribute` to one or more `Measure`s. Lack of the `MeasureRelationship` defaults to a relationship to all `Measure`s.
+* In addition to the positioning of an *`AttributeComponent`* within a *`DataSet`*, another relationship indicates the `Measure`(s) for which the *`AttributeComponent`* is reported. Regardless of the position of the *`AttributeComponent`* within the *`DataSet`*, the *`AttributeComponent`* may concern one, more than one, or all `Measure`s included in the DSD. This is expressed using the `MeasureRelationship` class, which relates a `DataAttribute` to one or more `Measure`s. Lack of the `MeasureRelationship` defaults to a relationship to all `Measure`s.
 <div align="center">
 
 |  |
@@ -1713,7 +1715,7 @@ The following table details the possible relationships a `DataAttribute` may spe
 | Figure 30: Representation of DSD Components |
 </div>
 
-Each of `Dimension`, `TimeDimension`, `Measure`, `DataAttribute` and `MetadataAttribute` can have a `Representation` specified (using the `localRepresentation` association). If this is not specified in the `DataStructureDefinition` then the representation specified for `Concept` (`coreRepresentation`) is used. `Measure`, and `DataAttribute` may be also represented by multilingual text (as seen in the `DataSet` diagram further down). An exception is the `MetadataAttribute`, where its `Representation` is specified in the `MetadataStructureDefinition`.
+Each of `Dimension`, `TimeDimension`, `Measure`, `DataAttribute` and `MetadataAttribute` can have a `Representation` specified (using the `localRepresentation` association). If this is not specified in the `DataStructureDefinition` then the representation specified for `Concept` (`coreRepresentation`) is used. `Measure`, and `DataAttribute` may be also represented by multilingual text (as seen in the *`DataSet`* diagram further down). An exception is the `MetadataAttribute`, where its `Representation` is specified in the `MetadataStructureDefinition`.
 
 A `DataStructureDefinition` can be extended to form a derived `DataStructureDefinition`. This is supported in the `StructureMap`.
 
@@ -1721,40 +1723,40 @@ A `DataStructureDefinition` can be extended to form a derived `DataStructureDefi
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `StructureUsage` |  | See “SDMX Base”. |
-| `Dataflow` | Inherits from <br/>`StructureUsage` | Abstract concept (i.e., the structure without any data) of a flow of data that providers will provide for different reference periods. |
-|  | /`structure` | Associates a Dataflow to the Data Structure Definition. |
+| *`StructureUsage`* |  | See “SDMX Base”. |
+| `Dataflow` | Inherits from <br/>*`StructureUsage`* | Abstract concept (i.e., the structure without any data) of a flow of data that providers will provide for different reference periods. |
+|  | `/structure` | Associates a Dataflow to the Data Structure Definition. |
 |  | `dimensionConstraint` | A list of Dimensions which the Dataflow uses. This is only required when the referenced DataStructureDefinition has the evolvingStructure property set to true and when the association to the DataStructureDefinition in on the latest minor version[^4]. |
 | `DataStructureDefinition` |  | A collection of metadata concepts, their structure and usage when used to collect or disseminate data. |
-|  | /`grouping` | An association to a set of metadata concepts that have an identified structural role in a Data Structure Definition. |
+|  | `/grouping` | An association to a set of metadata concepts that have an identified structural role in a Data Structure Definition. |
 |  | `evolvingStructure` | An optional boolean property, defaulting to false. When true the DataStructureDefinition may have new Dimensions added without having to change its major version number. |
-| `GroupDimensionDescriptor` | Inherits from <br/>`ComponentList` | A set of metadata concepts that define a partial key derived from the Dimension Descriptor in a Data Structure Definition. |
-|  | /`components` | An association to the Dimension components that comprise the group. |
-| `DimensionDescriptor` | Inherits from <br/>`ComponentList` | An ordered set of metadata concepts that, combined, classify a statistical series, and whose values, when combined (the key) in an instance such as a data set, uniquely identify a specific observation. |
-|  | /`components` | An association to the Dimension and Time Dimension comprising the Key Descriptor. |
-| `AttributeDescriptor` | Inherits from <br/>`ComponentList` | A set metadata concepts that define the Attributes of a Data Structure Definition. |
-|  | /`components` | An association to a Data Attribute component. |
-| `MeasureDescriptor` | Inherits from <br/>`ComponentList` | A metadata concept that defines the Measures of a Data Structure Definition. |
-|  | /`components` | An association to a Measure component. |
-| `DimensionComponent` | Inherits from <br/>`Component` <br/>Sub class <br/>`Dimension`  `TimeDimension` | An abstract class representing any Component that can be used for identifying observations. | |
+| `GroupDimensionDescriptor` | Inherits from <br/>*`ComponentList`* | A set of metadata concepts that define a partial key derived from the Dimension Descriptor in a Data Structure Definition. |
+|  | `/components` | An association to the Dimension components that comprise the group. |
+| `DimensionDescriptor` | Inherits from <br/>*`ComponentList`* | An ordered set of metadata concepts that, combined, classify a statistical series, and whose values, when combined (the key) in an instance such as a data set, uniquely identify a specific observation. |
+|  | `/components` | An association to the Dimension and Time Dimension comprising the Key Descriptor. |
+| `AttributeDescriptor` | Inherits from <br/>*`ComponentList`* | A set metadata concepts that define the Attributes of a Data Structure Definition. |
+|  | `/components` | An association to a Data Attribute component. |
+| `MeasureDescriptor` | Inherits from <br/>*`ComponentList`* | A metadata concept that defines the Measures of a Data Structure Definition. |
+|  | `/components` | An association to a Measure component. |
+| *`DimensionComponent`* | Inherits from <br/>*`Component`* <br/>Sub class <br/>`Dimension`  `TimeDimension` | An abstract class representing any Component that can be used for identifying observations. | |
 |  | `Order` | Specifies the order of the Dimension Components within the DSD. The property is used to indicate the position of the Dimension Component and determines the Key for identifying observations, or series. The Time Dimension, when specified, must be the last within the Dimension Descriptor. | |
-| `Dimension` | Inherits from <br/>`DimensionComponent` | A metadata concept used (most probably together with other metadata concepts) to classify a statistical series, e.g., a statistical concept indicating a certain economic activity or a geographical reference area. | |
-|  | /`role` | Association to the Concept that specifies the role that that the Dimension plays in the Data Structure Definition. | |
-|  | /`conceptIdentity` | An association to the metadata concept which defines the semantic of the Dimension. | |
-| `TimeDimension` | Inherits from <br/>`DimensionComponent` | A metadata concept that identifies the component in the key structure that has the role of “time”. | |
-| `DataAttribute` | Inherits from <br/>`Component` | A characteristic of an object or entity. | |
-|  | /`role` | Association to the Concept that specifies the role that that the Data Attribute plays in the Data Structure Definition. | |
+| `Dimension` | Inherits from <br/>*`DimensionComponent`* | A metadata concept used (most probably together with other metadata concepts) to classify a statistical series, e.g., a statistical concept indicating a certain economic activity or a geographical reference area. | |
+|  | `/role` | Association to the Concept that specifies the role that that the Dimension plays in the Data Structure Definition. | |
+|  | `/conceptIdentity` | An association to the metadata concept which defines the semantic of the Dimension. | |
+| `TimeDimension` | Inherits from <br/>*`DimensionComponent`* | A metadata concept that identifies the component in the key structure that has the role of “time”. | |
+| `DataAttribute` | Inherits from <br/>*`Component`* | A characteristic of an object or entity. | |
+|  | `/role` | Association to the Concept that specifies the role that that the Data Attribute plays in the Data Structure Definition. | |
 |  | `minOccurs` | Defines the minimum required occurrences for the Attribute. When equals to zero, the Attribute is conditional. | |
 |  | `maxOccurs` | Defines the maximum allowed occurrences for the Attribute. | |
 |  | `Usage` | Defines whether a Data Attribute must be reported or not. | |
 |  | `+relatedTo` | Association to an Attribute Relationship. | |
-|  | /`conceptIdentity` | An association to the Concept which defines the semantic of the component. | |
-| `Measure` | Inherits from <br/>`Component` | The metadata concept that is the phenomenon to be measured in a data set. In a data set the instance of the measure is often called the observation. | |
-|  | /`conceptIdentity` | An association to the Concept which carries the values of the measures. | |
+|  | `/conceptIdentity` | An association to the Concept which defines the semantic of the component. | |
+| `Measure` | Inherits from <br/>*`Component`* | The metadata concept that is the phenomenon to be measured in a data set. In a data set the instance of the measure is often called the observation. | |
+|  | `/conceptIdentity` | An association to the Concept which carries the values of the measures. | |
 |  | `minOccurs` | Defines the minimum required occurrences for the Measure. When equals to zero, the Measure is conditional. | |
 |  | `maxOccurs` | Defines the maximum allowed occurrences for the Measure. | |
 |  | `Usage` | Defines whether a Measure must be reported or not. | |
-| `AttributeRelationship` | Abstract Class <br/>`Relationship` <br/>Sub classes  <br/>`ObservationRelationship` <br/>`GroupRelationship` <br/>`DimensionRelationship` | Specifies the type of artefact to which a Data Attribute can be attached in a Data Set. | |
+| *`AttributeRelationship`* | Abstract Class <br/> <br/>Sub classes  <br/>`ObservationRelationship` <br/>`GroupRelationship` <br/>`DimensionRelationship` | Specifies the type of artefact to which a Data Attribute can be attached in a Data Set. | |
 | `ObservationRelationship` |  | The Data Attribute is related to the observations of the Data Set. | |
 | `GroupRelationship` |  | The Data Attribute is related to a Group Dimension Descriptor construct. | |
 |  | `+groupKey` | An association to the Group Dimension Descriptor | |
@@ -1789,31 +1791,31 @@ A data set comprises the collection of data values and associated metadata that 
 
 #### 5.4.3.1 Narrative – Data Set
 
-Note that the `DataSet` must conform to the `DataStructureDefinition` associated to the `Dataflow` for which this `DataSet` is an “instance of data”. Whilst the model shows the association to the classes of the `DataStructureDefinition`, this is for conceptual purposes to show the link to the `DataStructureDefinition`. In the actual `DataSet` as exchanged there must, of course, be a reference to the `DataStructureDefinition` and optionally a `Dataflow` or a `ProvisionAgreement`, but the `DataStructureDefinition` is not necessarily exchanged with the data. Therefore, the `DataStructureDefinition` classes are shown in the grey areas, as these are not a part of the `DataSet` when the `DataSet` is exchanged. However, the structural metadata in the `DataStructureDefinition` can be used by an application to validate the contents of the `DataSet` in terms of the valid content of a `KeyValue` as defined by the `Representation` in the `DataStructureDefinition`.
+Note that the *`DataSet`* must conform to the `DataStructureDefinition` associated to the `Dataflow` for which this *`DataSet`* is an “instance of data”. Whilst the model shows the association to the classes of the `DataStructureDefinition`, this is for conceptual purposes to show the link to the `DataStructureDefinition`. In the actual *`DataSet`* as exchanged there must, of course, be a reference to the `DataStructureDefinition` and optionally a `Dataflow` or a `ProvisionAgreement`, but the `DataStructureDefinition` is not necessarily exchanged with the data. Therefore, the `DataStructureDefinition` classes are shown in the grey areas, as these are not a part of the *`DataSet`* when the *`DataSet`* is exchanged. However, the structural metadata in the `DataStructureDefinition` can be used by an application to validate the contents of the *`DataSet`* in terms of the valid content of a *`KeyValue`* as defined by the `Representation` in the `DataStructureDefinition`.
 
-An organisation playing the role of `DataProvider` can be responsible for one or more `DataSet`.
+An organisation playing the role of `DataProvider` can be responsible for one or more *`DataSet`*.
 
-A `DataSet` is formatted as a `DataStructureDefinition` specific data set (`StructureSpecificDataSet`). The structured data set is structured according to one specific `DataStructureDefinition`; hence the latter is required for validation at the syntax level.
+A *`DataSet`* is formatted as a `DataStructureDefinition` specific data set (`StructureSpecificDataSet`). The structured data set is structured according to one specific `DataStructureDefinition`; hence the latter is required for validation at the syntax level.
 
-A `DataSet` is a collection of a set of `Observation`s that share the same dimensionality, which is specified by a set of unique components (`Dimension`, `TimeDimension`) defined in the `DimensionDescriptor` of the `DataStructureDefinition`, together with associated `AttributeValue`s that define specific characteristics about the artefact to which it is attached – `Observation`s, set of `Dimension`s. It can be structured in terms of a `SeriesKey` to which `Observation`s are reported.
+A *`DataSet`* is a collection of a set of *`Observation`s* that share the same dimensionality, which is specified by a set of unique components (`Dimension`, `TimeDimension`) defined in the `DimensionDescriptor` of the `DataStructureDefinition`, together with associated *`AttributeValue`s* that define specific characteristics about the artefact to which it is attached – *`Observation`s*, set of `Dimension`s. It can be structured in terms of a `SeriesKey` to which *`Observation`s* are reported.
 
-The `Observation` can be the value(s) of the variable(s) being measured for the `Concept` associated to the `Measure`(s) in the `MeasureDescriptor` of the `DataStructureDefinition`. Each `Observation` associates one or more `ObservationValue`s with a `KeyValue` (`+observationDimension`) which is the value for the “Dimension at the Observation Level”. Any `Dimension` can be specified as being the “Dimension at the Observation Level”, and this specification is made at the level of the `DataSet` (i.e., it must be the same `Dimension` for the entire `DataSet`).
+The *`Observation`* can be the value(s) of the variable(s) being measured for the `Concept` associated to the `Measure`(s) in the `MeasureDescriptor` of the `DataStructureDefinition`. Each *`Observation`* associates one or more *`ObservationValue`s* with a *`KeyValue`* (`+observationDimension`) which is the value for the “Dimension at the Observation Level”. Any `Dimension` can be specified as being the “Dimension at the Observation Level”, and this specification is made at the level of the *`DataSet`* (i.e., it must be the same `Dimension` for the entire *`DataSet`*).
 
-The `KeyValue` is a value for one of `TimeDimension` or `Dimension` specified in the `DataStructureDefinition`. If it is a `Dimension`, it can be coded (`CodedKeyValue`) or uncoded (`UncodedKeyValue`). If it is the `TimeDimension` then it is a `TimeKeyValue`. The actual value that the `CodedDimensionValue` can take must be one of the `Code`s in the `Codelist` specified as the `Representation` of the `Dimension` in the `DataStructureDefinition`.
+The *`KeyValue`* is a value for one of `TimeDimension` or `Dimension` specified in the `DataStructureDefinition`. If it is a `Dimension`, it can be coded (`CodedKeyValue`) or uncoded (`UncodedKeyValue`). If it is the `TimeDimension` then it is a `TimeKeyValue`. The actual value that the `CodedDimensionValue` can take must be one of the `Code`s in the `Codelist` specified as the `Representation` of the `Dimension` in the `DataStructureDefinition`.
 
 An `ObservationValue` can be coded – this is the `CodedObservation` – or it can be uncoded – this is the `UncodedObservation`. In the case of uncoded observations, the values may be multilingual – expressed via the `TextMeasureValue` – or not (`OtherUncodedMeasureValue`).
 
-The `GroupKey` is a subunit of the `Key` that has the same dimensionality as the `SeriesKey` but defines a subset of the `KeyValue`s of the `SeriesKey`. Its sub dimension structure is defined in the `GroupDimensionDescriptor` of the `DataStructureDefinition` identified by the same id as the `GroupKey`. The `id` identifies a “type” of group and the purpose of the `GroupKey` is to report one or more `AttributeValue` that are contained at this group level. The `GroupKey` is present when the `GroupDimensionDescriptor` is related to the `GroupRelationship` in the `DataStructureDefinition`. There can be many types of groups in a `DataSet`. If the `Group` is related to the `DimensionRelationship` in the `DataStructureDefinition` then the `AttributeValue` will be reported with the appropriate dimension in the `SeriesKey` or `Observation`.
+The `GroupKey` is a subunit of the *`Key`* that has the same dimensionality as the `SeriesKey` but defines a subset of the *`KeyValue`s* of the `SeriesKey`. Its sub dimension structure is defined in the `GroupDimensionDescriptor` of the `DataStructureDefinition` identified by the same id as the `GroupKey`. The `id` identifies a “type” of group and the purpose of the `GroupKey` is to report one or more *`AttributeValue`* that are contained at this group level. The `GroupKey` is present when the `GroupDimensionDescriptor` is related to the `GroupRelationship` in the `DataStructureDefinition`. There can be many types of groups in a *`DataSet`*. If the `Group` is related to the `DimensionRelationship` in the `DataStructureDefinition` then the *`AttributeValue`* will be reported with the appropriate dimension in the `SeriesKey` or *`Observation`*.
 
-In this way each of `SeriesKey`, `GroupKey`, and `Observation` can have zero or more `AttributeValue`s that define some metadata about the object to which it is associated. The `AttributeValue` may be either a `DataAttributeValue` or a `MetadataAttributeValue`, representing values of `DataAttribute`s defined in the DSD or `MetadataAttributes` of the linked MSD, respectively. The allowable `Concept`s and the objects to which these metadata can be associated (attached) are defined in the `DataStructureDefinition` and the linked `MetadataStructureDefinition`.
+In this way each of `SeriesKey`, `GroupKey`, and *`Observation`* can have zero or more *`AttributeValue`s* that define some metadata about the object to which it is associated. The *`AttributeValue`* may be either a *`DataAttributeValue`* or a *`MetadataAttributeValue`*, representing values of `DataAttribute`s defined in the DSD or `MetadataAttributes` of the linked MSD, respectively. The allowable `Concept`s and the objects to which these metadata can be associated (attached) are defined in the `DataStructureDefinition` and the linked `MetadataStructureDefinition`.
 
-The `AttributeValue` links to the object type (`SeriesKey`, `GroupKey`, `Observation`) to which it is associated.
+The *`AttributeValue`* links to the object type (`SeriesKey`, `GroupKey`, `Observation`) to which it is associated.
 
 #### 5.4.3.2 Definitions
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `DataSet` | Abstract Class <br/>Sub classes <br/>`StructureSpecificDataSet` | An organised collection of data. |
+| *`DataSet`* | Abstract Class <br/>Sub classes <br/>`StructureSpecificDataSet` | An organised collection of data. |
 |  | `reportingBegin` | A specific time period in a known system of time periods that identifies the start period of a report. |
 |  | `reportingEnd` | A specific time period in a known system of time periods that identifies the end period of a report. |
 |  | `dataExtractionDate` | A specific time period that identifies the date and time that the data are extracted from a data source. |
@@ -1827,45 +1829,45 @@ The `AttributeValue` links to the object type (`SeriesKey`, `GroupKey`, `Observa
 |  | `+structuredBy` | Associates the Data Structure Definition that defines the structure of the Data Set. Note that the Data Structure Definition is the same as that associated (non-mandatory) to the Dataflow. |
 |  | `+publishedBy` | Associates the Data Provider that reports/publishes the data. |
 | `StructureSpecificDataSet` |  | An XML specific data format structure that contains data corresponding to one specific Data Structure Definition. |
-| `Key` | Abstract class <br/>Sub classes <br/>`SeriesKey` `GroupKey` | Comprises the cross product of values of dimensions that identify uniquely an Observation. |
+| *`Key`* | Abstract class <br/>Sub classes <br/>`SeriesKey` `GroupKey` | Comprises the cross product of values of dimensions that identify uniquely an Observation. |
 |  | `keyValues` | Association to the individual Key Values that comprise the Key. |
 |  | `+attachedAttribute` | Association to the Attribute Values relating to the Series Key or Group Key. |
-| `KeyValue` | Abstract class <br/>Sub classes <br/>`TimeKeyValue`  `CodedKeyValue` `UncodedKeyValue` | The value of a component of a key such as the value of the instance a Dimension in a Dimension Descriptor of a Data Structure Definition. |
+| *`KeyValue`* | Abstract class <br/>Sub classes <br/>`TimeKeyValue`  `CodedKeyValue` `UncodedKeyValue` | The value of a component of a key such as the value of the instance a Dimension in a Dimension Descriptor of a Data Structure Definition. |
 |  | `+valueFor` | Association to the key component in the Data Structure Definition for which this Key Value is a valid representation.  Note that this is conceptual association as the key component is identified explicitly in the data set. |
-| `TimeKeyValue` | Inherits from <br/>`KeyValue` | The value of the Time Dimension component of the key. |
-| `CodedKeyValue` | Inherits from <br/>`KeyValue` | The value of a coded component of the key. The value is the Code to which this class is associated. |
+| `TimeKeyValue` | Inherits from <br/>*`KeyValue`* | The value of the Time Dimension component of the key. |
+| `CodedKeyValue` | Inherits from <br/>*`KeyValue`* | The value of a coded component of the key. The value is the Code to which this class is associated. |
 |  | `+valueOf` | Association to the Code.  Note that this is a conceptual association showing that the Code must exist in the Code list associated with the Dimension in the Data Structure Definition. In the actual Data Set the value of the Code is placed in the Key Value. |
-| `UnCodedKeyValue` | Inherits from <br/>`KeyValue` | The value of an uncoded component of the key. |
+| `UnCodedKeyValue` | Inherits from <br/>*`KeyValue`* | The value of an uncoded component of the key. |
 |  | `value` | The value of the key component. |
 |  | `startTime` | This attribute is only used if the textFormat of the attribute is of the Timespan type in the Data Structure Definition (in which case the value field takes a duration). |
-| `GroupKey` | Inherits from <br/>`Key` | A set of Key Values that comprise a partial key, of the same dimensionality as the Time Series Key for the purpose of attaching Data Attributes. |
+| `GroupKey` | Inherits from <br/>*`Key`* | A set of Key Values that comprise a partial key, of the same dimensionality as the Time Series Key for the purpose of attaching Data Attributes. |
 |  | `+describedBy` | Associates the Group Dimension Descriptor defined in the Data Structure Definition. |
-| `SeriesKey` | Inherits from <br/>`Key` | Comprises the cross product of values of all the Key Values that, together with the Key Value of the +observation Dimension identify uniquely an Observation. |
+| `SeriesKey` | Inherits from <br/>*`Key`* | Comprises the cross product of values of all the Key Values that, together with the Key Value of the +observation Dimension identify uniquely an Observation. |
 |  | `+describedBy` | Associates the Dimension Descriptor defined in the Data Structure Definition. |
 | `Observation` |  | The value(s) of the observed phenomenon in the context of the Key Values comprising the key. |
 |  | `+valueFor` | Associates the Measure(s) defined in the Data Structure Definition.  The source multiplicity (1..\*) indicates that more than one values may be provided for a Measure, if the latter allows it. |
 |  | `+attachedAttribute` | Association to the Attribute Values relating to the Observation. |
 |  | `+observationDimension` | Association to the Key Value that holds the value of the “Dimension at the Observation Level”. |
-| `ObservationValue` | Abstract class <br/>Sub classes <br/>`UncodedObservationValue` <br/>`CodedObservation` |  |
-| `UncodedObservationValue` | Abstract class <br/>Inherits from <br/>`ObservationValue` <br/>Sub classes <br/>`OtherUncodedMeasureValue`  <br/>`TextMeasureValue` |  |
-| `OtherUncodedMeasureValue` | Inherits from <br/>`UncodedObservationValue` | An observation that has a text value. |
+| *`ObservationValue`* | Abstract class <br/>Sub classes <br/>*`UncodedObservationValue`* <br/>`CodedObservation` |  |
+| *`UncodedObservationValue`* | Abstract class <br/>Inherits from <br/>*`ObservationValue`* <br/>Sub classes <br/>`OtherUncodedMeasureValue`  <br/>`TextMeasureValue` |  |
+| `OtherUncodedMeasureValue` | Inherits from <br/>*`UncodedObservationValue`* | An observation that has a text value. |
 |  | `value` | The value of the Uncoded Observation. |
 |  | `startTime` | This attribute is only used if the textFormat of the Measure is of the Timespan type in the Data Structure Definition (in which case the value field takes a duration). |
-| `TextMeasureValue` | Inherits from <br/>`UncodedObservationValue` | An observation that has a localised text value |
+| `TextMeasureValue` | Inherits from <br/>*`UncodedObservationValue`* | An observation that has a localised text value |
 |  | `text` | The localised text values. |
-| `CodedObservation` | Inherits from <br/>`ObservationValue` | An Observation that takes its value from a code in a Code list. |
+| `CodedObservation` | Inherits from <br/>*`ObservationValue`* | An Observation that takes its value from a code in a Code list. |
 |  | `+valueOf` | Association to the Code that is the value of the Observation.  Note that this is a conceptual association showing that the Code must exist in the `Codelist`(s) associated with the Measure(s) in the Data Structure Definition. In the actual Data Set the value of the Code is placed in the Observation. |
-| `AttributeValue` | Abstract class <br/>Sub classes <br/>`DataAttributeValue` <br/>`MetadataAttributeValue` | Represents the value for any Attribute reported in the Dataset, i.e., Data or Metadata Attribute. |
-| `DataAttributeValue` | Abstract class <br/>Inherits from <br/>`AttributeValue` <br/>Sub classes  <br/>`UncodedAttributeValue` <br/>`CodedAttributeValue` | The value of a Data Attribute, such as the instance of a Coded Attribute or of an Uncoded Attribute in a structure such as a Data Structure Definition. |
+| *`AttributeValue`* | Abstract class <br/>Sub classes <br/>*`DataAttributeValue`* <br/>*`MetadataAttributeValue`* | Represents the value for any Attribute reported in the Dataset, i.e., Data or Metadata Attribute. |
+| *`DataAttributeValue`* | Abstract class <br/>Inherits from <br/>*`AttributeValue`* <br/>Sub classes  <br/>*`UncodedAttributeValue`* <br/>`CodedAttributeValue` | The value of a Data Attribute, such as the instance of a Coded Attribute or of an Uncoded Attribute in a structure such as a Data Structure Definition. |
 |  | `+valueFor` | Association to the Data Attribute defined in the Data Structure Definition. Note that this is conceptual association as the Concept is identified explicitly in the data set.  The source multiplicity (1..\*) indicates the possibility to provide more than one values for a Data Attribute, if the latter allows it. |
-| `MetadataAttributeValue` | (explained further in section “Metadata Set”) | The value of a Metadata Attribute, as specified in the Metadata Structure Definition, which is linked in the Data Structure Definition |
-| `UncodedAttributeValue` | Inherits from <br/>`AttributeValue` <br/>Sub classes  <br/>`OtherUncodedAttributeValue`  <br/>`TextAttributeValue` |  |
-| `OtherUncodedAttributeValue` | Inherits from <br/>`UncodedObservationValue` | An attribute value that has a text value |
+| *`MetadataAttributeValue`* | (explained further in section “Metadata Set”) | The value of a Metadata Attribute, as specified in the Metadata Structure Definition, which is linked in the Data Structure Definition |
+| *`UncodedAttributeValue`* | Inherits from <br/>*`AttributeValue`* <br/>Sub classes  <br/>`OtherUncodedAttributeValue`  <br/>`TextAttributeValue` |  |
+| `OtherUncodedAttributeValue` | Inherits from <br/>*`UncodedObservationValue`* | An attribute value that has a text value |
 |  | `value` | The value of the Uncoded attribute. |
 |  | `startTime` | This attribute is only used if the textFormat of the attribute is of the Timespan type in the Data Structure Definition (in which case the value field takes a duration). |
-| `TextAttributeValue` | Inherits from <br/>`UncodedAttributeValue` | An attribute that has a localised text value |
+| `TextAttributeValue` | Inherits from <br/>*`UncodedAttributeValue`* | An attribute that has a localised text value |
 |  | text | The localised text values. |
-| `CodedAttributeValue` | Inherits from <br/>`AttributeValue` | An attribute that takes it value from a Code in Code list. |
+| `CodedAttributeValue` | Inherits from <br/>*`AttributeValue`* | An attribute that takes it value from a Code in Code list. |
 |  | `+valueOf` | Association to the Code that is the value of the Attribute Value.  Note that this is a conceptual association showing that the Code must exist in the Code list associated with the Data Attribute in the Data Structure Definition. In the actual Data Set the value of the Code is placed in the Attribute Value. |
 
 # 6 Cube
@@ -1930,16 +1932,16 @@ It is important to the understanding of the relationship class diagrams presente
 The concrete classes in this part of the SDMX metamodel, which require to be maintained by Maintenance Agencies, all inherit from `MaintainableArtefact`. These are:
 <ul>
 
-`StructureUsage` (concrete class is `Metadataflow`)
+*`StructureUsage`* (concrete class is `Metadataflow`)
 
-`Structure` (concrete class is `MetadataStructureDefinition`)
+*`Structure`* (concrete class is `MetadataStructureDefinition`)
 
 `MetadataProvisionAgreement`
 </ul>
 
-These classes also inherit the identity and versioning facets of `IdentifiableArtefact`, `NameableArtefact` and `VersionableArtefact`.
+These classes also inherit the identity and versioning facets of *`IdentifiableArtefact`*, *`NameableArtefact`* and *`VersionableArtefact`*.
 
-A `Structure` may contain several lists of components. In this case the `MetadataStructureDefinition` acts as a list and contains `Component`s, i.e., `MetadataAttribute`s.
+A *`Structure`* may contain several lists of components. In this case the `MetadataStructureDefinition` acts as a list and contains *`Component`s*, i.e., `MetadataAttribute`s.
 
 ## 7.3 Metadata Structure Definition
 
@@ -1966,39 +1968,39 @@ The `MetadataStructureDefinition` only contains `MetadataAttribute`s, since targ
 
 In brief, a `MetadataStructureDefinition` (MSD) defines the `MetadataAttribute`s, within an `MetadataAttributeDescriptor`, that can be associated with the objects identified in the `Metadataflow`s and `MetadataProvisionAgreement`s that refer to the MSD. The hierarchy of the `MetadataAttribute`s is specified within the `MetadataAttributeDescriptor`.
 
-The `MetadataAttributeDescriptor` comprises a set of `MetadataAttribute`s – these can be defined as a hierarchy. Each `MetadataAttribute` identifies a `Concept` that is reported or disseminated in a `MetadataSet` (/`conceptIdentity`) that uses this `MetadataStructureDefinition`. Different `MetadataAttribute`s in the same `MetadataAttributeDescriptor` can use `Concept`s from different `ConceptScheme`s. Note that a `MetadataAttribute` does not link to a `Concept` that defines its role in this `MetadataStructureDefinition` (i.e., the `MetadataAttribute` does not play a role).
+The `MetadataAttributeDescriptor` comprises a set of `MetadataAttribute`s – these can be defined as a hierarchy. Each `MetadataAttribute` identifies a `Concept` that is reported or disseminated in a `MetadataSet` (`/conceptIdentity`) that uses this `MetadataStructureDefinition`. Different `MetadataAttribute`s in the same `MetadataAttributeDescriptor` can use `Concept`s from different `ConceptScheme`s. Note that a `MetadataAttribute` does not link to a `Concept` that defines its role in this `MetadataStructureDefinition` (i.e., the `MetadataAttribute` does not play a role).
 
-The `MetadataAttribute` can be specified as having multiple occurrences and/or specified as being mandatory (`minOccurs`=1 or more) or optional (`minOccurs`=0). A hierarchical `MetadataStructureDefinition` can be defined by specifying a hierarchy for a `MetadataAttribute`.
+The `MetadataAttribute` can be specified as having multiple occurrences and/or specified as being mandatory (`minOccurs`=`1` or more) or optional (`minOccurs`=`0`). A hierarchical `MetadataStructureDefinition` can be defined by specifying a hierarchy for a `MetadataAttribute`.
 
-It can be seen from this, that the specification of the objects to which a `MetadataAttribute` can be attached is indirect: the `MetadataAttribute`s are defined in a `MetadataStructureDefinition`, but they are attached to one or more `IdentifiableArtefact`s as defined in the `Metadataflow`s or `MetadataProvisionAgreement`s. This gives a flexible mechanism by which the actual objects need not be defined in concrete terms in the model but are defined dynamically by the `IdentifiableObjectSelection`. In this way, the `MetadataStructureDefinition` can be used to define any set of `MetadataAttribute`s regardless of the objects to which they can be attached.
+It can be seen from this, that the specification of the objects to which a `MetadataAttribute` can be attached is indirect: the `MetadataAttribute`s are defined in a `MetadataStructureDefinition`, but they are attached to one or more *`IdentifiableArtefact`s* as defined in the `Metadataflow`s or `MetadataProvisionAgreement`s. This gives a flexible mechanism by which the actual objects need not be defined in concrete terms in the model but are defined dynamically by the *`IdentifiableObjectSelection`*. In this way, the `MetadataStructureDefinition` can be used to define any set of `MetadataAttribute`s regardless of the objects to which they can be attached.
 
-Each `MetadataAttribute` can have a `Representation` specified (using the /`localRepresentation` association). If this is not specified in the `MetadataStructureDefinition` then the `Representation` is taken from that defined for the `Concept` (the `coreRepresentation` association).
+Each `MetadataAttribute` can have a `Representation` specified (using the `localRepresentation` association). If this is not specified in the `MetadataStructureDefinition` then the `Representation` is taken from that defined for the `Concept` (the `coreRepresentation` association).
 
-The definition of the various types of `Representation` can be found in the specification of the Base constructs. Note that if the `Representation` is non-enumerated then the association is to the `ExtendedFacet` (which allows for XHTML as a `FacetValueType`). If the `Representation` is enumerated, then is must use a `Codelist`.
+The definition of the various types of `Representation` can be found in the specification of the Base constructs. Note that if the `Representation` is non-enumerated then the association is to the `ExtendedFacet` (which allows for XHTML as a `FacetValueType`). If the `Representation` is enumerated, then it must use a `Codelist`.
 
-The `Metadataflow` is linked to a `MetadataStructureDefinition`. The `Metadataflow`, in addition to the attributes inherited from the Base classes, it also has a list of `IdentifiableObjectSelection` constructs, which resolve into the `IdentifiableArtefact`s that the `Metadataset`s will refer to. The `IdentifiableObjectSelection` acts like a reference, but it may also include wildcarding part of the reference terms.
+The `Metadataflow` is linked to a `MetadataStructureDefinition`. The `Metadataflow`, in addition to the attributes inherited from the Base classes, it also has a list of *`IdentifiableObjectSelection`* constructs, which resolve into the *`IdentifiableArtefact`s* that the `Metadataset`s will refer to. The *`IdentifiableObjectSelection`* acts like a reference, but it may also include wildcarding part of the reference terms.
 
-The `MetadataProvisionAgreement` is linked to a `Metadataflow`. The former, like the `Metadataflow`, may have `IdentifiableObjectSelection` constructs to be used for specifying the proper targets for reference metadata.
+The `MetadataProvisionAgreement` is linked to a `Metadataflow`. The former, like the `Metadataflow`, may have *`IdentifiableObjectSelection`* constructs to be used for specifying the proper targets for reference metadata.
 
 #### 7.3.4.2 Definitions
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `StructureUsage` |  | See “SDMX Base”. |
-| `Metadataflow` | Inherits from:  <br/>`StructureUsage` | Abstract concept (i.e., the structure without any metadata) of a flow of metadata that providers will provide for different reference periods. Specifies possible targets for metadata, via the Identifiable Object Selection. |
-|  | /`structure` | Associates a Metadata Structure Definition. |
+| *`StructureUsage`* |  | See “SDMX Base”. |
+| `Metadataflow` | Inherits from:  <br/>*`StructureUsage`* | Abstract concept (i.e., the structure without any metadata) of a flow of metadata that providers will provide for different reference periods. Specifies possible targets for metadata, via the Identifiable Object Selection. |
+|  | `/structure` | Associates a Metadata Structure Definition. |
 | `MetadataProvisionAgreement` |  | Links the Metadata Provider to the relevant Structure Usage (i.e., Metadataflow) for which the provider supplies metadata. The agreement may constrain the scope of the metadata that can be provided, by means of a Constraint. Specifies possible targets for metadata, via the Identifiable Object Selection. |
 | `MetadataProvider` |  | See Organisation Scheme. |
 | IdentifiableObjectSelection |  | A list or wildcarded expression resolving into Identifiable Objects that metadata will refer to. |
-| `MetadataStructureDefinition` | Inherits from: <br/>`MaintainableArtefact` | A collection of metadata concepts and their structure when used to collect or disseminate reference metadata. |
-| `MetadataAttributeDescriptor` | Inherits from: <br/>`ComponentList` | Defines a set of concepts that comprises the Metadata Attributes to be reported. |
-|  | /`components` | An association to the Metadata Attributes relevant to the Metadata Attribute Descriptor. |
+| `MetadataStructureDefinition` | Inherits from: <br/>*`MaintainableArtefact`* | A collection of metadata concepts and their structure when used to collect or disseminate reference metadata. |
+| `MetadataAttributeDescriptor` | Inherits from: <br/>*`ComponentList`* | Defines a set of concepts that comprises the Metadata Attributes to be reported. |
+|  | `/components` | An association to the Metadata Attributes relevant to the Metadata Attribute Descriptor. |
 | `MetadataAttribute` |  | Identifies a Concept for which a value may be reported in a Metadata Set. |
-|  | /`hierarchy` | Association to one or more child Metadata Attribute. |
-|  | /`conceptIdentity` | An association to the concept which defines the semantic of the attribute. |
+|  | `/hierarchy` | Association to one or more child Metadata Attribute. |
+|  | `/conceptIdentity` | An association to the concept which defines the semantic of the attribute. |
 |  | `isPresentational` | Indication that the Metadata Attribute is present for structural purposes (i.e. it has child attributes) and that no value for this attribute is expected to be reported in a Metadata Set. |
-|  | `minOccurs`  maxOccurs | Specifies how many occurrences of the Metadata Attribute may be reported at this point in the Metadataset. |
-|  | /`localRepresentation` | Associates a Representation that overrides any core representation specified for the Concept itself. |
+|  | `minOccurs` <br/>`maxOccurs` | Specifies how many occurrences of the Metadata Attribute may be reported at this point in the Metadataset. |
+|  | `/localRepresentation` | Associates a Representation that overrides any core representation specified for the Concept itself. |
 | `Representation` |  | The representation of the Metadata Attribute. |
 
 ## 7.4 Metadata Set
@@ -2018,15 +2020,15 @@ The `MetadataProvisionAgreement` is linked to a `Metadataflow`. The former, like
 
 Note that the `MetadataSet` must conform to the `MetadataStructureDefinition` associated to the `Metadataflow` or `MetadataProvisionAgreement` for which this `MetadataSet` is an “instance of metadata”. Whilst the model shows the association to the classes of the `MetadataStructureDefinition`, this is for conceptual purposes to show the link to the `MetadataStructureDefinition`. In the actual `MetadataSet`, as exchanged, there must, of course, be a reference to the `MetadataStructureDefinition` and optionally a `Metadataflow` or a `MetadataProvisionAgreement`, but the `MetadataStructureDefinition` is not necessarily exchanged with the metadata. Note that the `MetadataStructureDefinition` classes are shown also but are not a part of the `MetadataSet` itself.
 
-A `MetadataProvider` is maintaining one or more `MetadataSet`s, as the latter is a `MaintainableArtefact`.
+A `MetadataProvider` is maintaining one or more `MetadataSet`s, as the latter is a *`MaintainableArtefact`*.
 
-A `MetadataSet` comprises a set of `MetadataAttributeValue`s and a set of `TargetIdentifiableObject`s , which must be part of those specified in the relevant `Metadataflow` or `MetadataProvisionAgreement`.
+A `MetadataSet` comprises a set of *`MetadataAttributeValue`s* and a set of `TargetIdentifiableObject`s , which must be part of those specified in the relevant `Metadataflow` or `MetadataProvisionAgreement`.
 
-The `MetadataStructureDefinition` specifies which `MetadataAttribute`s are expected as `MetadataAttributeValue`s. The `TargetIdentifiableObject`s point to the `IdentifiableArtefact`s for which the `MetadataAttributeValue`s are reported.
+The `MetadataStructureDefinition` specifies which `MetadataAttribute`s are expected as *`MetadataAttributeValue`s*. The `TargetIdentifiableObject`s point to the *`IdentifiableArtefact`s* for which the *`MetadataAttributeValue`s* are reported.
 
-A simple text value for the `MetadataAttributeValue` uses the `UncodedMetadataAttributeValue` sub class of `MetadataAttributeValue` whilst a coded value uses the `CodedMetadataAttributeValue` sub class.
+A simple text value for the *`MetadataAttributeValue`* uses the *`UncodedMetadataAttributeValue`* sub class of *`MetadataAttributeValue`* whilst a coded value uses the `CodedMetadataAttributeValue` sub class.
 
-The `UncodedMetadataAttributeValue` can be one of:
+The *`UncodedMetadataAttributeValue`* can be one of:
 
 * `XHTMLAttributeValue` – the content is XHTML,
 * `TextAttributeValue` – the content is textual and may contain the `text` in multiple languages,
@@ -2053,12 +2055,12 @@ The `CodedMetadataAttributeValue` contains a value for a `Code` specified as the
 |  | `+valueFor` | Associates the Target Identifiable Object being a part of the Identifiable Object Selection specified in the Dataflow or Metadata Provision Agreement. |
 | `StructureRef` |  | Contains the identification of an Identifiable object. |
 |  | `structureType` | The object type of the target object. |
-| Identi`fiableArtefactRef |  | Identification of the target object. |
+| `IdentifiableArtefactRef` |  | Identification of the target object. |
 |  | `+containedObject` | Association to a contained object in a hierarchy of Identifiable Objects such as a Transition in a Process Step. |
-| `MetadataAttributeValue` | Abstract class <br/>Sub classes are: <br/>`UncodedMetadataAttributeValue` <br/>`CodedMetadataAttributeValue` | The value for a Metadata Attribute. |
-|  | `+valueFor` <br/>(inherited from the `AttributeValue`) | Association to the Metadata Attribute in the Metadata Structure Definition that identifies the Concept and allowed Representation for the Metadata Attribute value.  Note that this is a conceptual association showing the link to the MSD construct. The syntax for the Metadata Attribute value will state, in some form, the id of the Metadata Attribute. |
+| *`MetadataAttributeValue`* | Abstract class <br/>Sub classes are: <br/>*`UncodedMetadataAttributeValue`* <br/>`CodedMetadataAttributeValue` | The value for a Metadata Attribute. |
+|  | `+valueFor` <br/>(inherited from the *`AttributeValue`*) | Association to the Metadata Attribute in the Metadata Structure Definition that identifies the Concept and allowed Representation for the Metadata Attribute value.  Note that this is a conceptual association showing the link to the MSD construct. The syntax for the Metadata Attribute value will state, in some form, the id of the Metadata Attribute. |
 |  | `+child` | Association to a child Metadata Attribute value consistent with the hierarchy defined in the MSD for the Metadata Attribute for which this child is a Metadata Attribute value. |
-| `UncodedMetadataAttributeValue` | Inherits from <br/>`MetadataAttributeValue` <br/>Sub class: <br/>`XHTMLAttributeValue` <br/>`TextAttributeValue` <br/>`OtherUncodedAttributeValue` | The content of a Metadata Attribute value where this is textual. |
+| *`UncodedMetadataAttributeValue`* | Inherits from <br/>*`MetadataAttributeValue`* <br/>Sub class: <br/>`XHTMLAttributeValue` <br/>`TextAttributeValue` <br/>`OtherUncodedAttributeValue` | The content of a Metadata Attribute value where this is textual. |
 | `XHTMLAttributeValue` |  | This contains XHTML |
 |  | `value` | The string value of the XHTML |
 | `TextAttributeValue` |  | This value of a Metadata Attribute value where the content is human-readable text. |
@@ -2066,7 +2068,7 @@ The `CodedMetadataAttributeValue` contains a value for a `Code` specified as the
 | `OtherUncodedAttributeValue` |  | The value of a Metadata Attribute value where the content is not of human-readable text. |
 |  | `value` | A text string that is consistent in format to that defined in the Representation of the Metadata Attribute for which this is a Metadata Attribute value. |
 |  | `startTime` | This attribute is only used if the textFormat of the Metadata Attribute is of the Timespan type in the Metadata Structure Definition (in which case the value field takes a duration). |
-| `CodedMetadataAttributeValue` | Inherits from <br/>`MetadataAttributeValue` | The content of a Metadata Attribute value that is taken from a Code in a Code list. |
+| `CodedMetadataAttributeValue` | Inherits from <br/>*`MetadataAttributeValue`* | The content of a Metadata Attribute value that is taken from a Code in a Code list. |
 |  | `value` | The Code value of the Metadata Attribute value. |
 |  | `+value` | Association to a Code in the Code list specified in the Representation of the Metadata Attribute for which this Metadata Attribute value is the value.  Note that this shows the conceptual link to the Item that is the value. In reality, the value itself will be contained in the Coded Metadata Attribute Value. |
 
@@ -2103,7 +2105,7 @@ The principal features of the `Hierarchy` are:
 
 #### 8.2.2.1 Narrative
 
-The `Hierarchy` and `HierarchyAssociation` inherit from `MaintainableArtefact` and thus have identification, naming, versioning and a maintenance agency. The `Level` is a `NameableArtefact` and therefore has an Id, multi-lingual name and multi-lingual description. A `HierachicalCode` is an `IdentifiableArtefact`.
+The `Hierarchy` and `HierarchyAssociation` inherit from *`MaintainableArtefact`* and thus have identification, naming, versioning and a maintenance agency. The `Level` is a *`NameableArtefact`* and therefore has an Id, multi-lingual name and multi-lingual description. A `HierachicalCode` is an *`IdentifiableArtefact`*.
 
 It is important to understand that the `Code`s participating in a `Hierarchy` are not themselves contained in the list – they are referenced from the list and are maintained in one or more `Codelist`s. This is explained in the narrative of the relationship class diagram below.
 
@@ -2136,23 +2138,23 @@ The basic principles of the `Hierarchy` are:
 
 A `Hierarchy` can have formal levels (`hasFormalLevels`="`true`"). However, even if `hasFormalLevels`="`false`" the `Hierarchy` can still have one or more `Level`s associated in order to document information about the `HierarchicalCodes`.
 
-If `hasFormalLevels`="`false`" the `Hierarchy` is “value based” comprising a hierarchy of codes with no formal `Level`s. If `hasFormalLevels`="`true`" then the hierarchy is “level based” where each `Level` is a formal `Level` in the `Hierarchy`, such as those present in statistical classifications. In a “level based” hierarchy each `HierarchicalCode` is linked to the `Level` in which it resides. It is expected that all `HierarchicalCode`s at the same hierarchic level defined by the `+parent`/`+child` association will be linked to the same `Level`. Note that the `+level` association need only be specified if the `HierarchicalCode` is at a different hierarchical level (implied by the `HierarchicalCode` parent/child association) than the actual `Level` in the level hierarchy (implied by the `Level` parent/child association).
+If `hasFormalLevels`="`false`" the `Hierarchy` is "value based" comprising a hierarchy of codes with no formal `Level`s. If `hasFormalLevels`="`true`" then the hierarchy is “level based” where each `Level` is a formal `Level` in the `Hierarchy`, such as those present in statistical classifications. In a “level based” hierarchy each `HierarchicalCode` is linked to the `Level` in which it resides. It is expected that all `HierarchicalCode`s at the same hierarchic level defined by the `+parent`/`+child` association will be linked to the same `Level`. Note that the `+level` association need only be specified if the `HierarchicalCode` is at a different hierarchical level (implied by the `HierarchicalCode` parent/child association) than the actual `Level` in the level hierarchy (implied by the `Level` parent/child association).
 
 [Note that organisations wishing to be compliant with accepted models for statistical classifications should ensure that the Id is the number associated with the `Level`, where `Level`s are numbered consecutively starting with level 1 at the highest `Level`].
 
 The `Level` may have `CodingFormat` information defined (e.g. coding type at that level).
 
-A `HierarchyAssociation` links an `IdentifiableArtefact` (`+linkedObject`), that needs a `Hierarchy`, with the latter (`+linkedHierarchy`). The association is performed in a certain context (`+contextObject`), e.g. a `Dimension` in the context of a `Dataflow`.
+A `HierarchyAssociation` links an *`IdentifiableArtefact`* (`+linkedObject`), that needs a `Hierarchy`, with the latter (`+linkedHierarchy`). The association is performed in a certain context (`+contextObject`), e.g. a `Dimension` in the context of a `Dataflow`.
 
 #### 8.3.2.2 Definitions
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `Hierarchy` | Inherits from: <br/>`MaintainableArtefact` | A classification structure arranged in levels of detail from the broadest to the most detailed level. |
+| `Hierarchy` | Inherits from: <br/>*`MaintainableArtefact`* | A classification structure arranged in levels of detail from the broadest to the most detailed level. |
 |  | `hasFormalLevels` | If “true”, this indicates a hierarchy where the structure is arranged in levels of detail from the broadest to the most detailed level.  If “false”, this indicates a hierarchy structure where the items in the hierarchy have no formal level structure. |
 |  | `+codes` | Association to the top-level Hierarchical Codes in the Hierarchy. |
 |  | `+level` | Association to the top Level in the Hierarchy. |
-| `Level` | Inherits from <br/>`NameableArtefact` | In a “level based” hierarchy this describes a group of Codes which are characterised by homogeneous coding, and where the parent of each Code in the group is at the same higher level of the Hierarchy.  In a “value based’ hierarchy this describes information about the Hierarchical Codes at the specified nesting level. |
+| `Level` | Inherits from <br/>*`NameableArtefact`* | In a “level based” hierarchy this describes a group of Codes which are characterised by homogeneous coding, and where the parent of each Code in the group is at the same higher level of the Hierarchy.  In a “value based’ hierarchy this describes information about the Hierarchical Codes at the specified nesting level. |
 |  | `+codeFormat` | Association to the Coding Format. |
 |  | `+child` | Association to a child Level of Level. |
 | `CodingFormat` |  | Specifies format information for the codes at this level in the hierarchy such as whether the codes at the level are alphabetic, numeric or alphanumeric and the code length. |
@@ -2165,7 +2167,7 @@ A `HierarchyAssociation` links an `IdentifiableArtefact` (`+linkedObject`), that
 | `Code` |  | The Code to be used at this point in the hierarchy. |
 |  | /`items` | Association to the Code list containing the Code. |
 | `Codelist` |  | The Code list containing the Code. |
-| `HierarchyAssociation` | Inherits from: <br/>`MaintainableArtefact` | An association between an Identifiable Artefact and a Hierarchy, within a specific context. |
+| `HierarchyAssociation` | Inherits from: <br/>*`MaintainableArtefact`* | An association between an Identifiable Artefact and a Hierarchy, within a specific context. |
 |  | `+contextObject` | The context within which the association is performed. |
 |  | `+linkedObject` | Associates the Identifiable Artefact that needs the Hierarchy. |
 |  | `+linkedHierarchy` | Associated the Hierarchy. |
@@ -2176,7 +2178,7 @@ A `HierarchyAssociation` links an `IdentifiableArtefact` (`+linkedObject`), that
 
 A `StructureMap` allows mapping between `DataStructureDefinition`s or `Dataflow`s. It ultimately maps one `DataStructureDefinition` to another (source to target) although it can do this via the `Dataflow` or directly against the `DataStructureDefinition`.
 
-The `StructureMap` defines how the *structure* of a source `DataStructureDefinition` relates to the *structure* of the target `DataStructureDefinition`. The term *structure* in this instance refers to the `Dimension`s and `Attribute`s (collectively called `Component`s). An example relationship is source REF\_AREA `Dimension` maps to target COUNTRY `Dimension`. When converting data, systems should interpret this, as ‘data reported against REF\_AREA in the source dataset, should be converted to data against COUNTRY in the target dataset’. `StructureMap`s can make use of the `RepresentationMap` to describe how the reported value map, if there is a mapping to be done on the value, for example source REF\_AREA.US may map to COUNTRY.USA. In the case of mapping Dates, the `EpochMap` or `DatePatternMap` is used and maintained in the `StructureMap` that uses it.
+The `StructureMap` defines how the *structure* of a source `DataStructureDefinition` relates to the *structure* of the target `DataStructureDefinition`. The term *structure* in this instance refers to the `Dimension`s and `Attribute`s (collectively called *`Component`s*). An example relationship is source REF\_AREA `Dimension` maps to target COUNTRY `Dimension`. When converting data, systems should interpret this, as ‘data reported against REF\_AREA in the source dataset, should be converted to data against COUNTRY in the target dataset’. `StructureMap`s can make use of the `RepresentationMap` to describe how the reported value map, if there is a mapping to be done on the value, for example source REF\_AREA.US may map to COUNTRY.USA. In the case of mapping Dates, the `EpochMap` or `DatePatternMap` is used and maintained in the `StructureMap` that uses it.
 
 ### 9.1.1 Class Diagram – Relationship
 <div align="center">
@@ -2191,11 +2193,11 @@ The `StructureMap` defines how the *structure* of a source `DataStructureDefinit
 
 #### 9.1.2.1 Narrative
 
-The `StructureMap` is a `MaintainableArtefact`. The `StructureMap` can either map a source and target `DataStructureDefinition` or a source and target `Dataflow`, it cannot mix source and target types. The `StructureMap` contains zero or more `ComponentMap`s. Each `ComponentMap` maps one or more `Component`s from the source `DataStructureDefinition` to one or more `Component`s in the target `DataStructureDefinition`[^5]. In addition, the `StructureMap` contains zero or more `FixedValueMap`s. In this case, one or more `Component`s, from the source or target `DataStructureDefinition`, map to a fixed value.
+The `StructureMap` is a *`MaintainableArtefact`*. The `StructureMap` can either map a source and target `DataStructureDefinition` or a source and target `Dataflow`, it cannot mix source and target types. The `StructureMap` contains zero or more `ComponentMap`s. Each `ComponentMap` maps one or more *`Component`s* from the source `DataStructureDefinition` to one or more *`Component`s* in the target `DataStructureDefinition`[^5]. In addition, the `StructureMap` contains zero or more `FixedValueMap`s. In this case, one or more *`Component`s*, from the source or target `DataStructureDefinition`, map to a fixed value.
 
-The rules pertaining to how reported values map, are maintained in either a `RepresentationMap`, `EpochMap`, or `DatePatternMap`. A `ComponentMap` can only reference one of these mapping types to define how the reported values relate from source `Dataset` to the target `Dataset`. If a `ComponentMap` has more than 1 source or target, a `RepresentationMap` must be used to describe how the values map, as it is the only map which can define multiple source and target values in combination.
+The rules pertaining to how reported values map, are maintained in either a `RepresentationMap`, `EpochMap`, or `DatePatternMap`. A `ComponentMap` can only reference one of these mapping types to define how the reported values relate from source *`Dataset`* to the target *`Dataset`*. If a `ComponentMap` has more than 1 source or target, a `RepresentationMap` must be used to describe how the values map, as it is the only map which can define multiple source and target values in combination.
 
-If the `ComponentMap` does not reference any map type to describe how the values map in a `Dataset`, then the values from the source `Dataset` are copied to the target `Dataset` verbatim, with no mapping rules being applied.
+If the `ComponentMap` does not reference any map type to describe how the values map in a *`Dataset`*, then the values from the source *`Dataset`* are copied to the target *`Dataset`* verbatim, with no mapping rules being applied.
 
 A `RepresentationMap` is a separate `Maintainable` structure. `EpochMap` and `DatePatternMap` are maintained in the same `StructureMap` and are referenced locally from the `ComponentMap`. `EpochMap` and `DatePatternMap` are maintained outside of the `ComponentMap` and can therefore be reused by multiple `ComponentMap`s.
 
@@ -2212,7 +2214,7 @@ A `RepresentationMap` is a separate `Maintainable` structure. `EpochMap` and `Da
 
 #### 9.1.4.1 Narrative
 
-The `EpochMap` and `DatePatternMap` are both `IdentifiableArtefact`. An `EpochMap` and `DatePatternMap` both provide the ability to map source to target date formats. The `EpochMap` describes the source date as the number of epochs since a point in time, where the duration of each epoch is defined, e.g., number of milliseconds since 1970. The `DatePatternMap` describes the source date as a pattern for example `MM-YYYY`, accompanied by the appropriate locale.
+The `EpochMap` and `DatePatternMap` are both *`IdentifiableArtefact`*. An `EpochMap` and `DatePatternMap` both provide the ability to map source to target date formats. The `EpochMap` describes the source date as the number of epochs since a point in time, where the duration of each epoch is defined, e.g., number of milliseconds since 1970. The `DatePatternMap` describes the source date as a pattern for example `MM-YYYY`, accompanied by the appropriate locale.
 
 Both mappings describe the target date as a frequency Identifier. The frequency identifier is given either a fixed value, e.g., ‘A’ or a reference to a `Dimension` or `Attribute` in the target `DataStructureDefinition` of the `StructureMap`, e.g. ‘FREQ’. In the latter case, the frequency id is derived at run time when the output series and observations are generated. Dates mapped using the frequency lookup can therefore be mapped using different frequencies depending on the series or observation being converted.
 
@@ -2222,27 +2224,27 @@ If the Frequency Identifier aligns with standard SDMX frequencies the output dat
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `StructureMap` | Inherits from <br/>`MaintainableArtefact` | Links a source and target structure where there is a semantic equivalence between the source and the target structures. |
+| `StructureMap` | Inherits from <br/>*`MaintainableArtefact`* | Links a source and target structure where there is a semantic equivalence between the source and the target structures. |
 |  | `+sourceStructure` | Association to the source Data Structure. |
 |  | `+targetStructure` | Association to the target Data Structure |
 |  | `+sourceStructureUsage` | Association to the source Dataflow. |
 |  | `+targetStructureUsage` | Association to the target Dataflow. |
-| `ComponentMap` | Inherits from <br/>`AnnotableArtefact` | Links source and target Component(s) where there is a semantic equivalence between the source and the target Components. |
+| `ComponentMap` | Inherits from <br/>*`AnnotableArtefact`* | Links source and target Component(s) where there is a semantic equivalence between the source and the target Components. |
 |  | `+source` | Association to zero or more source Components. |
 |  | `+target` | Association to zero or more the target Components. |
 |  | `mappingRules` | Reference to either a RepresentationMap, an EpochMap or a DatePatternMap. |
-| `FixedValueMap` | Inherits from <br/>`AnnotableArtefact` | Links a Component (source or target) to a fixed value. |
+| `FixedValueMap` | Inherits from <br/>*`AnnotableArtefact`* | Links a Component (source or target) to a fixed value. |
 |  | `value` | The value that a Component will be fixed in a fixed component map. |
-| `DateMap` | Inherits from <br/>`IdentifiableArtefact` |  |
+| *`DateMap`* | Inherits from <br/>*`IdentifiableArtefact`* |  |
 |  | `freqDimension` | The Dimension or Attribute of the target Data Structure Definition which will hold the frequency information for date conversion. Mutually exclusive with targetFrequencyId. |
 |  | `yearStart` | The date of the start of the year, enabling mapping from high frequency to lower frequency formats. |
 |  | `resolvePeriod` | Which point in time to resolve to when mapping from low frequency to high frequency periods. |
 |  | `mappedFrequencies` | A reference to a map of frequency id to date pattern for output. |
-| `EpochMap` | Inherits from <br/>`DateMap` |  |
+| `EpochMap` | Inherits from <br/>*`DateMap`* |  |
 |  | `basePeriod` | Epoch zero starts on this period. |
 |  | `targetFrequencyId` | The frequency to convert the input date into. Mutually exclusive with freqDimension. |
 |  | `epochPeriod` | Describes the period of time that each epoch represents. |
-| `DatePatternMap` | Inherits from <br/>`DateMap` | Described a source date based on a string pattern, and how it maps to the target date. |
+| `DatePatternMap` | Inherits from <br/>*`DateMap`* | Described a source date based on a string pattern, and how it maps to the target date. |
 |  | `locale` | The locale on which the input will be parsed according to the pattern. |
 | `DateMapping` |  |  |
 |  | `sourcePattern` | Describes the source date using conventions for describing years, months, days, etc. |
@@ -2274,16 +2276,16 @@ The absence of an output for an input is interpreted as ‘no output value for t
 
 #### 10.1.2.1 Narrative
 
-The `RepresentationMap` is a `MaintainableArtefact`. It maps one or more source values to one or more target values, where values that are being mapped are defined by the `ValueRepresentation`. A `ValueRepresentation` is an abstract container which is either a `Codelist`, `ValueList` or a `FacetValueType`. Source and target values are in a list where the list order is important as the `RepresentationMapping` `sourceValues` and `targetValues` must match the order. It is permissible to mix types for both source and target values, allowing for example a `Codelist` to map to an Integer (which is a `FacetValueType`). The list of source or targets can also be mixed, for example a `Codelist` in conjunction with a `FacetValueType` and `ValueList` and can be defined as the source of a mapping, thus allowing rules such as ‘When CL\_AREA=UK AND AGE=26 CURRENCY=$’.
+The `RepresentationMap` is a *`MaintainableArtefact`*. It maps one or more source values to one or more target values, where values that are being mapped are defined by the *`ValueRepresentation`*. A *`ValueRepresentation`* is an abstract container which is either a `Codelist`, `ValueList` or a `FacetValueType`. Source and target values are in a list where the list order is important as the `RepresentationMapping` `sourceValues` and `targetValues` must match the order. It is permissible to mix types for both source and target values, allowing for example a `Codelist` to map to an Integer (which is a `FacetValueType`). The list of source or targets can also be mixed, for example a `Codelist` in conjunction with a `FacetValueType` and `ValueList` and can be defined as the source of a mapping, thus allowing rules such as ‘When CL\_AREA=UK AND AGE=26 CURRENCY=$’.
 
 #### 10.1.2.2 Definitions
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `RepresentationMap` | Inherits from <br/>`MaintainableArtefact` | Links source and target representations, whose values may conform to a linked `Codelist`, `ValueList` or enumerated type such as Integer. |
+| `RepresentationMap` | Inherits from <br/>*`MaintainableArtefact`* | Links source and target representations, whose values may conform to a linked `Codelist`, `ValueList` or enumerated type such as Integer. |
 |  | `source` | Association to one or more `Codelist`, `ValueList`, or `FacetValue` – mixed types are permissible |
 |  | `target` | Association to one or more `Codelist`, `ValueList`, or `FacetValue` – mixed types are permissible |
-| `RepresentationMapping` | Inherits from <br/>`AnnotableArtefact` | Describes how the source value(s) map to the target value(s) |
+| `RepresentationMapping` | Inherits from <br/>*`AnnotableArtefact`* | Describes how the source value(s) map to the target value(s) |
 |  | `validFrom` | Optional period describing when the mapping is applicable |
 |  | `validTo` | Optional period describing which the mapping is no longer applicable. |
 |  | `sourceValues` | Input value for source in the `RepresentationMap` |
@@ -2315,14 +2317,14 @@ The absence of an output for an input is interpreted as ‘no output value for t
 
 #### 11.1.1.1 Narrative
 
-An `ItemSchemeMap` is an abstract type which inherits from `Maintainable`. It is subclassed by the 4 concrete classes:
+An *`ItemSchemeMap`* is an abstract type which inherits from *`MaintainableArtefact`*. It is subclassed by the 4 concrete classes:
 
 * `OrganisationSchemeMap`
 * `ConceptSchemeMap`
 * `CategorySchemeMap`
 * `ReportingTaxonomyMap`
 
-An `OrganisationSchemeMap` maps a source `AgencyScheme`, `DataProviderScheme`, `DataConsumerScheme` or `OrganisationUnitScheme` to a target `AgencyScheme`, `DataProviderScheme`, `DataConsumerScheme` or `OrganisationUnitScheme`. It is permissible to mix source and target types to define an equivalence between `Organisation`s of different roles. The mapped items refer to the `Organisation`s in the source/target schemes.
+An `OrganisationSchemeMap` maps a source `AgencyScheme`, `DataProviderScheme`, `DataConsumerScheme` or `OrganisationUnitScheme` to a target `AgencyScheme`, `DataProviderScheme`, `DataConsumerScheme` or `OrganisationUnitScheme`. It is permissible to mix source and target types to define an equivalence between *`Organisation`s* of different roles. The mapped items refer to the *`Organisation`s* in the source/target schemes.
 
 A `ConceptSchemeMap` maps a source `ConceptScheme` to a target `ConceptScheme`. The mapped items refer to the `Concept`s in the source/target schemes.
 
@@ -2337,7 +2339,7 @@ A `ReportingTaxonomyMap` maps a source `ReportingTaxonomy` to a target `Reportin
 | *`ItemSchemeMap`* | Inherits from <br/>*`MaintainableArtefact`* | Links source and target *`ItemScheme`s* |
 |  | `+source` | Association to a source *`ItemScheme`* |
 |  | `+target` | Association to a target *`ItemScheme`* |
-| `ItemMap` | Inherits from <br/>`AnnotableArtefact` | Describes how the source value maps to the target value |
+| `ItemMap` | Inherits from <br/>*`AnnotableArtefact`* | Describes how the source value maps to the target value |
 |  | `validFrom` | Optional period describing when the mapping is applicable |
 |  | `validTo` | Optional period describing which the mapping is no longer applicable. |
 |  | `sourceValue` | Input value for source |
@@ -2424,7 +2426,7 @@ A *`ConstrainableArtefact`* can have two types of *`Constraint`s*:
 
 2. `MetadataConstraint` – is used as a mechanism to specify a set of component values (`MetadatTargetRegion`) that can be reported against the target *`ConstrainableArtefact`*. Multiple such `MetadataConstraint`s may be present for a *`ConstrainableArtefact`*.
 
-Note also that another possible type of a `Constraint` is available; that is a `AvailableDataConstraint`, this is used to report the data that exists in a data source. An `AvailableDataConstraint` is not a *`MaintainableArtefact`* as it is generated dynamically based on the query. An `AvailableDataConstraint` contains only 1 `CubeRegion` which is used to specify the valid values per `Dimension` of the DSD that is is attached to.
+Note also that another possible type of a *`Constraint`* is available; that is a `AvailableDataConstraint`, this is used to report the data that exists in a data source. An `AvailableDataConstraint` is not a *`MaintainableArtefact`* as it is generated dynamically based on the query. An `AvailableDataConstraint` contains only 1 `CubeRegion` which is used to specify the valid values per `Dimension` of the DSD that is is attached to.
 
 ### 12.3.3 Relationship Class Diagram – Detail
 <div align="center">
@@ -2441,14 +2443,14 @@ A *`Constraint`* is a *`MaintainableArtefact`*.
 
 A `DataConstraint` has a choice of two ways of specifying value subsets:
 
-1. As a set of keys that can be present in the *`DataSet`* (`DataKeySet`). Each `DataKey` specifies a number of `ComponentValue`s each of which reference a `Component` (e.g., `Dimension`, `DataAttribute`). Each `ComponentValue` is a value that may be present for a *`Component`* of a structure when contained in a *`DataSet`*. In addition, each `DataKeySet` may also include `MemberSelection`s for `DataAttribute` or `Measure` components.
+1. As a set of keys that can be present in the *`DataSet`* (`DataKeySet`). Each `DataKey` specifies a number of `ComponentValue`s each of which reference a *`Component`* (e.g., `Dimension`, `DataAttribute`). Each `ComponentValue` is a value that may be present for a *`Component`* of a structure when contained in a *`DataSet`*. In addition, each `DataKeySet` may also include `MemberSelection`s for `DataAttribute` or `Measure` components.
 
-2. As a `CubeRegion` whose `MemberSelection`s `SelectionValues` define a subset of allowed/disallowed values for a `Component` when contained in a *`DataSet`*/*`MetadataSet`*. A `DataConstraint` is restricted to a maximum of 2 `CubeRegion`s, one to define included (allowable) content, and the other to define disallowed content (`isIncluded`=`false`).
+2. As a `CubeRegion` whose `MemberSelection`s `SelectionValues` define a subset of allowed/disallowed values for a *`Component`* when contained in a *`DataSet`*/*`MetadataSet`*. A `DataConstraint` is restricted to a maximum of 2 `CubeRegion`s, one to define included (allowable) content, and the other to define disallowed content (`isIncluded`=`false`).
 
 The difference between (1) and (2) above is that :
 
 1. Defines a combination of `Dimension` values, which are assessed in combination to reference one or more `Series` in a *`Dataset`*. This combination of values can be used to explicitly include or exclude the `Series` from being reported (via the `isIncluded` property). In addition, once a set of `Series` are targeted by a `DataKey` restrictions can be applied to `DataAttribute` and `Measure` values by defining subsets of values that are either allowed or disallowed. The `DataKeySet` targets its rules to specific `Series`.
-2. Defines a subset of values that are allowed for a `Component`. Each `CubeRegion` `MemberSelection` defines a single `Component` to define a set of allowed or disallowed values, the `MemberSelection`s are processed indepently of each other. The `CubeRegion` supplies global rules, not series specific rules.
+2. Defines a subset of values that are allowed for a *`Component`*. Each `CubeRegion` `MemberSelection` defines a single *`Component`* to define a set of allowed or disallowed values, the `MemberSelection`s are processed indepently of each other. The `CubeRegion` supplies global rules, not series specific rules.
 
 A `MetadataConstraint` has only one way of specifying value subsets:
 
@@ -2470,7 +2472,7 @@ In `DataKey`s and `MemberValue`s it is possible, via the `validFrom` and `validT
 
 | Class | Feature | Description |
 | --- | --- | --- |
-| `ConstrainableArtefact` | Abstract Class <br/>Sub classes are: <br/>`Dataflow` <br/>`DataProvider` <br/>`DataStructureDefinition` <br/>`Metadataflow` <br/>`MetadataProvisionAgreement` <br/>`MetadataSet` <br/>`MetadataStructureDefinition` <br/>`ProvisionAgreement` <br/>*`QueryDatasource`* <br/>`SimpleDatasource` | An artefact that can have Constraints specified. |
+| *`ConstrainableArtefact`* | Abstract Class <br/>Sub classes are: <br/>`Dataflow` <br/>`DataProvider` <br/>`DataStructureDefinition` <br/>`Metadataflow` <br/>`MetadataProvisionAgreement` <br/>`MetadataSet` <br/>`MetadataStructureDefinition` <br/>`ProvisionAgreement` <br/>*`QueryDatasource`* <br/>`SimpleDatasource` | An artefact that can have Constraints specified. |
 |  | `content` | Associates the metadata that constrains the content to be found in a data or metadata source linked to the Constrainable Artefact. |
 | *`Constraint`* | Inherits from <br/>*`MaintainableArtefact`* <br/>Abstract class <br/>Sub classes are: <br/>`DataConstraint` <br/>`MetadataConstraint` | Specifies a subset of the definition of the allowable or actual content of a data or metadata source that can be derived from the Structure that defines code lists and other valid content. |
 |  | `+dataContentKeys` | Association to a subset of Data Key Sets (i.e., value combinations) that can be derived from the definition of the structure to which the Constrainable Artefact is linked. |
@@ -2556,7 +2558,7 @@ A `ProvisionAgreement` / `MetadataProvisionAgreement` links the artefact that de
 
 The *`StructureUsage`*, which has concrete classes of `Dataflow` and `Metadataflow` identifies the corresponding `DataStructureDefinition` or `MetadataStructureDefinition`, and, via `Categorisation`, can link to one or more `Category`(s) in a `CategoryScheme` such as a subject matter domain scheme, by which the *`StructureUsage`* can be classified. This can assist in drilling down from subject matter domains to find the data or metadata that may be relevant.
 
-The `SimpleDatasource` links to the actual `DataSet` on a website (this is shown on the diagram as a dependency called “references”). The `sourceURL` is obtained during the registration process of the `DataSet`. Additional information about the content of the `SimpleDatasource` is stored in the registry in terms of a *`Constraint`* (see 12.3) for the `Registration`.
+The `SimpleDatasource` links to the actual `DataSet` on a website (this is shown on the diagram as a dependency called “references”). The `sourceURL` is obtained during the registration process of the `DataSet`. Additional information about the content of the `SimpleDatasource` is stored in the registry in terms of a *`Constraint`* (see [12.3](#123-constraints)) for the `Registration`.
 
 The *`QueryDatasource`* is an abstract class that represents a data source, which can understand an SDMX RESTful query (`RESTDatasource`) and respond appropriately. Each of these different *`Datasource`s* inherit the `dataURL` from *`Datasource`*, and the *`QueryDatasource`* has an additional URL, the `specURL`, to locate the specification of the service (i.e., the open API specification for `RESTDatasource`), which describes how to access it. All other supported protocols are assumed to use the `SimpleDatasource` URL.
 
