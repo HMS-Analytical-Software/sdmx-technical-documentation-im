@@ -2822,9 +2822,9 @@ In both the mapping directions, no specification is needed if the default mappin
 
 Although in general one SDMX `Dataflow` is mapped to one VTL dataset and vice-versa, it is also allowed to map distinct parts of a single SDMX `Dataflow` to distinct VTL data sets according to the rules and conventions described in the Section 6 of the SDMX Standards.[^13]
 
-In the direction from SDMX to VTL, this is achieved by fixing the values of some predefined Dimensions of the SDMX Data Structure: all the observations having such combination of values are mapped to one corresponding VTL dataset (the Dimensions having fixed values are not maintained in the Data Structure of the resulting VTL dataset). The `ToVtlSubspace` and `ToVtlSpaceKey` classes allow to define these Dimensions. When one SDMX `Dataflow` is mapped to just one VTL dataset these classes are not used.
+In the direction from SDMX to VTL, this is achieved by fixing the values of some predefined `Dimension`s of the SDMX Data Structure: all the observations having such combination of values are mapped to one corresponding VTL dataset (the `Dimension`s having fixed values are not maintained in the Data Structure of the resulting VTL dataset). The `ToVtlSubspace` and `ToVtlSpaceKey` classes allow to define these `Dimension`s. When one SDMX `Dataflow` is mapped to just one VTL dataset these classes are not used.
 
-Analogously, in the direction from VTL to SDMX, it is possible to map more calculated VTL datasets to distinct parts of a single SDMX `Dataflow`, as long as these VTL datasets have the same Data Structure. This can be done by providing, for each VTL dataset, distinct values for some additional SDMX Dimensions that are not part of the VTL data structure. The `FromVtlSuperspace` and `FromVtlSpaceKey` classes allow to define these dimensions. When one VTL dataset is mapped to just one SDMX `Dataflow` these classes are not used.
+Analogously, in the direction from VTL to SDMX, it is possible to map more calculated VTL datasets to distinct parts of a single SDMX `Dataflow`, as long as these VTL datasets have the same Data Structure. This can be done by providing, for each VTL dataset, distinct values for some additional SDMX `Dimension`s that are not part of the VTL data structure. The `FromVtlSuperspace` and `FromVtlSpaceKey` classes allow to define these dimensions. When one VTL dataset is mapped to just one SDMX `Dataflow` these classes are not used.
 
 **Custom Type Scheme**
 
@@ -2916,7 +2916,7 @@ The actor is depicted as a stick man as shown below.
 
 |  |
 |:---:|
-| ![alt text](image-73.png) |
+| ![Data Publisher](image-73.png) |
 | Figure 49 Actor |
 </div>
 
@@ -2929,12 +2929,12 @@ The **use case** can be defined as follows:
 
 |  |
 |:---:|
-| ![alt text](image-74.png) |
+| ![Publish Data](image-74.png) |
 | Figure 50 Use case |
 
 |  |
 |:---:|
-| ![alt text](image-75.png) |
+| ![Data Publisher - Publish Data](image-75.png) |
 | Figure 51 Actor and use case |
 
 |  |
@@ -2990,7 +2990,7 @@ In an E-R model these are known as relationships. A UML model can give more mean
 
 Here the `DataflowDefinition` class has an association with the `DataStructureDefinition` class. The diagram shows that a `DataflowDefinition` can have an association with only one `DataStructureDefinition` (1) and that a `DataStructureDefinition` can be linked to many `DataflowDefinition`s (0..\*). The association is sometimes named to give more semantics.
 
-In UML it is possible to specify a variety of “multiplicity” rules. The most common ones are:
+In UML it is possible to specify a variety of "multiplicity" rules. The most common ones are:
 <ul>
 
 Zero or one (0..1)
@@ -3033,7 +3033,7 @@ It can be useful to name associations as this gives some more semantic meaning t
 
 Furthermore, it is possible to give role names to the association-ends to give more semantic meaning – such as parent and child in a tree structure association. The role is shown with “+” preceding the role name (e.g. in the diagram above the semantic of the association is that a *`Item`* can have zero or one parent *`Item`s* and zero or many child *`Item`*).
 
-In this model the preference has been to use role names for associations between concrete classes and association names for associations between abstract classes. The reason for using an association name is often useful to show a physical association between two sub classes that inherit the actual association between the super class from which they inherit. This is possible to show in the UML with association names, but not with role names. This is covered later in “Derived Association”.
+In this model the preference has been to use role names for associations between concrete classes and association names for associations between abstract classes. The reason for using an association name is often useful to show a physical association between two sub classes that inherit the actual association between the super class from which they inherit. This is possible to show in the UML with association names, but not with role names. This is covered later in "Derived Association".
 
 Note that in general the role name is given at just one end of the association.
 
@@ -3041,7 +3041,7 @@ Note that in general the role name is given at just one end of the association.
 
 Associations are, in general, navigable in both directions. For a conceptual data model it is not necessary to give any more semantic than this.
 
-However, UML allows a notation to express navigability in one direction only. In this model this “navigability” feature has been used to represent referencing. In other words, the class at the navigable end of the association is referenced from the class at the non-navigable end. This is aligned, in general, with the way this is implemented in the XML schemas.
+However, UML allows a notation to express navigability in one direction only. In this model this "navigability" feature has been used to represent referencing. In other words, the class at the navigable end of the association is referenced from the class at the non-navigable end. This is aligned, in general, with the way this is implemented in the XML schemas.
 <div align="center">
 
 |  |
