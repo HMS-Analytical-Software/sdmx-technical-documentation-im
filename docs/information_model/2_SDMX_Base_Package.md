@@ -9,13 +9,11 @@ only derived sub-classes can exist in an implementation).
 
 The motivation for establishing the SDMX Base package is as follows:
 
-it is accepted “Best Practise” to identify fundamental archetypes
+- it is accepted “Best Practise” to identify fundamental archetypes
 occurring in a model
-
-identification of commonly found structures or “patterns” leads to
-easier understanding
-
-identification of patterns encourages re-use
+- identification of commonly found structures or “patterns” leads to
+    easier understanding
+- identification of patterns encourages re-use
 
 Each of the class diagrams in this section views classes from the SDMX
 Base package from a different perspective. There are detailed views of
@@ -138,7 +136,7 @@ which they relate.
 ![](media/image38.png)
 /// caption
 Figure 12: Class Diagram of Basic Data Types
-/// 
+///
 
 ### Explanation of the Diagram
 
@@ -155,19 +153,16 @@ The ActionType enumeration is used to specify the action that a
 receiving system should take when processing the content that is the
 object of the action. It is enumerated as follows:
 
--   Append: Data or metadata is an incremental update for an existing
+- Append: Data or metadata is an incremental update for an existing
     data/metadata set or the provision of new data or documentation
     (attribute values) formerly absent. If any of the supplied data or
     metadata is already present, it will not replace that data or
     metadata. This corresponds to the "Update" value found in version
     1.0 of the SDMX Technical Standards.
-
--   Replace: Data/metadata is to be replaced and may also include
+- Replace: Data/metadata is to be replaced and may also include
     additional data/metadata to be appended.
-
--   Delete: Data/Metadata is to be deleted.
-
--   Information: Data and metadata are for information purposes.
+- Delete: Data/Metadata is to be deleted.
+- Information: Data and metadata are for information purposes.
 
 The ToValueType data type contains the attributes to support
 transformations defined in the StructureMap (see Section 0).
@@ -201,14 +196,14 @@ RulesetScheme, VtlMappingScheme and UserDefinedOperatorScheme.
 
 ### Class Diagram
 
-![](media/image39.png) 
+![](media/image39.png)
 /// caption
 Figure 13 The Item Scheme pattern
 ///
 
 ### Explanation of the Diagram
 
-#### Narrative 
+#### Narrative
 
 The *ItemScheme* is an abstract class which defines a set of *Item*
 (this class is also abstract). Its main purpose is to define a mechanism
@@ -307,15 +302,11 @@ The *Component* is contained in a *ComponentList*. The type of
 *Component* in a *ComponentList* is dependent on the concrete class of
 the ComponentList as follows:
 
-DimensionDescriptor: Dimension, TimeDimension
-
-GroupDimensionDescriptor: Dimension, TimeDimension
-
-MeasureDescriptor: Measure
-
-AttributeDescriptor: DataAttribute, MetadataAttributeRef
-
-MetadataAttributeDescriptor: MetadataAttribute
+- DimensionDescriptor: Dimension, TimeDimension
+- GroupDimensionDescriptor: Dimension, TimeDimension
+- MeasureDescriptor: Measure
+- AttributeDescriptor: DataAttribute, MetadataAttributeRef
+- MetadataAttributeDescriptor: MetadataAttribute
 
 Each *Component* takes its semantic (and possibly also its
 representation) from a Concept in a ConceptScheme. This is represented
@@ -338,14 +329,12 @@ ExtendedFacet(s), which allow the additional representation of XHTML.
 The types of representation that are valid for specific components is
 expressed in the model as a constraint on the association:
 
--   The Dimension, DataAttribute, Measure, MetadataAttribute may be
+- The Dimension, DataAttribute, Measure, MetadataAttribute may be
     enumerated and, if so, use an *EnumeratedList*.
-
--   The Dimension and Measure may be non-enumerated and, if so, use one
+- The Dimension and Measure may be non-enumerated and, if so, use one
     or more Facet(s), note that the FacetValueType applicable to the
     TimeDimension is restricted to those that represent time.
-
--   The MetadataAttribute and DataAttribute may be non-enumerated and,
+- The MetadataAttribute and DataAttribute may be non-enumerated and,
     if so, use one or more ExtendedFacet(s).
 
 The *Structure* may be used by one or more *StructureUsage*(s). An
@@ -404,22 +393,16 @@ platforms:
 | URI | xsd:anyURI | string:uri | System.Uri | Java.net.URI or java.lang.String |
 | DateTime | xsd:dateTime | string:date-time | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
 | Time | xsd:time | string:time | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
-| GregorianYear | xsd:gYear | string<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a> | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
+| GregorianYear | xsd:gYear | string[^1] | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
 | GregorianMonth | xsd:gYearMonth | string | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
 | GregorianDay | xsd:date | string | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
 | Day, MonthDay, Month | xsd:g* | string | System.DateTime | javax.xml.datatype.XMLGregorianCalendar |
 | Duration | xsd:duration | string | System.TimeSpan | javax.xml.datatype.Duration |
 
-<aside id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>In the JSON schemas, more complex data types are
-complemented with regular expressions, whenever no direct mapping to a
-standard type exists.<a href="#fnref1" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
+[^1]: 
+    In the JSON schemas, more complex data types are
+    complemented with regular expressions, whenever no direct mapping to a
+    standard type exists.
 
 There are also a number of SDMX data types which do not have these
 direct correspondences, often because they are composite representations
@@ -434,16 +417,16 @@ the start value, and one to define the interval.
 
 | Facet Type | Explanation |
 | :--- | :--- |
-| isSequence | The isSequence facet indicates whether the values are intended to be<br>ordered, and it may work in combination with the interval, startValue,<br>and endValue facet or the timeInterval, startTime, and endTime, facets.<br>If this attribute holds a value of true, a start value or time and a<br>numeric or time interval must be supplied. If an end value is not given,<br>then the sequence continues indefinitely. |
-| interval | The interval attribute specifies the permitted interval (increment)<br>in a sequence. In order for this to be used, the isSequence attribute<br>must have a value of true. |
-| startValue | The startValue facet is used in conjunction with the isSequence and<br>interval facets (which must be set in order to use this facet). This<br>facet is used for a numeric sequence and indicates the starting point of<br>the sequence. This value is mandatory for a numeric sequence to be<br>expressed. |
-| endValue | The endValue facet is used in conjunction with the isSequence and<br>interval facets (which must be set in order to use this facet). This<br>facet is used for a numeric sequence and indicates that ending point (if<br>any) of the sequence. |
-| timeInterval | The timeInterval facet indicates the permitted duration in a time<br>sequence. In order for this to be used, the isSequence facet must have a<br>value of true. |
-| startTime | The startTime facet is used in conjunction with the isSequence and<br>timeInterval facets (which must be set in order to use this facet). This<br>attribute is used for a time sequence and indicates the start time of<br>the sequence. This value is mandatory for a time sequence to be<br>expressed. |
-| endTime | The endTime facet is used in conjunction with the isSequence and<br>timeInterval facets (which must be set in order to use this facet). This<br>facet is used for a time sequence and indicates that ending point (if<br>any) of the sequence. |
-| minLength | The minLength facet specifies the minimum and length of the value in<br>characters. |
-| maxLength | The maxLength facet specifies the maximum length of the value in<br>characters. |
-| minValue | The minValue facet is used for inclusive and exclusive ranges,<br>indicating what the lower bound of the range is. If this is used with an<br>inclusive range, a valid value will be greater than or equal to the<br>value specified here. If the inclusive and exclusive data type is not<br>specified (e.g., this facet is used with an integer data type), the<br>value is assumed to be inclusive. |
-| maxValue | The maxValue facet is used for inclusive and exclusive ranges,<br>indicating what the upper bound of the range is. If this is used with an<br>inclusive range, a valid value will be less than or equal to the value<br>specified here. If the inclusive and exclusive data type is not<br>specified (e.g., this facet is used with an integer data type), the<br>value is assumed to be inclusive. |
-| decimals | The decimals facet indicates the number of characters allowed after<br>the decimal separator. |
-| pattern | The pattern attribute holds any regular expression permitted in the<br>implementation syntax (e.g., W3C XML Schema). |
+| isSequence | The isSequence facet indicates whether the values are intended to be ordered, and it may work in combination with the interval, startValue, and endValue facet or the timeInterval, startTime, and endTime, facets. If this attribute holds a value of true, a start value or time and a numeric or time interval must be supplied. If an end value is not given, then the sequence continues indefinitely. |
+| interval | The interval attribute specifies the permitted interval (increment) in a sequence. In order for this to be used, the isSequence attribute must have a value of true. |
+| startValue | The startValue facet is used in conjunction with the isSequence and interval facets (which must be set in order to use this facet). This facet is used for a numeric sequence and indicates the starting point of the sequence. This value is mandatory for a numeric sequence to be expressed. |
+| endValue | The endValue facet is used in conjunction with the isSequence and interval facets (which must be set in order to use this facet). This facet is used for a numeric sequence and indicates that ending point (if any) of the sequence. |
+| timeInterval | The timeInterval facet indicates the permitted duration in a time sequence. In order for this to be used, the isSequence facet must have a value of true. |
+| startTime | The startTime facet is used in conjunction with the isSequence and timeInterval facets (which must be set in order to use this facet). This attribute is used for a time sequence and indicates the start time of the sequence. This value is mandatory for a time sequence to be expressed. |
+| endTime | The endTime facet is used in conjunction with the isSequence and timeInterval facets (which must be set in order to use this facet). This facet is used for a time sequence and indicates that ending point (if any) of the sequence. |
+| minLength | The minLength facet specifies the minimum and length of the value in characters. |
+| maxLength | The maxLength facet specifies the maximum length of the value in characters. |
+| minValue | The minValue facet is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. If the inclusive and exclusive data type is not specified (e.g., this facet is used with an integer data type), the value is assumed to be inclusive. |
+| maxValue | The maxValue facet is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. If the inclusive and exclusive data type is not specified (e.g., this facet is used with an integer data type), the value is assumed to be inclusive. |
+| decimals | The decimals facet indicates the number of characters allowed after the decimal separator. |
+| pattern | The pattern attribute holds any regular expression permitted in the implementation syntax (e.g., W3C XML Schema). |

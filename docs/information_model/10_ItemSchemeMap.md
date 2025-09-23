@@ -23,8 +23,9 @@ The absence of an output for an input is interpreted as ‘no output value
 for the given source value(s)’.
 
 ![](media/image66.png)
-
+/// caption
 Figure 40: Item Scheme Map
+///
 
 ### Explanation of the Diagram
 
@@ -33,15 +34,10 @@ Figure 40: Item Scheme Map
 An ItemSchemeMap is an abstract type which inherits from Maintainable.
 It is subclassed by the 4 concrete classes:
 
--   OrganisationSchemeMap
-
--   ConceptSchemeMap
-
--   CategorySchemeMap
-
-<!-- -->
-
--   ReportingTaxonomyMap
+- OrganisationSchemeMap
+- ConceptSchemeMap
+- CategorySchemeMap
+- ReportingTaxonomyMap
 
 An OrganisationSchemeMap maps a source AgencyScheme, DataProviderScheme,
 DataConsumerScheme or OrganisationUnitScheme to a target AgencyScheme,

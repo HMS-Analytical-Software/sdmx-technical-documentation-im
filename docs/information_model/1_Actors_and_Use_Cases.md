@@ -55,7 +55,6 @@ convenience the Maintenance Agency actor is sub divided into two actor
 roles:
 
 - maintaining structural definitions
-
 - maintaining provisioning definitions
 
 Whilst both these functions may be carried out by the same person, or at

@@ -13,7 +13,7 @@ structure is termed a Data Structure Definition. "Data sets" are made up
 of one or more lower-level "groups", based on their degrees of
 similarity. Each group is in turn comprised of one or more "series" of
 data. Each series or section has a "key" - values for each of a cluster
-of concepts, also called \"dimensions\" - which identifies it, and one
+of concepts, also called "dimensions" - which identifies it, and one
 or more "observations", which typically combine the time of the
 observation, and the value of the observation (e.g., measurement).
 Additionally, metadata may be attached at any level of this structure as
@@ -27,7 +27,7 @@ structured according to the SDMX Information Model is optimized for
 exchange, potentially with partners who may have no ability to process a
 "cube" of data coming from complex statistical systems. SDMX time series
 can be understood as "slices" of the cube. Such a slice is identified by
-its key. A \"series\" key consists of the values for all dimensions
+its key. A "series" key consists of the values for all dimensions
 specified by the key family except time. Thus, it is possible to
 reconstruct and describe data cubes from SDMX-structured data, and to
 exchange such databases using the interfaces and formats provided for

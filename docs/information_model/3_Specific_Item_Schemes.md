@@ -525,13 +525,13 @@ For instance:
 
 Section 1
 
-1\. linked to Dataflow\_1
-2\. linked to Dataflow\_2
+1. linked to Dataflow_1
+2. linked to Dataflow_2
 
 Section 2
 
-1\. linked to Dataflow\_3
-2\. linked to Dataflow\_4
+1. linked to Dataflow_3
+2. linked to Dataflow_4
 
 Here, the nodes of Section 1 and Section 2 would not be linked to
 Dataflow but the other would be linked to a Dataflow (and hence the

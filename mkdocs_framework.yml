@@ -2,8 +2,7 @@ site_name: SDMX Framework
 
 nav:
 - Framework: 
-  - Release History: framework/framework-release-history.md
-  - Introduction: framework/framework-introduction.md
+  - framework/framework-introduction.md
   - Change History: framework/framework-change-history.md
   - Processes and Business Scope: framework/framework-processes-and-business-scope.md
   - The SDMX Information Model: framework/framework-the-sdmx-information-model.md

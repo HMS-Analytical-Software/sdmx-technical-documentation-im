@@ -2,8 +2,8 @@ site_name: SDMX Information Model
 
 nav:
 - Information Model:
+  - information_model/0_Introduction.md
   - Change History: information_model/0_change_history.md
-  - Introduction: information_model/0_Introduction.md
   - Actors and Use Cases: information_model/1_Actors_and_Use_Cases.md
   - SDMX Base Package: information_model/2_SDMX_Base_Package.md
   - Specific Item Schemes: information_model/3_Specific_Item_Schemes.md

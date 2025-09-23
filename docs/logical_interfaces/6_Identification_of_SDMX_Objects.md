@@ -4,41 +4,35 @@
 
 All major classes of the SDMX Information model inherit from one of:
 
--   ***IdentifiableArtefact*** – this gives an object the ability to be
+- ***IdentifiableArtefact*** – this gives an object the ability to be
     uniquely identified (see following section on identification), to
     have a user-defined URI, and to have multi-lingual annotations.
-
--   ***NameableArtefact*** – this has all of the features of
+- ***NameableArtefact*** – this has all of the features of
     *IdentifiableArtefact* plus the ability to have a multi-lingual name
     and description.
-
--   ***VersionableArtefact*** – this has all of the above features plus
+- ***VersionableArtefact*** – this has all of the above features plus
     a version number, according to the SDMX versioning rules in SDMX
     Standards Section 6 “Technical Notes”, paragraph “4.3 Versioning”,
     and a validity period.
-
--   ***MaintainableArtefact*** – this has all of the above features,
+- ***MaintainableArtefact*** – this has all of the above features,
     plus registry and structure URIs, and an association to the
     maintenance organisation of the object.
 
 ### 6.1.1 Identification, Naming, Versioning, and Maintenance Model
 
 ![](media/image8.png)
-
+/// caption
 Figure 5: Class diagram of fundamental artefacts in the SDMX-IM
+///
 
 The table below shows the identification and related data attributes to
 be stored in a registry for objects that are one of:
 
--   *Annotable*
-
--   *Identifiable*
-
--   *Nameable*
-
--   *Versionable*
-
--   *Maintainable*
+- *Annotable*
+- *Identifiable*
+- *Nameable*
+- *Versionable*
+- *Maintainable*
 
 | <strong>Object Type</strong> | <strong>Data Attributes</strong> | <strong>Status</strong> | <strong>Data type</strong> | <strong>Notes</strong> |
 | :--- | :--- | :--- | :--- | :--- |
@@ -62,9 +56,9 @@ be stored in a registry for objects that are one of:
 | serviceURL | C | string | The url of the service that can be queried for this resource. |
 | structureURL | C | string | The url of the resource. |
 | (Maintenance) organisationId | M | string | The object must be linked to a maintenance organisation, i.e.,<br>Agency or Metadata Provider. |
-
-
+/// caption
 Table 1: Common Attributes of Object Types
+///
 
 ## 6.2 Unique identification of SDMX objects 
 
@@ -74,11 +68,10 @@ The Maintenance Agency in SDMX is maintained in an Agency Scheme which
 itself is a sub class of Organisation Scheme – this is shown in the
 class diagram below.
 
-> <img
-> src="/home/jonas/Eurostat/sdmx-technical-documentation-scripts/tmp/SDMX_3-0-0_SECTION_5_FINAL-1_0vfxulzof/media/image9.png"
-> style="width:5.77153in;height:3.2625in" />
-
+![](media/image9.png)
+/// caption
 Figure 6: Agency Scheme Model
+///
 
 The Agency in SDMX is extremely important. The Agency Id system used in
 SDMX is an n-level structure. The top level of this structure is
@@ -89,30 +82,23 @@ explicitly in the SDMX object identification mechanism.
 
 In order to achieve this SDMX adopts the following rules:
 
--   Agencies are maintained in an Agency Scheme (which is a sub class of
+- Agencies are maintained in an Agency Scheme (which is a sub class of
     Organisation Scheme).
-
--   The agency of the Agency Scheme must also be declared in a
+- The agency of the Agency Scheme must also be declared in a
     (different) Agency Scheme.
-
--   The “top-level” agency is SDMX and maintains the “top-level” Agency
+- The “top-level” agency is SDMX and maintains the “top-level” Agency
     Scheme.
-
--   Agencies registered in the top-level scheme can themselves maintain
+- Agencies registered in the top-level scheme can themselves maintain
     a single Agency Scheme. Agencies in these second-tier schemes can
     themselves maintain a single Agency Scheme and so on.
-
--   The AgencyScheme has a fixed version, i.e., ‘1.0’, hence it is an
+- The AgencyScheme has a fixed version, i.e., ‘1.0’, hence it is an
     exception from the Semantic Versioning that other Artefacts follow.
-
--   There can be only one AgencyScheme maintained by any one Agency. It
+- There can be only one AgencyScheme maintained by any one Agency. It
     has a fixed id of AGENCIES.
-
--   The /hierarchy of Organisation is not inherited by Maintenance
+- The /hierarchy of Organisation is not inherited by Maintenance
     Agency – thus each Agency Scheme is a flat list of Maintenance
     Agencies.
-
--   The format of the agency identifier is agencyID.agencyID etc. The
+- The format of the agency identifier is agencyID.agencyID etc. The
     top-level agency in this identification mechanism is the agency
     registered in the SDMX agency scheme. In other words, SDMX is not a
     part of the hierarchical ID structure for agencies. However, SDMX
@@ -127,13 +113,10 @@ An example is shown below.
 
 The following organizations maintain an Agency Scheme.
 
--   SDMX – contains Agencies AA, BB
-
--   AA – contains Agencies CC, DD
-
--   BB – contains Agencies CC, DD
-
--   DD – Contains Agency EE
+- SDMX – contains Agencies AA, BB
+- AA – contains Agencies CC, DD
+- BB – contains Agencies CC, DD
+- DD – Contains Agency EE
 
 Each agency is identified by its full hierarchy excluding SDMX.
 
@@ -220,25 +203,16 @@ is called the **actual object**.
 
 The packages are:
 
-base
-
-codelist
-
-conceptscheme
-
-datastructure
-
-categoryscheme
-
-registry
-
-metadatastructure
-
-process
-
-structuremapping
-
-transformation
+- base
+- codelist
+- conceptscheme
+- datastructure
+- categoryscheme
+- registry
+- metadatastructure
+- process
+- structuremapping
+- transformation
 
 **maintainable-object-id** is the identifier of the maintainable object.
 This will always be present as all identifiable objects are either a
@@ -358,10 +332,10 @@ SDMX-RR MUST be able to create the URN from the individual
 identification attributes submitted and to transform the URN to these
 identification attributes. The identification attributes are:
 
--   **Identifiable and Nameable Artefacts**: id (in some cases this id
+- **Identifiable and Nameable Artefacts**: id (in some cases this id
     may be hierarchic)
 
--   **Maintainable Artefacts**: id, version, agencyId
+- **Maintainable Artefacts**: id, version, agencyId
 
 The SDMX-RR MUST be able to resolve the unique identifier of an SDMX
 artefact and to produce an SDMX-ML rendering of that artefact if it is

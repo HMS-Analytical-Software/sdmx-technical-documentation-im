@@ -9,18 +9,16 @@ existing ones, written using the Validation and Transformation Language
 
 The purpose of this model package is to enable the:
 
--   definition of validation and transformation algorithms by means of
+- definition of validation and transformation algorithms by means of
     VTL, in order to specify how to calculate new SDMX data from
     existing ones;
-
--   exchange of the definition of VTL algorithms, also together the
+- exchange of the definition of VTL algorithms, also together the
     definition of the data structures of the involved data (for example,
     exchange the data structures of a reporting framework together with
     the validation rules to be applied, exchange the input and output
     data structures of a calculation task together with the VTL
     transformations describing the calculation algorithms);
-
--   execution of VTL algorithms, either interpreting the VTL
+- execution of VTL algorithms, either interpreting the VTL
     transformations or translating them in whatever other computer
     language is deemed as appropriate;
 
@@ -44,9 +42,10 @@ referenced below.
 ### Class Diagram
 
 ![](media/image73.png)
-
+/// caption
 Figure 47: Class inheritance diagram in the Transformations and
 Expressions Package
+///
 
 ### Explanation of the Diagram
 
@@ -59,38 +58,26 @@ and VtlMappingScheme inherit from ItemScheme
 These schemes inherit from the *ItemScheme* and therefore have the
 following attributes:
 
-id
-
-uri
-
-urn
-
-version
-
-validFrom
-
-validTo
-
-isExternalReference
-
-registryURL
-
-structureURL
-
-repositoryURL
-
-isPartial
+- id
+- uri
+- urn
+- version
+- validFrom
+- validTo
+- isExternalReference
+- registryURL
+- structureURL
+- repositoryURL
+- isPartial
 
 The model artefacts Transformation, Ruleset, UserDefinedOperator,
 NamePersonalisation, VtlMapping, CustomType inherit the attributes and
 associations of Item which itself inherits from *NameableArtefact*. They
 have the following attributes:
 
-id
-
-uri
-
-urn
+- id
+- uri
+- urn
 
 The multi-lingual name and description are provided by the relationship
 to InternationalString from *NameableArtefact*.
@@ -100,9 +87,10 @@ to InternationalString from *NameableArtefact*.
 ### Class Diagram
 
 ![](media/image74.png)
-
+/// caption
 Figure 48: Relationship diagram in the Transformations and Expressions
 Package
+///
 
 ### Explanation of the Diagram
 
@@ -132,43 +120,39 @@ current stocks, D1 the stocks of the previous date, D2 the flows in the
 last period. A possible VTL Transformation aimed at checking the
 consistency between flows and stocks is the following:
 
-> Dr := If ( (D1 + D2) = D3, then "true", else "false")
+`Dr := If ( (D1 + D2) = D3, then "true", else "false")`
 
 In this Transformation:
 
-Dr is the result (a new dataflow)
-
-:= is an assignment operator
-
-If((D1+D2)=D3, then "true", else "false") is the expression
-
-D1, D2, D3 are the operands
-
-If, ( ), +, = are VTL operators
+- `Dr` is the result (a new dataflow)
+- `:=` is an assignment operator
+- `If((D1+D2)=D3, then "true", else "false")` is the expression
+- `D1, D2, D3` are the operands
+- `If, ( ), +, =` are VTL operators
 
 The Transformation model artefact contains three attributes:
 
-1.  result
+1. result
 
-> The left-hand side of a VTL statement, which specifies the Artefact to
-> which the outcome of the expression is assigned. An artefact cannot be
-> result of more than one Transformation.
+    > The left-hand side of a VTL statement, which specifies the Artefact to
+    > which the outcome of the expression is assigned. An artefact cannot be
+    > result of more than one Transformation.
 
-1.  isPersistent
+2. isPersistent
 
-> An assignment operator, which specifies also the persistency of the
-> left-hand side. The assignment operators are two, namely ‘:=’ for
-> non-persistent assignment (the result is non-persistent) and ‘&lt;-’
-> for persistent assignment (the result is persistent).
+    > An assignment operator, which specifies also the persistency of the
+    > left-hand side. The assignment operators are two, namely ‘:=’ for
+    > non-persistent assignment (the result is non-persistent) and ‘&lt;-’
+    > for persistent assignment (the result is persistent).
 
-1.  expression
+1. expression
 
-> The right-hand side of a VTL statement, which is the expression to be
-> evaluated. An expression consists in the invocation of VTL operators
-> in a certain order. When an operator is invoked, for each input
-> parameter, an actual argument is passed to the operator, which returns
-> an actual argument for the output parameter. An expression is simply a
-> text string written according the VTL grammar.
+    > The right-hand side of a VTL statement, which is the expression to be
+    > evaluated. An expression consists in the invocation of VTL operators
+    > in a certain order. When an operator is invoked, for each input
+    > parameter, an actual argument is passed to the operator, which returns
+    > an actual argument for the output parameter. An expression is simply a
+    > text string written according the VTL grammar.
 
 Because an Artefact can be the result of just one Transformation and a
 Transformation belongs to just one TransformationScheme, it follows also
@@ -209,15 +193,13 @@ container for one or more Ruleset.
 
 The Ruleset model artefact contains the following attributes:
 
-1.  rulesetType – the type of the ruleset according to VTL (VTL 2.0
+1. rulesetType – the type of the ruleset according to VTL (VTL 2.0
     allows two types: “datapoint” and “hierarchical” ruleset);
-
-2.  rulesetScope – the VTL artefact on which the ruleset is defined; VTL
+2. rulesetScope – the VTL artefact on which the ruleset is defined; VTL
     2.0 allows rulesets defined on Value Domains, which correspond to
     SDMX Codelists and rulesets defined on Variables, which correspond
     to SDMX Concepts for which a definite Representation is assumed;
-
-3.  rulesetDefinition – the VTL statement that defines the ruleset
+3. rulesetDefinition – the VTL statement that defines the ruleset
     according to the syntax of the VTL definition language.
 
 The RulesetScheme can have an association with zero or more
@@ -358,10 +340,10 @@ or attribute is NULL.
 VTL expression can contain literals, i.e. specific values of a certain
 VTL data type written according to a certain format. For example,
 consider the following Transformation that extracts from the dataflow D1
-the observations for which the “reference\_date” belongs to the years
+the observations for which the "reference_date" belongs to the years
 2018 and 2019:
 
-Dr := D1 \[ filter between (reference\_date, 2018-01-01, 2019-12-31)\]
+`Dr := D1 \[ filter between (reference_date, 2018-01-01, 2019-12-31)\]`
 
 In this expression, the two values 2018-01-01 and 2019-12-31 are
 literals of the VTL “date” scalar type expressed in the format
@@ -427,29 +409,23 @@ basic scalar type).
 |  | vtlVersion | The VTL version, which the VTL scalar types belong to. |
 | CustomType | <p>Inherits from</p><br><p><em>Item</em></p> | Custom specification for a VTL basic scalar type. |
 |  | vtlScalarType | VTL scalar type for which the custom specifications are given. |
-|  | outputFormat | Custom specification of the VTL formatting mask needed to obtain to<br>the desired representation, i.e. the desired SDMX format (e.g.<br>YYYY-MM-DD, see also the VTL formatting mask in the VTL Reference Manual<br>and the SDMX Technical Notes). If not specified, the “Default output<br>format” of the default conversion table from VTL to SDMX is used. <a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a> |
-|  | datatype | Custom specification of the external (SDMX) data type in which the<br>VTL data type must be converted (e.g. the GregorianDay). If not<br>specified, the “Default SDMX data type” of the default conversion table<br>from VTL to SDMX is used. <a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a> |
+|  | outputFormat | Custom specification of the VTL formatting mask needed to obtain to<br>the desired representation, i.e. the desired SDMX format (e.g.<br>YYYY-MM-DD, see also the VTL formatting mask in the VTL Reference Manual<br>and the SDMX Technical Notes). If not specified, the “Default output<br>format” of the default conversion table from VTL to SDMX is used. [^1] |
+|  | datatype | Custom specification of the external (SDMX) data type in which the<br>VTL data type must be converted (e.g. the GregorianDay). If not<br>specified, the “Default SDMX data type” of the default conversion table<br>from VTL to SDMX is used. [^2] |
 |  | nullValue | Custom specification of the SDMX value to be produced for the VTL<br>NULL values, with reference to the vtlScalarType specified above. If no<br>value is specified, no value is produced. |
-|  | vtlLiteralFormat | Custom specification of the format of the VTL literals belonging to<br>the vtlScalarType used in the VTL program (e.g. YYYY-MM-DD)<a class="footnote-ref" href="#fn3" id="fnref3" role="doc-noteref"><sup>3</sup></a>. If not specified, the “Default<br>output format” of the default conversion table from VTL to SDMX is<br>assumed.<a class="footnote-ref" href="#fn4" id="fnref4" role="doc-noteref"><sup>4</sup></a> |
+|  | vtlLiteralFormat | Custom specification of the format of the VTL literals belonging to<br>the vtlScalarType used in the VTL program (e.g. YYYY-MM-DD)[^3]. If not specified, the “Default<br>output format” of the default conversion table from VTL to SDMX is<br>assumed.[^4] |
 
-<aside id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>See “Mapping VTL basic scalar types to SDMX data types”
-in the SDMX Technical Notes, chapter “Validation and Transformation
-Language”.<a href="#fnref1" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>See “Mapping VTL basic scalar types to SDMX data types”
-in the SDMX Technical Notes, chapter “Validation and Transformation
-Language”.<a href="#fnref2" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>See also the VTL formatting mask in the VTL Reference
-Manual and the SDMX Technical Notes.<a href="#fnref3"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>See “Mapping VTL basic scalar types to SDMX data types”
-in the SDMX Technical Notes, chapter “Validation and Transformation
-Language.<a href="#fnref4" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
+[^1]:
+    See “Mapping VTL basic scalar types to SDMX data types”
+    in the SDMX Technical Notes, chapter “Validation and Transformation
+    Language”.
+[^2]:
+    See “Mapping VTL basic scalar types to SDMX data types”
+    in the SDMX Technical Notes, chapter “Validation and Transformation
+    Language”.
+[^3]:
+    See also the VTL formatting mask in the VTL Reference
+    Manual and the SDMX Technical Notes.
+[^4]:
+    See “Mapping VTL basic scalar types to SDMX data types”
+    in the SDMX Technical Notes, chapter “Validation and Transformation
+    Language.

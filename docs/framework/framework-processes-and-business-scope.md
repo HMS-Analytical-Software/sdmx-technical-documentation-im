@@ -5,13 +5,12 @@
 SDMX identifies three basic process patterns regarding the exchange of
 statistical data and metadata. These can be described as follows:
 
-1. *Bilateral exchange:* All aspects of the exchange process are agreed
+1. **Bilateral exchange:** All aspects of the exchange process are agreed
     between counterparties, including the mechanism for exchange of data
     and metadata, the formats, the frequency or schedule, and the mode
     used for communications regarding the exchange. This is perhaps the
     most common process pattern.
-
-2. *Gateway exchange:* Gateway exchanges are an organized set of
+2. **Gateway exchange:** Gateway exchanges are an organized set of
     bilateral exchanges, in which several data and metadata collecting
     organizations or individuals agree to exchange the collected
     information with each other in a single, known format, and according
@@ -21,8 +20,7 @@ statistical data and metadata. These can be described as follows:
     This is also a very common process pattern in the statistical area,
     where communities of institutions agree on ways to gain efficiencies
     within the scope of their collective responsibilities.
-
-3. *Data-sharing exchange:* Open, freely available data formats and
+3. **Data-sharing exchange:** Open, freely available data formats and
     process patterns are known and standard. Thus, any organization or
     individual can use any counterparty's data and metadata (assuming
     they are permitted access to it). This model requires no bilateral
@@ -101,25 +99,22 @@ useful for these automated processes and technologies.
 
 Briefly, these can be described as:
 
-1. *Batch Exchange of Data and Metadata:* The transmission of whole or
+1. **Batch Exchange of Data and Metadata:** The transmission of whole or
     partial databases between counterparties, including incremental
     updating.
-
-2. *Provision of Data and Metadata on the Internet:* Internet
+2. **Provision of Data and Metadata on the Internet:** Internet
     technology - including its use in private or semi-private TCP/IP
     networks - is extremely common. This technology includes XML, JSON
     and REST web services as primary mechanisms for automating data and
     metadata provision, as well as the more traditional static HTML and
     database-driven publishing.
-
-3. *Generic Processes:* While many applications and processes are
+3. **Generic Processes:** While many applications and processes are
     specific to some set of data and metadata, other types of automated
     services and processes are designed to handle any type of
     statistical data and metadata whatsoever. This is particularly true
     in cases where portal sites and data feeds are made available on the
     Internet.
-
-4. *Presentation and Transformation of Data:* In order to make data and
+4. **Presentation and Transformation of Data:** In order to make data and
     metadata useful to consumers, they must support automated processes
     that transform them into application-specific processing formats,
     other standard formats, and presentational formats. Although not
@@ -133,24 +128,24 @@ requirements of all of these automation processes and technologies.
 
 ### Statistical Data and Metadata
 
-To avoid confusion about which \"data\" and \"metadata\" are the
+To avoid confusion about which "data" and "metadata" are the
 intended content of the SDMX formats specified here, a statement of
-scope is offered. Statistical \"data\" are sets of often numeric
+scope is offered. Statistical "data" are sets of often numeric
 observations which typically have time associated with them. They are
 associated with a set of metadata values, representing specific
 concepts, which act as identifiers and descriptors of the data. These
 metadata values and concepts can be understood as the named dimensions
 of a multi-dimensional co-ordinate system, describing what is often
-called a \"cube\" of data.
+called a "cube" of data.
 
 SDMX identifies a standard technique for modelling, expressing, and
-understanding the structure of this multi-dimensional \"cube\", allowing
+understanding the structure of this multi-dimensional "cube", allowing
 automated processing of data from a variety of sources. This approach is
 widely applicable across types of data and attempts to provide the
 simplest and most easily comprehensible technique that will support the
 exchange of this broad set of data and related metadata.
 
-The term \"metadata\" is very broad indeed. A distinction can be made
+The term "metadata" is very broad indeed. A distinction can be made
 between "structural" metadata -- those concepts used in the description
 and identification of statistical data and metadata -- and "reference"
 metadata -- the larger set of concepts that describe and qualify
@@ -199,9 +194,10 @@ in Figure 1, and are discussed in more detail elsewhere in this
 document.
 
 ![](./media/image2.png)
-
->  **Figure 1: High Level Schematic of Major Artefacts in the SDMX 3.0
-> Information Model**
+/// caption
+High Level Schematic of Major Artefacts in the SDMX 3.0
+Information Model
+///
 
 ### The SDMX View of Statistical Exchange
 
@@ -227,9 +223,9 @@ range - and for data structure definitions - the metadata which
 describes the structure of statistical data sets. These are important
 objects in statistical exchanges, and are retained and enhanced in the
 second version of the standards in a backward-compatible form. A related
-object in statistical exchanges is the \"data flow\" - this supports the
-concept of data reporting or dissemination on an ongoing basis. \"Data
-flows\" can be understood as data sets which are not bounded by time.
+object in statistical exchanges is the "data flow" - this supports the
+concept of data reporting or dissemination on an ongoing basis. "Data
+flows" can be understood as data sets which are not bounded by time.
 Data structures are owned and maintained by agencies - in a similar
 fashion, data flows are owned by maintenance agencies.
 
@@ -240,8 +236,8 @@ were reported independent of the statistical data. However, in 3.0
 reference metadata associated directly with data such as footnotes are
 reported as attributes of the data set. For other reference metadata,
 principally that linked to structures like "concepts", SDMX provides
-reference \"metadata sets\", \"metadata structure definitions\", and
-\"metadata flows\". These objects are very similar to data sets, data
+reference "metadata sets", "metadata structure definitions", and
+"metadata flows". These objects are very similar to data sets, data
 structure definitions, and data flows, but concern reference metadata
 rather than statistical observations. In the same way that data
 providers may publish statistical data, they may also publish reference
@@ -251,7 +247,7 @@ definitions, the structural definitions of data sets.
 
 The structural definitions of both data and reference metadata associate
 specific statistical concepts with their representations, whether
-textual, coded, etc. These concepts are taken from a \"concept scheme\"
+textual, coded, etc. These concepts are taken from a "concept scheme"
 which is maintained by a specific agency. Concept schemes group a set of
 concepts, provide their definitions and names, and allow for semantic
 relationships to be expressed, when some concepts are specializations of
@@ -259,9 +255,9 @@ others. It is possible for a single concept scheme to be used both for
 data structures - key families - and for reference metadata structures.
 
 Inherent in any statistical exchange -- and in many dissemination
-activities -- is a concept of \"service level agreement\", even if this
+activities -- is a concept of "service level agreement", even if this
 is not formalized or made explicit. SDMX incorporates this idea in
-objects termed \"provision agreements\". Data providers may provide data
+objects termed "provision agreements". Data providers may provide data
 to many different data flows. Data flows may incorporate data coming
 from more than one data provider. Provision agreements are the objects
 which tell you which data providers are supplying what data to which
@@ -273,7 +269,7 @@ reported or published, the specific topics about which data or metadata
 is reported within the theoretically possible set of data (as described
 by a data structure definition or reference metadata structure
 definition), and the time period covered by the statistical data and
-metadata. This set of information is termed \"constraint\" in the SDMX
+metadata. This set of information is termed "constraint" in the SDMX
 Information Model.
 
 A brief summary of the objects described in the information model
@@ -283,7 +279,6 @@ includes:
     particular observations for a specific period of time. A data set
     can be understood as a collection of similar data, sharing a
     structure, which covers a fixed period of time.
-
 - ***Data Structure Definition (DSD, also known as Key Family in
     Version 2.0):*** Each data set has a set of structural metadata.
     These descriptions are referred to in SDMX as Data Structure
@@ -291,8 +286,8 @@ includes:
     associated with the measures, dimensions, and attributes of a data
     "cube," along with information about the representation of data and
     related identifying and descriptive (structural) metadata. In
-    Version 2.1, the term \"Key Family\" was replaced by \"Data
-    Structure Definition\" (DSD) both in XML Schemas and the Information
+    Version 2.1, the term "Key Family" was replaced by "Data
+    Structure Definition" (DSD) both in XML Schemas and the Information
     Model. The DSD has been modified in version 3.0 to better support
     microdata by providing the option to define multiple measures and
     for attributes and measures to take arrays of values. An optional
@@ -300,14 +295,12 @@ includes:
     describing the reference metadata associated with the data. When
     reported, these reference metadata are included as part of the
     dataset.
-
 - ***Code list:*** Code lists enumerate a set of codes to be used in
     the representation of dimensions, attributes, and other structural
     parts of SDMX. Codes can be organised into simple hierarchies within
     a code list, and more complex hierarchies potentially involving
     multiple code lists using hierarchy and hierarchy association
     structures.
-
 - ***Value list:*** Value lists introduced in version 3.0 are similar
     to codelists with the exception that the items do not need to
     conform to the usual SDMX rules for identifiable objects. That
@@ -317,19 +310,16 @@ includes:
     application in concepts and data structures definitions for less
     structured data and microdata enumerations and can be mapped to
     other value or code lists using representation maps.
-
 - ***Organisation Scheme:*** Organisations and organisation structure
     can be defined in an Organisation Scheme. Specific Organisation
     Schemes exist for Maintenance Agency, Data Provider, Metadata
     Provider, Data Consumer, and Organisation Unit.
-
 - ***Category Scheme and Categorisation:*** Category schemes are made
     up of a hierarchy of categories, which in SDMX may include any type
     of useful classification for the organization of data and metadata.
     A Categorisation links a category to an identifiable object. In this
     way sets of objects can be categorised. A statistical subject-matter
     domain scheme is implemented in SDMX as a Category Scheme.
-
 - ***Concept Scheme:*** A concept scheme is a maintained list of
     concepts that are used in data structure definitions and metadata
     structure definitions. There can be many such concept schemes. A
@@ -340,7 +330,6 @@ includes:
     Indeed, organisations wishing to remain with version 1.0 key family
     schema specifications will continue to declare the representation in
     the key family definition.
-
 - ***Metadata Set:*** A reference metadata set is a set of information
     pertaining to an object within the formal SDMX view of statistical
     exchange: they may describe the maintainers of data or structural
@@ -350,7 +339,6 @@ includes:
     creators of reference metadata may take whatever concepts they are
     concerned with, or obliged to report, and provide a reference
     metadata set containing that information.
-
 - ***Metadata Structure Definition:*** A reference metadata set also
     has a set of structural metadata which describes how it is
     organized. This metadata set identifies what reference metadata
@@ -358,7 +346,6 @@ includes:
     (typically as hierarchies), what their presentational structure is,
     how they may be represented (as free text, as coded values, etc.),
     and with which formal SDMX object types they are associated.
-
 - ***Dataflow Definition:*** In SDMX, data sets are reported or
     disseminated according to a data flow definition. The data flow
     definition identifies the data structure definition and may be
@@ -367,17 +354,13 @@ includes:
     organised category schemes). Constraints, in terms of reporting
     periodicity or sub set of possible keys that are allowed in a data
     set, may be attached to the data flow definition.
-
 - ***Metadataflow Definition:*** A metadata flow definition is very
     similar to a data flow definition, but describes, categorises, and
     constrains metadata sets.
-
 - ***Data Provider:*** An organization which produces data is termed a
     data provider.
-
 - ***Metadata Provider:*** An organization which produces reference
     metadata is termed a metadata provider.
-
 - ***Provision Agreement (Metadata Provision Agreement):*** The set of
     information which describes the way in which data sets and metadata
     sets are provided by a data/metadata provider. A provision agreement
@@ -393,13 +376,11 @@ includes:
     outside the scope of a technical specification). In version 3.0,
     metadata provision agreement and data provision agreement are two
     separate artefacts.
-
 - ***Constraint:*** Data and Metadata Constraints describe a subset of
     a data source or metadata source, and may also provide information
     about scheduled releases of data. They are associated with data /
     metadata providers, provision agreements, data flows, metadataflows,
     data structure definitions and metadata structure definitions.
-
 - ***Structure Map:*** Structure maps describes a mapping between data
     structure definitions or dataflows for the purpose of transforming a
     data set into a different structure. The mapping rules are defined
@@ -408,12 +389,10 @@ includes:
     map to one or more components in that of the target. Represent maps
     act as lookup tables and specific provision is made for mapping
     dates and times.
-
 - ***Representation Map:*** Representation maps describe mappings
     between source value(s) and target value(s) where the values are
     restricted to those in a code list, value list or be of a certain
     type such as integer or string.
-
 - ***Item Scheme Map:*** An item scheme map describes mapping rules
     between any item scheme with the exception of code lists and value
     lists which use representation maps. The version 3.0 information
@@ -421,7 +400,6 @@ includes:
     concept scheme map, category scheme map and reporting taxonomy map.
     Organisation scheme map and reporting scheme map have been omitted
     from the information model schematic in Figure 1.
-
 - ***Reporting Taxonomy:*** A reporting taxonomy allows an
     organisation to link (possibly in a hierarchical way) a number of
     cube or data flow definitions which together form a complete
@@ -430,25 +408,21 @@ includes:
     support other collection and reporting functions. It also supports
     the specification of publications such as a yearbook, in terms of
     the data or metadata contained in the publication.
-
 - ***Process:*** The process class provides a way to model statistical
     processes as a set of interconnected *process steps.* Although not
     central to the exchange and dissemination of statistical data and
     metadata, having a shared description of processing allows for the
     interoperable exchange and dissemination of reference metadata sets
     which describe processes-related concepts.
-
 - ***Hierarchy***: Describes complex code hierarchies principally for
     data discovery purposes. The codes themselves are referenced from
     the code lists in which they are maintained.
-
 - ***Hierarchy Association***: A hierarchy association links a
     hierarchy to something that needs it like a dimension. Furthermore,
     the linking can be specified in the context of another object such
     as a dimension in the context of a dataflow. Thus, a dimension in a
     data structure definition could have different hierarchies depending
     on the dataflow.
-
 - ***Transformation Scheme:*** A transformation scheme is a set of
     Validation and Transformation Language (VTL) transformations aimed
     at obtaining some meaningful results for the user (e.g., the
@@ -502,7 +476,6 @@ The registry services discussed here can be briefly summarized:
     such as a code list, and for this stub to reference the actual
     location from where the metadata can be retrieved, either from a
     file or a structural metadata resource, such as another registry.
-
 - ***Registration of Data and Metadata Sources:*** This registry
     service allows users with maintenance agency access privileges to
     inform the registry of the existence and location (for retrieval) of
@@ -512,14 +485,12 @@ The registry services discussed here can be briefly summarized:
     it, or for an application to discover its existence. Objects in the
     registry are organized and categorized according to one or more
     category schemes.
-
 - ***Querying:*** The registry services have interfaces for querying
     the metadata contained in a registry, so that applications and users
     can discover the existence of data sets and reference metadata sets,
     structural metadata, the providers/agencies associated with those
     objects, and the provider agreements which describe how the data and
     metadata are made available, and how they are categorized.
-
 - ***Subscription/Notification:*** It is possible to "subscribe" to
     specific objects in a registry, so that a notification will be sent
     to all subscribers whenever the registry objects are updated.
@@ -539,20 +510,16 @@ Version 3.0 has standardized on RESTful web services with a OpenAPI
 specification published on the SDMX Technical Working Group's GitHub
 repository <https://github.com/sdmx-twg>. There are five 'resources':
 
-- structure -- retrieval and maintenance of structural metadata
-
-- data -- retrieval of data
-
-- schema -- retrieval of XML schemas to validate specific data or
+- structure — retrieval and maintenance of structural metadata
+- data — retrieval of data
+- schema — retrieval of XML schemas to validate specific data or
     metadata sets
-
-- availability -- retrieval of information on the data available for a
+- availability — retrieval of information on the data available for a
     Dataflow
-
-- metadata -- retrieval of reference metadata
+- metadata — retrieval of reference metadata
 
 The following conceptual example uses the 'data' resource to query a
 data repository for a series identified by the key 'M.USD.EUR.SP00.A' in
 the EXR (ECB exchange rates) Dataflow:
 
-> <https://ws-entry-point/data/dataflow/ECB/EXR/1.0.0/M.USD.EUR.SP00.A>
+`https://ws-entry-point/data/dataflow/ECB/EXR/1.0.0/M.USD.EUR.SP00.A`

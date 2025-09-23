@@ -27,15 +27,11 @@ this).
 The actual SDMX Base construct from which the concrete classes inherit
 depends upon the requirements of the class for:
 
-Annotation – *AnnotableArtefact*
-
-Identification – *IdentifiableArtefact*
-
-Naming – *NameableArtefact*
-
-Versioning – *VersionableArtefact*
-
-Maintenance – *MaintainableArtefact*
+- Annotation – *AnnotableArtefact*
+- Identification – *IdentifiableArtefact*
+- Naming – *NameableArtefact*
+- Versioning – *VersionableArtefact*
+- Maintenance – *MaintainableArtefact*
 
 ## Inheritance View
 
@@ -54,46 +50,38 @@ Data Set Packages
 Those classes in the SDMX metamodel which require annotations inherit
 from *AnnotableArtefact*. These are:
 
-*IdentifiableArtefact*
-
-*DataSet*
-
-*Key* (and therefore *SeriesKey* and *GroupKey*)
-
-*Observation*
+- *IdentifiableArtefact*
+- *DataSet*
+- *Key* (and therefore *SeriesKey* and *GroupKey*)
+- *Observation*
 
 Those classes in the SDMX metamodel which require annotations and global
 identity are derived from *IdentifiableArtefact*. These are:
 
-*NameableArtefact*
-
-*ComponentList*
-
-*Component*
+- *NameableArtefact*
+- *ComponentList*
+- *Component*
 
 Those classes in the SDMX metamodel which require annotations, global
 identity, multilingual name and multilingual description are derived
 from *NameableArtefact*. These are:
 
-*VersionableArtefact*
-
-*Item*
+- *VersionableArtefact*
+- *Item*
 
 The classes in the SDMX metamodel which require annotations, global
 identity, multilingual name and multilingual description, and versioning
 are derived from *VersionableArtefact*. These are:
 
-*MaintainableArtefact*
+- *MaintainableArtefact*
 
 Abstract classes which represent information that is maintained by
 Maintenance Agencies all inherit from *MaintainableArtefact*, they also
 inherit all the features of a *VersionableArtefact*, and are:
 
-*StructureUsage*
-
-*Structure*
-
-*ItemScheme*
+- *StructureUsage*
+- *Structure*
+- *ItemScheme*
 
 All the above classes are abstract. The key to understanding the class
 diagrams presented in this section are the concrete classes that inherit
@@ -104,15 +92,14 @@ packages of the metamodel which require to be maintained by Agencies all
 inherit (via other abstract classes) from *MaintainableArtefact*, these
 are:
 
-Dataflow
-
-DataStructureDefinition
+- Dataflow
+- DataStructureDefinition
 
 The component structures that are lists of lists, inherit directly from
 *Structure*. A *Structure* contains several lists of components. The
 concrete class that inherits from *Structure* is:
 
-DataStructureDefinition
+- DataStructureDefinition
 
 A DataStructureDefinition contains a list of dimensions, a list of
 measures and a list of attributes.
@@ -120,25 +107,20 @@ measures and a list of attributes.
 The concrete classes which inherit from *ComponentList* and are
 subcomponents of the DataStructureDefinition are:
 
-DimensionDescriptor – content is Dimension and TimeDimension
-
-DimensionGroupDescriptor – content is an association to Dimension,
-TimeDimension
-
-MeasureDescriptor – content is Measure
-
-AttributeDescriptor – content is DataAttribute and an association to
-MetadataAttribute
+- DimensionDescriptor – content is Dimension and TimeDimension
+- DimensionGroupDescriptor – content is an association to Dimension,
+    TimeDimension
+- MeasureDescriptor – content is Measure
+- AttributeDescriptor – content is DataAttribute and an association to
+- MetadataAttribute
 
 The classes that inherit from *Component* are:
 
-Measure
-
-*DimensionComponent* and thereby its sub classes of Dimension and
-TimeDimension
-
-*Attribute* and thereby its sub classes of DataAttribute and
-MetadataAttribute
+- Measure
+- *DimensionComponent* and thereby its sub classes of Dimension and
+    TimeDimension
+- *Attribute* and thereby its sub classes of DataAttribute and
+    MetadataAttribute
 
 The concrete classes identified above are the majority of the classes
 required to define the metamodel for the DataStructureDefinition. The
@@ -151,9 +133,9 @@ required.
 ### Class Diagram 
 
 ![](media/image54.png)
-
-| Figure 28 Relationship class diagram of the Data Structure<br>Definition excluding representation |
-| :--- |
+/// caption
+Figure 28 Relationship class diagram of the Data Structure<br>Definition excluding representation
+///
 
 
 ### Explanation of the Diagrams
@@ -180,9 +162,8 @@ DataSets to be reported/disseminated.
 There are two types of dimensions each having a common association to
 Concept:
 
--   Dimension
-
--   TimeDimension
+- Dimension
+- TimeDimension
 
 Note that DimensionComponent can be any or all its sub classes i.e.,
 Dimension, TimeDimension.
@@ -264,19 +245,15 @@ the constructs to which the *AttributeComponent* is to be reported
 within a *DataSet*. An *AttributeComponent* can be specified as being
 related to one of the following artefacts:
 
--   All data within the dataset (DataflowRelationship) – this is
+- All data within the dataset (DataflowRelationship) – this is
     equivalent to attaching an Attribute to all data within the
     Dataflow.
-
--   Dimension or set of Dimensions (DimensionRelationship)
-
--   Set of Dimensions specified by a GroupKey (GroupRelationship – this
+- Dimension or set of Dimensions (DimensionRelationship)
+- Set of Dimensions specified by a GroupKey (GroupRelationship – this
     is retained for compatibility reasons – or +groupKey of the
     DimensionRelationship)
-
--   Observation (ObservationRelationship)
-
--   In addition to the positioning of an *AttributeComponent* within a
+- Observation (ObservationRelationship)
+- In addition to the positioning of an *AttributeComponent* within a
     *DataSet*, another relationship indicates the Measure(s) for which
     the *AttributeComponent* is reported. Regardless of the position of
     the *AttributeComponent* within the *DataSet*, the
@@ -287,8 +264,9 @@ related to one of the following artefacts:
     Measures.
 
 ![](media/image55.png)
-
+/// caption
 Figure 29: Attribute Attachment Defined in the Data Structure Definition
+///
 
 The following table details the possible relationships a DataAttribute
 may specify. Note that these relationships are mutually exclusive, and

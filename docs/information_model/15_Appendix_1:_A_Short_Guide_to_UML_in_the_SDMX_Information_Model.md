@@ -26,7 +26,7 @@ The actor is depicted as a stick man as shown below.
 Figure 49 Actor
 ///
 
-The **use cas**e can be defined as follows:
+The **use case** can be defined as follows:
 
 > “A use case defines a set of use-case instances, where each instance
 > is a sequence of actions a system performs that yields an observable
@@ -126,21 +126,18 @@ named to give more semantics.
 In UML it is possible to specify a variety of “multiplicity” rules. The
 most common ones are:
 
-Zero or one (0..1)
-
-Zero or many (0..\*)
-
-One or many (1..\*)
-
-Many (\*)
-
-Unspecified (blank)
+- Zero or one (0..1)
+- Zero or many (0..\*)
+- One or many (1..\*)
+- Many (\*)
+- Unspecified (blank)
 
 ### Aggregation
 
 ![](media/image82.svg)
-
+/// caption
 Figure 56: A simple aggregate association
+///
 
 ![](media/image83.svg) 
 /// caption

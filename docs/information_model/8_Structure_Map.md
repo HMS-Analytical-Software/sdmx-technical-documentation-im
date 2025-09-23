@@ -11,21 +11,22 @@ The StructureMap defines how the *structure* of a source
 DataStructureDefinition relates to the *structure* of the target
 DataStructureDefinition. The term *structure* in this instance refers to
 the Dimensions and Attributes (collectively called Components). An
-example relationship is source REF\_AREA Dimension maps to target
+example relationship is source REF_AREA Dimension maps to target
 COUNTRY Dimension. When converting data, systems should interpret this,
-as ‘data reported against REF\_AREA in the source dataset, should be
+as ‘data reported against REF_AREA in the source dataset, should be
 converted to data against COUNTRY in the target dataset’. StructureMaps
 can make use of the RepresentationMap to describe how the reported value
 map, if there is a mapping to be done on the value, for example source
-REF\_AREA.US may map to COUNTRY.USA. In the case of mapping Dates, the
+REF_AREA.US may map to COUNTRY.USA. In the case of mapping Dates, the
 EpochMap or DatePatternMap is used and maintained in the StructureMap
 that uses it.
 
 ### Class Diagram – Relationship
 
 ![](media/image63.png)
-
+/// caption
 Figure 37: Relationship Class diagram of the Structure Map
+///
 
 ### Explanation of the Diagram
 
@@ -63,8 +64,9 @@ by multiple ComponentMaps.
 ### Class Diagram – Epoch Mapping and Date Pattern Mapping
 
 ![](media/image64.png)
-
+/// caption
 Figure 38: Relationship Class diagram of the EpochMap and DatePatternMap
+///
 
 ### Explanation of the Diagram
 

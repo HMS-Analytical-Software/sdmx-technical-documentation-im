@@ -1,4 +1,4 @@
-#  Cube
+# Cube
 
 ## Context
 
@@ -28,14 +28,11 @@ described by a cube definition and can be processed by cube aware
 systems. The SDMX-IM supports the definition of such cubes in the
 following way:
 
--   The Hierarchy defines the (often complex) hierarchies of codes.
-
--   If required:
-
-    -   The StructureMap can group DataStructureDefinition that describe
+- The Hierarchy defines the (often complex) hierarchies of codes.
+- If required:
+    - The StructureMap can group DataStructureDefinition that describe
         the cube
-
-    -   The HierarchyAssociation can provide a mechanism to apply a
+    - The HierarchyAssociation can provide a mechanism to apply a
         Hierarchy to the Codes in the Codelists used by the
         DataStructureDefinition, providing also the context of which the
         hierarchy applies (e.g., a Dataflow).

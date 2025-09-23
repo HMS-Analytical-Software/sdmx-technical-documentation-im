@@ -1,12 +1,3 @@
-
-
-# Revision History
-
-| Revision | Date | Contents |
-| :--- | :--- | :--- |
-| <blockquote><br><p>DRAFT 1.0</p><br></blockquote> | <blockquote><br><p>May 2021</p><br></blockquote> | <blockquote><br><p>Draft release updated for SDMX 3.0 for public consultation</p><br></blockquote> |
-| <blockquote><br><p>1.0</p><br></blockquote> | <blockquote><br><p>October 2021</p><br></blockquote> | <blockquote><br><p>Public Release for SDMX 3.0</p><br></blockquote> |
-
 # Change History
 
 ### Version 1.0 – initial release September 2004
@@ -42,9 +33,7 @@ Introduction of new types of Item Scheme:
 - Object Type Scheme to specify object types in support of the
     Metadata Structure Definition (principally the object types
     (classes) in this Information Model)
-
 - Type Scheme to specify types other than object type
-
 - A generic Item Scheme Association to specify the association between
     Items in two or more Item Schemes, where such associations cannot be
     described in the Structure Set and Transformation.
@@ -90,35 +79,35 @@ The purpose of this revision is threefold:
 ##### Basic inheritance and patterns
 
 1. The following attributes are added to Maintainable:
-  i\) isExternalReference
-  ii\) structure URL
-  iii\) serviceURL
-1. Added Nameable Artefact and moved the Name and Description
+    1. isExternalReference
+    2. structure URL
+    3. serviceURL
+2. Added Nameable Artefact and moved the Name and Description
     associations from Identifiable Artefact to Nameable Artefact. This
     allows an artefact to be identified (with id and urn) without the
     need to specify a Name.
-1. Removed any inheritance from Versionable Artefact with the exception
+3. Removed any inheritance from Versionable Artefact with the exception
     of Maintainable Artefact – this means that only Maintainable objects
     can be versioned, and objects contained in a maintainable object
     cannot be independently versioned.
-1. Renamed MaintenanceAgency to Agency 0 this is its name in the schema
+4. Renamed MaintenanceAgency to Agency 0 this is its name in the schema
     and the URN.
-1. Removed abstract class Association as a subclass of Item (as these
+5. Removed abstract class Association as a subclass of Item (as these
     association types are not maintained in Item Schemes). Specific
     associations are modelled explicitly (e.g. Categorisation,
     ItemScheme, Item).
-1. Added ActionType to data types.
-1. Removed Coded Artefact and Uncoded Artefact and all subclasses (e.g.
+6. Added ActionType to data types.
+7. Removed Coded Artefact and Uncoded Artefact and all subclasses (e.g.
     Coded Data Attribute and Uncoded Data Attribute) as the
     “Representation” is more complex than just a distinction between
     coded and uncoded.
-1. Added Representation to the Component. Removed association to Type.
-1. Removed concept role association (to Item) as roles are identified
+8. Added Representation to the Component. Removed association to Type.
+9. Removed concept role association (to Item) as roles are identified
     by a relationship to a Concept.
-1. Removed abstract class Attribute as both Data Attribute and Metadata
+10. Removed abstract class Attribute as both Data Attribute and Metadata
     Attribute have different properties. Data Attribute and Metadata
     Attribute inherit directly from Component.
-1. isPartial attribute added to Item Scheme to support partial Item
+11. isPartial attribute added to Item Scheme to support partial Item
     Schemes (e.g. partial Code list).
 
 ##### Representation

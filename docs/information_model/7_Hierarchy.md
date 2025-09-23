@@ -25,16 +25,13 @@ subset, and special case, of hierarchies.
 
 The principal features of the Hierarchy are:
 
-1.  A child code can have more than one parent.
-
-2.  There can be more than one code that has no parent (i.e. more than
+1. A child code can have more than one parent.
+2. There can be more than one code that has no parent (i.e. more than
     one “root node”).
-
-3.  The levels in a hierarchy can be explicitly defined or they can be
+3. The levels in a hierarchy can be explicitly defined or they can be
     implicit: i.e. they exist only as parent/child relationships in the
     coding structure.
-
-4.  Hierarchies may be associated to the structures they refer to, via
+4. Hierarchies may be associated to the structures they refer to, via
     the HierarchyAssociation.
 
 ## Inheritance
@@ -42,8 +39,9 @@ The principal features of the Hierarchy are:
 ### Class Diagram
 
 ![](media/image61.png)
-
+/// caption
 Figure 35: Inheritance class diagram for the Hierarchy
+///
 
 ### Explanation of the Diagram
 
@@ -70,8 +68,9 @@ shown in the relationship section below.
 ### Class Diagram
 
 ![](media/image62.png)
-
+/// caption
 Figure 36: Relationship class diagram of the Hierarchy
+///
 
 ### Explanation of the Diagram
 
@@ -79,13 +78,11 @@ Figure 36: Relationship class diagram of the Hierarchy
 
 The basic principles of the Hierarchy are:
 
-1.  The Hierarchy is a specification of the structure of the Codes.
-
-2.  The Codes in the Hierarchy are not themselves a part of the
+1. The Hierarchy is a specification of the structure of the Codes.
+2. The Codes in the Hierarchy are not themselves a part of the
     artefact, rather they are references to Codes in one or more
     external Codelists.
-
-3.  The hierarchy of Codes is specified in HierarchicalCode. This
+3. The hierarchy of Codes is specified in HierarchicalCode. This
     references the Code and its immediate child HierarchicalCodes.
 
 A Hierarchy can have formal levels (hasFormalLevels="true"). However,

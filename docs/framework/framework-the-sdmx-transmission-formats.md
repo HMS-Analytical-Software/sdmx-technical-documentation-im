@@ -14,7 +14,6 @@ There are four distinct types of message:
     SDMX-ML structure message can carry details of any number and
     combination of structural metadata artefacts like DSDs, code lists
     and constraints.
-
 2. *Structure-specific Data:* For the exchange of data. This format is
     specific to the Data Structure Definitions of the data sets (in
     other terms, it is DSD-specific) and is created by following
@@ -25,18 +24,17 @@ There are four distinct types of message:
     parser, and supports the transmission of partial data sets
     (incremental updates) as well as whole data sets.
 
-> Many XML tools and technologies have expectations about the functions
-> performed by an XML schema, one of which is a very direct relationship
-> between the XML constructs described in the XML schema and the tagged
-> data in the XML instance. Strong data typing is also considered
-> normal, supporting full validation of the tagged data. These message
-> types are designed to support validation and other expected XML schema
-> functions.
+    > Many XML tools and technologies have expectations about the functions
+    > performed by an XML schema, one of which is a very direct relationship
+    > between the XML constructs described in the XML schema and the tagged
+    > data in the XML instance. Strong data typing is also considered
+    > normal, supporting full validation of the tagged data. These message
+    > types are designed to support validation and other expected XML schema
+    > functions.
 
 3. *Generic Metadata:* For the exchange of reference metadata sets.
     'Generic' means the XML elements and XML attributes are the same
     regardless of the metadata set.
-
 4. *Registry:* All of the possible interactions with the SDMX registry
     services are supported using SDMX-ML interfaces and REST API calls.
     Submission of structural metadata content, data / metadata
@@ -71,12 +69,10 @@ There are three distinct message types:
     structural metadata artefacts. While the SDMX-ML and SDMX-JSON
     messages are structured differently, it is possible to freely
     convert between them.
-
 2. *Data:* For the exchange of data. Unlike SDMX-ML, the structure of a
     SDMX-JSON data message is not specific to the DSDs of the data sets
     so schema validation will not check for compliance of the data with
     the DSDs.
-
 3. *Metadata*: For the exchange of reference metadata sets.
 
 ### SDMX-CSV
@@ -94,7 +90,6 @@ There are two distinct message types:
 1. *Data*: For the exchange of data. Like SDMX-JSON, SDMX-CSV can
     include both code IDs and labels which is helpful when using the
     data to create human readable charts and dashboards.
-
 2. *Metadata*: For the exchange of reference metadata sets.
 
 ### Formats and Messages Deprecated in Version 3.0
@@ -103,23 +98,16 @@ The following formats and messages have been deprecated in version 3.0
 to simplify, modernise and rationalise the standard.
 
 - SDMX-EDI
-
 - SDMX-ML 1.0/2.0 Generic (time-series) data message
-
 - SDMX-ML 1.0/2.0 Compact (time-series) data message
-
 - SDMX-ML 1.0/2.0 Utility (time-series) data message
-
 - SDMX-ML 1.0/2.0 Cross-Sectional data message
-
 - SDMX-ML 2.1 Generic (Time Series) data messages (for observations,
     time-series and cross-sectional data)
-
 - SDMX-ML 2.1 Structure Specific Time Series data message
 
 The following messages were deprecated in version 3.0 as a consequence
 of the deprecation of the SOAP web services:
 
 - SDMX-ML Query messages
-
 - SDMX-ML Submit Structure Request messages

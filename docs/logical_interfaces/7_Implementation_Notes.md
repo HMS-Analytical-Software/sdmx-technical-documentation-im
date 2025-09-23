@@ -22,11 +22,9 @@ maintenance agency, or individual structural metadata items.
 
 Structural metadata items
 
--   may only be modified by the maintenance agency which created them;
-
--   may only be deleted by the agency which created them;
-
--   may not be deleted if they are referenced from other constructs in
+- may only be modified by the maintenance agency which created them;
+- may only be deleted by the agency which created them;
+- may not be deleted if they are referenced from other constructs in
     the Registry.
 
 The level of granularity for the maintenance of SDMX Structural Metadata
@@ -37,9 +35,9 @@ flag set and a reduced set of Items.
 
 The following table lists the Maintainable Artefacts.
 
-| <strong>Maintainable Artefacts</strong> | <strong>Content</strong> |
-| :--- | :--- |
-| <strong>Abstract Class</strong> | <strong>Concrete Class</strong> |  |
+| <strong>Maintainable Artefacts</strong> |  | <strong>Content</strong> |
+| :--- | :--- | :--- |
+| | <strong>Abstract Class</strong> | <strong>Concrete Class</strong> |  |
 | Item Scheme | Codelist | Code |
 |  | Concept Scheme | Concept |
 |  | Category Scheme | Category |
@@ -72,28 +70,25 @@ The following table lists the Maintainable Artefacts.
 | None | Hierarchy | Hierarchical Code |
 | None | Hierarchy Association |  |
 | None | Categorisation |  |
-
-
+/// caption
 Table 4: Table of Maintainable Artefacts for Structural Definition
 Metadata
+///
 
 ### 7.1.2 Item Scheme, Structure
 
 The artefacts included in the structural definitions are:
 
--   All types of Item Scheme (Codelist, Concept Scheme, Category Scheme,
+- All types of Item Scheme (Codelist, Concept Scheme, Category Scheme,
     Organisation Scheme, Agency Scheme, Data Provider Scheme, Metadata
     Provider Scheme, Data Consumer Scheme, Organisation Unit Scheme,
     Transformation Scheme, Name Personalisation Scheme, Custom Type
     Scheme, Vtl Mapping Scheme, Ruleset Scheme, User Defined Operator
     Scheme)
-
--   All types of Enumerated List (ValueList)[1]
-
--   All types of Structure (Data Structure Definition, Metadata
+- All types of Enumerated List (ValueList)[^1]
+- All types of Structure (Data Structure Definition, Metadata
     Structure Definition)
-
--   All types of Structure Usage (Dataflow, Metadataflow)
+- All types of Structure Usage (Dataflow, Metadataflow)
 
 ### 7.1.3 Structure Usage
 
@@ -110,28 +105,28 @@ gives the ability for an application to discover data and metadata by
 #### 7.1.3.2 Structure Usage Schematic
 
 ![](media/image13.png)
-
+/// caption
 Figure 9: Schematic of Linking the Data and Metadata Flows to Categories
 and Structure Definitions
+///
 
 #### 7.1.3.3 Structure Usage Model 
 
 ![](media/image14.png)
-
+/// caption
 Figure 10: SDMX-IM of links from Structure Usage to Category
+///
 
 In addition to the maintenance of the Dataflow and the Metadataflow, the
 following links must be maintained in the registry:
 
--   Dataflow to Data Structure Definition
-
--   Metadataflow to Metadata Structure Definition
+- Dataflow to Data Structure Definition
+- Metadataflow to Metadata Structure Definition
 
 The following links may be created by means of a Categorisation
 
--   Categorisation to Dataflow and Category
-
--   Categorisation to Metadataflow and Category
+- Categorisation to Dataflow and Category
+- Categorisation to Metadataflow and Category
 
 ## 7.2 Data and Metadata Provisioning
 
@@ -167,21 +162,24 @@ Data Provider. In terms of the SDMX Information Model, the Data Provider
 is maintained in a Data Provider Scheme.
 
 ![](media/image15.png)
-
+/// caption
 Figure 11: SDMX-IM of the Data Provider
+///
 
 Note that the Data Provider does not inherit the hierarchy association.
 The diagram below shows a logical schematic of the data model classes
 required to maintain provision agreements.
 
 ![](media/image16.png)
-
+/// caption
 Figure 12: Schematic of the Provision Agreement
+///
 
 The diagram below is a logical representation of the data required in
 order to maintain Provision Agreements.
-
+/// caption
 ![](media/image17.png)
+///
 
 Figure 13: Logical class diagram of the information contained in the
 Provision Agreement
@@ -246,16 +244,18 @@ Dimension values already selected).
 ### 7.3.2 Data and Metadata Constraints: Schematic
 
 ![](media/image18.png)
-
+/// caption
 Figure 14: Schematic of the Constraint and the Artefacts that can be
 constrained
+///
 
 ### 7.3.3 Data and Metadata Constraints: Model
 
 ![](media/image19.png)
-
+/// caption
 Figure 15: Logical class diagram showing inheritance between and
 reference to constrainable artefacts
+///
 
 Logical class diagram showing inheritance between and reference to
 constrainable artefacts
@@ -306,8 +306,9 @@ messages are returned as a registry exception within the response.
 #### 7.4.2.1 Registration Request Schematic 
 
 ![](media/image20.png)
-
-Figure 16: Schematic of the Objects Concerned with Registration
+/// caption
+Figure 16: Schematic of the Objects Concerned with registration
+///
 
 #### 7.4.2.2 Registration Request Model 
 
@@ -317,11 +318,9 @@ dataset or metadata set to be registered. The Registration can
 optionally have information, which has been extracted from the
 Registration:
 
--   validFrom
-
--   validTo
-
--   lastUpdated
+- validFrom
+- validTo
+- lastUpdated
 
 The last updated date is useful during the discovery process to make
 sure the client knows which data is freshest.
@@ -337,8 +336,9 @@ following values:
 
 
 ![](media/image21.png)
-
+/// caption
 Figure 17: Logical Class Diagram of Registration of Data and Metadata
+///
 
 The *QueryDatasource* is an abstract class that represents a data
 source, which can understand an API query (i.e., a RESTful query –
@@ -407,8 +407,9 @@ contain some successful and some failed statuses. The logical model for
 the RegistrationResponse is shown below:
 
 ![](media/image22.png)
-
+/// caption
 Figure 18: Logical class diagram showing the registration response
+///
 
 ## 7.5 Subscription and Notification Service 
 
@@ -437,28 +438,26 @@ the subscription. This is called a “notification”.
 ###  7.5.1 Subscription Logical Class Diagram 
 
 ![](media/image23.png)
-
+/// caption
 Figure 19: Logical Class Diagram of the Subscription
+///
 
 ###  7.5.2 Subscription Information
 
 Regardless of the type of registry/repository events being observed, a
 subscription always contains:
 
-1.  A set of URIs describing the end-points to which notifications must
+1. A set of URIs describing the end-points to which notifications must
     be sent if the subscription is activated. The URIs can be either
     mailto: or http: protocol. In the former case an email notification
     is sent; in the latter an HTTP POST notification is sent.
-
-2.  A user-defined identifier, which is returned in the response to the
+2. A user-defined identifier, which is returned in the response to the
     subscription request. This helps with asynchronous processing and is
     NOT stored in the Registry.
-
-3.  A validity period which defines both when the subscription becomes
+3. A validity period which defines both when the subscription becomes
     active and expires. The subscriber may be sent a notification on
     expiration of the subscription.
-
-4.  A selector which specifies which type of events are of interest. The
+4. A selector which specifies which type of events are of interest. The
     set of event types is:
 
 | <strong>Event Type</strong> | <strong>Comment</strong> |
@@ -476,46 +475,44 @@ URNs, which are identifiers which have some or all of their component
 parts replaced by the wildcard character \`\*\`. Identifier components
 comprise:
 
--   agencyID
-
--   id
-
--   version
+- agencyID
+- id
+- version
 
 Examples of wildcarded identifier components for an identified object
 type of Codelist are shown below:
 
+``` http
 AgencyID = \*
-
 Id = \*
-
 Version = \*
+```
 
 This subscribes to all Codelists of all versions for all agencies.
 
+``` http
 AgencyID = AGENCY1
-
 Id = CODELIST1
-
 Version = \*
+```
 
 This subscribes to all versions of Codelist CODELIST1 maintained by the
 agency AGENCY1.
 
+``` http
 AgencyID = AGENCY1
-
 Id = \*
-
 Version = \*
+```
 
 This subscribes to all versions of all Codelist objects maintained by
 the agency AGENCY1.
 
+``` http
 AgencyID = \*
-
 Id = CODELIST1
-
 Version = \*
+```
 
 This subscribes to all versions of Codelist CODELIST1 maintained by any
 agency.
@@ -523,18 +520,24 @@ agency.
 Note that if the subscription is to the latest stable version then this
 can be achieved by the + character, i.e.:
 
+``` http
 Version = +
+```
 
 A subscription to the latest version (whether stable, draft or
 non-versioned) can be achieved by the ~ character, i.e.:
 
+``` http
 Version = ~
+```
 
 A subscription to the latest stable version within major version 2
 starting with version 2.3.1 can be achieved by adding the + character
 after the minor version number, i.e.:
 
+``` http
 Version = 2.3+.1
+```
 
 The complete SDMX versioning syntax can be found in the SDMX Standards
 Section 6 “Technical Notes”, paragraph “4.3 Versioning”.
@@ -572,8 +575,9 @@ or replacement of an existing registration or a new registration.
 ### 7.6.1 Logical Class Diagram
 
 ![](media/image24.png)
-
+/// caption
 Figure 20: Logical Class Diagram of the Notification
+///
 
 A notification is an XML document that is sent to a user via email or
 http POST whenever a subscription is activated. It is an asynchronous
@@ -582,13 +586,10 @@ one-way message.
 Regardless of the registry component that caused the event to be
 triggered, the following common information is in the message:
 
--   Date and time that the event occurred
-
--   The URN of the artefact that caused the event
-
--   The URN of the Subscription that produced the notification
-
--   Event Action: Add, Replace, or Delete.
+- Date and time that the event occurred
+- The URN of the artefact that caused the event
+- The URN of the Subscription that produced the notification
+- Event Action: Add, Replace, or Delete.
 
 Additionally, supplementary information may be contained in the
 notification as detailed below.
@@ -603,4 +604,4 @@ elements from that namespace).
 
 The notification will contain the Registration.
 
-[1] Note that Codelist is also an EnumeratedList.
+[^1]: Note that Codelist is also an EnumeratedList.
