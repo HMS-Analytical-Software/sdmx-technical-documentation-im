@@ -7,17 +7,15 @@ of Transformations, which are algorithms to calculate new data starting
 from already existing ones[6]. The purpose of the VTL in the SDMX
 context is to enable the:
 
--   definition of validation and transformation algorithms, in order to
+- definition of validation and transformation algorithms, in order to
     specify how to calculate new data from existing ones;
-
--   exchange of the definition of VTL algorithms, also together the
+- exchange of the definition of VTL algorithms, also together the
     definition of the data structures of the involved data (for example,
     exchange the data structures of a reporting framework together with
     the validation rules to be applied, exchange the input and output
     data structures of a calculation task together with the VTL
     Transformations describing the calculation algorithms);
-
--   compilation and execution of VTL algorithms, either interpreting the
+- compilation and execution of VTL algorithms, either interpreting the
     VTL Transformations or translating them in whatever other computer
     language is deemed as appropriate.
 
@@ -90,21 +88,14 @@ the drawback that the references are verbose.
 The SDMX URN[10] is the concatenation of the following parts, separated
 by special symbols like dot, equal, asterisk, comma, and parenthesis:
 
--   SDMXprefix
-
--   SDMX-IM-package-name
-
--   class-name
-
--   agency-id
-
--   maintainedobject-id
-
--   maintainedobject-version
-
--   container-object-id [11]
-
--   object-id
+- SDMXprefix
+- SDMX-IM-package-name
+- class-name
+- agency-id
+- maintainedobject-id
+- maintainedobject-version
+- container-object-id [11]
+- object-id
 
 The generic structure of the URN is the following:
 
@@ -136,21 +127,18 @@ artefact belongs to, and in case the artefact itself is
 maintainable[12], coincides with the name of the artefact. Therefore the
 maintainedobject-id depends on the class of the artefact:
 
--   if the artefact is a Dataflow, which is a maintainable class, the
+- if the artefact is a Dataflow, which is a maintainable class, the
     maintainedobject-id is the Dataflow name (dataflow-id);
-
--   if the artefact is a Dimension, Measure, TimeDimension or
+- if the artefact is a Dimension, Measure, TimeDimension or
     DataAttribute, which are not maintainable and belong to the
     DataStructure maintainable class, the maintainedobject-id is the
     name of the DataStructure (dataStructure-id) which the artefact
     belongs to;
-
--   if the artefact is a Concept, which is not maintainable and belongs
+- if the artefact is a Concept, which is not maintainable and belongs
     to the ConceptScheme maintainable class, the maintainedobject-id is
     the name of the ConceptScheme (conceptScheme-id) which the artefact
     belongs to;
-
--   if the artefact is a Codelist, which is a maintainable class, the
+- if the artefact is a Codelist, which is a maintainable class, the
     maintainedobject-id is the Codelist name (codelist-id).
 
 The maintainedobject-version is the version, according to the SDMX
@@ -165,24 +153,23 @@ The object-id is the name of the non-maintainable artefact (when the
 artefact is maintainable its name is already specified as the
 maintainedobject-id, see above), in particular it has to be specified:
 
--   if the artefact is a Dimension, TimeDimension, Measure or
+- if the artefact is a Dimension, TimeDimension, Measure or
     DataAttribute (the object-id is the name of one of the artefacts
     above, which are data structure components)
-
--   if the artefact is a Concept (the object-id is the name of the
+- if the artefact is a Concept (the object-id is the name of the
     Concept)
 
 For example, by using the URN, the VTL Transformation that sums two SDMX
 Dataflows DF1 and DF2 and assigns the result to a third persistent
 Dataflow DFR, assuming that DF1, DF2 and DFR are the maintainedobject-id
 of the three Dataflows, that their version is 1.0.0 and their Agency is
-AG, would be written as[13]:
+AG, would be written as[^13]:
 
-'urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=AG:DFR(1.0.0)' &lt;-
-
+```xml
+'urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=AG:DFR(1.0.0)' <-
 'urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=AG:DF1(1.0.0)' +
-
 'urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=AG:DF2(1.0.0)'
+```
 
 ### Abbreviation of the URN
 
@@ -198,83 +185,71 @@ for the identification of the artefact or that can be deduced from other
 available information, including the context in which the invocation is
 made. The possible abbreviations are described below.
 
--   The SDMXprefix can be omitted for all the SDMX objects, because it
+- The SDMXprefix can be omitted for all the SDMX objects, because it
     is a prefixed string (urn:sdmx:org), always the same for SDMX
     objects.
-
--   The SDMX-IM-package-name can be omitted as well because it can be
+- The SDMX-IM-package-name can be omitted as well because it can be
     deduced from the class-name that follows it (the table of the
     SDMX-IM packages and classes that allows this deduction is in the
     SDMX 2.1 Standards - Section 5 - Registry Specifications, paragraph
     6.2.3). In particular, considering the object classes of the
     artefacts that VTL can reference, the package is:
-
-    -   "datastructure" for the classes Dataflow, Dimension,
+    - "datastructure" for the classes Dataflow, Dimension,
         TimeDimension, Measure, DataAttribute,
-
-    -   "conceptscheme" for the class Concept,
-
-    -   "codelist" for the class Codelist.
-
--   The class-name can be omitted as it can be deduced from the VTL
+    - "conceptscheme" for the class Concept,
+    - "codelist" for the class Codelist.
+- The class-name can be omitted as it can be deduced from the VTL
     invocation. In particular, starting from the VTL class of the
     invoked artefact (e.g. dataset, component, identifier, measure,
     attribute, variable, valuedomain), which is known given the syntax
-    of the invoking VTL operator[14], the SDMX class can be deduced from
+    of the invoking VTL operator[^14], the SDMX class can be deduced from
     the mapping rules between VTL and SDMX (see the section "Mapping
-    between VTL and SDMX" hereinafter)[15].
-
--   If the agency-id is not specified, it is assumed by default equal to
+    between VTL and SDMX" hereinafter)[^15].
+- If the agency-id is not specified, it is assumed by default equal to
     the agency-id of the TransformationScheme, UserDefinedOperatorScheme
     or RulesetScheme from which the artefact is invoked. For example,
     the agency-id can be omitted if it is the same as the invoking
     TransformationScheme and cannot be omitted if the artefact comes
-    from another agency[16]. Take also into account that, according to
+    from another agency[^16]. Take also into account that, according to
     the VTL consistency rules, the agency of the result of a
     Transformation must be the same as its TransformationScheme,
     therefore the agency-id can be omitted for all the results (left
     part of Transformation statements).
-
--   As for the maintainedobject-id, this is essential in some cases
+- As for the maintainedobject-id, this is essential in some cases
     while in other cases it can be omitted:
-
-    -   if the referenced artefact is a Dataflow, which is a
+    - if the referenced artefact is a Dataflow, which is a
         maintainable class, the maintainedobject-id is the dataflow-id
         and obviously cannot be omitted;
-
-    -   if the referenced artefact is a Dimension, TimeDimension,
+    - if the referenced artefact is a Dimension, TimeDimension,
         Measure, DataAttribute, which are not maintainable and belong to
         the DataStructure maintainable class, the maintainedobject-id is
         the dataStructure-id and can be omitted, given that these
         components are always invoked within the invocation of a
         Dataflow, whose dataStructure-id can be deduced from the SDMX
         structural definitions;
-
-    -   if the referenced artefact is a Concept, which is not
+    - if the referenced artefact is a Concept, which is not
         maintainable and belong to the ConceptScheme maintainable class,
         the maintained object is the conceptScheme-id and cannot be
         omitted;
-
-    -   if the referenced artefact is a Codelist, which is a
+    - if the referenced artefact is a Codelist, which is a
         maintainable class, the maintainedobject-id is the codelist-id
         and obviously cannot be omitted.
-
--   When the maintainedobject-id is omitted, the
+- When the maintainedobject-id is omitted, the
     maintainedobject-version is omitted too. When the
     maintainedobject-id is not omitted and the maintainedobject-version
     is omitted, the version 1.0 is assumed by default.
+    - As said, the container-object-id does not apply to the classes that
+        can be referenced in VTL Transformations, therefore is not present
+        in their URN
+  - The object-id does not exist for the artefacts belonging to the
+      Dataflow, and Codelist classes, while it exists and cannot be
+      omitted for the artefacts belonging to the classes Dimension,
+      TimeDimension, Measure, DataAttribute and Concept, as for them the
+      object-id is the main identifier of the artefact
 
-<!-- -->
-
--   As said, the container-object-id does not apply to the classes that
-    can be referenced in VTL Transformations, therefore is not present
-    in their URN
-
--   The object-id does not exist for the artefacts belonging to the
-    Dataflow, and Codelist classes, while it exists and cannot be
-    omitted for the artefacts belonging to the classes Dimension,
-    TimeDimension, Measure, DataAttribute and Concept, as for them the
-    object-id is the main identifier of the artefact
+[^14]: Since these references to SDMX objects include non-permitted characters as per the VTL ID notation, they need to be included between single quotes, according to the VTL rules for irregular names.
+[^15]: For the syntax of the VTL operators see the VTL Reference Manual
+[^16]: In case the invoked artefact is a VTL component, which can be invoked only within the invocation of a VTL data set (SDMX Dataflow), the specific SDMX class-name (e.g. Dimension, TimeDimension, Measure or DataAttribute) can be deduced from the data structure of the SDMX Dataflow, which the component belongs to.
 
 The simplified object identifier is obtained by omitting all the first
 part of the URN, including the special characters, till the first part
@@ -283,44 +258,58 @@ not omitted.
 For example, the full formulation that uses the complete URN shown at
 the end of the previous paragraph:
 
+```xml
 'urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=AG:DFR(1.0.0)' :=
-
 'urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=AG:DF1(1.0.0)' +
-
 'urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=AG:DF2(1.0.0)'
+```
 
 by omitting all the non-essential parts would become simply:
 
+```sh
 DFR := DF1 + DF2
+```
 
 The references to the Codelists can be simplified similarly. For
 example, given the non-abbreviated reference to the Codelist
-AG:CL\_FREQ(1.0.0), which is[17]:
+AG:CL\_FREQ(1.0.0), which is[^17]:
 
-'urn:sdmx:org.sdmx.infomodel.codelist.Codelist=AG:CL\_FREQ(1.0.0)'
+```xml
+'urn:sdmx:org.sdmx.infomodel.codelist.Codelist=AG:CL_FREQ(1.0.0)'
+```
+
+[^17]: If the Agency is composite (for example AgencyA.Dept1.Unit2), the agency is considered different even if only part of the composite name is different (for example AgencyA.Dept1.Unit3 is a different Agency than the previous one). Moreover the agency-id cannot be omitted in part (i.e., if a TransformationScheme owned by AgencyA.Dept1.Unit2 references an artefact coming from AgencyA.Dept1.Unit3, the specification of the agency-id becomes mandatory and must be complete, without omitting the possibly equal parts like AgencyA.Dept1)
 
 if the Codelist is referenced from a RulesetScheme belonging to the
 agency AG, omitting all the optional parts, the abbreviated reference
-would become simply[18]:
+would become simply[^18]:
 
-CL\_FREQ
+```xml
+CL_FREQ
+```
 
 As for the references to the components, it can be enough to specify the
 component-Id, given that the dataStructure-Id can be omitted. An example
 of non-abbreviated reference, if the data structure is DST1 and the
 component is SECTOR, is the following:
 
+```xml
 'urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=AG:DST1(1.0.0).SECTOR'
+```
 
 The corresponding fully abbreviated reference, if made from a
 TransformationScheme belonging to AG, would become simply:
 
+```xml
 SECTOR
+```
 
 For example, the Transformation for renaming the component SECTOR of the
-Dataflow DF1 into SEC can be written as[19]:
+Dataflow DF1 into SEC can be written as[^19]:
 
-'DFR(1.0.0)' := 'DF1(1.0.0)' \[rename SECTOR to SEC\]
+```xml
+'DFR(1.0.0)' := 'DF1(1.0.0)' [rename SECTOR to SEC]
+```
 
 In the references to the Concepts, which can exist for example in the
 definition of the VTL Rulesets, at least the conceptScheme-id and the
@@ -329,19 +318,25 @@ concept-id must be specified.
 An example of non-abbreviated reference, if the conceptScheme-id is CS1
 and the concept-id is SECTOR, is the following:
 
+```xml
 'urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=AG:CS1(1.0.0).SECTOR'
+```
 
 The corresponding fully abbreviated reference, if made from a
 RulesetScheme belonging to AG, would become simply:
 
+```xml
 CS1(1.0.0).SECTOR
+```
 
 The Codes and in general all the Values can be written without any other
 specification, for example, the transformation to check if the values of
 the measures of the Dataflow DF1 are between 0 and 25000 can be written
 like follows:
 
+```xml
 'DFR(1.0.0)' := between ( 'DF1(1.0.0)', 0, 25000 )
+```
 
 The artefact (Component, Concept, Codelist …) which the Values are
 referred to can be deduced from the context in which the reference is
@@ -380,7 +375,9 @@ In the signature, given the mapping between VTL and SDMX better
 described in the following paragraphs, a reference to a VTL Value Domain
 becomes a reference to a SDMX Codelist, while a reference to a VTL
 Represented Variable becomes a reference to a SDMX Concept, assuming for
-it a definite representation[20].
+it a definite representation[^21].
+
+[^21]: Rulesets of this kind cannot be reused when the referenced Concept has a different representation. 
 
 In general, for referencing SDMX Codelists and Concepts, the conventions
 described in the previous paragraphs apply. In the Ruleset syntax, the
@@ -389,7 +386,9 @@ elements that reference SDMX artefacts are called "valueDomain" and
 "ruleVariable", "condValueDomain" "condVariable" for the Hierarchical
 Rulesets). The syntax of the Ruleset signature allows also to define
 aliases of the elements above, these aliases are valid only within the
-specific Ruleset definition statement and cannot be mapped to SDMX.[21]
+specific Ruleset definition statement and cannot be mapped to SDMX.[^22]
+
+[^22]: See also the section "VTL-DL Rulesets" in the VTL Reference Manual.
 
 In the body of the Rulesets, the Codes and in general all the Values can
 be written without any other specification, because the artefact, which
@@ -424,7 +423,9 @@ In the opposite direction, every time an object calculated by means of
 VTL must be treated as a SDMX object (for example for exchanging it
 through SDMX), there is the need of a SDMX definition of the object, so
 that the SDMX operations can take place. The SDMX definition is needed
-for the VTL objects for which a SDMX use is envisaged[22].
+for the VTL objects for which a SDMX use is envisaged[^23].
+
+[^23]: If a calculated artefact is persistent, it needs a persistent definition, i.e. a SDMX definition in a SDMX environment. In addition,  possible calculated artefact that are not persistent may require a SDMX definition, for example when the result of a non-persistent calculation is disseminated through SDMX tools (like an inquiry tool).
 
 The mapping methods from VTL to SDMX are described in the following
 paragraphs as well, however they do not allow the complete SDMX
@@ -481,7 +482,7 @@ following sections.
 
 ### Mapping from SDMX to VTL data structures
 
-#### Basic Mapping 
+#### Basic Mapping
 
 The main mapping method from SDMX to VTL is called **Basic** mapping.
 This is considered as the default mapping method and is applied unless a
@@ -499,7 +500,6 @@ according to the following table:
 | Measure | Measure |
 | DataAttribute | Attribute |
 
-
 The SDMX DataAttributes, in VTL they are all considered "at data point /
 observation level" (i.e. dependent on all the VTL Identifiers), because
 VTL does not have the SDMX AttributeRelationships, which defines the
@@ -509,7 +509,7 @@ dimension or set or group of dimensions, whole data set).
 With the Basic mapping, one SDMX observation[26] generates one VTL data
 point.
 
-#### Pivot Mapping 
+#### Pivot Mapping
 
 An alternative mapping method from SDMX to VTL is the **Pivot** mapping,
 which makes sense and is different from the Basic method only for the
@@ -551,24 +551,24 @@ this method behaves like the Basic mapping (see the previous paragraph).
 The SDMX structures that contain a MeasureDimension are mapped as
 described below (this mapping is equivalent to a pivoting operation):
 
--   A SDMX simple dimension becomes a VTL (simple) identifier and a SDMX
+- A SDMX simple dimension becomes a VTL (simple) identifier and a SDMX
     TimeDimension becomes a VTL (time) identifier;
 
--   Each possible Code Cj of the SDMX MeasureDimension is mapped to a
+- Each possible Code Cj of the SDMX MeasureDimension is mapped to a
     VTL Measure, having the same name as the SDMX Code (i.e. Cj); the
     VTL Measure Cj is a new VTL component even if the SDMX data
     structure has not such a Component;
 
--   The SDMX MeasureDimension is not mapped to VTL (it disappears in the
+- The SDMX MeasureDimension is not mapped to VTL (it disappears in the
     VTL Data Structure);
 
--   The SDMX Measure is not mapped to VTL as well (it disappears in the
+- The SDMX Measure is not mapped to VTL as well (it disappears in the
     VTL Data Structure);
 
--   An SDMX DataAttribute is mapped in different ways according to its
+- An SDMX DataAttribute is mapped in different ways according to its
     AttributeRelationship:
 
-    -   If, according to the SDMX AttributeRelationship, the values of
+    - If, according to the SDMX AttributeRelationship, the values of
         the DataAttribute do not depend on the values of the
         MeasureDimension, the SDMX DataAttribute becomes a VTL Attribute
         having the same name. This happens if the AttributeRelationship
@@ -577,7 +577,7 @@ described below (this mapping is equivalent to a pivoting operation):
         refers to a set (or a group) of dimensions which does not
         include the MeasureDimension;
 
-    -   Otherwise, if, according to the SDMX AttributeRelationship, the
+    - Otherwise, if, according to the SDMX AttributeRelationship, the
         values of the DataAttribute depend on the MeasureDimension, the
         SDMX DataAttribute is mapped to one VTL Attribute for each
         possible Code of the SDMX MeasureDimension. By default, the
@@ -591,7 +591,7 @@ described below (this mapping is equivalent to a pivoting operation):
         they can be achieved afterwards by renaming the Attributes
         through VTL operators).
 
-    -   Like in the Basic mapping, the resulting VTL Attributes are
+    - Like in the Basic mapping, the resulting VTL Attributes are
         considered as dependent on all the VTL identifiers (i.e. "at
         data point / observation level"), because VTL does not have the
         SDMX notion of Attribute Relationship.
@@ -608,7 +608,6 @@ following:
 | DataAttribute not depending on the MeasureDimension | Attribute |
 | DataAttribute depending on the MeasureDimension | One Attribute for each Code of the SDMX MeasureDimension |
 
-
 Using this mapping method, the components of the data structure can
 change in the conversion from SDMX to VTL and it must be taken into
 account that the VTL statements can reference only the components of the
@@ -617,30 +616,30 @@ resulting VTL data structure.
 At observation / data point level, calling Cj (j=1, … n) the
 j<sup>th</sup> Code of the MeasureDimension:
 
--   The set of SDMX observations having the same values for all the
+- The set of SDMX observations having the same values for all the
     Dimensions except than the MeasureDimension become one multi-measure
     VTL Data Point, having one Measure for each Code Cj of the SDMX
     MeasureDimension;
 
--   The values of the SDMX simple Dimensions, TimeDimension and
+- The values of the SDMX simple Dimensions, TimeDimension and
     DataAttributes not depending on the MeasureDimension (these
     components by definition have always the same values for all the
     observations of the set above) become the values of the
     corresponding VTL (simple) Identifiers, (time) Identifier and
     Attributes.
 
--   The value of the Measure of the SDMX observation belonging to the
+- The value of the Measure of the SDMX observation belonging to the
     set above and having MeasureDimension=Cj becomes the value of the
     VTL Measure Cj
 
--   For the SDMX DataAttributes depending on the MeasureDimension, the
+- For the SDMX DataAttributes depending on the MeasureDimension, the
     value of the DataAttribute DA of the SDMX observation belonging to
     the set above and having MeasureDimension=Cj becomes the value of
     the VTL Attribute DA\_Cj
 
-#### From SDMX DataAttributes to VTL Measures 
+#### From SDMX DataAttributes to VTL Measures
 
--   In some cases, it may happen that the DataAttributes of the SDMX
+- In some cases, it may happen that the DataAttributes of the SDMX
     DataStructure need to be managed as Measures in VTL. Therefore, a
     variant of both the methods above consists in transforming all the
     SDMX DataAttributes in VTL Measures. When DataAttributes are
@@ -660,7 +659,7 @@ DataAttributes need to be managed as VTL Measures.
 
 ### Mapping from VTL to SDMX data structures
 
-#### Basic Mapping 
+#### Basic Mapping
 
 The main mapping method **from VTL to SDMX** is called **Basic** mapping
 as well.
@@ -682,7 +681,6 @@ Mapping table:
 | (Time) Identifier | TimeDimension |
 | Measure | Measure |
 | Attribute | DataAttribute |
-
 
 If the distinction between simple identifier and time identifier is not
 maintained in the VTL environment, the classification between Dimension
@@ -709,7 +707,7 @@ consistency rules. For example, the SDMX DSD must have the
 AttributeRelationship for the DataAttributes, which does not exist in
 VTL.
 
-#### Unpivot Mapping 
+#### Unpivot Mapping
 
 An alternative mapping method from VTL to SDMX is the **Unpivot**
 mapping.
@@ -727,23 +725,23 @@ values of the VTL Measures.
 
 The **unpivot** mapping behaves like follows:
 
--   like in the basic mapping, a VTL (simple) identifier becomes a SDMX
+- like in the basic mapping, a VTL (simple) identifier becomes a SDMX
     Dimension and a VTL (time) identifier becomes a SDMX TimeDimension
     (as said, a measure identifier cannot exist in multi-measure VTL
     structures);
 
--   a MeasureDimension component called "measure\_name" is added to the
+- a MeasureDimension component called "measure\_name" is added to the
     SDMX DataStructure;
 
--   a Measure component called "obs\_value" is added to the SDMX
+- a Measure component called "obs\_value" is added to the SDMX
     DataStructure;
 
--   each VTL Measure is mapped to a Code of the SDMX MeasureDimension
+- each VTL Measure is mapped to a Code of the SDMX MeasureDimension
     having the same name as the VTL Measure (therefore all the VTL
     Measure Components do not originate Components in the SDMX
     DataStructure);
 
--   a VTL Attribute becomes a SDMX DataAttribute having
+- a VTL Attribute becomes a SDMX DataAttribute having
     AttributeRelationship referred to all the SDMX DimensionComponents
     including the TimeDimension and except the MeasureDimension.
 
@@ -757,24 +755,23 @@ following:
 | All Measure Components | <p>MeasureDimension (having one Code for each VTL measure component)<br>&amp;</p><br><p>one Measure</p> |
 | Attribute | DataAttribute depending on all SDMX Dimensions including the<br>TimeDimension and except the MeasureDimension |
 
-
 At observation / data point level:
 
--   a multi-measure VTL Data Point becomes a set of SDMX observations,
+- a multi-measure VTL Data Point becomes a set of SDMX observations,
     one for each VTL Measure;
 
--   the values of the VTL Identifiers become the values of the
+- the values of the VTL Identifiers become the values of the
     corresponding SDMX DimensionComponents, for all the observations of
     the set above;
 
--   the name of the j<sup>th</sup> VTL Measure (e.g. “Cj”) becomes the
+- the name of the j<sup>th</sup> VTL Measure (e.g. “Cj”) becomes the
     Code of the SDMX MeasureDimension of the j<sup>th</sup> observation
     of the set;
 
--   the value of the j<sup>th</sup> VTL Measure becomes the value of the
+- the value of the j<sup>th</sup> VTL Measure becomes the value of the
     SDMX Measure of the j<sup>th</sup> observation of the set;
 
--   the values of the VTL Attributes become the values of the
+- the values of the VTL Attributes become the values of the
     corresponding SDMX DataAttributes (in principle for all the
     observations of the set above).
 
@@ -794,7 +791,7 @@ agency and version; moreover, the SDMX DSD must have the
 AttributeRelationship for the DataAttributes, which does not exist in
 VTL.
 
-#### From VTL Measures to SDMX Data Attributes 
+#### From VTL Measures to SDMX Data Attributes
 
 More than all for the multi-measure VTL structures (having more than one
 Measure Component), it may happen that the Measures of the VTL Data
@@ -817,7 +814,6 @@ The mapping table is the following:
 | Some Measures | Measure |
 | Other Measures | DataAttribute |
 | Attribute | DataAttribute |
-
 
 Even in this case, the resulting SDMX definitions must be compliant with
 the SDMX consistency rules. For example, the SDMX DSD must have the
@@ -850,7 +846,7 @@ Dataflow.
 The VtlMappingScheme is a container for zero or more VtlDataflowMapping
 (it may contain also mappings towards artefacts other than dataflows).
 
-### Mapping dataflow subsets to distinct VTL Data Sets 
+### Mapping dataflow subsets to distinct VTL Data Sets
 
 Until now it has been assumed to map one SMDX Dataflow to one VTL Data
 Set and vice-versa. This mapping one-to-one is not mandatory according
@@ -886,23 +882,23 @@ values for INDICATOR and COUNTRY would be mapped to the same VTL dataset
 
 In practice, this kind mapping is obtained like follows:
 
--   For a given SDMX Dataflow, the user (VTL definer) declares the
+- For a given SDMX Dataflow, the user (VTL definer) declares the
     DimensionComponents on which the mapping will be based, in a given
     order.[30] Following the example above, imagine that the user
     declares the Dimensions INDICATOR and COUNTRY.
 
 <!-- -->
 
--   The VTL Data Set is given a name using a special notation also
+- The VTL Data Set is given a name using a special notation also
     called “ordered concatenation” and composed of the following parts:
 
-    -   The reference to the SDMX Dataflow (expressed according to the
+    - The reference to the SDMX Dataflow (expressed according to the
         rules described in the previous paragraphs, i.e. URN,
         abbreviated URN or another alias); for example DF(1.0.0);
 
-    -   a slash (“/”) as a separator; [31]
+    - a slash (“/”) as a separator; [31]
 
-    -   The reference to a specific part of the SDMX Dataflow above,
+    - The reference to a specific part of the SDMX Dataflow above,
         expressed as the concatenation of the values that the SDMX
         DimensionComponents declared above must have, separated by dots
         (“.”) and written in the order in which these
@@ -1024,10 +1020,10 @@ INDICATOR, and COUNTRY and that such a programmer finds it convenient to
 calculate separately the parts of DF2(1.0.0) that have different
 combinations of values for INDICATOR and COUNTRY:
 
--   each part is calculated as a VTL derived Data Set, result of a
+- each part is calculated as a VTL derived Data Set, result of a
     dedicated VTL Transformation; [36]
 
--   the data structure of all these VTL Data Sets has the TIME\_PERIOD
+- the data structure of all these VTL Data Sets has the TIME\_PERIOD
     identifier and does not have the INDICATOR and COUNTRY
     identifiers.[37]
 
@@ -1126,7 +1122,7 @@ step consists in calculating other (non-persistent) VTL datasets (in the
 example DF2bis\_GDPPERCAPITA\_USA and so on) by adding the identifiers
 INDICATOR and COUNTRY with the desired values (*INDICATORvalue* and
 *COUNTRYvalue)*. Finally, all these non-persistent Data Sets are united
-and give the final result DF2(1.0)[40], which can be mapped one-to-one
+and give the final result DF2[1.0](40), which can be mapped one-to-one
 to the homonymous SDMX Dataflow having the dimension components
 TIME\_PERIOD, INDICATOR and COUNTRY.
 
@@ -1316,7 +1312,7 @@ SDMX artefact (or part of it). The values of the VTL result must be
 converted into the desired (SDMX) external representations (data types)
 of the SDMX artefact.
 
-### Mapping SDMX data types to VTL basic scalar types 
+### Mapping SDMX data types to VTL basic scalar types
 
 The following table describes the default mapping for converting from
 the SDMX data types to the VTL basic scalar types.
@@ -1368,7 +1364,6 @@ the SDMX data types to the VTL basic scalar types.
 | DataSetReference | Metadata type – not applicable |
 |  |  |
 
-
 Figure 14 – Mappings from SDMX data types to VTL Basic Scalar Types
 
 When VTL takes in input SDMX artefacts, it is assumed that a type
@@ -1379,7 +1374,7 @@ applying to it the VTL type conversion features (see the implicit and
 explicit type conversion and the "cast" operator in the VTL Reference
 Manual).
 
-### Mapping VTL basic scalar types to SDMX data types 
+### Mapping VTL basic scalar types to SDMX data types
 
 The following table describes the default conversion from the VTL basic
 scalar types to the SDMX data types .
@@ -1394,7 +1389,6 @@ scalar types to the SDMX data types .
 | time_period | ReportingTimePeriod (StandardReportingPeriod) | <p> YYYY-Pppp</p><br><p>(according to SDMX )</p> |
 | Duration | Duration | Like XML (xs:duration) PnYnMnDTnHnMnS |
 | Boolean | Boolean | Like XML (xs:boolean) with the values "true" or "false" |
-
 
 Figure 14 – Mappings from SDMX data types to VTL Basic Scalar Types
 
@@ -1458,7 +1452,6 @@ special characters as described in the following table.
 | \ | prefix for the special characters that must appear in the mask |
 | N | fixed number of digits used in the preceding textual representation<br>of the month or the day |
 |  |  |
-
 
 The default conversion, either standard or customized, can be used to
 deduce automatically the representation of the components of the result

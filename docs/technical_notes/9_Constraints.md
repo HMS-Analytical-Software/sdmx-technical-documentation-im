@@ -5,26 +5,17 @@
 A Constraint is a Maintainable Artefact that can be associated to one or
 more of:
 
--   Data Structure Definition
-
--   Metadata Structure Definition
-
--   Dataflow
-
--   Metadataflow
-
--   Provision Agreement
-
--   Metadata Provision Agreement
-
--   Data Provider or Metadata Provider (this is restricted to a Release
+- Data Structure Definition
+- Metadata Structure Definition
+- Dataflow
+- Metadataflow
+- Provision Agreement
+- Metadata Provision Agreement
+- Data Provider or Metadata Provider (this is restricted to a Release
     Calendar Constraint)
-
--   Simple or Queryable Data Sources
-
--   Dataset
-
--   Metadataset
+- Simple or Queryable Data Sources
+- Dataset
+- Metadataset
 
 Note that regardless of the Artefact to which the Constraint is
 associated, it is constraining the contents of code lists in the DSD to
@@ -38,16 +29,14 @@ Metadata/Data Provider.
 
 The Constraint can be of one of two types:
 
--   Data constraint
-
--   Metadata constraint
+- Data constraint
+- Metadata constraint
 
 The Data Constraint may serve two different perspectives, depending on
 the way the latter is retrieved. These are:
 
--   Allowed constraint
-
--   Actual constraint
+- Allowed constraint
+- Actual constraint
 
 The former (allowed – also valid for Metadata Constraint) is specified
 by a data or metadata provider or consumer for sharing the allowed data
@@ -59,17 +48,14 @@ data).
 For Actual Data Constraints, there a few characteristics that are worth
 noting:
 
--   They can only be retrieved by the availability requests (as
+- They can only be retrieved by the availability requests (as
     specified in the REST API).
-
--   They depend on the data available in an SDMX Web Service and thus
+- They depend on the data available in an SDMX Web Service and thus
     they can only be dynamically generated according to that data.
-
--   Although they are Maintainable Artefacts, they cannot change
+- Although they are Maintainable Artefacts, they cannot change
     independently of data; thus, they cannot be versioned (they are
     non-versioned, as explained in section 14).
-
--   Their identifier may also be dynamically generated and thus there is
+- Their identifier may also be dynamically generated and thus there is
     no REST resource based on their identification.
 
 ## Rules for a Constraint
@@ -81,47 +67,35 @@ terms of the component values or the keys.
 
 In terms of data the components are:
 
--   Dimension
-
--   Time Dimension
-
--   Data Attribute
-
--   Measure
-
--   Metadata Attribute
-
--   DataKeySets: the keys are the content of the KeyDescriptor – i.e.,
+- Dimension
+- Time Dimension
+- Data Attribute
+- Measure
+- Metadata Attribute
+- DataKeySets: the keys are the content of the KeyDescriptor – i.e.,
     the series keys composed, for each key, by a value for each
     Dimension.
 
 In terms of reference metadata the components are:
 
--   Metadata Attribute
+- Metadata Attribute
 
 For a Constraint based on a DSD the Constraint can reference one or more
 of:
 
--   Data Structure Definition
-
--   Dataflow
-
--   Provision Agreement
-
--   Data Provider
+- Data Structure Definition
+- Dataflow
+- Provision Agreement
+- Data Provider
 
 For a Constraint based on an MSD the Constraint can reference one or
 more of:
 
--   Metadata Structure Definition
-
--   Metadataflow
-
--   Metadata Provision Agreement
-
--   Metadata Provider
-
--   Metadata Set
+- Metadata Structure Definition
+- Metadataflow
+- Metadata Provision Agreement
+- Metadata Provider
+- Metadata Set
 
 Furthermore, there can be more than one Constraint specified for a
 specific object e.g., more than one Constraint for a specific DSD.
@@ -138,18 +112,15 @@ DSD), subject to the following restrictions:
 
 A Constraint can contain multiple Member Selections (e.g., Dimensions).
 
--   A specific Member Selection (e.g., Dimension FREQ) can only be
+- A specific Member Selection (e.g., Dimension FREQ) can only be
     contained in one Cube Region for any one attached object (e.g., a
     specific DSD or specific Dataflow).
-
--   Component values within a Member Selection may define a validity
+- Component values within a Member Selection may define a validity
     period. Otherwise, the value is valid for the whole validity of the
     Cube Region.
-
--   For partial reference resolution purposes (as per the SDMX REST
+- For partial reference resolution purposes (as per the SDMX REST
     API), the latest non-draft Constraint must be considered.
-
--   A Member Selection may include wildcarding of values (using
+- A Member Selection may include wildcarding of values (using
     character ‘%’ to represent zero or more occurrences of any
     character), as well as cascading through hierarchic structures
     (e.g., parents in Codelist), or localised values (e.g., text for
@@ -157,8 +128,7 @@ A Constraint can contain multiple Member Selections (e.g., Dimensions).
     Cascading values are mutual exclusive to localised values, as the
     former refer to coded values, while the latter refer to uncoded
     values.
-
--   Any values included in a Member Selection for Components with an
+- Any values included in a Member Selection for Components with an
     array data type (i.e., Measures, Attributes or Metadata Attributes),
     will be applied as single values and will not be assessed combined
     with other values to match all possible array values. For example,
@@ -191,11 +161,9 @@ Finally, a validity period may be specified per Key.
 There are three levels of constraint attachment for which these
 inheritance rules apply:
 
--   DSD/MSD – top level
-
-    -   Dataflow/Metadataflow – second level
-
-        -   Provision Agreement – third level
+- DSD/MSD – top level
+    - Dataflow/Metadataflow – second level
+        - Provision Agreement – third level
 
 Note that these rules do not apply to the Simple Datasource or Queryable
 Datasource; the Constraint(s) attached to these artefacts are resolved
@@ -230,22 +198,19 @@ It is not necessary to have a Constraint on the higher-level artefact
 (e.g., DSD referenced by the Dataflow), but if there is such a
 Constraint at the higher level(s) then:
 
--   The lower-level Constraint cannot be less restrictive than the
+- The lower-level Constraint cannot be less restrictive than the
     Constraint specified for the same Member Selection (e.g. Dimension)
     at the next higher level, which constrains that Member Selection.
     For example, if the Dimension FREQ is constrained to A, Q in a DSD,
     then the Constraint at the Dataflow or Provision Agreement cannot be
     A, Q, M or even just M – it can only further constrain A, Q.
-
--   The Constraint at the lower level for any one Member Selection
+- The Constraint at the lower level for any one Member Selection
     further constrains the content for the same Member Selection at the
     higher level(s).
-
--   Any Member Selection, which is not referenced in a Constraint, is
+- Any Member Selection, which is not referenced in a Constraint, is
     deemed to be constrained according to the Constraint specified at
     the next higher level which constraints that Member Selection.
-
--   If there is a conflict when resolving the Constraint in terms of a
+- If there is a conflict when resolving the Constraint in terms of a
     lower-level Constraint being less restrictive than a higher-level
     Constraint, then the Constraint at the higher-level is used.
 
@@ -260,17 +225,14 @@ It is not necessary to have a Constraint on the higher-level artefact
 (e.g., DSD referenced by the Dataflow), but if there is such a
 Constraint at the higher level(s) then:
 
--   The lower-level Constraint cannot be less restrictive than the
+- The lower-level Constraint cannot be less restrictive than the
     Constraint specified at the higher level.
-
--   The Constraint at the lower level for any one Member Selection
+- The Constraint at the lower level for any one Member Selection
     further constrains the keys specified at the higher level(s).
-
--   Any Member Selection, which is not referenced in a Constraint, is
+- Any Member Selection, which is not referenced in a Constraint, is
     deemed to be constrained according to the Constraint specified at
     the next higher level which constraints that Member Selection.
-
--   If there is a conflict when resolving the keys in the Constraint at
+- If there is a conflict when resolving the keys in the Constraint at
     two levels, in terms of a lower-level constraint being less
     restrictive than a higher-level Constraint, then the offending keys
     specified at the lower level are not deemed part of the Constraint.
@@ -283,18 +245,14 @@ The following logic explains how the inheritance mechanism works. Note
 that this is conceptual logic and actual systems may differ in the way
 this is implemented.
 
-1.  Determine all possible keys that are valid at the higher level.
-
-2.  These keys are deemed to be inherited by the lower-level constrained
+1. Determine all possible keys that are valid at the higher level.
+2. These keys are deemed to be inherited by the lower-level constrained
     object, subject to the Constraints specified at the lower level.
-
-3.  Determine all possible keys that are possible using the Constraints
+3. Determine all possible keys that are possible using the Constraints
     specified at the lower level.
-
-4.  At the lower level inherit all keys that match with the higher-level
+4. At the lower level inherit all keys that match with the higher-level
     Constraint.
-
-5.  If there are keys in the lower-level Constraint that are not
+5. If there are keys in the lower-level Constraint that are not
     inherited then the key is invalid (i.e., it is less restrictive).
 
 ### Constraints Examples
@@ -305,159 +263,144 @@ The following scenario is used.
 
 A DSD contains the following Dimensions:
 
--   GEO – Geography
-
--   SEX – Sex
-
--   AGE – Age
-
--   CAS – Current Activity Status
+- GEO – Geography
+- SEX – Sex
+- AGE – Age
+- CAS – Current Activity Status
 
 In the DSD, common code lists are used and the requirement is to
 restrict these at various levels to specify the actual code that are
 valid for the object to which the Constraint is attached.
 
 ![](media/image14.png)
-
+///caption
 Figure 20: Example Scenario for Constraints
+///
 
 Constraints are declared as follows:
 
 ![](media/image15.png)
-
+///caption
 Figure 21: Example Constraints
+///
 
 Notes:
 
 AGE is constrained for the DSD and is further restricted for the
 Dataflow CENSUS\_CUBE1.
 
--   The same Constraint applies to both Provision Agreements.
+- The same Constraint applies to both Provision Agreements.
 
 The cascade rules elaborated above result as follows:
 
 DSD
 
--   Constrained by eliminating code 001 from the code list for the AGE
+- Constrained by eliminating code 001 from the code list for the AGE
     Dimension.
 
 Dataflow CENSUS\_CUBE1
 
--   Constrained by restricting the code list for the AGE Dimension to
+- Constrained by restricting the code list for the AGE Dimension to
     codes 002 and 003 (note that this is a more restrictive constraint
     than that declared for the DSD which specifies all codes except code
     001).
 
-    -   Restricts the CAS codes to 003 and 004.
+    - Restricts the CAS codes to 003 and 004.
 
 Dataflow CENSUS\_CUBE2
 
--   Restricts the code list for the CAS Dimension to codes TOT and NAP.
-
-    -   Inherits the AGE constraint applied at the level of the DSD.
+- Restricts the code list for the CAS Dimension to codes TOT and NAP.
+    - Inherits the AGE constraint applied at the level of the DSD.
 
 Provision Agreement CENSUS\_CUBE1\_IT
 
--   Restricts the codes for the GEO Dimension to IT and its children.
-
-    -   Inherits the constraints from Dataflow CENSUS\_CUBE1 for the AGE
+- Restricts the codes for the GEO Dimension to IT and its children.
+    - Inherits the constraints from Dataflow CENSUS\_CUBE1 for the AGE
         and CAS Dimensions.
 
 Provision Agreement CENSUS\_CUBE2\_IT
 
--   Restricts the codes for the GEO Dimension to IT and its children.
-
-    -   Inherits the constraints from Dataflow CENSUS\_CUBE2 for the CAS
+- Restricts the codes for the GEO Dimension to IT and its children.
+    - Inherits the constraints from Dataflow CENSUS\_CUBE2 for the CAS
         Dimension.
-
-    -   Inherits the AGE constraint applied at the level of the DSD.
+    - Inherits the AGE constraint applied at the level of the DSD.
 
 The Constraints are defined as follows:
 
 DSD Constraint
 
-**&lt;str:DataConstraint agencyID="SDMX" id="DATA\_CONSTRAINT"
-version="1.0.0-draft" type="Allowed"&gt;  
-&lt;com:Name xml:lang="en"&gt;SDMX 3.0 Data Constraint
-sample&lt;/com:Name&gt;  
-&lt;str:ConstraintAttachment&gt;  
-&lt;str:DataStructure&gt;urn:sdmx:org.sdmx.infomodel.datastructure.**
-
-**DataStructure=CENSUSHUB:CENSUS(1.0.0)&lt;/str:DataStructure&gt;  
-&lt;/str:ConstraintAttachment&gt;  
-&lt;str:CubeRegion include="true"&gt;  
-&lt;!-- the ability to exclude values is illustrated – i.e., all values
-valid except this one --&gt;  
-&lt;com:KeyValue id="AGE" include="false"&gt;  
-&lt;com:Value&gt;001&lt;/com:Value&gt;  
-&lt;/com:KeyValue&gt;  
-&lt;/str:CubeRegion&gt;  
-&lt;/str:DataConstraint&gt;**
+```xml
+<str:DataConstraint agencyID="SDMX" id="DATA_CONSTRAINT" version="1.0.0-draft" type="Allowed">
+  <com:Name xml:lang="en">SDMX 3.0 Data Constraint sample</com:Name>
+  <str:ConstraintAttachment>
+    <str:DataStructure>urn:sdmx:org.sdmx.infomodel.datastructure.
+      DataStructure=CENSUSHUB:CENSUS(1.0.0)</str:DataStructure>
+  </str:ConstraintAttachment>
+  <str:CubeRegion include="true">
+    <!-- the ability to exclude values is illustrated – i.e., all values valid except this one -->
+    <com:KeyValue id="AGE" include="false">
+      <com:Value>001</com:Value>
+    </com:KeyValue>
+  </str:CubeRegion>
+</str:DataConstraint>
+```
 
 Dataflow Constraints
 
-**&lt;str:DataConstraint agencyID="SDMX" id="DATA\_CONSTRAINT\_2"
-version="1.0.0-draft" type="Allowed"&gt;  
-&lt;com:Name xml:lang="en"&gt;SDMX 3.0 Data Constraint
-sample&lt;/com:Name&gt;  
-&lt;str:ConstraintAttachment&gt;  
-&lt;str:Dataflow&gt;urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=**
+```xml
+<str:DataConstraint agencyID="SDMX" id="DATA_CONSTRAINT_2" version="1.0.0-draft" type="Allowed">
+  <com:Name xml:lang="en">SDMX 3.0 Data Constraint sample</com:Name>
+  <str:ConstraintAttachment>
+    <str:Dataflow>urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=
+         CENSUSHUB:CENSUS_CUBE1(1.0.0)</str:Dataflow>
+  </str:ConstraintAttachment>
+  <str:CubeRegion include="true">
+    <com:KeyValue id="AGE" include="true">
+      <com:Value>002</com:Value>
+      <com:Value>003</com:Value>
+    </com:KeyValue>
+    <com:KeyValue id="CAS">
+      <com:Value>003</com:Value>
+      <com:Value>004</com:Value>
+    </com:KeyValue>
+  </str:CubeRegion>
+</str:DataConstraint>
 
-**CENSUSHUB:CENSUS\_CUBE1(1.0.0)&lt;/str:Dataflow&gt;  
-&lt;/str:ConstraintAttachment&gt;  
-&lt;str:CubeRegion include="true"&gt;  
-&lt;com:KeyValue id="AGE" include="true"&gt;  
-&lt;com:Value&gt;002&lt;/com:Value&gt;  
-&lt;com:Value&gt;003&lt;/com:Value&gt;  
-&lt;/com:KeyValue&gt;  
-&lt;com:KeyValue id="CAS"&gt;  
-&lt;com:Value&gt;003&lt;/com:Value&gt;  
-&lt;com:Value&gt;004&lt;/com:Value&gt;  
-&lt;/com:KeyValue&gt;  
-&lt;/str:CubeRegion&gt;  
-&lt;/str:DataConstraint&gt;  
-  
-&lt;str:DataConstraint agencyID="SDMX" id="DATA\_CONSTRAINT\_3"
-version="1.0.0-draft" type="Allowed"&gt;  
-&lt;com:Name xml:lang="en"&gt;SDMX 3.0 Data Constraint
-sample&lt;/com:Name&gt;  
-&lt;str:ConstraintAttachment&gt;  
-&lt;str:Dataflow&gt;urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=**
-
-**CENSUSHUB:CENSUS\_CUBE2(1.0.0)&lt;/str:Dataflow&gt;  
-&lt;/str:ConstraintAttachment&gt;  
-&lt;str:CubeRegion include="true"&gt;  
-&lt;com:KeyValue id="CAS" include="true"&gt;  
-&lt;com:Value&gt;TOT&lt;/com:Value&gt;  
-&lt;com:Value&gt;NAP&lt;/com:Value&gt;  
-&lt;/com:KeyValue&gt;  
-&lt;/str:CubeRegion&gt;  
-&lt;/str:DataConstraint&gt;**
+<str:DataConstraint agencyID="SDMX" id="DATA_CONSTRAINT_3" version="1.0.0-draft" type="Allowed">
+  <com:Name xml:lang="en">SDMX 3.0 Data Constraint sample</com:Name>
+  <str:ConstraintAttachment>
+    <str:Dataflow>urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=
+         CENSUSHUB:CENSUS_CUBE2(1.0.0)</str:Dataflow>
+  </str:ConstraintAttachment>
+  <str:CubeRegion include="true">
+    <com:KeyValue id="CAS" include="true">
+      <com:Value>TOT</com:Value>
+      <com:Value>NAP</com:Value>
+    </com:KeyValue>
+  </str:CubeRegion>
+</str:DataConstraint>
+```
 
 Provision Agreement Constraint
 
-**&lt;str:DataConstraint agencyID="SDMX" id="DATA\_CONSTRAINT\_4"
-version="1.0.0-draft" type="Allowed"&gt;  
-&lt;com:Name xml:lang="en"&gt;SDMX 3.0 Data Constraint
-sample&lt;/com:Name&gt;  
-&lt;str:ConstraintAttachment&gt;  
-&lt;str:ProvisionAgreement&gt;urn:sdmx:org.sdmx.infomodel.registry.**
-
-**ProvisionAgreement=CENSUSHUB:CENSUS\_CUBE1\_IT(1.0.0)**
-
-**&lt;/str:ProvisionAgreement&gt;  
-&lt;str:ProvisionAgreement&gt;urn:sdmx:org.sdmx.infomodel.registry.**
-
-**ProvisionAgreement=CENSUSHUB:CENSUS\_CUBE2\_IT(1.0.0)**
-
-**&lt;/str:ProvisionAgreement&gt;  
-&lt;/str:ConstraintAttachment&gt;  
-&lt;str:CubeRegion include="true"&gt;  
-&lt;com:KeyValue id="GEO" include="true"&gt;  
-&lt;com:Value cascadeValues="true"&gt;IT&lt;/com:Value&gt;  
-&lt;/com:KeyValue&gt;  
-&lt;/str:CubeRegion&gt;  
-&lt;/str:DataConstraint**
+```xml
+<str:DataConstraint agencyID="SDMX" id="DATA_CONSTRAINT_4" version="1.0.0-draft" type="Allowed">
+  <com:Name xml:lang="en">SDMX 3.0 Data Constraint sample</com:Name>
+  <str:ConstraintAttachment>
+    <str:ProvisionAgreement>urn:sdmx:org.sdmx.infomodel.registry.
+      ProvisionAgreement=CENSUSHUB:CENSUS_CUBE1_IT(1.0.0)
+    </str:ProvisionAgreement>
+    <str:ProvisionAgreement>urn:sdmx:org.sdmx.infomodel.registry.
+      ProvisionAgreement=CENSUSHUB:CENSUS_CUBE2_IT(1.0.0)
+    </str:ProvisionAgreement>
+  </str:ConstraintAttachment>
+  <str:CubeRegion include="true">
+    <com:KeyValue id="GEO" include="true">
+      <com:Value cascadeValues="true">IT</com:Value>
+    </com:KeyValue>
+  </str:CubeRegion>
+</str:DataConstraint
+```
 
 #### Combination of Constraints
 
@@ -479,15 +422,13 @@ Let’s assume a DSD with the following Components:
 | Measure | MULTISELECT |
 | Measure | CHOICE |
 
-
 On the above, let’s assume the following use cases with their
 constraining requirements:
 
 ##### Use Case 1: A Constraint on allowed values for some Dimensions
 
-R1: Allow monthly and quarterly data
-
-R2: Allow Mexico for vis-à-vis country
+- R1: Allow monthly and quarterly data
+- R2: Allow Mexico for vis-à-vis country
 
 This is expressed with the following CubeRegion:
 
@@ -495,29 +436,23 @@ This is expressed with the following CubeRegion:
 | :--- | :--- |
 | VIS_CTY | MX |
 
-
 ##### Use Case 2: A Constraint on allowed combinations for some Dimensions
 
-R1: Allow monthly data for Germany
-
-R2: Allow quarterly data for Mexico
+- R1: Allow monthly data for Germany
+- R2: Allow quarterly data for Mexico
 
 This is expressed with the following DataKeySet:
 
 | Key1 | FREQ | M |
 | :--- | :--- | :--- |
-|
 | Key2 | FREQ | Q |
 | VIS_CTY | MX |
 
-
 ##### Use Case 3: A Constraint on allowed values for some Dimensions combined with allowed values for some Attributes
 
-R1: Allow monthly and quarterly data
-
-R2: Allow Mexico for vis-à-vis country
-
-R3: Allow present for status
+- R1: Allow monthly and quarterly data
+- R2: Allow Mexico for vis-à-vis country
+- R3: Allow present for status
 
 This may be expressed with the following CubeRegion:
 
@@ -526,42 +461,32 @@ This may be expressed with the following CubeRegion:
 | VIS_CTY | MX |
 | OBS_STATUS | A |
 
-
 ##### Use Case 4: A Constraint on allowed combinations for some Dimensions combined with specific Attribute values
 
-R1: Allow monthly data, for Germany, with unit euro
-
-R2: Allow quarterly data, for Mexico, with unit usd
+- R1: Allow monthly data, for Germany, with unit euro
+- R2: Allow quarterly data, for Mexico, with unit usd
 
 This is may be expressed with the following DataKeySet:
 
 | Key1 | FREQ | M |
 | :--- | :--- | :--- |
-|
-|
 | Key2 | FREQ | Q |
 | VIS_CTY | MX |
 | UNIT | USD |
 
-
 ##### Use Case 5: A Constraint on allowed values for some Dimensions together with some combination of Dimension values
 
-R1: For annually and quarterly data, for Mexico and Germany, only A
-status is allowed
-
-R2: For monthly data, for Mexico and Germany, only F status is allowed
+- R1: For annually and quarterly data, for Mexico and Germany, only A status is allowed
+- R2: For monthly data, for Mexico and Germany, only F status is allowed
 
 Considering the above examples, the following CubeRegions would be
 created:
 
 | CubeRegion1 | FREQ | Q, A |
 | :--- | :--- | :--- |
-|
-|
 | CubeRegion2 | FREQ | M |
 | VIS_CTY | MX, DE |
 | OBS_STATUS | F |
-
 
 The problem with this approach is that according to the business rule
 for Constraints, only one should be specified per Component. Thus, if a
@@ -580,14 +505,12 @@ DSD CubeRegion:
 | VIS_CTY | MX, DE |
 | OBS_STATUS | A, F |
 
-
 Dataflow1 CubeRegion:
 
 | FREQ | Q, A |
 | :--- | :--- |
 | VIS_CTY | MX, DE |
 | OBS_STATUS | F |
-
 
 Dataflow2 CubeRegion:
 
@@ -596,27 +519,19 @@ Dataflow2 CubeRegion:
 | VIS_CTY | MX, DE |
 | OBS_STATUS | A |
 
-
 ##### Use case 6: A Constraint on allowed values for some Dimensions combined with allowed values for Measures
 
-R1: Allow monthly data, for Germany, with unit euro, and measure choice
-is 'A'
-
-R2: Allow quarterly data, for Mexico, with unit usd, and measure choice
-is 'B'
+- R1: Allow monthly data, for Germany, with unit euro, and measure choice is 'A'
+- R2: Allow quarterly data, for Mexico, with unit usd, and measure choice is 'B'
 
 This is may be expressed with the following DataKeySet:
 
 | Key1 | FREQ | M |
 | :--- | :--- | :--- |
-|
-|
-|
 | Key2 | FREQ | Q |
 | VIS_CTY | MX |
 | UNIT | USD |
 | CHOICE | B |
-
 
 ##### Use Case 7: A Constraint with wildcards for Codes and removePrefix property
 
@@ -624,11 +539,9 @@ For this example, we assume that the VIS\_CTY representation has been
 prefixed with prefix ‘AREA\_’. In this Constraint, we need to remove the
 prefix.
 
-R1: Allow monthly and quarterly data
-
-R2: Allow vis-à-vis countries that start with M
-
-R3: Remove the prefix ‘AREA\_’
+- R1: Allow monthly and quarterly data
+- R2: Allow vis-à-vis countries that start with M
+- R3: Remove the prefix ‘AREA\_’
 
 This may be expressed with the following CubeRegion:
 
@@ -636,15 +549,11 @@ This may be expressed with the following CubeRegion:
 | :--- | :--- |
 | VIS_CTY (removePrefix=’AREA_’) | M% |
 
-
 ##### Use Case 8: A Constraint with multilingual support on Attributes
 
-R1: Allow monthly and quarterly data
-
-R2: Allow Mexico for vis-à-vis country
-
-R3: Allow a comment, in English, which includes the term adjusted for
-status
+- R1: Allow monthly and quarterly data
+- R2: Allow Mexico for vis-à-vis country
+- R3: Allow a comment, in English, which includes the term adjusted for status
 
 This may be expressed with the following CubeRegion:
 
@@ -653,14 +562,11 @@ This may be expressed with the following CubeRegion:
 | VIS_CTY | MX |
 | COMMENT (lang=’en’) | %adjusted% |
 
-
 ##### Use Case 9: A Constraint on allowed values for Dimensions combined with allowed values for Metadata Attributes
 
-R1: Allow monthly and quarterly data
-
-R2: Allow Mexico for vis-à-vis country
-
-R3: Allow John Doe for contact
+- R1: Allow monthly and quarterly data
+- R2: Allow Mexico for vis-à-vis country
+- R3: Allow John Doe for contact
 
 This may be expressed with the following CubeRegion:
 
@@ -668,7 +574,6 @@ This may be expressed with the following CubeRegion:
 | :--- | :--- |
 | VIS_CTY | MX |
 | CONTACT | John Doe |
-
 
 #### Other constraining terms
 
@@ -682,12 +587,10 @@ metadataset.
 For example, the ReleaseCalendar for Provider BIS, is specified in the
 three following terms:
 
--   Periodicity: how often data should be reported, e.g., monthly
-
--   Offset: the number of days between the 1<sup>st</sup> of January and
+- Periodicity: how often data should be reported, e.g., monthly
+- Offset: the number of days between the 1<sup>st</sup> of January and
     the first release of data, e.g., 10 days
-
--   Tolerance: the maximum allowed of days that data may be considered,
+- Tolerance: the maximum allowed of days that data may be considered,
     without being considered as late, e.g., 5 days
 
 With the above terms, BIS would need to report data between the

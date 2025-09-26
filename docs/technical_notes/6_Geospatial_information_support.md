@@ -8,19 +8,17 @@ features over the Earth using a defined coordinates system.
 
 SDMX can support three different ways for referencing geospatial data:
 
-1.  <u>Indirect Reference to Geospatial Information</u>. Including a
+1. <u>Indirect Reference to Geospatial Information</u>. Including a
     link to an external file containing the geospatial information. This
     is the only backwards compatible approach. Since this representation
     of geospatial information is not included inside the data message,
     the main use case would be connecting dissemination systems for
     making use of external tools, like GIS software.
-
-2.  <u>Geographic Coordinates</u>. Including the coordinates of a
+2. <u>Geographic Coordinates</u>. Including the coordinates of a
     specific geospatial feature as a set of coordinates. This is
     suitable for any statistical information that needs to be
     georeferenced especially for the exchange of microdata.
-
-3.  <u>A Geographic Codelist</u>. Includes a type of Codelist, listing
+3. <u>A Geographic Codelist</u>. Includes a type of Codelist, listing
     predefined geographies that are represented by geospatial
     information. These geographies could be administrative (including
     administrative boundaries or enumeration areas), lines, points, or
@@ -30,7 +28,7 @@ SDMX can support three different ways for referencing geospatial data:
     modellers as it provides a clear way to identify those dimensions
     developing a "Geospatial" role.
 
-## Indirect Reference to Geospatial Information.
+## Indirect Reference to Geospatial Information
 
 This option provides a way to include external references to geospatial
 information through a file containing it. The external content may be
@@ -41,15 +39,13 @@ that can interpret the information in different formats.
 The reference to the external files containing geospatial information is
 made using some recommended SDMX Attributes, with the following content:
 
--   **GEO\_INFO\_TEXT**. A description of the kind of information being
+- **GEO\_INFO\_TEXT**. A description of the kind of information being
     referenced.
-
--   **GEO\_INFO\_URL**. A URL which points to the resource containing
+- **GEO\_INFO\_URL**. A URL which points to the resource containing
     the referred geospatial information. The resource might be a file
     with static geodesic information or a web service providing dynamic
     construction of geometries.
-
--   **GEO\_INFO\_TYPE**. Coded information describing a standard format
+- **GEO\_INFO\_TYPE**. Coded information describing a standard format
     of the file that contains the geospatial information. The format
     types are taken from the list of Format descriptions for Geospatial
     Data managed by the US Library of the Congress
@@ -58,13 +54,12 @@ made using some recommended SDMX Attributes, with the following content:
     code list (**CL\_GEO\_FORMATS**). Examples of the codes contained in
     the document are:
 
-| <ul><br><li><p>Code</p></li><br></ul> | <ul><br><li><p>Description</p></li><br></ul> |
-| :--- | :--- |
-| <ul><br><li><p><strong>GML</strong></p></li><br></ul> | <ul><br><li><p>Geography Markup Language</p></li><br></ul> |
-| <ul><br><li><p><strong>GeoTIFF</strong></p></li><br></ul> | <ul><br><li><p>GeoTIFF</p></li><br></ul> |
-| <ul><br><li><p><strong>KML_2_2</strong></p></li><br></ul> | <ul><br><li><p>KML Version 2.2</p></li><br></ul> |
-| <ul><br><li><p><strong>GEOJSON_1_1</strong></p></li><br></ul> | <ul><br><li><p>GeoJSON Version 1.1</p></li><br></ul> |
-
+    | **Code**          | **Description**              |
+    |--------------------|------------------------------|
+    | **GML**           | Geography Markup Language    |
+    | **GeoTIFF**       | GeoTIFF                      |
+    | **KML_2_2**       | KML Version 2.2             |
+    | **GEOJSON_1_1**   | GeoJSON Version 1.1         |
 
 Depending on the intended use, these attributes may be attached at the
 dataflow level, the series level or the observation level.
@@ -107,33 +102,30 @@ capital.
 The components that conform to the structure of the
 GeospatialInformation type are:
 
--   X\_COORDINATE: The horizontal (longitude) value of a pair of
+- X\_COORDINATE: The horizontal (longitude) value of a pair of
     coordinates expressed in the Coordinate Reference System (CRS),
     mandatory.
-
--   Y\_COORDINATE**:** The vertical value (latitude) of a pair of
+- Y\_COORDINATE**:** The vertical value (latitude) of a pair of
     coordinates expressed in the CRS units, mandatory.
-
--   ALT: The height (altitude) from the reference surface is expressed
+- ALT: The height (altitude) from the reference surface is expressed
     in meters, optional.
-
--   CRS: The code of the Coordinate Reference System is used to
+- CRS: The code of the Coordinate Reference System is used to
     reference the coordinates in the flow, optional.
 
-> The code of the CRS will be as it appears in the EPSG Geodetic
-> Parameter Registry (<http://www.epsg-registry.org/>) maintained by the
-> International Association of Oil and Gas Producers. If this element is
-> omitted, by default, the CRS will be the World Geodetic System 1984
-> (WGS 84, EPSG:4326).
+    The code of the CRS will be as it appears in the EPSG Geodetic
+    Parameter Registry (<http://www.epsg-registry.org/>) maintained by the
+    International Association of Oil and Gas Producers. If this element is
+    omitted, by default, the CRS will be the World Geodetic System 1984
+    (WGS 84, EPSG:4326).
 
--   PRECISION: Precision of the coordinates, expressing the possible
+- PRECISION: Precision of the coordinates, expressing the possible
     deviation in meters from the exact geodesic point, optional.
 
-> This component is only allowed if the CRS is specified too. If
-> omitted, it will be interpreted as limited it to the expected
-> measurement accuracy (e. g. a standard GPS has an accuracy of ~ 10m).
+    This component is only allowed if the CRS is specified too. If
+    omitted, it will be interpreted as limited it to the expected
+    measurement accuracy (e. g. a standard GPS has an accuracy of ~ 10m).
 
--   GEO\_DESCRIPTION: Text for additional information about the place,
+- GEO\_DESCRIPTION: Text for additional information about the place,
     geographical feature, or set of geographical features, optional.
 
 Geographical features (GEO\_FEATURES) are collections of geographical
@@ -144,49 +136,44 @@ schools, and the like. They are represented in the following way:
 
 **(GEO\_FEATURE, GEO\_FEATURE): GEO\_DESCRIPTION**
 
--   GEO\_FEATURE represents a set of points defining a feature following
+- GEO\_FEATURE represents a set of points defining a feature following
     the ISO/IEC 13249-3:2016 standard to conform Well-known Text (WKT)
     for the representation of geometries in a format defined in the
     following way:
 
-> **GEOMETY\_TYPE (GEOMETRY\_REP)**
+    **GEOMETRY\_TYPE (GEOMETRY\_REP)**
 
--   GEOMETRY\_TYPE: A string with a closed vocabulary defining the type
+- GEOMETRY\_TYPE: A string with a closed vocabulary defining the type
     of the geometry that represents a geographical component of the
     GEO\_FEATURES collection, mandatory.
 
-> Three types are allowed:
+    Three types are allowed:
 
-1.  **Point**, a specific geodesic point, like the centroid of a city or
-    a hospital. It is represented with the string “POINT”
+    1. **Point**, a specific geodesic point, like the centroid of a city or
+        a hospital. It is represented with the string “POINT”
+    2. **Line**, a feature defining a line like a road, a river, or
+        similar. It is represented with the string “LINESTRING”
+    3. **Area**, a polygon defining a closed area. It is represented with
+        the string “POLYGON”
 
-2.  **Line**, a feature defining a line like a road, a river, or
-    similar. It is represented with the string “LINESTRING”
+    If the GEOMETRY\_REP is going to be including the height (ALT)
+    component, a “Z” must be added after the string qualifying the
+    GEOMETRY\_TYPE. In this way, we will have: “POINT Z”, “LINESTRING Z”
+    and “POLYGON Z”
+    
+    Other feature types (e.g. Triangular irregular networks, “TIN”) are
+    not supported yet directly, except grids that are detailed in 7.3.
 
-3.  **Area**, a polygon defining a closed area. It is represented with
-    the string “POLYGON”
-
-> If the GEOMETRY\_REP is going to be including the height (ALT)
-> component, a “Z” must be added after the string qualifying the
-> GEOMETRY\_TYPE. In this way, we will have: “POINT Z”, “LINESTRING Z”
-> and “POLYGON Z”
->
-> Other feature types (e.g. Triangular irregular networks, “TIN”) are
-> not supported yet directly, except grids that are detailed in 7.3.
-
--   GEOMETRY\_REP: Representation of each of the types The way to
+- GEOMETRY\_REP: Representation of each of the types The way to
     represent each GEO\_FEATURE\_TYPE will be:
-
-    -   A point (POINT): “COORDINATES”
-
-    -   A line (LINESTRING): “COORDINATES, COORDINATES, …”
-
-    -   An area (POLYGON): “(COORDINATES, COORDINATES, …), (COORDINATES,
+    - A point (POINT): “COORDINATES”
+    - A line (LINESTRING): “COORDINATES, COORDINATES, …”
+    - An area (POLYGON): “(COORDINATES, COORDINATES, …), (COORDINATES,
         COORDINATES, …)”
 
 Where:
 
--   COORDINATES: Represents an individual set of coordinates composed by
+- COORDINATES: Represents an individual set of coordinates composed by
     the X\_COORDINATE (X), Y\_COORDINATE (Y), and ALT (Z) in the
     following way “X Y Z” or “X Y” defining a single point of the
     polygon. Altitude is to be reported in meters.
@@ -194,40 +181,37 @@ Where:
 In an expanded way, GEO\_FEATURE may be represented in the following
 ways:
 
-**POINT (X\_COORDINATE Y\_COORDINATE): GEO\_DESCRIPTION**
 
-**POINT Z (X\_COORDINATE Y\_COORDINATE ALT): GEO\_DESCRIPTION**
-
-**LINESTRING (X\_COORDINATE Y\_COORDINATE, X\_COORDINATE Y\_COORDINATE,
-…): GEO\_DESCRIPTION**
-
-**LINESTRING Z (X\_COORDINATE Y\_COORDINATE ALT, X\_COORDINATE
-Y\_COORDINATE ALT, …): GEO\_DESCRIPTION**
-
-**POLYGON ((X\_COORDINATE Y\_COORDINATE, X\_COORDINATE Y\_COORDINATE,
-…), (X\_COORDINATE Y\_COORDINATE, X\_COORDINATE Y\_COORDINATE, …), …):
-GEO\_DESCRIPTION**
-
-**POLYGON Z ((X\_COORDINATE Y\_COORDINATE ALT, X\_COORDINATE
-Y\_COORDINATE ALT, …), (X\_COORDINATE Y\_COORDINATE ALT, X\_COORDINATE
-Y\_COORDINATE ALT, …), …): GEO\_DESCRIPTION**
+```xml
+POINT (X_COORDINATE Y_COORDINATE): GEO_DESCRIPTION
+POINT Z (X_COORDINATE Y_COORDINATE ALT): GEO_DESCRIPTION
+LINESTRING (X_COORDINATE Y_COORDINATE, X_COORDINATE Y_COORDINATE, …): GEO_DESCRIPTION
+LINESTRING Z (X_COORDINATE Y_COORDINATE ALT, X_COORDINATE Y_COORDINATE ALT, …): GEO_DESCRIPTION
+POLYGON  ((X_COORDINATE Y_COORDINATE, X_COORDINATE Y_COORDINATE, …), (X_COORDINATE Y_COORDINATE, X_COORDINATE Y_COORDINATE, …), …): GEO_DESCRIPTION
+POLYGON Z ((X_COORDINATE Y_COORDINATE ALT, X_COORDINATE Y_COORDINATE ALT, …), (X_COORDINATE Y_COORDINATE ALT, X_COORDINATE Y_COORDINATE ALT, …), …): GEO_DESCRIPTION
+```
 
 An example of how GEO\_FEATURES may be represented in an expanded way
 would be:
 
-**(POLYGON Z ((X\_COORDINATE Y\_COORDINATE ALT, X\_COORDINATE
-Y\_COORDINATE ALT, …), (X\_COORDINATE Y\_COORDINATE ALT, X\_COORDINATE
-Y\_COORDINATE ALT, …), …), POLYGON Z ((X\_COORDINATE Y\_COORDINATE ALT,
-X\_COORDINATE Y\_COORDINATE ALT, …), (X\_COORDINATE Y\_COORDINATE ALT,
-X\_COORDINATE Y\_COORDINATE ALT, …), …), POLYGON Z ((X\_COORDINATE
-Y\_COORDINATE ALT, X\_COORDINATE Y\_COORDINATE ALT, …), (X\_COORDINATE
-Y\_COORDINATE ALT, X\_COORDINATE Y\_COORDINATE ALT, …), …), …):
-GEO\_DESCRIPTION**
+```xml
+(POLYGON Z (
+    (X_COORDINATE Y_COORDINATE ALT, X_COORDINATE Y_COORDINATE ALT, …), 
+    (X_COORDINATE Y_COORDINATE ALT, X_COORDINATE Y_COORDINATE ALT, …), …),
+ POLYGON Z (
+    (X_COORDINATE Y_COORDINATE ALT, X_COORDINATE Y_COORDINATE ALT, …), 
+    (X_COORDINATE Y_COORDINATE ALT, X_COORDINATE Y_COORDINATE ALT, …), …), 
+ POLYGON Z (
+    (X_COORDINATE Y_COORDINATE ALT, X_COORDINATE Y_COORDINATE ALT, …), 
+    (X_COORDINATE Y_COORDINATE ALT, X_COORDINATE Y_COORDINATE ALT, …), …), …): 
+    GEO_DESCRIPTION
+```
 
 Accordingly to this logic, an example of an expanded expression
 representing a value of the GeospatialInformation may be the following:
 
-**“CRS, PRECISION: {(POLYGON Z ((X\_COORDINATE Y\_COORDINATE ALT,
+```xml
+“CRS, PRECISION: {(POLYGON Z ((X\_COORDINATE Y\_COORDINATE ALT,
 X\_COORDINATE Y\_COORDINATE ALT, …), (X\_COORDINATE Y\_COORDINATE ALT,
 X\_COORDINATE Y\_COORDINATE ALT, …), …), POLYGON Z ((X\_COORDINATE
 Y\_COORDINATE ALT, X\_COORDINATE Y\_COORDINATE ALT, …), (X\_COORDINATE
@@ -241,12 +225,11 @@ Y\_COORDINATE ALT, X\_COORDINATE Y\_COORDINATE ALT, …), (X\_COORDINATE
 Y\_COORDINATE ALT, X\_COORDINATE Y\_COORDINATE ALT, …), …), POLYGON Z
 ((X\_COORDINATE Y\_COORDINATE ALT, X\_COORDINATE Y\_COORDINATE ALT, …),
 (X\_COORDINATE Y\_COORDINATE ALT, X\_COORDINATE Y\_COORDINATE ALT, …),
-…), …): GEO \_DESCRIPTION}, …: GEO\_DESCRIPTION”**
+…), …): GEO \_DESCRIPTION}, …: GEO\_DESCRIPTION”
+```
 
 Validation rules must be added to the XML Schema to ensure the integrity
 of the specification according to the proposed syntax.
-
- 
 
 ## A Geographic Codelist
 
@@ -257,11 +240,10 @@ form of SDMX Codelist, named "GeoCodelist", which is a Codelist
 containing the Geography used to demarcate the geographic extent. This
 is implemented in two ways:
 
-1.  Geographic. It is a regular codelist that has been extended to add a
+1. Geographic. It is a regular codelist that has been extended to add a
     geographical feature set to each of its items, typically, this would
     include all types of administrative geographies;
-
-2.  Grid. As a codelist that has defined a geographical grid composed of
+2. Grid. As a codelist that has defined a geographical grid composed of
     cells representing regular squared portions of the Earth.
 
 A GeoCodelist is a Codelist as defined in the SDMX Information Model
@@ -278,64 +260,62 @@ GeoCodelist, and it is necessary to add a grid definition to the
 Codelist identifier using the gridDefinition property. The components
 needed to define a geographical grid are the following:
 
--   CRS: The code of the Coordinate Reference System is used to
+- CRS: The code of the Coordinate Reference System is used to
     reference the coordinates in the flow, optional. The code of the CRS
     will be as it appears in the EPSG Geodetic Parameter Registry
     (<http://www.epsg-registry.org/>) maintained by the International
     Association of Oil and Gas Producers. If this component is omitted,
     by default the CRS will be the World Geodetic System 1984 (WGS 84,
     EPSG:4326).
-
--   REFERENCE\_CORNER: A code composed of two characters to define the
+- REFERENCE\_CORNER: A code composed of two characters to define the
     position of the coordinates that will be used as a starting
     reference to locate the cells. The possible values of this code can
     be UL (Upper Left), UR (Upper Right), LL (Lower Left), or LR (Lower
     Right). If this component is omitted the value LL (Lower Left) will
     be taken by default. This element is optional.
-
--   REFERENCE\_COORDINATES: Represents the starting point to reference
+- REFERENCE\_COORDINATES: Represents the starting point to reference
     the cells of the grid, accordingly to the CRS and the
     REFERENCE\_CORNER. It is represented by an individual set of
     coordinates composed by the X\_COORDINATE (X) and Y\_COORDINATE (Y)
     in the following way "X,Y". This element is mandatory if GEO\_STD is
     omitted.
-
--   CELL\_WIDTH: The size in meters of a horizontal side of the cells in
+- CELL\_WIDTH: The size in meters of a horizontal side of the cells in
     the grid. This element is mandatory if GEO\_STD is omitted.
-
--   CELL\_HEIGHT: The size in meters of a vertical side of the cells in
+- CELL\_HEIGHT: The size in meters of a vertical side of the cells in
     the grid. This element is mandatory if GEO\_STD is omitted .
-
--   GEO\_STD: A restricted text value expressing that the cells in the
+- GEO\_STD: A restricted text value expressing that the cells in the
     grid will provide information about matching codes existing in
     another reference system that establishes a mechanism to define the
     grid. This element is optional.
 
-> Accepted values for this component are included in the Geographical
-> Grids Codelist (CL\_GEO\_GRIDS). Examples contained in the mentioned
-> document are:
+    Accepted values for this component are included in the Geographical
+    Grids Codelist (CL\_GEO\_GRIDS). Examples contained in the mentioned
+    document are:
 
-| <strong>Value</strong> | <strong>Description</strong> |
-| :--- | :--- |
-| GEOHASH | GeoHash |
-| GEOREF | World Geographic Reference System |
-| MGRS | Military Grid Reference System |
-| OLC | Open Location Code / Plus Code |
-| QTH | Maidenhead Locator System /QTH Locator / IAURU Locator |
-| W3W | What3words™ |
-| WOEID | Where On Earth Identifier |
-
+    | **Value** | **Description** |
+    | :--- | :--- |
+    | GEOHASH | GeoHash |
+    | GEOREF | World Geographic Reference System |
+    | MGRS | Military Grid Reference System |
+    | OLC | Open Location Code / Plus Code |
+    | QTH | Maidenhead Locator System /QTH Locator / IAURU Locator |
+    | W3W | What3words™ |
+    | WOEID | Where On Earth Identifier |
 
 The GRID\_DEFINITION element will contain a regular expression string
 corresponding to the following format:
 
-"**CRS: REFERENCE\_CORNER; REFERENCE\_COORDINATES; CELL\_WIDTH,
-CELL\_HEIGHT: GEO\_STD**"
+```xml
+"CRS: REFERENCE\_CORNER; REFERENCE\_COORDINATES; CELL\_WIDTH,
+CELL\_HEIGHT: GEO\_STD"
+```
 
 In an expanded way we would have:
 
-"**CRS:REFERENCE\_CORNER; X\_COORDINATE, Y\_COORDINATE; CELL\_WIDTH,
-CELL\_HEIGHT: GEO\_STD**"
+```xml
+"CRS:REFERENCE\_CORNER; X\_COORDINATE, Y\_COORDINATE; CELL\_WIDTH,
+CELL\_HEIGHT: GEO\_STD"
+```
 
 If the grid will be fully adhering to a standard declared in the
 GEO\_STD, the definition of each code in the code list will be optional.
@@ -344,15 +324,12 @@ in the grid, which is made by adding the GEO\_CELL element to each item
 of the code list that will contain a regular expression string composed
 of the following components:
 
--   GEO\_COL**:** The number of the column in the grid starting by zero.
-
--   GEO\_ROW**:** The number of the row in the grid starting by zero.
-
--   GEO\_TAG**:** An optional text to include additional information to
+- GEO\_COL: The number of the column in the grid starting by zero.
+- GEO\_ROW: The number of the row in the grid starting by zero.
+- GEO\_TAG: An optional text to include additional information to
     the cell.
-
--   GEO\_CELL will have values with the following format: "**GEO\_COL,
-    GEO\_ROW: GEO\_TAG**"
+- GEO\_CELL will have values with the following format: ```"GEO\_COL,
+    GEO\_ROW: GEO\_TAG"```
 
 When using a gridded GeoCodelist we may use the GEO\_TAG to integrate
 the cells in the grid to the codes used by other standard defined grids.
@@ -360,5 +337,3 @@ As an example, GEO\_TAG can take the values of the Open Location Codes,
 GeoHash, etc. If this is done, the GEO\_STD component must have been
 added to the definition of the grid. If the GEO\_STD is omitted, the
 GEO\_TAG contents will be taken just as free text.
-
--

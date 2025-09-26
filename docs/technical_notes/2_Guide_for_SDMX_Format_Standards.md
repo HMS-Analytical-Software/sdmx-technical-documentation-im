@@ -70,11 +70,10 @@ as well as flat representations.
 
 Structure Definition
 
--   The SDMX-ML Structure Message is currently the main way of modelling
+- The SDMX-ML Structure Message is currently the main way of modelling
     a DSD. The SDMX-JSON version follows the same principles, while the
     SDMX-CSV does not support structures, yet.
-
--   The SDMX-ML Structure Message allows for the structures on which a
+- The SDMX-ML Structure Message allows for the structures on which a
     Data Structure Definition depends – that is, codelists and concepts
     – to be either included in the message or to be referenced by the
     message containing the data structure definition. XML syntax is
@@ -83,27 +82,23 @@ Structure Definition
     is also available in SDMX-JSON. The latter, though, further supports
     conveying data with some structural metadata within a single
     message.
-
--   All structures can be inserted, replaced or deleted, unless
+- All structures can be inserted, replaced or deleted, unless
     structural dependencies are not respected.
 
 Validation
 
--   The SDMX-ML structure specific messages will allow validation of XML
+- The SDMX-ML structure specific messages will allow validation of XML
     syntax and data typing to be performed with a generic XML parser and
     enforce agreement between the structural definition and the data to
     a moderate degree with the same tool.
-
--   Similarly, the SDMX-JSON message can be validated using JSON Schema
+- Similarly, the SDMX-JSON message can be validated using JSON Schema
     and hence may also be generically parsed and validated.
-
--   The SDMX-CSV format cannot be validated by generic tools.
+- The SDMX-CSV format cannot be validated by generic tools.
 
 Update and Delete Messages
 
--   All data messages allow for both append/replace/delete messages.
-
--   These messages allow also transmitting only data or only
+- All data messages allow for both append/replace/delete messages.
+- These messages allow also transmitting only data or only
     documentation (i.e., Attribute values without Observation values).
 
 Character Encodings
@@ -154,9 +149,8 @@ institution.
 
 Central institutions can play a double role:
 
--   collecting and further disseminating statistics;
-
--   devising structural definitions for use in data exchanges.
+- collecting and further disseminating statistics;
+- devising structural definitions for use in data exchanges.
 
 #### Defining Data Structure Definitions (DSDs)
 
@@ -166,7 +160,7 @@ institutions when devising new DSDs.
 
 <u>Dimensions, Attributes and Codelists</u>
 
--   **Avoid dimensions that are not appropriate for all the series in
+- **Avoid dimensions that are not appropriate for all the series in
     the data structure definition**. If some dimensions are not
     applicable (this is evident from the need to have a code in a code
     list which is marked as "not applicable", "not relevant" or "total")
@@ -174,8 +168,7 @@ institutions when devising new DSDs.
     structure definition in which these dimensions are dropped from the
     key structure. This is a judgement call as it is sometimes difficult
     to achieve this without increasing considerably the number of DSDs.
-
--   **Devise DSDs with a small number of Dimensions for public viewing
+- **Devise DSDs with a small number of Dimensions for public viewing
     of data**. A DSD with the number dimensions in excess 6 or 7 is
     often difficult for non-specialist users to understand. In these
     cases, it is better to have a larger number of DSDs with smaller
@@ -185,38 +178,28 @@ institutions when devising new DSDs.
     dimensionality, which are necessary for statisticians and
     economists, are often obscure to public consumers who may not always
     understand the semantic of the differentiation.
-
--   **Avoid composite dimensions**. Each dimension should correspond to
+- **Avoid composite dimensions**. Each dimension should correspond to
     a single characteristic of the data, not to a combination of
     characteristics.
-
--   Consider the inclusion of the following attributes. Once the key
+- Consider the inclusion of the following attributes. Once the key
     structure of a data structure definition has been decided, then the
     set of (preferably mandatory) attributes of this data structure
     definition has to be defined. In general, some statistical concepts
     are deemed necessary across all Data Structure Definitions to
     qualify the contained information. Examples of these are:
-
-    A descriptive title for the series (this is most useful for
-    dissemination of data for viewing e.g., on the web).
-
-    Collection (e.g., end of period, averaged or summed over period).
-
-    Unit (e.g., currency of denomination).
-
-    Unit multiplier (e.g., expressed in millions).
-
-    Availability (which institutions can a series become available to).
-
-    Decimals (i.e., number of decimal digits used in numerical
-    observations).
-
-    Observation Status (e.g., estimate, provisional, normal).
+    - A descriptive title for the series (this is most useful for
+      dissemination of data for viewing e.g., on the web).
+    - Collection (e.g., end of period, averaged or summed over period).
+    - Unit (e.g., currency of denomination).
+    - Unit multiplier (e.g., expressed in millions).
+    - Availability (which institutions can a series become available to).
+    - Decimals (i.e., number of decimal digits used in numerical observations).
+    - Observation Status (e.g., estimate, provisional, normal).
 
 Moreover, additional attributes may be considered as mandatory when a
 specific data structure definition is defined.
 
--   **Avoid creating a new code list where one already exists**. It is
+- **Avoid creating a new code list where one already exists**. It is
     highly recommended that structural definitions and code lists be
     consistent with internationally agreed standard methodologies,
     wherever they exist, e.g., System of National Accounts 1993; Balance
@@ -224,21 +207,12 @@ specific data structure definition is defined.
     Manual; Government Finance Statistics Manual, etc. When setting-up a
     new data exchange, the following order of priority is suggested when
     considering the use of code lists:
-
-    international standard code lists;
-
-    international code lists supplemented by other international and/or
-    regional institutions;
-
-    standardised lists used already by international institutions;
-
-    new code lists agreed between two international or regional
-    institutions;
-
-    new code lists which extend existing code lists, by adding only
-    missing codes;
-
-    new specific code lists.
+    - international standard code lists;
+    - international code lists supplemented by other international and/or regional institutions;
+    - standardised lists used already by international institutions;
+    - new code lists agreed between two international or regional institutions;
+    - new code lists which extend existing code lists, by adding only missing codes;
+    - new specific code lists.
 
 The same code list can be used for several statistical concepts, within
 a data structure definition or across DSDs. Note that SDMX has
@@ -251,121 +225,75 @@ DSD.
 
 Data Structure Definition Structure
 
--   The following items have to be specified by a structural definitions
+- The following items have to be specified by a structural definitions
     maintenance agency when defining a new data structure definition:
-
--   Data structure definition (DSD) identification:
-
-<!-- -->
-
--   DSD identifier
-
--   DSD name
-
-<!-- -->
-
--   A list of metadata concepts assigned as dimensions of the data
+- Data structure definition (DSD) identification:
+    - DSD identifier
+    - DSD name
+- A list of metadata concepts assigned as dimensions of the data
     structure definition. For each:
-
-<!-- -->
-
--   (statistical) concept identifier
-
--   code list identifier (id, version, maintenance agency) if the
-    representation is coded
-
-<!-- -->
-
--   A list of (statistical) concepts assigned as attributes for the data
+    - (statistical) concept identifier
+    - code list identifier (id, version, maintenance agency) if the
+        representation is coded
+- A list of (statistical) concepts assigned as attributes for the data
     structure definition. For each:
-
-<!-- -->
-
--   (statistical) concept identifier
-
--   code list identifier if the concept is coded
-
--   usage: mandatory, optional
-
--   relationship to dimensions and measures
-
--   maximum text length for the uncoded concepts
-
--   maximum code length for the coded concepts
-
-<!-- -->
-
--   A list of the code lists used in the data structure definition. For
+    - (statistical) concept identifier
+    - code list identifier if the concept is coded
+    - usage: mandatory, optional
+    - relationship to dimensions and measures
+    - maximum text length for the uncoded concepts
+    - maximum code length for the coded concepts
+- A list of the code lists used in the data structure definition. For
     each:
-
-<!-- -->
-
--   code list identifier
-
--   code list name
-
--   code values and descriptions
-
-<!-- -->
-
--   Definition of Dataflow. Two (or more) partners performing data
+    - code list identifier
+    - code list name
+    - code values and descriptions
+- Definition of Dataflow. Two (or more) partners performing data
     exchanges in a certain context need to agree on:
-
-<!-- -->
-
--   the list of dataset identifiers they will be using;
-
--   for each Dataflow:
-
-    -   its content (e.g., by Constraints) and description
-
-    -   the relevant DSD that defines the structure of the data reported
-        or disseminated according the Dataflow
+    - the list of dataset identifiers they will be using;
+    - for each Dataflow:
+        - its content (e.g., by Constraints) and description
+        - the relevant DSD that defines the structure of the data reported
+            or disseminated according the Dataflow
 
 #### Exchanging Attributes
 
 ##### Attributes on series and group levels
 
--   Static properties.
+Static properties.
 
-    Upon creation of a series the sender has to provide to the receiver
+- Upon creation of a series the sender has to provide to the receiver
     values for all mandatory attributes. In case they are available,
     values for conditional attributes should also be provided. Whereas
     initially this information may be provided by means other than
     SDMX-ML/JSON/CSV messages (e.g., paper, telephone) it is expected
     that partner institutions will be in a position to provide this
     information in the available formats over time.
-
-    A centre may agree with its data exchange partners special
+- A centre may agree with its data exchange partners special
     procedures for authorising the setting of attributes' initial
     values.
 
--   Communication of changes to the centre.
+Communication of changes to the centre.
 
-    Following the creation of a series, the attribute values do not have
+- Following the creation of a series, the attribute values do not have
     to be reported again by senders, as long as they do not change.
-
-    Whenever changes in attribute values for a series (or group) occur,
+- Whenever changes in attribute values for a series (or group) occur,
     the reporting institutions should report either all attribute values
     again (this is the recommended option) or only the attribute values
     which have changed. This applies both to the mandatory and the
     conditional attributes. For example, if a previously reported value
     for a conditional attribute is no longer valid, this has to be
     reported to the centre.
-
-    A centre may agree with its data exchange partners special
+- A centre may agree with its data exchange partners special
     procedures for authorising modifications in the attribute values.
-
-    Communication of observation level attributes "observation status",
+- Communication of observation level attributes "observation status",
     "observation confidentiality", "observation pre-break" is
     recommended.
-
-    Whenever an observation is exchanged, the corresponding observation
+- Whenever an observation is exchanged, the corresponding observation
     status is recommended to also be exchanged attached to the
     observation, regardless of whether it has changed or not since the
     previous data exchange.
-
-    If the "observation status" changes and the observation remains
+- If the "observation status" changes and the observation remains
     unchanged, both components would have to be reported (unless the
     observation is deleted).
 
@@ -440,23 +368,16 @@ describe the "container" for an instance of the data.
 
 ##### "Frequency" related issues
 
--   ***Special frequencies.*** The issue of data collected at special
+- ***Special frequencies.*** The issue of data collected at special
     (regular or irregular) intervals at a lower than daily frequency
     (e.g., 24 or 36 or 48 observations per year, on irregular days
     during the year) is not extensively discussed here. However, for
     data exchange purposes:
-
-<!-- -->
-
--   such data can be mapped into a series with daily frequency; this
-    daily series will only hold observations for those days on which the
-    measured event takes place;
-
--   if the collection intervals are regular, additional values to the
-    existing frequency code list(s) could be added in the future.
-
-<!-- -->
-
--   ***Tick data.*** The issue of data collected at irregular intervals
+    - such data can be mapped into a series with daily frequency; this
+        daily series will only hold observations for those days on which the
+        measured event takes place;
+    - if the collection intervals are regular, additional values to the
+        existing frequency code list(s) could be added in the future.
+- ***Tick data.*** The issue of data collected at irregular intervals
     at a higher than daily frequency (e.g., tick-by-tick data) is not
     discussed here either.
