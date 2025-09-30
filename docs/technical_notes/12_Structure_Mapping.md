@@ -11,25 +11,18 @@ intended to perform any aggregations or calculations.
 
 An input series maps to:
 
-1.  Exactly one output series; or
-
-2.  Multiple output series with different Series Keys, but the same
-    > observation values; or
-
-3.  Zero output series where no source rule matches the input Component
-    > values.
+1. Exactly one output series; or
+2. Multiple output series with different Series Keys, but the same observation values; or
+3. Zero output series where no source rule matches the input Component values.
 
 Typical use cases include:
 
--   Transforming received data into a common internal structure;
-
--   Transforming reported data into the data collector's preferred
-    structure;
-
--   Transforming unidimensional datasets[45] to multi-dimensional; and
-
--   Transforming internal datasets with a complex structure to a simpler
-    > structure with fewer dimensions suitable for dissemination.
+- Transforming received data into a common internal structure;
+- Transforming reported data into the data collector's preferred
+      structure;
+- Transforming unidimensional datasets[45] to multi-dimensional; and
+- Transforming internal datasets with a complex structure to a simpler
+      structure with fewer dimensions suitable for dissemination.
 
 ## 1-1 structure maps
 
@@ -50,7 +43,6 @@ ISO 3-character equivalent.
 | Andorra | AD | AND |
 | etc… |  |  |
 
-
 Different source values can also map to the same target value, for
 example when deriving regions from country codes.
 
@@ -61,7 +53,6 @@ example when deriving regions from country codes.
 | IT | EUR |
 | ES | EUR |
 | BE | EUR |
-
 
 ## N-n structure maps
 
@@ -78,7 +69,6 @@ Example:
 | 1 | <p>If</p><br><p>FREQUENCY=A; and</p><br><p>ADJUSTMENT=N; and</p><br><p>MATURITY=L.</p> | <p>Set</p><br><p>INDICATOR=A_N_L</p> |
 | 2 | <p>If</p><br><p>FREQUENCY=M; and</p><br><p>ADJUSTMENT=S_A1; and</p><br><p>MATURITY=TY12.</p> | <p>Set</p><br><p>INDICATOR=MON_SAX_12</p> |
 
-
 N-n rules can also set values for multiple source Components.
 
 | Rule | Source | Target |
@@ -86,8 +76,7 @@ N-n rules can also set values for multiple source Components.
 | 1 | <p>If</p><br><p>FREQUENCY=A; and</p><br><p>ADJUSTMENT=N; and</p><br><p>MATURITY=L.</p> | <p>Set</p><br><p>INDICATOR=A_N_L,</p><br><p>STATUS=QXR15,</p><br><p>NOTE="Unadjusted".</p> |
 | 2 | <p>If</p><br><p>FREQUENCY=M; and</p><br><p>ADJUSTMENT=S_A1; and</p><br><p>MATURITY=TY12.</p> | <p>Set</p><br><p>INDICATOR=MON_SAX_12,</p><br><p>STATUS=MPM12,</p><br><p>NOTE="Seasonally Adjusted"</p> |
 
-
-##  Ambiguous mapping rules
+## Ambiguous mapping rules
 
 A structure map is ambiguous if the rules result in a dataset containing
 multiple series with the same Series Key.
@@ -99,7 +88,6 @@ with multiple dimensions is shown below:
 | :--- | :--- | :--- |
 | SERIES_CODE=XMAN_Z_21 | <p>Dimensions</p><br><p>INDICATOR=XM</p><br><p>FREQ=A</p><br><p>ADJUSTMENT=N</p><br><p>Attributes</p><br><p>UNIT_MEASURE=_Z</p><br><p>COMP_ORG=21</p> | XM:A:N |
 | SERIES_CODE=XMAN_Z_34 | <p>Dimensions</p><br><p>INDICATOR=XM</p><br><p>FREQ=A</p><br><p>ADJUSTMENT=N</p><br><p>Attributes</p><br><p>UNIT_MEASURE=_Z</p><br><p>COMP_ORG=34</p> | XM:A:N |
-
 
 The above behaviour can be okay if the series XMAN\_Z\_21 contains
 observations for different periods of time then the series XMAN\_Z\_34.
@@ -115,11 +103,9 @@ describe explicit mappings between source and target Component values.
 The source and target of a Representation Map can reference any of the
 following:
 
-1.  Codelist
-
-2.  Free Text (restricted by type, e.g String, Integer, Boolean)
-
-3.  Valuelist
+1. Codelist
+2. Free Text (restricted by type, e.g String, Integer, Boolean)
+3. Valuelist
 
 A Representation Map mapping ISO 2-character to ISO 3-character
 Codelists would take the following form:
@@ -133,7 +119,6 @@ Codelists would take the following form:
 | AD | AND |
 | etc… |  |
 
-
 A Representation Map mapping free text country names to an ISO
 2-character Codelist could be similarly described:
 
@@ -146,7 +131,6 @@ A Representation Map mapping free text country names to an ISO
 | "Ireland" | IE |
 | "Eire" | IE |
 | etc… |  |
-
 
 Valuelists, introduced in SDMX 3.0, are equivalent to Codelists but
 allow the maintenance of non-SDMX identifiers. Importantly, their IDs do
@@ -167,23 +151,22 @@ example:
 | % | En | Percentage |
 |  | fr | Pourcentage |
 
-
 Other characteristics of Representation Maps:
 
--   Support the mapping of multiple source Component values to multiple
-    > Target Component values as described in section 13.3 on n-to-n
-    > mappings; this covers also the case of mapping an Attribute with
-    > an array representation to map combinations of values to a single
-    > target value;
+- Support the mapping of multiple source Component values to multiple
+    Target Component values as described in section 13.3 on n-to-n
+    mappings; this covers also the case of mapping an Attribute with
+    an array representation to map combinations of values to a single
+    target value;
 
--   Allow source or target mappings for an Item to be optional allowing
-    > rules such as 'A maps to nothing' or 'nothing maps to A'; and
+- Allow source or target mappings for an Item to be optional allowing
+    rules such as 'A maps to nothing' or 'nothing maps to A'; and
 
--   Support for mapping rules where regular expressions or substrings
-    > are used to match source Component values. Refer to section 13.6
-    > for more on this topic.
+- Support for mapping rules where regular expressions or substrings
+    are used to match source Component values. Refer to section 13.6
+    for more on this topic.
 
-##  Regular expression and substring rules
+## Regular expression and substring rules
 
 It is common for classifications to contain meanings within the
 identifier, for example the code Id 'XULADS' may refer to a particular
@@ -213,7 +196,6 @@ component.
 | ^[A-G] | Rule match if the input starts with letters A to G | OUT_B |
 | A&#124;B | Rule match if input is either 'A' or 'B' | OUT_C |
 
-
 Like all mapping rules, the output is either a Code, a Value or free
 text depending on the representation of the Component in the target Data
 Structure Definition.
@@ -227,7 +209,6 @@ For example
 | :--- | :--- | :--- | :--- |
 | <mark>([0-9]{4})[0-9]([0-9]{1})</mark> | <mark>\1-Q\2</mark> | 200933 | 2009-Q3 |
 
-
 As regular expression rules can be used as a general catch-all if
 nothing else matches, the ordering of the rules is important. Rules
 should be tested starting with the highest priority, moving down the
@@ -240,7 +221,6 @@ The following example shows this:
 | 1 | A | Rule match if input = 'A' | OUT_A |
 | 2 | B | Rule match if input = 'B' | OUT_B |
 | 3 | [A-Z] | Any character A-Z | OUT_C |
-
 
 The input 'A' matches both the first and the last rule, but the first
 takes precedence having the higher priority. The output is OUT\_A.
@@ -262,14 +242,12 @@ For instance:
 | ABC_DEF_XYZ | 5 | 3 | DEF |
 | XULADS | 1 | 2 | XU |
 
-
 Sub-strings can therefore be used for the conceptual rule *If starts
 with 'XU' map to Y* as shown in the following example:
 
 | Start | Length | Source | Target |
 | :--- | :--- | :--- | :--- |
 | 1 | 2 | XU | Y |
-
 
 ## Mapping non-SDMX time formats to SDMX formats
 
@@ -278,14 +256,13 @@ datasets to be mapped to an SDMX compliant time format.
 
 Two types of time input are defined:
 
-1.  **Pattern based dates** – a string which can be described using a
-    > notation like dd/mm/yyyy or is represented as the number of
-    > periods since a point in time, for example: 2010M001 (first month
-    > in 2010), or 2014D123 (123<sup>rd</sup> day in 2014); and
-
-2.  **Numerical based datetime** – a number specifying the elapsed
-    > periods since a fixed point in time, for example Unix Time is
-    > measured by the number of milliseconds since 1970.
+1. **Pattern based dates** – a string which can be described using a
+    notation like dd/mm/yyyy or is represented as the number of
+    periods since a point in time, for example: 2010M001 (first month
+    in 2010), or 2014D123 (123<sup>rd</sup> day in 2014); and
+2. **Numerical based datetime** – a number specifying the elapsed
+    periods since a fixed point in time, for example Unix Time is
+    measured by the number of milliseconds since 1970.
 
 The output of a time-based mapping is derived from the output Frequency,
 which is either explicitly stated in the mapping or defined as the value
@@ -305,21 +282,19 @@ for the given frequency Id. The default rules are:
 | T | YYYY-Tn | 2010-T1 |
 | W | YYYY-Wn | YYYY-W53 |
 
-
 In the case where the input frequency is lower than the output
 frequency, the mapping defaults to end of period, but can be explicitly
 set to start, end or mid-period.
 
 There are two important points to note:
 
-1.  The output frequency determines the output date format, but the
-    > default output can be redefined using a Frequency Format mapping
-    > to force explicit rules on how the output time period is
-    > formatted.
-
-2.  To support the use case of changing frequency the structure map can
-    > optionally provide a start of year attribute, which defines the
-    > year start date in MM-DD format. For example: YearStart=04-01.
+1. The output frequency determines the output date format, but the
+    default output can be redefined using a Frequency Format mapping
+    to force explicit rules on how the output time period is
+    formatted.
+2. To support the use case of changing frequency the structure map can
+    optionally provide a start of year attribute, which defines the
+    year start date in MM-DD format. For example: YearStart=04-01.
 
 ### Pattern based dates
 
@@ -363,18 +338,13 @@ indicative list of examples is presented in the following table:
 | Irish (ga) | Ireland (IE) | ga-IE<a href="https://www.oracle.com/java/technologies/javase/jdk8-jre8-suported-locales.html#cldrlocale">(*)</a> |
 | Italian (it) | Italy (IT) | it-IT |
 
-
 Examples
 
-22/06/1981 would be described as dd/MM/YYYY, with locale en-GB
-
-2008-mars-12 would be described as YYYY-MMM-DD, with locale fr-FR
-
-22 July 1981 would be described as dd MMMM YYYY, with locale en-US
-
-22 Jul 1981 would be described as dd MMM YYYY
-
-2010 D62 would be described as YYYYDnn (day 62 of the year 2010)
+- 22/06/1981 would be described as dd/MM/YYYY, with locale en-GB
+- 2008-mars-12 would be described as YYYY-MMM-DD, with locale fr-FR
+- 22 July 1981 would be described as dd MMMM YYYY, with locale en-US
+- 22 Jul 1981 would be described as dd MMM YYYY
+- 2010 D62 would be described as YYYYDnn (day 62 of the year 2010)
 
 The following pattern letters are defined (all other characters from 'A'
 to 'Z' and from 'a' to 'z' are reserved):
@@ -416,15 +386,17 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 The model is illustrated below:
 
 ![](media/image18.png)
-
+///caption
 Figure 24 showing the component map mapping the SOURCE\_DATE Dimension
 to the TIME\_PERIOD dimension with the additional information on the
 component map to describe the time format
+///
 
 ![](media/image19.png)
-
+///caption
 Figure 25 showing an input date format, whose output frequency is
 derived from the output value of the FREQ Dimension
+///
 
 ### Numerical based datetime
 
@@ -432,21 +404,16 @@ Where the source datetime input is purely numerical, the mapping rules
 are defined by the **Base** as a valid SDMX Time Period, and the
 **Period** which must take one of the following enumerated values:
 
--   day
-
--   second
-
--   millisecond
-
--   microsecond
-
--   nanosecond
+- day
+- second
+- millisecond
+- microsecond
+- nanosecond
 
 | Numerical datetime systems | Base | Period |
 | :--- | :--- | :--- |
 | <p>Epoch Time (UNIX)</p><br><p>Milliseconds since 01 Jan 1970</p> | 1970 | millisecond |
 | <p>Windows System Time</p><br><p>Milliseconds since 01 Jan 1601</p> | 1601 | millisecond |
-
 
 The example above illustrates numerical based datetime mapping rules for
 two commonly used time standards.
@@ -454,10 +421,11 @@ two commonly used time standards.
 The model is illustrated below:
 
 ![](media/image20.png)
-
+///caption
 Figure 26 showing the component map mapping the SOURCE\_DATE Dimension
 to the TIME\_PERIOD Dimension with the additional information on the
 component map to describe the numerical datetime system in use
+///
 
 ### Mapping more complex time inputs
 
@@ -480,7 +448,6 @@ target dataset.
 | 3 | <p>If</p><br><p>INDICATOR=XULADS; and</p><br><p>TIME_PERIOD=2009.</p> | <p>Set</p><br><p>OBS_CONF=F</p> |
 | 4 | <p>If</p><br><p>INDICATOR=XULADS; and</p><br><p>TIME_PERIOD=2010.</p> | <p>Set</p><br><p>OBS_CONF=<strong>C</strong></p> |
 
-
 In the example above, OBS\_CONF is an Observation Attribute.
 
 ## Time span mapping rules using validity periods
@@ -498,7 +465,6 @@ re-written using two rules as follows:
 | :--- | :--- | :--- |
 | 1 | <p>If</p><br><p>INDICATOR=XULADS.</p><br><p>Validity Period</p><br><p>start period=2007</p><br><p>end period=2009</p> | <p>Set</p><br><p>OBS_CONF=F</p> |
 | 2 | <p>If</p><br><p>INDICATOR=XULADS.</p><br><p>Validity Period</p><br><p>start period=2010</p> | <p>Set</p><br><p>OBS_CONF=F</p> |
-
 
 In Rule 1, start period resolves to the start of the 2007 period
 (2007-01-01T00:00:00), and the end period resolves to the very end of
@@ -519,15 +485,14 @@ time range will have an OBS\_CONF value of C.
 | :--- | :--- |
 | <p><strong>FREQ</strong>="A" </p><br><p>ADJUSTMENT="N" </p><br><p><strong>REF_AREA</strong>="PL" </p><br><p><strong>COUNTERPART_AREA</strong>="W0" </p><br><p>REF_SECTOR="S1" </p><br><p>COUNTERPART_SECTOR="S1" </p><br><p>ACCOUNTING_ENTRY="B" </p><br><p>STO="B5G" </p> | <p>FREQ="A" </p><br><p>REF_AREA="PL"</p><br><p>COUNTERPART_AREA="W0"  </p><br><p>INDICATOR="IND_ABC"</p> |
 
-
 The bold Dimensions map from source to target verbatim. The mapping
 simply specifies:
 
-FREQ =&gt; FREQ
-
-REF\_AREA=&gt; REF\_AREA
-
-COUNTERPART\_AREA=&gt; COUNTERPART \_AREA
+```xml
+FREQ => FREQ
+REF_AREA=> REF_AREA
+COUNTERPART_AREA=> COUNTERPART_AREA
+```
 
 No Representation Mapping is required. The source value simply copies
 across unmodified.
@@ -537,7 +502,9 @@ example of many Dimensions mapping to one Dimension. In this case a
 Representation Mapping is required, and the mapping first describes the
 input 'partial key' and how this maps to the target indicator:
 
-N:S1:S1:B:B5G =&gt; IND\_ABC
+```xml
+N:S1:S1:B:B5G => IND\_ABC
+```
 
 Where the key sequence is based on the order specified in the mapping
 (i.e ADJUSTMENT, REF\_SECTOR, etc will result in the first value N being
@@ -566,7 +533,6 @@ age to an output code.
 | 3 | B |
 | 4 | B |
 
-
 If this mapping takes advantage of regular expressions it can be
 expressed in two rules:
 
@@ -574,7 +540,6 @@ expressed in two rules:
 | :--- | :--- |
 | [0-2] | A |
 | [3-4] | B |
-
 
 ### Observation Attributes for Time Period
 
@@ -587,13 +552,11 @@ has an attribute value.
 | XULADS | 2009 | C |
 | XULADS | 2010 | C |
 
-
 Or using a validity period on the Representation Mapping:
 
 | Input INDICATOR | Valid From/ Valid To | Output OBS_CONF |
 | :--- | :--- | :--- |
 | XULADS | 2008/2010 | C |
-
 
 ### Time mapping
 
@@ -607,7 +570,6 @@ a time mapping with the following details:
 | :--- | :--- | :--- | :--- |
 | 18/07/1981 | dd/MM/yyyy | A | 1981 |
 
-
 When the target frequency is based on another target Dimension value, in
 this example the value of the FREQ Dimension in the target DSD.
 
@@ -615,13 +577,11 @@ this example the value of the FREQ Dimension in the target DSD.
 | :--- | :--- | :--- | :--- |
 | 18/07/1981 | dd/MM/yyyy | FREQ | <p>1981-07-18</p><br><p>(when FREQ=D)</p> |
 
-
 When the source is a numerical format
 
 | Source Value | Start Period | Interval | Target FREQ | Output |
 | :--- | :--- | :--- | :--- | :--- |
 | 1589808220 | 1970 | millisecond | M | 2020-05 |
-
 
 When the source frequency is lower than the target frequency additional
 information can be provided for resolve to start of period, end of
@@ -630,7 +590,6 @@ period, or mid period, as shown in the following example:
 | Source Value | Source Mapping | Target Frequency Dimension | Output |
 | :--- | :--- | :--- | :--- |
 | 1981 | yyyy | D – End of Period | 1981-12-31 |
-
 
 When the start of year is April 1<sup>st</sup> the Structure Map has
 YearStart=04-01:

@@ -493,7 +493,7 @@ When transforming **from SDMX to VTL**, this method consists in leaving
 the components unchanged and maintaining their names and roles,
 according to the following table:
 
-| <strong>SDMX</strong> | <strong>VTL</strong> |
+| **SDMX** | **VTL** |
 | :--- | :--- |
 | Dimension | (Simple) Identifier |
 | TimeDimension | (Time) Identifier |
@@ -553,21 +553,16 @@ described below (this mapping is equivalent to a pivoting operation):
 
 - A SDMX simple dimension becomes a VTL (simple) identifier and a SDMX
     TimeDimension becomes a VTL (time) identifier;
-
 - Each possible Code Cj of the SDMX MeasureDimension is mapped to a
     VTL Measure, having the same name as the SDMX Code (i.e. Cj); the
     VTL Measure Cj is a new VTL component even if the SDMX data
     structure has not such a Component;
-
 - The SDMX MeasureDimension is not mapped to VTL (it disappears in the
     VTL Data Structure);
-
 - The SDMX Measure is not mapped to VTL as well (it disappears in the
     VTL Data Structure);
-
 - An SDMX DataAttribute is mapped in different ways according to its
     AttributeRelationship:
-
     - If, according to the SDMX AttributeRelationship, the values of
         the DataAttribute do not depend on the values of the
         MeasureDimension, the SDMX DataAttribute becomes a VTL Attribute
@@ -576,7 +571,6 @@ described below (this mapping is equivalent to a pivoting operation):
         DimensionComponent and therefore is at data set level), or if it
         refers to a set (or a group) of dimensions which does not
         include the MeasureDimension;
-
     - Otherwise, if, according to the SDMX AttributeRelationship, the
         values of the DataAttribute depend on the MeasureDimension, the
         SDMX DataAttribute is mapped to one VTL Attribute for each
@@ -590,7 +584,6 @@ described below (this mapping is equivalent to a pivoting operation):
         named DA\_C1, DA\_C2, …, DA\_Cn (if different names are desired,
         they can be achieved afterwards by renaming the Attributes
         through VTL operators).
-
     - Like in the Basic mapping, the resulting VTL Attributes are
         considered as dependent on all the VTL identifiers (i.e. "at
         data point / observation level"), because VTL does not have the
@@ -620,18 +613,15 @@ j<sup>th</sup> Code of the MeasureDimension:
     Dimensions except than the MeasureDimension become one multi-measure
     VTL Data Point, having one Measure for each Code Cj of the SDMX
     MeasureDimension;
-
 - The values of the SDMX simple Dimensions, TimeDimension and
     DataAttributes not depending on the MeasureDimension (these
     components by definition have always the same values for all the
     observations of the set above) become the values of the
     corresponding VTL (simple) Identifiers, (time) Identifier and
     Attributes.
-
 - The value of the Measure of the SDMX observation belonging to the
     set above and having MeasureDimension=Cj becomes the value of the
     VTL Measure Cj
-
 - For the SDMX DataAttributes depending on the MeasureDimension, the
     value of the DataAttribute DA of the SDMX observation belonging to
     the set above and having MeasureDimension=Cj becomes the value of
@@ -729,18 +719,14 @@ The **unpivot** mapping behaves like follows:
     Dimension and a VTL (time) identifier becomes a SDMX TimeDimension
     (as said, a measure identifier cannot exist in multi-measure VTL
     structures);
-
 - a MeasureDimension component called "measure\_name" is added to the
     SDMX DataStructure;
-
 - a Measure component called "obs\_value" is added to the SDMX
     DataStructure;
-
 - each VTL Measure is mapped to a Code of the SDMX MeasureDimension
     having the same name as the VTL Measure (therefore all the VTL
     Measure Components do not originate Components in the SDMX
     DataStructure);
-
 - a VTL Attribute becomes a SDMX DataAttribute having
     AttributeRelationship referred to all the SDMX DimensionComponents
     including the TimeDimension and except the MeasureDimension.
@@ -759,18 +745,14 @@ At observation / data point level:
 
 - a multi-measure VTL Data Point becomes a set of SDMX observations,
     one for each VTL Measure;
-
 - the values of the VTL Identifiers become the values of the
     corresponding SDMX DimensionComponents, for all the observations of
     the set above;
-
 - the name of the j<sup>th</sup> VTL Measure (e.g. “Cj”) becomes the
     Code of the SDMX MeasureDimension of the j<sup>th</sup> observation
     of the set;
-
 - the value of the j<sup>th</sup> VTL Measure becomes the value of the
     SDMX Measure of the j<sup>th</sup> observation of the set;
-
 - the values of the VTL Attributes become the values of the
     corresponding SDMX DataAttributes (in principle for all the
     observations of the set above).
@@ -886,18 +868,12 @@ In practice, this kind mapping is obtained like follows:
     DimensionComponents on which the mapping will be based, in a given
     order.[30] Following the example above, imagine that the user
     declares the Dimensions INDICATOR and COUNTRY.
-
-<!-- -->
-
 - The VTL Data Set is given a name using a special notation also
     called “ordered concatenation” and composed of the following parts:
-
     - The reference to the SDMX Dataflow (expressed according to the
         rules described in the previous paragraphs, i.e. URN,
         abbreviated URN or another alias); for example DF(1.0.0);
-
     - a slash (“/”) as a separator; [31]
-
     - The reference to a specific part of the SDMX Dataflow above,
         expressed as the concatenation of the values that the SDMX
         DimensionComponents declared above must have, separated by dots
@@ -913,14 +889,18 @@ according to the VTL rules.
 
 Therefore, the generic name of this kind of VTL datasets would be:
 
+```xml
 'DF(1.0.0)/INDICATORvalue.COUNTRYvalue'
+```
 
 Where DF(1.0.0) is the Dataflow and *INDICATORvalue* and *COUNTRYvalue*
 are placeholders for one value of the INDICATOR and COUNTRY dimensions.
 
 Instead the specific name of one of these VTL datasets would be:
 
+```xml
 ‘DF(1.0.0)/POPULATION.USA’
+```xml
 
 In particular, this is the VTL dataset that contains all the
 observations of the Dataflow DF(1.0.0) for which *INDICATOR* =
@@ -967,15 +947,13 @@ It should be noted that the desired VTL Data Sets (i.e. of the kind
 applying the VTL operator “**sub**” (subspace) to the Dataflow
 DF1(1.0.0), like in the following VTL expression:
 
-> ‘DF1(1.0.0)/POPULATION.USA’ :=
->
-> DF1(1.0.0) \[ sub INDICATOR=“POPULATION”, COUNTRY=“USA” \];
->
-> ‘DF1(1.0.0)/POPULATION.CANADA’ :=
->
-> DF1(1.0.0) \[ sub INDICATOR=“POPULATION”, COUNTRY=“CANADA” \];
->
-> … … …
+```xml
+‘DF1(1.0.0)/POPULATION.USA’ :=
+DF1(1.0.0) \[ sub INDICATOR=“POPULATION”, COUNTRY=“USA” \];
+‘DF1(1.0.0)/POPULATION.CANADA’ :=
+DF1(1.0.0) \[ sub INDICATOR=“POPULATION”, COUNTRY=“CANADA” \];
+… … …
+```xml
 
 In fact the VTL operator “sub” has exactly the same behaviour.
 Therefore, mapping different parts of a SDMX Dataflow to different VTL
@@ -998,9 +976,10 @@ value.
 This is equivalent to the application of the VTL “sub” operator only to
 the identifier *INDICATOR*:
 
-> ‘DF1(1.0.0)/POPULATION.’ :=
->
-> DF1(1.0.0) \[ sub INDICATOR=“POPULATION” \];
+```xml
+‘DF1(1.0.0)/POPULATION.’ :=
+DF1(1.0.0) \[ sub INDICATOR=“POPULATION” \];
+```xml
 
 Therefore the VTL Data Set ‘DF1(1.0.0)/POPULATION.’ would have the
 identifiers COUNTRY and TIME\_PERIOD.
@@ -1022,7 +1001,6 @@ combinations of values for INDICATOR and COUNTRY:
 
 - each part is calculated as a VTL derived Data Set, result of a
     dedicated VTL Transformation; [36]
-
 - the data structure of all these VTL Data Sets has the TIME\_PERIOD
     identifier and does not have the INDICATOR and COUNTRY
     identifiers.[37]
@@ -1034,21 +1012,20 @@ mapping dimensions[38].
 The corresponding VTL Transformations, assuming that the result needs to
 be persistent, would be of this kind: [39]
 
-> ‘DF2(1.0.0)/INDICATORvalue.COUNTRYvalue’ &lt;- expression
+```xml
+‘DF2(1.0.0)/INDICATORvalue.COUNTRYvalue’ <- expression
+```
 
 Some examples follow, for some specific values of INDICATOR and COUNTRY:
 
-> ‘DF2(1.0.0)/GDPPERCAPITA.USA’ &lt;- expression11;
->
-> ‘DF2(1.0.0)/GDPPERCAPITA.CANADA’ &lt;- expression12;
->
-> … … …
->
-> ‘DF2(1.0.0)/POPGROWTH.USA’ &lt;- expression21;
->
-> ‘DF2(1.0.0)/POPGROWTH.CANADA’ &lt;- expression22;
->
-> … … …
+```xml
+‘DF2(1.0.0)/GDPPERCAPITA.USA’ &lt;- expression11;
+‘DF2(1.0.0)/GDPPERCAPITA.CANADA’ &lt;- expression12;
+… … …
+‘DF2(1.0.0)/POPGROWTH.USA’ &lt;- expression21;
+‘DF2(1.0.0)/POPGROWTH.CANADA’ &lt;- expression22;
+… … …
+```xml
 
 As said, it is assumed that these VTL derived Data Sets have the
 TIME\_PERIOD as the only identifier. In the mapping from VTL to SMDX,
@@ -1057,15 +1034,14 @@ on order to obtain the SDMX one, with the following values respectively:
 
 VTL dataset INDICATOR value COUNTRY value
 
+```xml
 ‘DF2(1.0.0)/GDPPERCAPITA.USA’ GDPPERCAPITA USA
 ‘DF2(1.0.0)/GDPPERCAPITA.CANADA’ GDPPERCAPITA CANADA
-
-> … … …
-
+… … …
 ‘DF2(1.0.0)/POPGROWTH.USA’ POPGROWTH USA ‘DF2(1.0.0)/POPGROWTH.CANADA’
 POPGROWTH CANADA
-
-> … … …
+… … …
+```
 
 It should be noted that the application of this many-to-one mapping from
 VTL to SDMX is equivalent to an appropriate sequence of VTL
@@ -1076,45 +1052,30 @@ final VTL dataset (in the example DF2(1.0.0)), that can be mapped
 one-to-one to the homonymous SDMX Dataflow. Following the same example,
 these VTL Transformations would be:
 
-DF2bis\_GDPPERCAPITA\_USA := ‘DF2(1.0.0)/GDPPERCAPITA.USA’
+```xml
+DF2bis_GDPPERCAPITA_USA := ‘DF2(1.0.0)/GDPPERCAPITA.USA’
+[calc identifier INDICATOR := ”GDPPERCAPITA”,
+identifier COUNTRY := ”USA”\];
 
-> \[calc identifier INDICATOR := ”GDPPERCAPITA”,
->
-> identifier COUNTRY := ”USA”\];
+DF2bis_GDPPERCAPITA_CANADA := ‘DF2(1.0.0)/GDPPERCAPITA.CANADA’
 
-DF2bis\_GDPPERCAPITA\_CANADA := ‘DF2(1.0.0)/GDPPERCAPITA.CANADA’
-
-> \[calc identifier INDICATOR:=”GDPPERCAPITA”,
->
-> identifier COUNTRY:=”CANADA”\];
-
+[calc identifier INDICATOR:=”GDPPERCAPITA”,
+identifier COUNTRY:=”CANADA”];
 … … …
-
-DF2bis\_POPGROWTH\_USA := ‘DF2(1.0.0)/POPGROWTH.USA’
-
-> \[calc identifier INDICATOR := ”POPGROWTH”,
->
-> identifier COUNTRY := ”USA”\];
-
-DF2bis\_POPGROWTH\_CANADA’ := ‘DF2(1.0.0)/POPGROWTH.CANADA’
-
-> \[calc identifier INDICATOR := ”POPGROWTH”,
->
-> identifier COUNTRY := ”CANADA”\];
-
+DF2bis_POPGROWTH_USA := ‘DF2(1.0.0)/POPGROWTH.USA’
+[calc identifier INDICATOR := ”POPGROWTH”,
+identifier COUNTRY := ”USA”];
+DF2bis_POPGROWTH_CANADA’ := ‘DF2(1.0.0)/POPGROWTH.CANADA’
+[calc identifier INDICATOR := ”POPGROWTH”,
+identifier COUNTRY := ”CANADA”];
 … … …
-
-DF2(1.0) &lt;- UNION (DF2bis\_GDPPERCAPITA\_USA’,
-
-> DF2bis\_GDPPERCAPITA\_CANADA’,
->
-> … ,
->
-> DF2bis\_POPGROWTH\_USA’,
->
-> DF2bis\_POPGROWTH\_CANADA’
->
-> …);
+DF2(1.0) <- UNION (DF2bis\_GDPPERCAPITA\_USA’,
+ DF2bis_GDPPERCAPITA_CANADA’,
+… ,
+DF2bis\_POPGROWTH\_USA’,
+DF2bis\_POPGROWTH\_CANADA’
+…);
+```
 
 In other words, starting from the datasets explicitly calculated through
 VTL (in the example ‘DF2(1.0)/GDPPERCAPITA.USA’ and so on), the first
@@ -1200,7 +1161,9 @@ also the same representation (i.e. the same Value Domain as for VTL).
 For example, it is possible to obtain correct results from the VTL
 expression
 
-DS\_c := DS\_a + DS\_b (where DS\_a, DS\_b, DS\_c are VTL Data Sets)
+```xml
+DS_c := DS_a + DS_b (where DS_a, DS_b, DS_c are VTL Data Sets)
+```
 
 if the matching components in DS\_a and DS\_b (e.g. ref\_date,
 geo\_area, sector …) refer to the same general representation. In
@@ -1242,8 +1205,9 @@ of the compound structures. See below the diagram of the VTL data types,
 taken from the VTL User Manual:
 
 ![](media/image16.svg)
-
+///caption
 Figure 22 – VTL Data Types
+///
 
 The VTL scalar types are in turn subdivided in basic scalar types, which
 are elementary (not defined in term of other data types) and Value
@@ -1255,8 +1219,9 @@ structure in terms of supersets/subsets (e.g. "scalar" is the superset
 of all the basic scalar types):
 
 ![](media/image17.svg)
-
+///caption
 Figure 23 – VTL Basic Scalar Types
+///
 
 ### VTL basic scalar types and SDMX data types
 

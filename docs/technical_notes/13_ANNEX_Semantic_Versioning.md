@@ -36,8 +36,6 @@ version numbers and the way they change convey meaning about the
 underlying data structures and what has been modified from one version
 to the next.
 
- 
-
 ## Semantic Versioning Specification for SDMX 3.0(.0)
 
   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -51,50 +49,42 @@ PATCH, and EXTENSION, as defined in chapter 4.3.
 
 The following rules apply to versioned artefacts:
 
--   All versioned SDMX artefacts MUST specify a version number.
-
--   The version number of immutable versioned SDMX artefacts MUST take
+- All versioned SDMX artefacts MUST specify a version number.
+- The version number of immutable versioned SDMX artefacts MUST take
     the form X.Y.Z where X, Y, and Z are non-negative integers and MUST
     NOT contain leading zeroes. X is the MAJOR version, Y is the MINOR
     version, and Z is the PATCH version. Each element MUST increase
     numerically. For instance: 1.9.0 -&gt; 1.10.0 -&gt; 1.11.0.
-
--   Once an SDMX artefact with an X.Y.Z version has been shared
+- Once an SDMX artefact with an X.Y.Z version has been shared
     externally or publicly released, the contents of that version MUST
     NOT be modified. That artefact version is considered stable. Any
     modifications MUST be released as a new version.
-
--   MAJOR version zero (0.y.z) is for initial modelling. Anything MAY
+- MAJOR version zero (0.y.z) is for initial modelling. Anything MAY
     change at any time. The externally released or public artefact
     SHOULD NOT be considered stable.
-
--   Version 1.0.0 defines the first stable artefact. The way in which
+- Version 1.0.0 defines the first stable artefact. The way in which
     the version number is incremented after this release is dependent on
     how this externally released or public artefact changes.
-
--   PATCH version Z (x.y.Z | x &gt; 0) MUST be incremented if only
+- PATCH version Z (x.y.Z | x &gt; 0) MUST be incremented if only
     backwards compatible property changes are introduced. A property
     change is defined as an internal change that does not affect the
     relationship to other artefacts. These are changes in the artefact's
     or artefact element's names, descriptions and annotations that MUST
     NOT alter their meaning.
-
--   MINOR version Y (x.Y.z | x &gt; 0) MUST be incremented if a new,
+- MINOR version Y (x.Y.z | x &gt; 0) MUST be incremented if a new,
     backwards compatible element is introduced to a stable artefact.
     These are additional items in ItemScheme artefacts. It MAY be
     incremented if substantial new information is introduced within the
     artefact's properties. It MAY include PATCH level changes. PATCH
     version MUST be reset to 0 when MINOR version is incremented.
-
--   MAJOR version X (X.y.z | X &gt; 0) MUST be incremented if any
+- MAJOR version X (X.y.z | X &gt; 0) MUST be incremented if any
     backwards incompatible changes are introduced to a stable artefact.
     These often relate to deletions of items in ItemSchemes or to
     backwards incompatibility introduced due to changes in references to
     other artefacts. A MAJOR version change MAY also include MINOR and
     PATCH level changes. PATCH and MINOR version MUST be reset to 0 when
     MAJOR version is incremented.
-
--   A mutable version, e.g. used for externally released or public
+- A mutable version, e.g. used for externally released or public
     drafts or as pre-release, MUST be denoted by appending an EXTENSION
     that consists of a hyphen and a series of dot separated identifiers
     immediately following the PATCH version (x.y.z-EXT). Identifiers
@@ -116,8 +106,7 @@ The following rules apply to versioned artefacts:
     X.Y.Z-EXT will allow only for any PATCH changes, as defined above.
     EXTENSION examples: 1.0.0-draft, 1.0.0-draft.1, 1.0.0-0.3.7,
     1.0.0-x.7.z.92.
-
--   Precedence refers to how versions are compared to each other when
+- Precedence refers to how versions are compared to each other when
     ordered. Precedence MUST be calculated by separating the version
     into MAJOR, MINOR, PATCH and EXTENSION identifiers in that order.
     Precedence is determined by the first difference when comparing each
@@ -137,145 +126,104 @@ The following rules apply to versioned artefacts:
     are equal. Example: 1.0.0-draft &lt; 1.0.0-draft.1 &lt;
     1.0.0-draft.prerelease &lt; 1.0.0-prerelease &lt; 1.0.0-prerelease.2
     &lt; 1.0.0-prerelease.11 &lt; 1.0.0-rc.1 &lt; 1.0.0.
-
--   The reasons for version changes MAY be documented in brief form in
+- The reasons for version changes MAY be documented in brief form in
     an artefact's annotation of type "CHANGELOG".
 
 ## Backus–Naur Form Grammar for Valid SDMX 3.0(.0) Semantic Versions
 
-**&lt;valid semver&gt; ::= &lt;version core&gt;**
+```xml
+<valid semver> ::= <version core>
+                 | <version core> "-" <extension>
 
-**| &lt;version core&gt; "-" &lt;extension&gt;**
+<version core> ::= <major> "." <minor> "." <patch>
 
-**&lt;version core&gt; ::= &lt;major&gt; "." &lt;minor&gt; "."
-&lt;patch&gt;**
+<major> ::= <numeric identifier>
+<minor> ::= <numeric identifier>
+<patch> ::= <numeric identifier>
 
-**&lt;major&gt; ::= &lt;numeric identifier&gt;**
+<extension> ::= <dot-separated extension identifiers>
 
-**&lt;minor&gt; ::= &lt;numeric identifier&gt;**
+<dot-separated extension identifiers> ::= <extension identifier>
+                                        | <extension identifier> "." <dot-separated extension identifiers>
 
-**&lt;patch&gt; ::= &lt;numeric identifier&gt;**
+<extension identifier> ::= <alphanumeric identifier>
+                         | <numeric identifier>**
 
-**&lt;extension&gt; ::= &lt;dot-separated extension identifiers&gt;**
+<alphanumeric identifier> ::= <non-digit>
+                            | <non-digit> <identifier characters>
+                            | <identifier characters> <non-digit>
+                            | <identifier characters> <non-digit> <identifier characters>
+                            
+<numeric identifier> ::= "0"
+                       | <positive digit>
+                       | <positive digit> <digits>
 
-**&lt;dot-separated extension identifiers&gt; ::= &lt;extension
-identifier&gt;**
+<identifier characters> ::= <identifier character>
+                          | <identifier character> <identifier characters>
 
-**| &lt;extension identifier&gt; "." &lt;dot-separated extension
-identifiers&gt;**
+<identifier character> ::= <digit>
+                         | <non-digit>
 
-**&lt;extension identifier&gt; ::= &lt;alphanumeric identifier&gt;**
+<non-digit> ::= <letter>
+              | "-"
 
-**| &lt;numeric identifier&gt;**
+<digits> ::= <digit>
+           | <digit> <digits>
 
-**&lt;alphanumeric identifier&gt; ::= &lt;non-digit&gt;**
+<digit> ::= "0"
+          | <positive digit>
 
-**| &lt;non-digit&gt; &lt;identifier characters&gt;**
+<positive digit> ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 
-**| &lt;identifier characters&gt; &lt;non-digit&gt;**
+<letter> ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+```
 
-**| &lt;identifier characters&gt; &lt;non-digit&gt; &lt;identifier
-characters&gt;**
-
-**&lt;numeric identifier&gt; ::= "0"**
-
-**| &lt;positive digit&gt;**
-
-**| &lt;positive digit&gt; &lt;digits&gt;**
-
-**&lt;identifier characters&gt; ::= &lt;identifier character&gt;**
-
-**| &lt;identifier character&gt; &lt;identifier characters&gt;**
-
-**&lt;identifier character&gt; ::= &lt;digit&gt;**
-
-**| &lt;non-digit&gt;**
-
-**&lt;non-digit&gt; ::= &lt;letter&gt;**
-
-**| "-"**
-
-**&lt;digits&gt; ::= &lt;digit&gt;**
-
-**| &lt;digit&gt; &lt;digits&gt;**
-
-**&lt;digit&gt; ::= "0"**
-
-**| &lt;positive digit&gt;**
-
-**&lt;positive digit&gt; ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" |
-"8" | "9"**
-
-**&lt;letter&gt; ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I"
-| "J"**
-
-**| "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T"**
-
-**| "U" | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" | "c" | "d"**
-
-**| "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n"**
-
-**| "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x"**
-
-**| "y" | "z"**
-
-## Dependency Management in SDMX 3.0(.0):
+## Dependency Management in SDMX 3.0(.0)
 
 MAJOR, MINOR or PATCH version parts in SDMX 3.0 artefact references CAN
 be wildcarded using "+" as extension:
 
--   X+.Y.Z means the currently latest available version &gt;= X.Y.Z
-
-    -   Example: "2+.3.1" means the currently latest available version
+- X+.Y.Z means the currently latest available version &gt;= X.Y.Z
+    - Example: "2+.3.1" means the currently latest available version
         &gt;= "2.3.1" (even if not backwards compatible)
+    - Typical use case: references in SDMX Categorisations
 
-    -   Typical use case: references in SDMX Categorisations
-
--   X.Y+.Z means the currently latest available backwards compatible
+- X.Y+.Z means the currently latest available backwards compatible
     version &gt;= X.Y.Z
-
-    -   Example: "2.3+.1" means the currently latest available version
+    - Example: "2.3+.1" means the currently latest available version
         &gt;= "2.3.1" and &lt; "3.0.0" (all backwards compatible
         versions &gt;= "2.3.1")
+    - Typical use case: references in SDMX DSD
 
-    -   Typical use case: references in SDMX DSD
-
--   X.Y.Z+ means the currently latest available forwards and backwards
+- X.Y.Z+ means the currently latest available forwards and backwards
     compatible version &gt;= X.Y.Z
-
-    -   Example: "2.3.1+" means the currently latest available version
+    - Example: "2.3.1+" means the currently latest available version
         &gt;= "2.3.1" and &lt; "2.4.0" (all forwards and backwards
         compatible versions &gt;= "2.3.1")
 
--   Non-versioned and 2-digit version SDMX structural artefacts CAN
+- Non-versioned and 2-digit version SDMX structural artefacts CAN
     reference any other non-versioned or versioned (whether SemVer or
     not) SDMX structural artefacts.
-
--   Semantically versioned artefacts MUST only reference other
+- Semantically versioned artefacts MUST only reference other
     semantically versioned artefacts.
-
--   Wildcarded references in a stable artefact implicitly target only
+- Wildcarded references in a stable artefact implicitly target only
     future stable versions of the referenced artefacts within the
     defined wildcard scope.
-
-    -   Example: The reference to "AGENCY\_ID:CODELIST\_ID(2.3+.1)" in
+    - Example: The reference to "AGENCY\_ID:CODELIST\_ID(2.3+.1)" in
         an artefact "AGENCY\_ID:DSD\_ID(2.2.1)" resolves to artefact
         "AGENCY\_ID:CODELIST\_ID(2.4.3)" if that was currently the
         latest available stable version.
 
--   Wildcarded references in a version-extended artefact implicitly
+- Wildcarded references in a version-extended artefact implicitly
     target future stable and version-extended versions of the referenced
     artefacts within the defined wildcard scope.
-
-    -   Example: The reference to "AGENCY\_ID:CODELIST\_ID(2.3+.1)" in
+    - Example: The reference to "AGENCY\_ID:CODELIST\_ID(2.3+.1)" in
         an artefact "AGENCY\_ID:DSD\_ID(2.2.1-draft)" resolves to
         artefact "AGENCY\_ID:CODELIST\_ID(2.5.0-draft)" if that was
         currently the latest available version.
 
--   References to specific version-extended artefacts MAY be used, but
-    those cannot be combined with a wildcard.
-
-    -   Example: The reference to "AGENCY\_ID:CODELIST\_ID(2.5.0-draft)"
+- References to specific version-extended artefacts MAY be used, but those cannot be combined with a wildcard.
+    - Example: The reference to "AGENCY\_ID:CODELIST\_ID(2.5.0-draft)"
         in an artefact "AGENCY\_ID:DSD\_ID(2.2.1)" resolves to artefact
         "AGENCY\_ID:CODELIST\_ID(2.5.0-draft)", which might be subject
         to continued backwards compatible changes.
@@ -313,14 +261,13 @@ If artefact versioning is required and SDMX 3.0.0 Semantic Versioning is
 available within the tools and processes used, then it is recommended to
 switch to Semantic Versioning with the following steps:
 
-1.  Complement the missing version parts with 0s to make the version
-    number SemVer-compliant using the MAJOR.MINOR.PATCH-EXTENSION
-    syntax:
+1. Complement the missing version parts with 0s to make the version
+    number SemVer-compliant using the MAJOR.MINOR.PATCH-EXTENSION syntax:
 
     Example: Version 2 becomes version 2.0.0 and version 3.1 becomes
     version 3.1.0.
 
-2.  Replace the "isFinal=false" property by the version extensions
+2. Replace the "isFinal=false" property by the version extensions
     "-draft" (or alternatively "-unstable" or "-nonfinal" depending on
     the use case).
 
@@ -348,9 +295,8 @@ scheme should be used?**
 If all counterparts involved in the process and all tools used for its
 implementation are SDMX 3.0-ready, then it is recommended to:
 
--   in general, use semantic versioning;
-
--   exceptionally, do not use versioning for artefacts that do not
+- in general, use semantic versioning;
+- exceptionally, do not use versioning for artefacts that do not
     require it, e.g. artefacts that never change, that are only used
     internally or for which communication on changes with external
     parties or systems is not required.
@@ -462,7 +408,9 @@ Compatible Regular Expressions, i.e. Perl, PHP and R\], Python and Go).
 Reduced version (without original SemVer "build metadata") from:
 <https://regex101.com/r/Ly7O1x/3/>
 
+```xml
 ^(?P&lt;major&gt;0|\[1-9\]\d\*)\\(?P&lt;minor&gt;0|\[1-9\]\d\*)\\(?P&lt;patch&gt;0|\[1-9\]\d\*)(?:-(?P&lt;extension&gt;(?:0|\[1-9\]\d\*|\d\*\[a-zA-Z-\]\[0-9a-zA-Z-\]\*)(?:\\(?:0|\[1-9\]\d\*|\d\*\[a-zA-Z-\]\[0-9a-zA-Z-\]\*))\*))?$
+```
 
 And one with numbered capture groups instead (so cg1 = major, cg2 =
 minor, cg3 = patch and cg4 = extension) that is compatible with ECMA
@@ -472,7 +420,9 @@ Perl, PHP and R), Python and Go.
 Reduced version (without original SemVer "build metadata") from:
 <https://regex101.com/r/vkijKf/1/>
 
+```xml
 ^(0|\[1-9\]\d\*)\\(0|\[1-9\]\d\*)\\(0|\[1-9\]\d\*)(?:-((?:0|\[1-9\]\d\*|\d\*\[a-zA-Z-\]\[0-9a-zA-Z-\]\*)(?:\\(?:0|\[1-9\]\d\*|\d\*\[a-zA-Z-\]\[0-9a-zA-Z-\]\*))\*))?$
+```
 
 **Must I adopt semantic versioning rules when switching to SDMX 3.0?**
 
