@@ -231,7 +231,9 @@ observation at a single point in time. Therefore, if one wants to use
 SDMX for data which is measured at a distinct point in time rather than
 being reported over a period, the date-time representation can be used.
 
- Representation: xs:dateTime `YYYY-MM-DDThh:mm:ss`[^1]
+ Representation: xs:dateTime `YYYY-MM-DDThh:mm:ss`[^2]
+
+[^2]: The seconds can be reported fractionally
 
 ### Standard Reporting Period
 
@@ -282,7 +284,7 @@ defined in SDMX:
     - Period Duration: P7D (seven days)
     - Limit per year: 53
     - Representation: common:ReportingWeekType (YYYY-Www, e.g. 2000-W53)
-    - Notes: There are either 52 or 53 weeks in a reporting year. This is based on the ISO 8601 definition of a week (Monday - Saturday), where the first week of a reporting year is defined as the week with the first Thursday on or after the reporting year start day.[^2] The reporting week is always represented as two digits, therefore 1-9 are 0 padded (e.g. 01). This allows the values to be sorted chronologically using textual sorting methods.
+    - Notes: There are either 52 or 53 weeks in a reporting year. This is based on the ISO 8601 definition of a week (Monday - Saturday), where the first week of a reporting year is defined as the week with the first Thursday on or after the reporting year start day.[^3] The reporting week is always represented as two digits, therefore 1-9 are 0 padded (e.g. 01). This allows the values to be sorted chronologically using textual sorting methods.
 - **Reporting Day**:
     - Period Indicator: D
     - Period Duration: P1D (one day)
@@ -290,7 +292,11 @@ defined in SDMX:
     - Representation: common:ReportingDayType (YYYY-Dddd, e.g. 2000-D366)
     - Notes: There are either 365 or 366 days in a reporting year, depending on whether the reporting year includes leap day (February 29). The reporting day is always represented as three digits, therefore 1-99 are 0 padded (e.g. 001). This allows the values to be sorted chronologically using textual sorting methods.
 
-[^2]: The seconds can be reported fractionally
+[^3]: 
+    ISO 8601 defines alternative definitions for the first week, all of
+    which produce equivalent results. Any of these definitions could be
+    substituted so long as they are in relation to the reporting year start
+    day.
 
 The meaning of a reporting year is always based on the start day of the
 year and requires that the reporting year is expressed as the year at
@@ -368,7 +374,7 @@ reporting year start day as \[REPORTING\_YEAR\_START\_DAY\]):
 3. **Determine \[PERIOD\_START\]:**
 
     Subtract one from the \[PERIOD\_VALUE\] and multiply this by the
-    \[PERIOD\_DURATION\]. Add[^3] this to the \[REPORTING\_YEAR\_BASE\].
+    \[PERIOD\_DURATION\]. Add[^4] this to the \[REPORTING\_YEAR\_BASE\].
     The result is the \[PERIOD\_START\].
 
 4. **Determine the \[PERIOD\_END\]:**
@@ -377,7 +383,9 @@ reporting year start day as \[REPORTING\_YEAR\_START\_DAY\]):
     Add[^4] this to the \[REPORTING\_YEAR\_BASE\] add[^4]
     -P1D. The result is the \[PERIOD\_END\].
 
-[^3]: ISO 8601 defines alternative definitions for the first week, all of which produce equivalent results. Any of these definitions could be substituted so long as they are in relation to the reporting year start day.
+[^4]:
+    The rules for adding durations to a date time are described in the W3C XML Schema specification.
+    See [w3.org](http://www.w3.org/TR/xmlschema-2/#adding-durations-to-dateTimes) for further details.
 
 For all of these ranges, the bounds include the beginning of the
 \[PERIOD\_START\] (i.e. 00:00:00) and the end of the \[PERIOD\_END\]
@@ -626,10 +634,16 @@ Example Matches:
 - 2010-T3 (any reporting year start day)
 - 2010-Q3 or later (any reporting year start day)
 - 2010-M07 or later (any reporting year start day)
-- 2010-W27 or later \[reporting year start day --01-01\][^4]
+- 2010-W27 or later \[reporting year start day --01-01\][^5]
 - 2010-D182 or later (reporting year start day --01-01)
-- 2010-W28 or later \[reporting year start day --07-01\][^5]
+- 2010-W28 or later \[reporting year start day --07-01\][^6]
 - 2010-D185 or later (reporting year start day --07-01)
+
+[^5]:
+    2010-Q3 (with a reporting year start day of --01-01) starts on 2010-07-01. This is day 4 of week 26, therefore the first week matched is week 27.
+[^6]: 
+    2010-Q3 (with a reporting year start day of --07-01) starts on 2011-01-01. This is day 6 of week 27, therefore the first week matched is week 28.
+
 
 ## Versioning
 

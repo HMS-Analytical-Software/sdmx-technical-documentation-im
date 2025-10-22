@@ -20,9 +20,13 @@ Typical use cases include:
 - Transforming received data into a common internal structure;
 - Transforming reported data into the data collector's preferred
       structure;
-- Transforming unidimensional datasets[45] to multi-dimensional; and
+- Transforming unidimensional datasets[^1] to multi-dimensional; and
 - Transforming internal datasets with a complex structure to a simpler
       structure with fewer dimensions suitable for dissemination.
+
+[^1]:
+    Unidimensional datasets are those with a single 'indicator' or
+    'series code' dimension.
 
 ## 1-1 structure maps
 
@@ -66,15 +70,15 @@ Example:
 
 | Rule | Source | Target |
 | :--- | :--- | :--- |
-| 1 | <p>If</p><br><p>FREQUENCY=A; and</p><br><p>ADJUSTMENT=N; and</p><br><p>MATURITY=L.</p> | <p>Set</p><br><p>INDICATOR=A_N_L</p> |
-| 2 | <p>If</p><br><p>FREQUENCY=M; and</p><br><p>ADJUSTMENT=S_A1; and</p><br><p>MATURITY=TY12.</p> | <p>Set</p><br><p>INDICATOR=MON_SAX_12</p> |
+| 1 | If FREQUENCY=A and ADJUSTMENT=N and MATURITY=L | Set INDICATOR=A_N_L |
+| 2 | If FREQUENCY=M and ADJUSTMENT=S_A1 and MATURITY=TY12 | Set INDICATOR=MON_SAX_12 |
 
 N-n rules can also set values for multiple source Components.
 
 | Rule | Source | Target |
 | :--- | :--- | :--- |
-| 1 | <p>If</p><br><p>FREQUENCY=A; and</p><br><p>ADJUSTMENT=N; and</p><br><p>MATURITY=L.</p> | <p>Set</p><br><p>INDICATOR=A_N_L,</p><br><p>STATUS=QXR15,</p><br><p>NOTE="Unadjusted".</p> |
-| 2 | <p>If</p><br><p>FREQUENCY=M; and</p><br><p>ADJUSTMENT=S_A1; and</p><br><p>MATURITY=TY12.</p> | <p>Set</p><br><p>INDICATOR=MON_SAX_12,</p><br><p>STATUS=MPM12,</p><br><p>NOTE="Seasonally Adjusted"</p> |
+| 1 | If FREQUENCY=A and ADJUSTMENT=N and MATURITY=L | Set INDICATOR=A_N_L, STATUS=QXR15, NOTE="Unadjusted" |
+| 2 | If FREQUENCY=M and ADJUSTMENT=S_A1 and MATURITY=TY12 | Set INDICATOR=MON_SAX_12, STATUS=MPM12, NOTE="Seasonally Adjusted" |
 
 ## Ambiguous mapping rules
 
@@ -86,8 +90,8 @@ with multiple dimensions is shown below:
 
 | Source | Target | Output Series Key |
 | :--- | :--- | :--- |
-| SERIES_CODE=XMAN_Z_21 | <p>Dimensions</p><br><p>INDICATOR=XM</p><br><p>FREQ=A</p><br><p>ADJUSTMENT=N</p><br><p>Attributes</p><br><p>UNIT_MEASURE=_Z</p><br><p>COMP_ORG=21</p> | XM:A:N |
-| SERIES_CODE=XMAN_Z_34 | <p>Dimensions</p><br><p>INDICATOR=XM</p><br><p>FREQ=A</p><br><p>ADJUSTMENT=N</p><br><p>Attributes</p><br><p>UNIT_MEASURE=_Z</p><br><p>COMP_ORG=34</p> | XM:A:N |
+| SERIES_CODE=XMAN_Z_21 | INDICATOR=XM, FREQ=A, ADJUSTMENT=N, UNIT_MEASURE=_Z, COMP_ORG=21 | XM:A:N |
+| SERIES_CODE=XMAN_Z_34 | INDICATOR=XM, FREQ=A, ADJUSTMENT=N, UNIT_MEASURE=_Z, COMP_ORG=34 | XM:A:N |
 
 The above behaviour can be okay if the series XMAN\_Z\_21 contains
 observations for different periods of time then the series XMAN\_Z\_34.
@@ -192,22 +196,22 @@ component.
 
 | Regex | Description | Output |
 | :--- | :--- | :--- |
-| A | Rule match if input = 'A' | OUT_A |
-| ^[A-G] | Rule match if the input starts with letters A to G | OUT_B |
-| A&#124;B | Rule match if input is either 'A' or 'B' | OUT_C |
+| `A` | Rule match if input = 'A' | OUT_A |
+| `^[A-G]` | Rule match if the input starts with letters A to G | OUT_B |
+| `A \| B` | Rule match if input is either 'A' or 'B' | OUT_C |
 
 Like all mapping rules, the output is either a Code, a Value or free
 text depending on the representation of the Component in the target Data
 Structure Definition.
 
 If the regular expression contains capture groups, these can be used in
-the definition of the output value, by specifying \\***n*** as an output
-value where ***n*** is the number of the capture group starting from 1.
+the definition of the output value, by specifying `\n` as an output
+value where `n` is the number of the capture group starting from 1.
 For example
 
 | Regex | Target output | Example Input | Example Output |
 | :--- | :--- | :--- | :--- |
-| <mark>([0-9]{4})[0-9]([0-9]{1})</mark> | <mark>\1-Q\2</mark> | 200933 | 2009-Q3 |
+| `([0-9]{4})[0-9]([0-9]{1})` | `\1-Q\2` | 200933 | 2009-Q3 |
 
 As regular expression rules can be used as a general catch-all if
 nothing else matches, the ordering of the rules is important. Rules
@@ -218,9 +222,9 @@ The following example shows this:
 
 | Priority | Regex | Description | Output |
 | :--- | :--- | :--- | :--- |
-| 1 | A | Rule match if input = 'A' | OUT_A |
-| 2 | B | Rule match if input = 'B' | OUT_B |
-| 3 | [A-Z] | Any character A-Z | OUT_C |
+| 1 | `A` | Rule match if input = 'A' | OUT_A |
+| 2 | `B` | Rule match if input = 'B' | OUT_B |
+| 3 | `[A-Z]` | Any character A-Z | OUT_C |
 
 The input 'A' matches both the first and the last rule, but the first
 takes precedence having the higher priority. The output is OUT\_A.
@@ -257,9 +261,9 @@ datasets to be mapped to an SDMX compliant time format.
 Two types of time input are defined:
 
 1. **Pattern based dates** – a string which can be described using a
-    notation like dd/mm/yyyy or is represented as the number of
-    periods since a point in time, for example: 2010M001 (first month
-    in 2010), or 2014D123 (123<sup>rd</sup> day in 2014); and
+    notation like `dd/mm/yyyy` or is represented as the number of
+    periods since a point in time, for example: `2010M001` (first month
+    in 2010), or `2014D123` (123rd day in 2014); and
 2. **Numerical based datetime** – a number specifying the elapsed
     periods since a fixed point in time, for example Unix Time is
     measured by the number of milliseconds since 1970.
@@ -309,8 +313,12 @@ formatting or matched against the input string during parsing.
 
 Due to the fact that dates may differ per locale, an optional property,
 defining the locale of the pattern, is provided. This would assist
-processing of source dates, according to the given locale[46]. An
+processing of source dates, according to the given locale[^2]. An
 indicative list of examples is presented in the following table:
+
+[^2]:
+    A list of commonly used locales can be found in the [Java supported
+    locales](https://www.oracle.com/java/technologies/javase/jdk8-jre8-suported-locales.html)
 
 | English (en) | Australia (AU) | en-AU |
 | :--- | :--- | :--- |
@@ -328,60 +336,54 @@ indicative list of examples is presented in the following table:
 | German (de) | Germany (DE) | de-DE |
 | German (de) | Luxembourg (LU) | de-LU |
 | German (de) | Switzerland (CH) | de-CH |
-| Greek (el) | Cyprus (CY) | el-CY<a href="https://www.oracle.com/java/technologies/javase/jdk8-jre8-suported-locales.html#cldrlocale">(*)</a> |
+| Greek (el) | Cyprus (CY) | [el-CY](https://www.oracle.com/java/technologies/javase/jdk8-jre8-suported-locales.html#cldrlocale)  |
 | Greek (el) | Greece (GR) | el-GR |
 | Hebrew (iw) | Israel (IL) | iw-IL |
 | Hindi (hi) | India (IN) | hi-IN |
 | Hungarian (hu) | Hungary (HU) | hu-HU |
 | Icelandic (is) | Iceland (IS) | is-IS |
-| Indonesian (in) | Indonesia (ID) | in-ID<a href="https://www.oracle.com/java/technologies/javase/jdk8-jre8-suported-locales.html#cldrlocale">(*)</a> |
-| Irish (ga) | Ireland (IE) | ga-IE<a href="https://www.oracle.com/java/technologies/javase/jdk8-jre8-suported-locales.html#cldrlocale">(*)</a> |
+| Indonesian (in) | Indonesia (ID) | [in-ID](https://www.oracle.com/java/technologies/javase/jdk8-jre8-suported-locales.html#cldrlocale) |
+| Irish (ga) | Ireland (IE) | [ga-IE](https://www.oracle.com/java/technologies/javase/jdk8-jre8-suported-locales.html#cldrlocale) |
 | Italian (it) | Italy (IT) | it-IT |
 
 Examples
 
-- 22/06/1981 would be described as dd/MM/YYYY, with locale en-GB
-- 2008-mars-12 would be described as YYYY-MMM-DD, with locale fr-FR
-- 22 July 1981 would be described as dd MMMM YYYY, with locale en-US
-- 22 Jul 1981 would be described as dd MMM YYYY
-- 2010 D62 would be described as YYYYDnn (day 62 of the year 2010)
+- `22/06/1981` would be described as `dd/MM/YYYY`, with locale `en-GB`
+- `2008-mars-12` would be described as `YYYY-MMM-DD`, with locale `fr-FR`
+- `22 July 1981` would be described as `dd MMMM YYYY`, with locale `en-US`
+- `22 Jul 1981` would be described as `dd MMM YYYY`
+- `2010 D62` would be described as `YYYYDnn` (day 62 of the year 2010)
 
 The following pattern letters are defined (all other characters from 'A'
 to 'Z' and from 'a' to 'z' are reserved):
 
 | Letter | Date or Time Component | Presentation | Examples |
 | :--- | :--- | :--- | :--- |
-| G | Era designator | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#text">Text</a> | AD |
-| yy | Year short (upper case is Year of Week<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a>) | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#year">Year</a> | 96 |
+| G | Era designator | [Text](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#text) | AD |
+| yy | Year short (upper case is Year of Week [^1]) | [Year](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#year) | 96 |
 | yyyy | Year Full (upper case is Year of Week) | Year | 1996 |
 | MM | Month number in year starting with 1 | Month | 07 |
 | MMM | Month name short | Month | Jul |
 | MMMM | Month name full | Month | July |
-| ww | Week in year | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 27 |
-| W | Week in month | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 2 |
-| DD | Day in year | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 189 |
-| dd | Day in month | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 10 |
-| F | Day of week in month | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 2 |
-| E | Day name in week | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#text">Text</a> | Tuesday; Tue |
-| U | Day number of week (1 = Monday, ..., 7 = Sunday) | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 1 |
-| HH | Hour in day (0-23) | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 0 |
-| kk | Hour in day (1-24) | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 24 |
-| KK | Hour in am/pm (0-11) | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 0 |
-| hh | Hour in am/pm (1-12) | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 12 |
-| mm | Minute in hour | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 30 |
-| ss | Second in minute | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 55 |
-| S | Millisecond | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 978 |
-| n | Number of periods, used after a SDMX Frequency Identifier such as M,<br>Q, D (month, quarter, day) | <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number">Number</a> | 12 |
+| ww | Week in year | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 27 |
+| W | Week in month | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 2 |
+| DD | Day in year | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 189 |
+| dd | Day in month | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 10 |
+| F | Day of week in month | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 2 |
+| E | Day name in week | [Text](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#text) | Tuesday; Tue |
+| U | Day number of week (1 = Monday, ..., 7 = Sunday) | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 1 |
+| HH | Hour in day (0-23) | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 0 |
+| kk | Hour in day (1-24) | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 24 |
+| KK | Hour in am/pm (0-11) | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 0 |
+| hh | Hour in am/pm (1-12) | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 12 |
+| mm | Minute in hour | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 30 |
+| ss | Second in minute | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 55 |
+| S | Millisecond | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 978 |
+| n | Number of periods, used after a SDMX Frequency Identifier such as M, Q, D (month, quarter, day) | [Number](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#number) | 12 |
 
-<aside id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>yyyy represents the calendar year while YYYY represents
-the year of the week, which is only relevant for 53 week years<a
-href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
+[^1]:
+    yyyy represents the calendar year while YYYY represents
+    the year of the week, which is only relevant for 53 week years
 
 The model is illustrated below:
 
@@ -412,8 +414,8 @@ are defined by the **Base** as a valid SDMX Time Period, and the
 
 | Numerical datetime systems | Base | Period |
 | :--- | :--- | :--- |
-| <p>Epoch Time (UNIX)</p><br><p>Milliseconds since 01 Jan 1970</p> | 1970 | millisecond |
-| <p>Windows System Time</p><br><p>Milliseconds since 01 Jan 1601</p> | 1601 | millisecond |
+| Epoch Time (UNIX): Milliseconds since 01 Jan 1970 | 1970 | millisecond |
+| Windows System Time: Milliseconds since 01 Jan 1601 | 1601 | millisecond |
 
 The example above illustrates numerical based datetime mapping rules for
 two commonly used time standards.
@@ -443,10 +445,12 @@ target dataset.
 
 | Rule | Source | Target |
 | :--- | :--- | :--- |
-| 1 | <p>If</p><br><p>INDICATOR=XULADS; and</p><br><p>TIME_PERIOD=2007.</p> | <p>Set</p><br><p>OBS_CONF=F</p> |
-| 2 | <p>If</p><br><p>INDICATOR=XULADS; and</p><br><p>TIME_PERIOD=2008.</p> | <p>Set</p><br><p>OBS_CONF=F</p> |
-| 3 | <p>If</p><br><p>INDICATOR=XULADS; and</p><br><p>TIME_PERIOD=2009.</p> | <p>Set</p><br><p>OBS_CONF=F</p> |
-| 4 | <p>If</p><br><p>INDICATOR=XULADS; and</p><br><p>TIME_PERIOD=2010.</p> | <p>Set</p><br><p>OBS_CONF=<strong>C</strong></p> |
+| Rule | Source | Target |
+| :--- | :--- | :--- |
+| 1 | If INDICATOR=XULADS and TIME_PERIOD=2007 | Set OBS_CONF=F |
+| 2 | If INDICATOR=XULADS and TIME_PERIOD=2008 | Set OBS_CONF=F |
+| 3 | If INDICATOR=XULADS and TIME_PERIOD=2009 | Set OBS_CONF=F |
+| 4 | If INDICATOR=XULADS and TIME_PERIOD=2010 | Set OBS_CONF=C |
 
 In the example above, OBS\_CONF is an Observation Attribute.
 
@@ -463,19 +467,19 @@ re-written using two rules as follows:
 
 | Rule | Source | Target |
 | :--- | :--- | :--- |
-| 1 | <p>If</p><br><p>INDICATOR=XULADS.</p><br><p>Validity Period</p><br><p>start period=2007</p><br><p>end period=2009</p> | <p>Set</p><br><p>OBS_CONF=F</p> |
-| 2 | <p>If</p><br><p>INDICATOR=XULADS.</p><br><p>Validity Period</p><br><p>start period=2010</p> | <p>Set</p><br><p>OBS_CONF=F</p> |
+| 1 | If INDICATOR=XULADS, validity period: start=2007, end=2009 | Set OBS_CONF=F |
+| 2 | If INDICATOR=XULADS, validity period: start=2010 | Set OBS_CONF=F |
 
 In Rule 1, start period resolves to the start of the 2007 period
-(2007-01-01T00:00:00), and the end period resolves to the very end of
-2009 (2009-12-31T23:59:59). The rule will hold true regardless of the
+(`2007-01-01T00:00:00`), and the end period resolves to the very end of
+2009 (`2009-12-31T23:59:59`). The rule will hold true regardless of the
 input data frequency. Any observations reporting data for the Indicator
-XULADS that fall into that time range will have an OBS\_CONF value of F.
+XULADS that fall into that time range will have an `OBS_CONF` value of `F`.
 
 In Rule 2, no end period is specified so remains in effect from the
-start of the period (2010-01-01T00:00:00) until the end of time. Any
-observations reporting data for the Indicator XULADS that fall into that
-time range will have an OBS\_CONF value of C.
+start of the period (`2010-01-01T00:00:00`) until the end of time. Any
+observations reporting data for the Indicator `XULADS` that fall into that
+time range will have an `OBS_CONF` value of `C`.
 
 ## Mapping examples
 
@@ -483,7 +487,7 @@ time range will have an OBS\_CONF value of C.
 
 | Source | Map To |
 | :--- | :--- |
-| <p><strong>FREQ</strong>="A" </p><br><p>ADJUSTMENT="N" </p><br><p><strong>REF_AREA</strong>="PL" </p><br><p><strong>COUNTERPART_AREA</strong>="W0" </p><br><p>REF_SECTOR="S1" </p><br><p>COUNTERPART_SECTOR="S1" </p><br><p>ACCOUNTING_ENTRY="B" </p><br><p>STO="B5G" </p> | <p>FREQ="A" </p><br><p>REF_AREA="PL"</p><br><p>COUNTERPART_AREA="W0"  </p><br><p>INDICATOR="IND_ABC"</p> |
+| FREQ="A", ADJUSTMENT="N", REF_AREA="PL", COUNTERPART_AREA="W0", REF_SECTOR="S1", COUNTERPART_SECTOR="S1", ACCOUNTING_ENTRY="B", STO="B5G" | FREQ="A", REF_AREA="PL", COUNTERPART_AREA="W0", INDICATOR="IND_ABC" |
 
 The bold Dimensions map from source to target verbatim. The mapping
 simply specifies:
@@ -507,8 +511,8 @@ N:S1:S1:B:B5G => IND\_ABC
 ```
 
 Where the key sequence is based on the order specified in the mapping
-(i.e ADJUSTMENT, REF\_SECTOR, etc will result in the first value N being
-taken from ADJUSTMENT as this was the first item in the source Dimension
+(i.e `ADJUSTMENT`, `REF_SECTOR`, etc will result in the first value `N` being
+taken from `ADJUSTMENT` as this was the first item in the source Dimension
 list.
 
 **Note**: The key order is NOT based on the Dimension order of the DSD,
@@ -525,7 +529,7 @@ text, the free text can include regular expressions.
 The following representation mapping can be used to explicitly map each
 age to an output code.
 
-| <p>Source Input</p><br><p>Free Text</p> | <p>Desired Output</p><br><p>Code Id</p> |
+| Source Input (Free Text) | Desired Output (Code Id) |
 | :--- | :--- |
 | 0 | A |
 | 1 | A |
@@ -538,8 +542,8 @@ expressed in two rules:
 
 | Regular Expression | Desired Output |
 | :--- | :--- |
-| [0-2] | A |
-| [3-4] | B |
+| `[0-2]` | A |
+| `[3-4]` | B |
 
 ### Observation Attributes for Time Period
 
@@ -548,22 +552,22 @@ has an attribute value.
 
 | Input INDICATOR | Input TIME_PERIOD | Output OBS_CONF |
 | :--- | :--- | :--- |
-| XULADS | 2008 | C |
-| XULADS | 2009 | C |
-| XULADS | 2010 | C |
+| `XULADS` | 2008 | C |
+| `XULADS` | 2009 | C |
+| `XULADS` | 2010 | C |
 
 Or using a validity period on the Representation Mapping:
 
 | Input INDICATOR | Valid From/ Valid To | Output OBS_CONF |
 | :--- | :--- | :--- |
-| XULADS | 2008/2010 | C |
+| `XULADS` | 2008/2010 | C |
 
 ### Time mapping
 
 This use case is to create a time period from an input that does not
 respect SDMX Time Formats.
 
-The Component Mapping from SYS\_TIME to TIME\_PERIOD specifies itself as
+The Component Mapping from `SYS_TIME` to `TIME_PERIOD` specifies itself as
 a time mapping with the following details:
 
 | Source Value | Source Mapping | Target Frequency | Output |
@@ -575,7 +579,7 @@ this example the value of the FREQ Dimension in the target DSD.
 
 | Source Value | Source Mapping | Target Frequency Dimension | Output |
 | :--- | :--- | :--- | :--- |
-| 18/07/1981 | dd/MM/yyyy | FREQ | <p>1981-07-18</p><br><p>(when FREQ=D)</p> |
+| 18/07/1981 | dd/MM/yyyy | FREQ | 1981-07-18 (when FREQ=D) |
 
 When the source is a numerical format
 
@@ -591,7 +595,7 @@ period, or mid period, as shown in the following example:
 | :--- | :--- | :--- | :--- |
 | 1981 | yyyy | D – End of Period | 1981-12-31 |
 
-When the start of year is April 1<sup>st</sup> the Structure Map has
+When the start of year is April 1st the Structure Map has
 YearStart=04-01:
 
 | Source Value | Source Mapping | Target Frequency Dimension | Output |

@@ -4,7 +4,7 @@
 
 The Validation and Transformation Language (VTL) supports the definition
 of Transformations, which are algorithms to calculate new data starting
-from already existing ones[6]. The purpose of the VTL in the SDMX
+from already existing ones[^1]. The purpose of the VTL in the SDMX
 context is to enable the:
 
 - definition of validation and transformation algorithms, in order to
@@ -19,6 +19,11 @@ context is to enable the:
     VTL Transformations or translating them in whatever other computer
     language is deemed as appropriate.
 
+[^1]:
+    The Validation and Transformation Language is a standard language
+    designed and published under the SDMX initiative. VTL is described in
+    the VTL User and Reference Guides available on the [SDMX website](https://sdmx.org).
+
 It is important to note that the VTL has its own information model (IM),
 derived from the Generic Statistical Information Model (GSIM) and
 described in the VTL User Guide. The VTL IM is designed to be compatible
@@ -29,7 +34,7 @@ and the model artefacts that allow the definition of the transformation
 algorithms (e.g. "Transformation", "Transformation Scheme").
 
 The VTL language can be applied to SDMX artefacts by mapping the SDMX IM
-model artefacts to the model artefacts that VTL can manipulate[7]. Thus,
+model artefacts to the model artefacts that VTL can manipulate[^2]. Thus,
 the SDMX artefacts can be used in VTL as inputs and/or outputs of
 Transformations. It is important to be aware that the artefacts do not
 always have the same names in the SDMX and VTL IMs, nor do they always
@@ -42,6 +47,11 @@ is not needed in the definition of VTL Transformations). A SDMX
 artefact on which the VTL transformations are executed (i.e., the
 Transformations are defined on Dataflows and are applied to Dataflow
 instances that can be Datasets).
+
+[^2]:
+    In this chapter, in order to distinguish VTL and SDMX model
+    artefacts, the VTL ones are written in the Arial font while the SDMX
+    ones in Courier New
 
 The VTL programs (Transformation Schemes) are represented in SDMX
 through the TransformationScheme maintainable class which is composed of
@@ -66,9 +76,19 @@ In any case, the aliases used in the VTL Transformations have to be
 mapped to the SDMX artefacts through the VtlMappingScheme and VtlMapping
 classes (see the section of the SDMX IM relevant to the VTL). A
 VtlMapping allows specifying the aliases to be used in the VTL
-Transformations, Rulesets[8] or User Defined Operators[9] to reference
+Transformations, Rulesets[^3] or User Defined Operators[^4] to reference
 SDMX artefacts. A VtlMappingScheme is a container for zero or more
 VtlMapping.
+
+[^3]: See also the section "VTL-DL Rulesets" in the VTL Reference Manual.
+[^4]:
+    The VTLMappings are used also for User Defined Operators (UDO).
+    Although UDOs are envisaged to be defined on generic operands, so that
+    the specific artefacts to be manipulated are passed as parameters at
+    their invocation, it is also possible that an UDO invokes directly some
+    specific SDMX artefacts. These SDMX artefacts have to be mapped to the
+    corresponding aliases used in the definition of the UDO through the
+    VtlMappingScheme and VtlMapping classes as well.
 
 The correspondence between an alias and a SDMX artefact must be
 one-to-one, meaning that a generic alias identifies one and just one
@@ -85,7 +105,7 @@ This approach has the advantage that in the VTL code the URN of the
 referenced artefacts is directly intelligible by a human reader but has
 the drawback that the references are verbose.
 
-The SDMX URN[10] is the concatenation of the following parts, separated
+The SDMX URN[^5] is the concatenation of the following parts, separated
 by special symbols like dot, equal, asterisk, comma, and parenthesis:
 
 - SDMXprefix
@@ -94,13 +114,22 @@ by special symbols like dot, equal, asterisk, comma, and parenthesis:
 - agency-id
 - maintainedobject-id
 - maintainedobject-version
-- container-object-id [11]
+- container-object-id [^6]
 - object-id
+
+[^5]:
+    For a complete description of the structure of the URN see the SDMX
+    2.1 Standards - Section 5 - Registry Specifications, paragraph 6.2.2
+    ("Universal Resource Name (URN)").
+[^6]:
+    The container-object-id can repeat and may not be present.
 
 The generic structure of the URN is the following:
 
+```xml
 SDMXprefix.SDMX-IM-package-name.class-name=agency-id:maintainedobject-id
 (maintainedobject-version).\*container-object-id.object-id
+```
 
 The **SDMXprefix** is "urn:sdmx:org", always the same for all SDMX
 artefacts.
@@ -124,7 +153,7 @@ AgencyA.Dept1.Unit2).
 
 The maintainedobject-id is the name of the maintained object which the
 artefact belongs to, and in case the artefact itself is
-maintainable[12], coincides with the name of the artefact. Therefore the
+maintainable[^7], coincides with the name of the artefact. Therefore the
 maintainedobject-id depends on the class of the artefact:
 
 - if the artefact is a Dataflow, which is a maintainable class, the
@@ -140,6 +169,8 @@ maintainedobject-id depends on the class of the artefact:
     belongs to;
 - if the artefact is a Codelist, which is a maintainable class, the
     maintainedobject-id is the Codelist name (codelist-id).
+
+[^7]: i.e., the artefact belongs to a maintainable class
 
 The maintainedobject-version is the version, according to the SDMX
 versioning rules, of the maintained object which the artefact belongs to
@@ -163,13 +194,18 @@ For example, by using the URN, the VTL Transformation that sums two SDMX
 Dataflows DF1 and DF2 and assigns the result to a third persistent
 Dataflow DFR, assuming that DF1, DF2 and DFR are the maintainedobject-id
 of the three Dataflows, that their version is 1.0.0 and their Agency is
-AG, would be written as[^13]:
+AG, would be written as[^8]:
 
 ```xml
 'urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=AG:DFR(1.0.0)' <-
 'urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=AG:DF1(1.0.0)' +
 'urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=AG:DF2(1.0.0)'
 ```
+
+[^8]:
+    Since these references to SDMX objects include non-permitted
+    characters as per the VTL ID notation, they need to be included between
+    single quotes, according to the VTL rules for irregular names.
 
 ### Abbreviation of the URN
 
@@ -202,15 +238,15 @@ made. The possible abbreviations are described below.
     invocation. In particular, starting from the VTL class of the
     invoked artefact (e.g. dataset, component, identifier, measure,
     attribute, variable, valuedomain), which is known given the syntax
-    of the invoking VTL operator[^14], the SDMX class can be deduced from
+    of the invoking VTL operator[^9], the SDMX class can be deduced from
     the mapping rules between VTL and SDMX (see the section "Mapping
-    between VTL and SDMX" hereinafter)[^15].
+    between VTL and SDMX" hereinafter)[^10].
 - If the agency-id is not specified, it is assumed by default equal to
     the agency-id of the TransformationScheme, UserDefinedOperatorScheme
     or RulesetScheme from which the artefact is invoked. For example,
     the agency-id can be omitted if it is the same as the invoking
     TransformationScheme and cannot be omitted if the artefact comes
-    from another agency[^16]. Take also into account that, according to
+    from another agency[^11]. Take also into account that, according to
     the VTL consistency rules, the agency of the result of a
     Transformation must be the same as its TransformationScheme,
     therefore the agency-id can be omitted for all the results (left
@@ -241,15 +277,28 @@ made. The possible abbreviations are described below.
     - As said, the container-object-id does not apply to the classes that
         can be referenced in VTL Transformations, therefore is not present
         in their URN
-  - The object-id does not exist for the artefacts belonging to the
-      Dataflow, and Codelist classes, while it exists and cannot be
-      omitted for the artefacts belonging to the classes Dimension,
-      TimeDimension, Measure, DataAttribute and Concept, as for them the
-      object-id is the main identifier of the artefact
+    - The object-id does not exist for the artefacts belonging to the
+        Dataflow, and Codelist classes, while it exists and cannot be
+        omitted for the artefacts belonging to the classes Dimension,
+        TimeDimension, Measure, DataAttribute and Concept, as for them the
+        object-id is the main identifier of the artefact
 
-[^14]: Since these references to SDMX objects include non-permitted characters as per the VTL ID notation, they need to be included between single quotes, according to the VTL rules for irregular names.
-[^15]: For the syntax of the VTL operators see the VTL Reference Manual
-[^16]: In case the invoked artefact is a VTL component, which can be invoked only within the invocation of a VTL data set (SDMX Dataflow), the specific SDMX class-name (e.g. Dimension, TimeDimension, Measure or DataAttribute) can be deduced from the data structure of the SDMX Dataflow, which the component belongs to.
+[^9]: For the syntax of the VTL operators see the VTL Reference Manual
+[^10]:
+    In case the invoked artefact is a VTL component, which can be
+    invoked only within the invocation of a VTL data set (SDMX Dataflow),
+    the specific SDMX class-name (e.g. Dimension, TimeDimension, Measure or
+    DataAttribute) can be deduced from the data structure of the SDMX
+    Dataflow, which the component belongs to.
+[^11]:
+    If the Agency is composite (for example AgencyA.Dept1.Unit2), the
+    agency is considered different even if only part of the composite name
+    is different (for example AgencyA.Dept1.Unit3 is a different Agency than
+    the previous one). Moreover the agency-id cannot be omitted in part
+    (i.e., if a TransformationScheme owned by AgencyA.Dept1.Unit2 references
+    an artefact coming from AgencyA.Dept1.Unit3, the specification of the
+    agency-id becomes mandatory and must be complete, without omitting the
+    possibly equal parts like AgencyA.Dept1)
 
 The simplified object identifier is obtained by omitting all the first
 part of the URN, including the special characters, till the first part
@@ -272,21 +321,27 @@ DFR := DF1 + DF2
 
 The references to the Codelists can be simplified similarly. For
 example, given the non-abbreviated reference to the Codelist
-AG:CL\_FREQ(1.0.0), which is[^17]:
+AG:CL\_FREQ(1.0.0), which is[^12]:
 
 ```xml
 'urn:sdmx:org.sdmx.infomodel.codelist.Codelist=AG:CL_FREQ(1.0.0)'
 ```
 
-[^17]: If the Agency is composite (for example AgencyA.Dept1.Unit2), the agency is considered different even if only part of the composite name is different (for example AgencyA.Dept1.Unit3 is a different Agency than the previous one). Moreover the agency-id cannot be omitted in part (i.e., if a TransformationScheme owned by AgencyA.Dept1.Unit2 references an artefact coming from AgencyA.Dept1.Unit3, the specification of the agency-id becomes mandatory and must be complete, without omitting the possibly equal parts like AgencyA.Dept1)
+[^12]: 
+    Single quotes are needed because this reference is not a VTL
+    regular name.
 
 if the Codelist is referenced from a RulesetScheme belonging to the
 agency AG, omitting all the optional parts, the abbreviated reference
-would become simply[^18]:
+would become simply[^13]:
 
 ```xml
 CL_FREQ
 ```
+
+[^13]:
+    Single quotes are not needed in this case because CL\_FREQ is a VTL
+    regular name.
 
 As for the references to the components, it can be enough to specify the
 component-Id, given that the dataStructure-Id can be omitted. An example
@@ -305,11 +360,15 @@ SECTOR
 ```
 
 For example, the Transformation for renaming the component SECTOR of the
-Dataflow DF1 into SEC can be written as[^19]:
+Dataflow DF1 into SEC can be written as[^14]:
 
 ```xml
 'DFR(1.0.0)' := 'DF1(1.0.0)' [rename SECTOR to SEC]
 ```
+
+[^14]:
+    The result DFR(1.0.0) is be equal to DF1(1.0.0) save that the
+    component SECTOR is called SEC
 
 In the references to the Concepts, which can exist for example in the
 definition of the VTL Rulesets, at least the conceptScheme-id and the
@@ -375,9 +434,10 @@ In the signature, given the mapping between VTL and SDMX better
 described in the following paragraphs, a reference to a VTL Value Domain
 becomes a reference to a SDMX Codelist, while a reference to a VTL
 Represented Variable becomes a reference to a SDMX Concept, assuming for
-it a definite representation[^21].
+it a definite representation[^15].
 
-[^21]: Rulesets of this kind cannot be reused when the referenced Concept has a different representation. 
+[^15]: Rulesets of this kind cannot be reused when the referenced Concept
+has a different representation.
 
 In general, for referencing SDMX Codelists and Concepts, the conventions
 described in the previous paragraphs apply. In the Ruleset syntax, the
@@ -386,9 +446,9 @@ elements that reference SDMX artefacts are called "valueDomain" and
 "ruleVariable", "condValueDomain" "condVariable" for the Hierarchical
 Rulesets). The syntax of the Ruleset signature allows also to define
 aliases of the elements above, these aliases are valid only within the
-specific Ruleset definition statement and cannot be mapped to SDMX.[^22]
+specific Ruleset definition statement and cannot be mapped to SDMX.[^16]
 
-[^22]: See also the section "VTL-DL Rulesets" in the VTL Reference Manual.
+[^16]: See also the section "VTL-DL Rulesets" in the VTL Reference Manual.
 
 In the body of the Rulesets, the Codes and in general all the Values can
 be written without any other specification, because the artefact, which
@@ -423,9 +483,14 @@ In the opposite direction, every time an object calculated by means of
 VTL must be treated as a SDMX object (for example for exchanging it
 through SDMX), there is the need of a SDMX definition of the object, so
 that the SDMX operations can take place. The SDMX definition is needed
-for the VTL objects for which a SDMX use is envisaged[^23].
+for the VTL objects for which a SDMX use is envisaged[^17].
 
-[^23]: If a calculated artefact is persistent, it needs a persistent definition, i.e. a SDMX definition in a SDMX environment. In addition,  possible calculated artefact that are not persistent may require a SDMX definition, for example when the result of a non-persistent calculation is disseminated through SDMX tools (like an inquiry tool).
+[^17]:
+    If a calculated artefact is persistent, it needs a persistent definition, 
+    i.e. a SDMX definition in a SDMX environment. In addition,  possible calculated 
+    artefact that are not persistent may require a SDMX definition, for example when 
+    the result of a non-persistent calculation is disseminated through SDMX tools 
+    (like an inquiry tool).
 
 The mapping methods from VTL to SDMX are described in the following
 paragraphs as well, however they do not allow the complete SDMX
@@ -443,14 +508,22 @@ actually generated (manually, automatically or part and part).
 ### General mapping of VTL and SDMX data structures
 
 This section makes reference to the VTL "Model for data and their
-structure"[23] and the correspondent SDMX "Data Structure
-Definition"[24].
+structure"[^18] and the correspondent SDMX "Data Structure
+Definition"[^19].
+
+[^18]: See the VTL 2.0 User Manual
+[^19]: See the SDMX Standards Section 2 – Information Model
 
 The main type of artefact that the VTL can manipulate is the VTL Data
 Set, which in general is mapped to the SDMX Dataflow. This means that a
 VTL Transformation, in the SDMX context, expresses the algorithm for
 calculating a derived Dataflow starting from some already existing
-Dataflows (either collected or derived).[25]
+Dataflows (either collected or derived).[^20]
+
+[^20]: 
+    Besides the mapping between one SDMX Dataflow and one VTL Data Set,
+    it is also possible to map distinct parts of a SDMX Dataflow to
+    different VTL Data Set, as explained in a following paragraph.
 
 While the VTL Transformations are defined in term of Dataflow
 definitions, they are assumed to be executed on instances of such
@@ -506,8 +579,12 @@ VTL does not have the SDMX AttributeRelationships, which defines the
 construct to which the DataAttribute is related (e.g. observation,
 dimension or set or group of dimensions, whole data set).
 
-With the Basic mapping, one SDMX observation[26] generates one VTL data
+With the Basic mapping, one SDMX observation[^21] generates one VTL data
 point.
+
+[^21]:
+    Here an SDMX observation is meant to correspond to one combination
+    of values of the DimensionComponents.
 
 #### Pivot Mapping
 
@@ -539,7 +616,15 @@ simple and common case). Nevertheless, it maintains its validity also if
 in the DataStructure there are more dimension with the role of
 MeasureDimensions: in this case what is said about the MeasureDimension
 must be applied to the combination of all the MeasureDimensions
-considered as a joint variable[27].
+considered as a joint variable[^22].
+
+[^22]:
+    E.g., if in the data structure there exist 3 Dimensions C,D,E
+    having the role of MeasureDimension, they should be considered as a
+    joint MeasureDimension Z=(C,D,E); therefore when the description says
+    “each possible value Cj of the MeasureDimension …” it means “each
+    possible combination of values (Cj, Dk, Ew) of the joint
+    MeasureDimension Z=(C,D,E)”.
 
 Among other things, the Pivot method provides also backward
 compatibility with the SDMX 2.1 data structures that contained a
@@ -590,16 +675,15 @@ described below (this mapping is equivalent to a pivoting operation):
         SDMX notion of Attribute Relationship.
 
 The summary mapping table of the "pivot" mapping from SDMX to VTL for
-the SDMX data structures that contain a MeasureDimension is the
-following:
+the SDMX data structures that contain a MeasureDimension is the following:
 
-| <strong>SDMX</strong> | <strong>VTL</strong> |
-| :--- | :--- |
-| Dimension | (Simple) Identifier |
-| TimeDimension | (Time) Identifier |
-| <p>MeasureDimension &amp;</p><br><p>one Measure</p> | One Measure for each Code of the SDMX MeasureDimension |
-| DataAttribute not depending on the MeasureDimension | Attribute |
-| DataAttribute depending on the MeasureDimension | One Attribute for each Code of the SDMX MeasureDimension |
+| **SDMX Component**                                   | **VTL Mapping**                                      |
+| :--------------------------------------------------- | :--------------------------------------------------- |
+| Dimension                                            | (Simple) Identifier                                  |
+| TimeDimension                                        | (Time) Identifier                                    |
+| MeasureDimension & one Measure                       | One Measure for each Code of the SDMX MeasureDimension|
+| DataAttribute (not depending on MeasureDimension)    | Attribute                                            |
+| DataAttribute (depending on MeasureDimension)        | One Attribute for each Code of the SDMX MeasureDimension |
 
 Using this mapping method, the components of the data structure can
 change in the conversion from SDMX to VTL and it must be taken into
@@ -665,7 +749,7 @@ the opposite direction.
 
 Mapping table:
 
-| <strong>VTL</strong> | <strong>SDMX</strong> |
+| **VTL** | **SDMX** |
 | :--- | :--- |
 | (Simple) Identifier | Dimension |
 | (Time) Identifier | TimeDimension |
@@ -734,12 +818,12 @@ The **unpivot** mapping behaves like follows:
 The summary mapping table of the **unpivot** mapping method is the
 following:
 
-| <strong>VTL</strong> | <strong>SDMX</strong> |
-| :--- | :--- |
-| (Simple) Identifier | Dimension |
-| (Time) Identifier | TimeDimension |
-| All Measure Components | <p>MeasureDimension (having one Code for each VTL measure component)<br>&amp;</p><br><p>one Measure</p> |
-| Attribute | DataAttribute depending on all SDMX Dimensions including the<br>TimeDimension and except the MeasureDimension |
+| **VTL**                | **SDMX**                                                                                      |
+| :--------------------- | :-------------------------------------------------------------------------------------------- |
+| (Simple) Identifier    | Dimension                                                                                     |
+| (Time) Identifier      | TimeDimension                                                                                 |
+| All Measure Components | MeasureDimension (having one Code for each VTL measure component) and one Measure             |
+| Attribute              | DataAttribute depending on all SDMX Dimensions including the TimeDimension and except the MeasureDimension |
 
 At observation / data point level:
 
@@ -789,7 +873,7 @@ DataAttributes in the target SDMX data structure definition.
 
 The mapping table is the following:
 
-| VTL | SDMX |
+| **VTL** | **SDMX** |
 | :--- | :--- |
 | (Simple) Identifier | Dimension |
 | (Time) Identifier | TimeDimension |
@@ -842,13 +926,28 @@ observations (each one corresponding to a distinct VTL Data Set).
 
 As a matter of fact, in some cases it can be useful to define VTL
 operations involving definite parts of a SDMX Dataflow instead than the
-whole.[28]
+whole.[^23]
+
+[^23]:
+    A typical example of this kind is the validation, and more in
+    general the manipulation, of individual time series belonging to the
+    same Dataflow, identifiable through the DimensionComponents of the
+    Dataflow except the TimeDimension. The coding of these kind of
+    operations might be simplified by mapping distinct time series (i.e.
+    different parts of a SDMX Dataflow) to distinct VTL Data Sets.
 
 Therefore, in order to make the coding of VTL operations simpler when
 applied on parts of SDMX Dataflows, it is allowed to map distinct parts
 of a SDMX Dataflow to distinct VTL Data Sets according to the following
 rules and conventions. This kind of mapping is possible both from SDMX
-to VTL and from VTL to SDMX, as better explained below.[29]
+to VTL and from VTL to SDMX, as better explained below.[^24]
+
+[^24]:
+    Please note that this kind of mapping is only an option at disposal
+    of the definer of VTL Transformations; in fact it remains always
+    possible to manipulate the needed parts of SDMX Dataflows by means of
+    VTL operators (e.g. “sub”, “filter”, “calc”, “union” …), maintaining a
+    mapping one-to-one between SDMX Dataflows and VTL Data Sets.
 
 Given a SDMX Dataflow and some predefined Dimensions of its
 DataStructure, it is allowed to map the subsets of observations that
@@ -866,22 +965,40 @@ In practice, this kind mapping is obtained like follows:
 
 - For a given SDMX Dataflow, the user (VTL definer) declares the
     DimensionComponents on which the mapping will be based, in a given
-    order.[30] Following the example above, imagine that the user
+    order.[^25] Following the example above, imagine that the user
     declares the Dimensions INDICATOR and COUNTRY.
 - The VTL Data Set is given a name using a special notation also
     called “ordered concatenation” and composed of the following parts:
     - The reference to the SDMX Dataflow (expressed according to the
         rules described in the previous paragraphs, i.e. URN,
         abbreviated URN or another alias); for example DF(1.0.0);
-    - a slash (“/”) as a separator; [31]
+    - a slash (“/”) as a separator; [^26]
     - The reference to a specific part of the SDMX Dataflow above,
         expressed as the concatenation of the values that the SDMX
         DimensionComponents declared above must have, separated by dots
         (“.”) and written in the order in which these
-        DimensionComponents are defined[32]. For example POPULATION.USA
+        DimensionComponents are defined[^27]. For example POPULATION.USA
         would mean that such a VTL Data Set is mapped to the SDMX
         observations for which the dimension *INDICATOR* is equal to
         POPULATION and the dimension *COUNTRY* is equal to USA.
+
+[^25]:
+    This definition is made through the ToVtlSubspace and ToVtlSpaceKey
+    classes and/or the FromVtlSuperspace and FromVtlSpaceKey classes,
+    depending on the direction of the mapping (“key” means “dimension”). The
+    mapping of Dataflow subsets can be applied independently in the two
+    directions, also according to different Dimensions. When no Dimension is
+    declared for a given direction, it is assumed that the option of mapping
+    different parts of a SDMX Dataflow to different VTL Data Sets is not
+    used.
+[^26]:
+    As a consequence of this formalism, a slash in the name of the VTL
+    Data Set assumes the specific meaning of separator between the name of
+    the Dataflow and the values of some of its Dimensions.
+[^27]:
+    This is the order in which the dimensions are defined in the
+    ToVtlSpaceKey class or in the FromVtlSpaceKey class, depending on the
+    direction of the mapping.
 
 In the VTL Transformations, this kind of dataset name must be referenced
 between single quotes because the slash (“/”) is not a regular character
@@ -912,11 +1029,16 @@ two mapping directions, i.e. from SDMX to VTL and from VTL to SDMX.
 As already said, the mapping from SDMX to VTL happens when the SDMX
 dataflows are operand of VTL Transformations, instead the mapping from
 VTL to SDMX happens when the VTL Data Sets that is result of
-Transformations[33] need to be treated as SDMX objects. This kind of
+Transformations[^28] need to be treated as SDMX objects. This kind of
 mapping can be applied independently in the two directions and the
 Dimensions on which the mapping is based can be different in the two
 directions: these Dimensions are defined in the ToVtlSpaceKey and in the
 FromVtlSpaceKey classes respectively.
+
+[^28]:
+    It should be remembered that, according to the VTL consistency
+    rules, a given VTL dataset cannot be the result of more than one VTL
+    Transformation.
 
 First, let us see what happens in the <u>mapping direction from SDMX to
 VTL</u>, i.e. when parts of a SDMX Dataflow (e.g. DF1(1.0.0)) need to be
@@ -933,9 +1055,20 @@ In order to obtain the data structure of these VTL Data Sets from the
 SDMX one, it is assumed that the SDMX DimensionComponents on which the
 mapping is based are dropped, i.e. not maintained in the VTL data
 structure; this is possible because their values are fixed for each one
-of the invoked VTL Data Sets[34]. After that, the mapping method from
+of the invoked VTL Data Sets[^29]. After that, the mapping method from
 SDMX to VTL specified for the Dataflow DF1(1.0.0) is applied (i.e.
 basic, pivot …).
+
+[^29]:
+    If these DimensionComponents would not be dropped, the various VTL
+    Data Sets resulting from this kind of mapping would have non-matching
+    values for the Identifiers corresponding to the mapping Dimensions (e.g.
+    POPULATION and COUNTRY). As a consequence, taking into account that the
+    typical binary VTL operations at dataset level (+, -, \*, / and so on)
+    are executed on the observations having matching values for the
+    identifiers, it would not be possible to compose the resulting VTL
+    datasets one another (e.g. it would not be possible to calculate the
+    population ratio between USA and CANADA).
 
 In the example above, for all the datasets of the kind
 ‘DF1(1.0.0)/*INDICATORvalue*.*COUNTRYvalue*’, the dimensions INDICATOR
@@ -959,7 +1092,15 @@ In fact the VTL operator “sub” has exactly the same behaviour.
 Therefore, mapping different parts of a SDMX Dataflow to different VTL
 Data Sets in the direction from SDMX to VTL through the ordered
 concatenation notation is equivalent to a proper use of the operator
-“**sub**” on such a Dataflow. [35]
+“**sub**” on such a Dataflow. [^30]
+
+[^30]:
+    In case the ordered concatenation notation is used, the VTL
+    Transformation described above, e.g. ‘DF1(1.0)/POPULATION.USA’ :=
+    DF1(1.0) \[ sub INDICATOR=“POPULATION”, COUNTRY=“USA”\], is implicitly
+    executed. In order to test the overall compliance of the VTL program to
+    the VTL consistency rules, it has to be considered as part of the VTL
+    program even if it is not explicitly coded.
 
 In the direction from SDMX to VTL it is allowed to omit the value of one
 or more DimensionComponents on which the mapping is based, but
@@ -1000,30 +1141,46 @@ calculate separately the parts of DF2(1.0.0) that have different
 combinations of values for INDICATOR and COUNTRY:
 
 - each part is calculated as a VTL derived Data Set, result of a
-    dedicated VTL Transformation; [36]
+    dedicated VTL Transformation; [^31]
 - the data structure of all these VTL Data Sets has the TIME\_PERIOD
     identifier and does not have the INDICATOR and COUNTRY
-    identifiers.[37]
+    identifiers.[^32]
+
+[^31]:
+    If the whole DF2(1.0) is calculated by means of just one VTL
+    Transformation, then the mapping between the SDMX Dataflow and the
+    corresponding VTL dataset is one-to-one and this kind of mapping (one
+    SDMX Dataflow to many VTL datasets) does not apply.
+[^32]:
+    This is possible as each VTL dataset corresponds to one particular
+    combination of values of INDICATOR and COUNTRY.
 
 Under these hypothesis, such derived VTL Data Sets can be mapped to
 DF2(1.0.0) by declaring the DimensionComponents INDICATOR and COUNTRY as
-mapping dimensions[38].
+mapping dimensions[^33].
+
+[^33]:
+    The mapping dimensions are defined as FromVtlSpaceKeys of the
+    FromVtlSuperSpace of the VtlDataflowMapping relevant to DF2(1.0).
 
 The corresponding VTL Transformations, assuming that the result needs to
-be persistent, would be of this kind: [39]
+be persistent, would be of this kind: [^34]
 
 ```xml
 ‘DF2(1.0.0)/INDICATORvalue.COUNTRYvalue’ <- expression
 ```
 
+[^34]:
+    the symbol of the VTL persistent assignment is used (`<-`)
+
 Some examples follow, for some specific values of INDICATOR and COUNTRY:
 
 ```xml
-‘DF2(1.0.0)/GDPPERCAPITA.USA’ &lt;- expression11;
-‘DF2(1.0.0)/GDPPERCAPITA.CANADA’ &lt;- expression12;
+‘DF2(1.0.0)/GDPPERCAPITA.USA’ <- expression11;
+‘DF2(1.0.0)/GDPPERCAPITA.CANADA’ <- expression12;
 … … …
-‘DF2(1.0.0)/POPGROWTH.USA’ &lt;- expression21;
-‘DF2(1.0.0)/POPGROWTH.CANADA’ &lt;- expression22;
+‘DF2(1.0.0)/POPGROWTH.USA’ <- expression21;
+‘DF2(1.0.0)/POPGROWTH.CANADA’ <- expression22;
 … … …
 ```xml
 
@@ -1083,48 +1240,53 @@ step consists in calculating other (non-persistent) VTL datasets (in the
 example DF2bis\_GDPPERCAPITA\_USA and so on) by adding the identifiers
 INDICATOR and COUNTRY with the desired values (*INDICATORvalue* and
 *COUNTRYvalue)*. Finally, all these non-persistent Data Sets are united
-and give the final result DF2[1.0](40), which can be mapped one-to-one
+and give the final result DF2(1.0)[^35], which can be mapped one-to-one
 to the homonymous SDMX Dataflow having the dimension components
 TIME\_PERIOD, INDICATOR and COUNTRY.
+
+[^35]:
+    The result is persistent in this example but it can be also non
+    persistent if needed.
 
 Therefore, mapping different VTL datasets having the same data structure
 to different parts of a SDMX Dataflow, i.e. in the direction from VTL to
 SDMX, through the ordered concatenation notation is equivalent to a
-proper use of the operators “calc” and “union” on such datasets. [41]
+proper use of the operators “calc” and “union” on such datasets. [^36]
+
+[^36]:
+    In case the ordered concatenation notation from VTL to SDMX is
+    used, the set of Transformations described above is implicitly
+    performed; therefore, in order to test the overall compliance of the VTL
+    program to the VTL consistency rules, these implicit Transformations
+    have to be considered as part of the VTL program even if they are not
+    explicitly coded.
 
 It is worth noting that in the direction from VTL to SDMX it is
 mandatory to specify the value for every Dimension on which the mapping
 is based (in other word, in the name of the calculated VTL dataset is
-<u>not</u> possible to omit the value of some of the Dimensions).
+**not** possible to omit the value of some of the Dimensions).
 
 ### Mapping variables and value domains between VTL and SDMX
 
 With reference to the VTL “model for Variables and Value domains”, the
 following additional mappings have to be considered:
 
-| VTL | SDMX |
+| **VTL** | **SDMX** |
 | :--- | :--- |
-| <strong>Data Set Component</strong> | Although this abstraction exists in SDMX, it does not have an<br>explicit definition and correspond to a Component (either a<br>DimensionComponent or a Measure or a DataAttribute) belonging to one<br>specific Dataflow<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a> |
-| <strong>Represented Variable</strong> | <strong>Concept</strong> with a definite Representation |
-| <strong>Value Domain</strong> | <strong>Representation</strong> (see the Structure Pattern in the<br>Base Package) |
-| <strong>Enumerated Value Domain / Code List</strong> | <strong>Codelist</strong> |
-| <strong>Code</strong> | <strong>Code</strong> (for enumerated DimensionComponent, Measure,<br>DataAttribute) |
-| <strong>Described Value Domain</strong> | non-enumerated <strong>Representation</strong> (having Facets /<br>ExtendedFacets, see the Structure Pattern in the Base Package) |
-| <strong>Value</strong> | Although this abstraction exists in SDMX, it does not have an<br>explicit definition and correspond to a <strong>Code</strong> of a<br>Codelist (for enumerated Representations) or to a valid<br><strong>value</strong> (for non-enumerated Representations) |
-| <strong>Value Domain Subset / Set</strong> | This abstraction does not exist in SDMX |
-| <strong>Enumerated Value Domain Subset / Enumerated<br>Set</strong> | This abstraction does not exist in SDMX |
-| <strong>Described Value Domain Subset / Described Set</strong> | This abstraction does not exist in SDMX |
-| <strong>Set list</strong> | This abstraction does not exist in SDMX |
+| **Data Set Component** | Although this abstraction exists in SDMX, it does not have an explicit definition and corresponds to a Component (either a DimensionComponent or a Measure or a DataAttribute) belonging to one specific Dataflow[^37] |
+| **Represented Variable** | **Concept** with a definite Representation |
+| **Value Domain** | **Representation** (see the Structure Pattern in the Base Package) |
+| **Enumerated Value Domain / Code List** | **Codelist** |
+| **Code** | **Code** (for enumerated DimensionComponent, Measure, DataAttribute) |
+| **Described Value Domain** | non-enumerated **Representation** (having Facets / ExtendedFacets, see the Structure Pattern in the Base Package) |
+| **Value** | Although this abstraction exists in SDMX, it does not have an explicit definition and corresponds to a **Code** of a Codelist (for enumerated Representations) or to a valid **value** (for non-enumerated Representations) |
+| **Value Domain Subset / Set** | This abstraction does not exist in SDMX |
+| **Enumerated Value Domain Subset / Enumerated Set** | This abstraction does not exist in SDMX |
+| **Described Value Domain Subset / Described Set** | This abstraction does not exist in SDMX |
+| **Set list** | This abstraction does not exist in SDMX |
 
-<aside id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Through SDMX Constraints, it is possible to specify the
-values that a Component of a Dataflow can assume.<a href="#fnref1"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
+[^37]: Through SDMX Constraints, it is possible to specify the values that a Component of a Dataflow can assume.
+
 
 The main difference between VTL and SDMX relies on the fact that the VTL
 artefacts for defining subsets of Value Domains do not exist in SDMX,
@@ -1149,10 +1311,20 @@ As for the mapping between VTL variables and SDMX Concepts, it should be
 noted that these artefacts do not coincide perfectly. In fact, the VTL
 variables are represented variables, defined always on the same Value
 Domain (“Representation” in SDMX) independently of the data set / data
-structure in which they appear[42], while the SDMX Concepts can have
-different Representations in different DataStructures.[43] This means
+structure in which they appear[^38], while the SDMX Concepts can have
+different Representations in different DataStructures.[^39] This means
 that one SDMX Concept can correspond to many VTL Variables, one for each
 representation the Concept has.
+
+[^38]:
+    By using represented variables, VTL can assume that data structures
+    having the same variables as identifiers can be composed one another
+    because the correspondent values can match.
+[^39]:
+    A Concept becomes a Component in a DataStructureDefinition, and
+    Components can have different LocalRepresentations in different
+    DataStructureDefinitions, also overriding the (possible) base
+    representation of the Concept.
 
 Therefore, it is important to be aware that some VTL operations (for
 example the binary operations at data set level) are consistent only if
@@ -1284,50 +1456,49 @@ the SDMX data types to the VTL basic scalar types.
 
 | SDMX data type (BasicComponentDataType) | Default VTL basic scalar type |
 | :--- | :--- |
-| <p>String</p><br><p>(string allowing any character)</p> | string |
-| <p>Alpha</p><br><p>(string which only allows A-z)</p> | string |
-| <p>AlphaNumeric</p><br><p>(string which only allows A-z and 0-9)</p> | string |
-| <p>Numeric</p><br><p>(string which only allows 0-9, but is not numeric so that is can<br>having leading zeros)</p> | string |
-| <p>BigInteger</p><br><p>(corresponds to XML Schema xs:integer datatype; infinite set of<br>integer values)</p> | integer |
-| <p>Integer</p><br><p>(corresponds to XML Schema xs:int datatype; between -2147483648 and<br>+2147483647 (inclusive))</p> | integer |
-| <p>Long</p><br><p>(corresponds to XML Schema xs:long datatype; between<br>-9223372036854775808 and +9223372036854775807 (inclusive))</p> | integer |
-| <p>Short</p><br><p>(corresponds to XML Schema xs:short datatype; between -32768 and<br>-32767 (inclusive))</p> | integer |
-| <p>Decimal</p><br><p>(corresponds to XML Schema xs:decimal datatype; subset of real<br>numbers that can be represented as decimals)</p> | number |
-| <p>Float</p><br><p>(corresponds to XML Schema xs:float datatype; patterned after the<br>IEEE single-precision 32-bit floating point type)</p> | number |
-| <p>Double</p><br><p>(corresponds to XML Schema xs:double datatype; patterned after the<br>IEEE double-precision 64-bit floating point type)</p> | number |
-| <p>Boolean</p><br><p>(corresponds to the XML Schema xs:boolean datatype; support the<br>mathematical concept of binary-valued logic: {true, false})</p> | boolean |
-| <p>URI</p><br><p>(corresponds to the XML Schema xs:anyURI; absolute or relative<br>Uniform Resource Identifier Reference)</p> | string |
-| <p>Count</p><br><p>(an integer following a sequential pattern, increasing by 1 for each<br>occurrence)</p> | integer |
-| <p>InclusiveValueRange</p><br><p>(decimal number within a closed interval, whose bounds are specified<br>in the SDMX representation by the facets minValue and maxValue)</p> | number |
-| <p>ExclusiveValueRange</p><br><p>(decimal number within an open interval, whose bounds are specified<br>in the SDMX representation by the facets minValue and maxValue)</p> | number |
-| <p>Incremental</p><br><p>(decimal number the increased by a specific interval (defined by the<br>interval facet), which is typically enforced outside of the XML<br>validation)</p> | number |
-| <p>ObservationalTimePeriod</p><br><p>(superset of StandardTimePeriod and TimeRange)</p> | time |
-| <p>StandardTimePeriod</p><br><p>(superset of BasicTimePeriod and ReportingTimePeriod)</p> | time |
-| <p>BasicTimePeriod</p><br><p>(superset of GregorianTimePeriod and DateTime)</p> | date |
-| <p>GregorianTimePeriod</p><br><p>(superset of GregorianYear, GregorianYearMonth, and<br>GregorianDay)</p> | date |
-| <p>GregorianYear</p><br><p>(YYYY)</p> | date |
-| <p>GregorianYearMonth / GregorianMonth</p><br><p>(YYYY-MM)</p> | date |
-| <p>GregorianDay</p><br><p>(YYYY-MM-DD)</p> | date |
-| <p>ReportingTimePeriod</p><br><p>(superset of RepostingYear, ReportingSemester, ReportingTrimester,<br>ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay)</p> | time_period |
-| <p>ReportingYear</p><br><p>(YYYY-A1 – 1 year period)</p> | time_period |
-| <p>ReportingSemester</p><br><p>(YYYY-Ss – 6 month period)</p> | time_period |
-| <p>ReportingTrimester</p><br><p>(YYYY-Tt – 4 month period)</p> | time_period |
-| <p>ReportingQuarter</p><br><p>(YYYY-Qq – 3 month period)</p> | time_period |
-| <p>ReportingMonth</p><br><p>(YYYY-Mmm – 1 month period)</p> | time_period |
-| <p>ReportingWeek</p><br><p>(YYYY-Www – 7 day period; following ISO 8601 definition of a week in<br>a year)</p> | time_period |
-| <p>ReportingDay</p><br><p>(YYYY-Dddd – 1 day period)</p> | time_period |
-| <p>DateTime</p><br><p>(YYYY-MM-DDThh:mm:ss)</p> | date |
-| <p>TimeRange</p><br><p>(YYYY-MM-DD(Thh:mm:ss)?/&lt;duration&gt;)</p> | time |
-| <p>Month</p><br><p>(--MM; speicifies a month independent of a year; e.g. February is<br>black history month in the United States)</p> | string |
-| <p>MonthDay</p><br><p>(--MM-DD; specifies a day within a month independent of a year; e.g.<br>Christmas is December 25<sup>th</sup>; used to specify reporting year<br>start day)</p> | string |
-| <p>Day</p><br><p>(---DD; specifies a day independent of a month or year; e.g. the<br>15<sup>th</sup> is payday)</p> | string |
-| <p>Time</p><br><p>(hh:mm:ss; time independent of a date; e.g. coffee break is at 10:00<br>AM)</p> | string |
-| <p>Duration</p><br><p>(corresponds to XML Schema xs:duration datatype)</p> | duration |
+| String (string allowing any character) | string |
+| Alpha (string which only allows A-z) | string |
+| AlphaNumeric (string which only allows A-z and 0-9) | string |
+| Numeric (string which only allows 0-9, but is not numeric so that it can have leading zeros) | string |
+| BigInteger (corresponds to XML Schema xs:integer datatype; infinite set of integer values) | integer |
+| Integer (corresponds to XML Schema xs:int datatype; between -2147483648 and +2147483647 (inclusive)) | integer |
+| Long (corresponds to XML Schema xs:long datatype; between -9223372036854775808 and +9223372036854775807 (inclusive)) | integer |
+| Short (corresponds to XML Schema xs:short datatype; between -32768 and -32767 (inclusive)) | integer |
+| Decimal (corresponds to XML Schema xs:decimal datatype; subset of real numbers that can be represented as decimals) | number |
+| Float (corresponds to XML Schema xs:float datatype; patterned after the IEEE single-precision 32-bit floating point type) | number |
+| Double (corresponds to XML Schema xs:double datatype; patterned after the IEEE double-precision 64-bit floating point type) | number |
+| Boolean (corresponds to the XML Schema xs:boolean datatype; supports the mathematical concept of binary-valued logic: {true, false}) | boolean |
+| URI (corresponds to the XML Schema xs:anyURI; absolute or relative Uniform Resource Identifier Reference) | string |
+| Count (an integer following a sequential pattern, increasing by 1 for each occurrence) | integer |
+| InclusiveValueRange (decimal number within a closed interval, whose bounds are specified in the SDMX representation by the facets minValue and maxValue) | number |
+| ExclusiveValueRange (decimal number within an open interval, whose bounds are specified in the SDMX representation by the facets minValue and maxValue) | number |
+| Incremental (decimal number that increases by a specific interval, defined by the interval facet, typically enforced outside of the XML validation) | number |
+| ObservationalTimePeriod (superset of StandardTimePeriod and TimeRange) | time |
+| StandardTimePeriod (superset of BasicTimePeriod and ReportingTimePeriod) | time |
+| BasicTimePeriod (superset of GregorianTimePeriod and DateTime) | date |
+| GregorianTimePeriod (superset of GregorianYear, GregorianYearMonth, and GregorianDay) | date |
+| GregorianYear (YYYY) | date |
+| GregorianYearMonth / GregorianMonth (YYYY-MM) | date |
+| GregorianDay (YYYY-MM-DD) | date |
+| ReportingTimePeriod (superset of ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay) | time_period |
+| ReportingYear (YYYY-A1 – 1 year period) | time_period |
+| ReportingSemester (YYYY-Ss – 6 month period) | time_period |
+| ReportingTrimester (YYYY-Tt – 4 month period) | time_period |
+| ReportingQuarter (YYYY-Qq – 3 month period) | time_period |
+| ReportingMonth (YYYY-Mmm – 1 month period) | time_period |
+| ReportingWeek (YYYY-Www – 7 day period; following ISO 8601 definition of a week in a year) | time_period |
+| ReportingDay (YYYY-Dddd – 1 day period) | time_period |
+| DateTime (YYYY-MM-DDThh:mm:ss) | date |
+| TimeRange (YYYY-MM-DD(Thh:mm:ss)?/<duration>) | time |
+| Month (--MM; specifies a month independent of a year) | string |
+| MonthDay (--MM-DD; specifies a day within a month independent of a year) | string |
+| Day (---DD; specifies a day independent of a month or year) | string |
+| Time (hh:mm:ss; time independent of a date) | string |
+| Duration (corresponds to XML Schema xs:duration datatype) | duration |
 | XHTML | Metadata type – not applicable |
 | KeyValues | Metadata type – not applicable |
 | IdentifiableReference | Metadata type – not applicable |
 | DataSetReference | Metadata type – not applicable |
-|  |  |
 
 Figure 14 – Mappings from SDMX data types to VTL Basic Scalar Types
 
@@ -1344,14 +1515,14 @@ Manual).
 The following table describes the default conversion from the VTL basic
 scalar types to the SDMX data types .
 
-| VTL basic scalar type | <p>Default SDMX data type</p><br><p>(BasicComponentDataType)</p> | Default output format |
+| VTL basic scalar type | Default SDMX data type (BasicComponentDataType) | Default output format |
 | :--- | :--- | :--- |
 | String | String | Like XML (xs:string) |
 | Number | Float | Like XML (xs:float) |
 | Integer | Integer | Like XML (xs:int) |
 | Date | DateTime | YYYY-MM-DDT00:00:00Z |
-| Time | StandardTimePeriod | &lt;date&gt;/&lt;date&gt; (as defined above) |
-| time_period | ReportingTimePeriod (StandardReportingPeriod) | <p> YYYY-Pppp</p><br><p>(according to SDMX )</p> |
+| Time | StandardTimePeriod | `<date>/<date>` (as defined above) |
+| time_period | ReportingTimePeriod (StandardReportingPeriod) | YYYY-Pppp (according to SDMX) |
 | Duration | Duration | Like XML (xs:duration) PnYnMnDTnHnMnS |
 | Boolean | Boolean | Like XML (xs:boolean) with the values "true" or "false" |
 
@@ -1369,16 +1540,17 @@ for the VTL basic scalar types "number", "integer", "date", "time",
 "string" and "boolean" the VTL conventions are extended with some other
 special characters as described in the following table.
 
-| VTL special characters for the formatting masks |
-| :--- |
-|  |
-| Number |
-| D | one numeric digit (if the scientific notation is adopted, D is only<br>for the mantissa) |
+VTL special characters for the formatting masks:
+
+Number:
+
+| D | one numeric digit (if the scientific notation is adopted, D is only for the mantissa) |
 | E | one numeric digit (for the exponent of the scientific notation) |
 | . (dot) | possible separator between the integer and the decimal parts. |
 | , (comma) | possible separator between the integer and the decimal parts. |
-|  |  |
-| Time and duration |
+
+Time and duration: 
+
 | C | century |
 | Y | year |
 | S | semester |
@@ -1393,37 +1565,45 @@ special characters as described in the following table.
 | P | period indicator (representation in one digit for the duration) |
 | P | number of the periods specified in the period indicator |
 | AM/PM | indicator of AM / PM (e.g. am/pm for "am" or "pm") |
-| MONTH | uppercase textual representation of the month (e.g., JANUARY for<br>January) |
-| DAY | uppercase textual representation of the day (e.g., MONDAY for<br>Monday) |
+| MONTH | uppercase textual representation of the month (e.g., JANUARY for January) |
+| DAY | uppercase textual representation of the day (e.g., MONDAY for Monday) |
 | Month | lowercase textual representation of the month (e.g., january) |
 | Day | lowercase textual representation of the month (e.g., monday) |
-| Month | First character uppercase, then lowercase textual representation of<br>the month (e.g., January) |
-| Day | First character uppercase, then lowercase textual representation of<br>the day using (e.g. Monday) |
-|  |  |
-| String |
+| Month | First character uppercase, then lowercase textual representation of the month (e.g., January) |
+| Day | First character uppercase, then lowercase textual representation of the day using (e.g. Monday) |
+
+
+String:
+
 | X | any string character |
 | Z | any string character from "A" to "z" |
 | 9 | any string character from "0" to "9" |
-|  |  |
-| Boolean |
+
+
+Boolean:
+
 | B | Boolean using "true" for True and "false" for False |
 | 1 | Boolean using "1" for True and "0" for False |
 | 0 | Boolean using "0" for True and "1" for False |
-|  |  |
-| Other qualifiers |
+
+Other qualifiers:
+
 | * | an arbitrary number of digits (of the preceding type) |
 | + | at least one digit (of the preceding type) |
 | ( ) | optional digits (specified within the brackets) |
 | \ | prefix for the special characters that must appear in the mask |
-| N | fixed number of digits used in the preceding textual representation<br>of the month or the day |
-|  |  |
+| N | fixed number of digits used in the preceding textual representation of the month or the day |
 
 The default conversion, either standard or customized, can be used to
 deduce automatically the representation of the components of the result
 of a VTL Transformation. In alternative, the representation of the
 resulting SDMX Dataflow can be given explicitly by providing its
 DataStructureDefinition. In other words, the representation specified in
-the DSD, if available, overrides any default conversion[44].
+the DSD, if available, overrides any default conversion[^40].
+
+[^40]:
+    The representation given in the DSD should obviously be compatible
+    with the VTL data type.
 
 ### Null Values
 
@@ -1458,8 +1638,8 @@ Given this discretion, it is essential to know which are the external
 representations adopted for the literals in a VTL program, in order to
 interpret them correctly. For example, if the external format for the
 dates is YYYY-MM-DD the date literal 2010-01-02 has the meaning of
-2<sup>nd</sup> January 2010, instead if the external format for the
-dates is YYYY-DD-MM the same literal has the meaning of 1<sup>st</sup>
+2nd January 2010, instead if the external format for the
+dates is YYYY-DD-MM the same literal has the meaning of 1st
 February 2010.
 
 Hereinafter, i.e. in the SDMX implementation of the VTL, it is assumed
