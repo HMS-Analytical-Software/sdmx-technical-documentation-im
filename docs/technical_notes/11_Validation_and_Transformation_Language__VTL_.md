@@ -1164,14 +1164,14 @@ mapping dimensions[^33].
     FromVtlSuperSpace of the VtlDataflowMapping relevant to DF2(1.0).
 
 The corresponding VTL Transformations, assuming that the result needs to
-be persistent, would be of this kind: [^34]
+be persistent, would be of this kind[^34]:
+
+[^34]:
+    the symbol of the VTL persistent assignment is used (`<-`)
 
 ```xml
 ‘DF2(1.0.0)/INDICATORvalue.COUNTRYvalue’ <- expression
 ```
-
-[^34]:
-    the symbol of the VTL persistent assignment is used (`<-`)
 
 Some examples follow, for some specific values of INDICATOR and COUNTRY:
 
