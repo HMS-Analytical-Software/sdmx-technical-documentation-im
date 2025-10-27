@@ -37,9 +37,9 @@ depends upon the requirements of the class for:
 
 ### Class Diagram
 
-![](media/image53.png) 
-/// caption
-Figure 27 Class inheritance in the Data Structure Definition and
+![](media/image53.png){ width="550" }
+/// figure-caption | 27
+Class inheritance in the Data Structure Definition and
 Data Set Packages
 ///
 
@@ -133,8 +133,8 @@ required.
 ### Class Diagram 
 
 ![](media/image54.png)
-/// caption
-Figure 28 Relationship class diagram of the Data Structure<br>Definition excluding representation
+/// figure-caption
+Relationship class diagram of the Data Structure<br>Definition excluding representation
 ///
 
 
@@ -264,8 +264,8 @@ related to one of the following artefacts:
     Measures.
 
 ![](media/image55.png)
-/// caption
-Figure 29: Attribute Attachment Defined in the Data Structure Definition
+/// figure-caption
+Attribute Attachment Defined in the Data Structure Definition
 ///
 
 The following table details the possible relationships a DataAttribute
@@ -281,8 +281,9 @@ therefore only one of the following is possible.
 
 
 ![](media/image56.png)
-
-Figure 30: Representation of DSD Components
+/// figure-caption
+Representation of DSD Components
+///
 
 Each of Dimension, TimeDimension, Measure, DataAttribute and
 MetadataAttribute can have a Representation specified (using the
@@ -359,9 +360,9 @@ DataStructureDefinition.
 
 ### Class Diagram
 
-![](media/image57.png) 
-/// caption
-Figure 31: Class Diagram of the Data Set
+![](media/image57.png){ width="550" }
+/// figure-caption
+Class Diagram of the Data Set
 ///
 
 ### Explanation of the Diagram

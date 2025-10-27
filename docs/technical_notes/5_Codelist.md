@@ -19,8 +19,8 @@ contain the code 'A' from CL\_SERIES as this was the second Codelist to
 be referenced in the sequence of references.
 
 ![](media/image3.png)
-///caption
-Figure 7: Codelist extension
+/// figure-caption | 7
+Codelist extension
 ///
 
 As the extended Codelist, CL\_INDICATOR\_EX in this example, may also
@@ -30,8 +30,8 @@ will be used instead of Code 'A' from CL\_INDICATOR and CL\_SERIES, as
 shown below:
 
 ![](media/image4.png)
-///caption
-Figure 8: Codelist extension with new Codes
+/// figure-caption
+Codelist extension with new Codes
 ///
 
 ### Prefixing Code Ids
@@ -43,8 +43,8 @@ the CL\_SERIES reference includes a prefix of 'SER\_' then the resulting
 Codelist would contain 7 codes, A, E, F, X, Y, SER\_A, SER\_B, SER\_C.
 
 ![](media/image5.png)
-///caption
-Figure 9: Extended Codelist with prefix
+/// figure-caption
+Extended Codelist with prefix
 ///
 
 ### Including / Excluding Specific Codes
@@ -58,8 +58,8 @@ either a list of excluded items, or included items, exclusion and
 inclusion is not supported against a single Codelist.
 
 ![](media/image6.png)
-///caption
-Figure 10: Extended Codelist with include/exclude terms
+/// figure-caption
+Extended Codelist with include/exclude terms
 ///
 
 ### Parent Ids
@@ -73,23 +73,23 @@ to Codes originating from different Codelists, and also prevents
 circular references from occurring.
 
 ![](media/image7.png)
-///caption
-Figure 11: Parent Code included
+/// figure-caption
+Parent Code included
 ///
 
 ![](media/image8.png)
-///caption
-Figure 12: Parent Code from different extended Codelist
+/// figure-caption
+Parent Code from different extended Codelist
 ///
 
 ![](media/image9.png)
-///caption
-Figure 13: Parent Code overridden by local Code
+/// figure-caption
+Parent Code overridden by local Code
 ///
 
 ![](media/image10.png)
-///caption
-Figure 14: Parent Code not included
+/// figure-caption
+Parent Code not included
 ///
 
 ### Discriminated Unions
@@ -182,6 +182,6 @@ As an example, let’s assume:
 - The above are also shown in the schematic below:
 
 - ![](media/image11.png)
-///caption
-Figure 15: Hierarchy Association
+/// figure-caption
+ Hierarchy Association
 ///

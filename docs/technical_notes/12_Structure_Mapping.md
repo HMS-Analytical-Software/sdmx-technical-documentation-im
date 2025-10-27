@@ -388,15 +388,15 @@ to 'Z' and from 'a' to 'z' are reserved):
 The model is illustrated below:
 
 ![](media/image18.png)
-///caption
-Figure 24 showing the component map mapping the SOURCE\_DATE Dimension
+/// figure-caption | 24
+showing the component map mapping the SOURCE\_DATE Dimension
 to the TIME\_PERIOD dimension with the additional information on the
 component map to describe the time format
 ///
 
 ![](media/image19.png)
-///caption
-Figure 25 showing an input date format, whose output frequency is
+/// figure-caption
+showing an input date format, whose output frequency is
 derived from the output value of the FREQ Dimension
 ///
 
@@ -423,8 +423,8 @@ two commonly used time standards.
 The model is illustrated below:
 
 ![](media/image20.png)
-///caption
-Figure 26 showing the component map mapping the SOURCE\_DATE Dimension
+/// figure-caption
+showing the component map mapping the SOURCE\_DATE Dimension
 to the TIME\_PERIOD Dimension with the additional information on the
 component map to describe the numerical datetime system in use
 ///

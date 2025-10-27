@@ -26,8 +26,8 @@ for the given source value(s)’.
 ### Class Diagram – Relationship
 
 ![](media/image65.png)
-/// caption
-Figure 39: Representation Map
+/// figure-caption | 39
+Representation Map
 ///
 
 ### Explanation of the Diagram

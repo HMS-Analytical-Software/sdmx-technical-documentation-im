@@ -36,8 +36,8 @@ Registry logical model covers the last aspect.
 #### Use cases
 
 ![](media/image8.svg)
-/// caption
-Figure 7 Use cases for maintaining data and metadata structural and
+///  figure-caption | 7
+Use cases for maintaining data and metadata structural and
 provisioning definitions
 ///
 
@@ -84,8 +84,8 @@ is unique.
 | ![](media/image25.svg) |  | Responsible for maintaining data and metadata provisioning<br>definitions. |  |
 |  | ![](media/image26.svg) | The maintenance of provisioning definitions. |  |
 
-/// caption
-Figure 8: Table of Actors and Use Cases for Maintenance of Structural
+///  figure-caption
+Table of Actors and Use Cases for Maintenance of Structural
 and Provisioning Definitions
 ///
 
@@ -94,8 +94,8 @@ and Provisioning Definitions
 #### Use Cases
 
 ![](media/image27.svg)
-/// caption
-Figure 9: Actors and use cases for data and metadata publishing and
+///  figure-caption
+Actors and use cases for data and metadata publishing and
 consuming
 ///
 

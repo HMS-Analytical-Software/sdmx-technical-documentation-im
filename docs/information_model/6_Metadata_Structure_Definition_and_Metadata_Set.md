@@ -57,8 +57,8 @@ notation used to depict this).
 ### Class Diagram - Inheritance
 
 ![](media/image58.png)
-/// caption
-Figure 32: Inheritance class diagram of the Metadata Structure
+/// figure-caption | 32
+Inheritance class diagram of the Metadata Structure
 Definition
 ///
 
@@ -102,8 +102,8 @@ MetadataProvisionAgreement, since SDMX 3.0.
 ### Class Diagram – Relationship
 
 ![](media/image59.png)
-/// caption
-Figure 33: Relationship class diagram of the Metadata Structure
+/// figure-caption
+Relationship class diagram of the Metadata Structure
 Definition
 ///
 
@@ -192,8 +192,8 @@ to be used for specifying the proper targets for reference metadata.
 ### Class Diagram
 
 ![](media/image60.png)
-/// caption
-Figure 34: Relationship Class Diagram of the Metadata Set
+/// figure-caption
+Relationship Class Diagram of the Metadata Set
 ///
 
 ### Explanation of the Diagram

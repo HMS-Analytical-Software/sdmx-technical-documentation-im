@@ -2,9 +2,9 @@
 
 ## Class Diagram
 
-![](media/image70.png)
-/// caption
-Figure 44: Relationship and inheritance class diagram of data/metadata
+![](media/image70.png){ width="550" }
+/// figure-caption | 44
+Relationship and inheritance class diagram of data/metadata
 provisioning
 ///
 
@@ -64,8 +64,8 @@ through the SDMX structural artefacts that eventually link to a data or
 metadata registration[4].
 
 ![](media/image71.png)
-/// caption
-Figure 45: Schematic of the linking of structural metadata to data and
+///  figure-caption
+Schematic of the linking of structural metadata to data and
 metadata registration
 ///
 

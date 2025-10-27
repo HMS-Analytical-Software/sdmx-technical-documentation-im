@@ -24,9 +24,9 @@ and relationships amongst classes.
 
 ### Class Diagram
 
-![](media/image36.png)
-/// caption
-Figure 10: SDMX Identification, Maintenance and Versioning
+![](media/image36.png){ width="550" }
+/// figure-caption | 10
+SDMX Identification, Maintenance and Versioning
 ///
 
 
@@ -116,9 +116,9 @@ and maintenance.
 
 ### Class Diagram – Basic Inheritance from the Base Inheritance Classes
 
-![](media/image37.png)
-/// caption
-Figure 11: Basic Inheritance from the Base Structures
+![](media/image37.png){ width="550" }
+/// figure-caption
+Basic Inheritance from the Base Structures
 ///
 
 ### Explanation of the Diagram
@@ -133,9 +133,9 @@ which they relate.
 
 ### Class Diagram
 
-![](media/image38.png)
-/// caption
-Figure 12: Class Diagram of Basic Data Types
+![](media/image38.png){ width="550" }
+/// figure-caption
+Class Diagram of Basic Data Types
 ///
 
 ### Explanation of the Diagram
@@ -197,8 +197,8 @@ RulesetScheme, VtlMappingScheme and UserDefinedOperatorScheme.
 ### Class Diagram
 
 ![](media/image39.png)
-/// caption
-Figure 13 The Item Scheme pattern
+/// figure-caption
+The Item Scheme pattern
 ///
 
 ### Explanation of the Diagram
@@ -274,14 +274,14 @@ common software and common syntax structures.
 
 ### Class Diagrams
 
-![](media/image40.png)
-/// caption
-Figure 14: The Structure Pattern
+![](media/image40.png){ width="450" }
+/// figure-caption
+The Structure Pattern
 ///
 
-![](media/image41.png)
-/// caption
-Figure 15: Representation within the Structure Pattern
+![](media/image41.png){ height="550" }
+/// figure-caption
+Representation within the Structure Pattern
 ///
 
 ### Explanation of the Diagrams

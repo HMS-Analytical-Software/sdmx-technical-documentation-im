@@ -16,8 +16,8 @@ specified. For instance, the following roles are some examples:
 The Information Model for this is shown below:
 
 ![](media/image13.png)
-///caption
-Figure 19: Information Model Extract for Concept Role
+/// figure-caption | 19
+Information Model Extract for Concept Role
 ///
 
 It is possible to specify zero or more concept roles for a Dimension,

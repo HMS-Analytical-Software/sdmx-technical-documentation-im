@@ -17,8 +17,8 @@ used.
 ### Class Diagram
 
 ![](media/image72.png)
-/// caption
-Figure 46: Inheritance and Relationship class diagram of Process and
+/// figure-caption | 46
+Inheritance and Relationship class diagram of Process and
 Transitions
 ///
 

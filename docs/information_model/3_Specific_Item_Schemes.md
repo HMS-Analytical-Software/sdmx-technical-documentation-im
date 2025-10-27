@@ -32,9 +32,9 @@ diagrams in the specific sections below.
 
 ### Class Diagram
 
-![](media/image42.png)
-/// caption
-Figure 16: Class diagram of the Codelist
+![](media/image42.png){ width="450" }
+/// figure-caption | 16
+Class diagram of the Codelist
 ///
 
 ### Explanation of the Diagram
@@ -89,9 +89,9 @@ full Codelist. The way this works is described in section 3.5.3.1 on
 
 ### Class Diagram – Codelist Extension
 
-![](media/image43.png)
-/// caption
-Figure 17: Class diagram for Codelist Extension
+![](media/image43.png){ width="450" }
+/// figure-caption
+Class diagram for Codelist Extension
 ///
 
 #### Narrative
@@ -132,14 +132,14 @@ to a set of Codes with common parts in their identifiers.
 The geospatial support is implemented via an extension of the normal
 Codelist. This is illustrated in the following diagrams.
 
-![](media/image44.png)
-/// caption
-Figure 18: Inheritance for the GeoCodelist
+![](media/image44.png){ width="350" }
+/// figure-caption
+Inheritance for the GeoCodelist
 ///
 
 ![](media/image45.png)
-/// caption
-Figure 19: Class diagram for Geospatial Codelist
+/// figure-caption
+Class diagram for Geospatial Codelist
 ///
 
 #### Narrative
@@ -179,9 +179,9 @@ are related to the gridDefinition specified in the GeoGridCodelist.
 
 ### Class Diagram
 
-![](media/image46.png)
-/// caption
-Figure 20: Class diagram of the ValueList
+![](media/image46.png){ width="550" }
+/// figure-caption
+Class diagram of the ValueList
 ///
 
 ### Explanation of the Diagram
@@ -224,9 +224,9 @@ The ValueList can have one or more ValueItems.
 
 ### Class Diagram - Inheritance
 
-![](media/image47.png)
-/// caption
-Figure 21 Class diagram of the Concept Scheme
+![](media/image47.png){ width="550" }
+/// figure-caption
+Class diagram of the Concept Scheme
 ///
 
 ### Explanation of the Diagram
@@ -271,8 +271,8 @@ section 3.5.3.1 on ItemScheme.
 ### Class Diagram - Relationship
 
 ![](media/image48.png)
-/// caption
-Figure 22: Relationship class diagram of the Concept Scheme
+/// figure-caption
+Relationship class diagram of the Concept Scheme
 ///
 
 ### Explanation of the diagram
@@ -332,9 +332,9 @@ to any set of IdentiableArtefacts in a Categorisation.
 
 ### Class diagram - Inheritance
 
-![](media/image49.png)
-/// caption
-Figure 23 Inheritance Class diagram of the Category Scheme
+![](media/image49.png){ width="350" }
+/// figure-caption
+Inheritance Class diagram of the Category Scheme
 ///
 
 ### Explanation of the Diagram
@@ -381,8 +381,8 @@ in section 3.5.3.1 on ItemScheme.
 ### Class diagram - Relationship
 
 ![](media/image50.png)
-/// caption
-Figure 24: Relationship Class diagram of the Category Scheme
+/// figure-caption
+Relationship Class diagram of the Category Scheme
 ///
 
 The CategoryScheme can have one or more Categorys. The Category is
@@ -415,8 +415,8 @@ IdentifiableArtefact.
 ### Class Diagram
 
 ![](media/image51.png)
-/// caption
-Figure 25 The Organisation Scheme class diagram
+/// figure-caption
+The Organisation Scheme class diagram
 ///
 
 ### Explanation of the Diagram
@@ -494,9 +494,9 @@ on *ItemScheme*.
 
 ### Class Diagram
 
-![](media/image52.png)
-/// caption
-Figure 26: Class diagram of the Reporting Taxonomy
+![](media/image52.png){ width="550" }
+/// figure-caption
+Class diagram of the Reporting Taxonomy
 ///
 
 ### Explanation of the Diagram

@@ -37,8 +37,8 @@ This supports a hierarchical structure of agencyID.
 An example is shown below.
 
 ![](media/image12.png)
-///caption
-Figure 16: Example of Hierarchic Structure of Agencies
+///figure-caption | 16
+Example of Hierarchic Structure of Agencies
 ///
 
 Each agency is identified by its full hierarchy excluding SDMX.
@@ -86,8 +86,9 @@ The XML representing this structure is shown below.
 
 </str:AgencySchemes>
 ```
-
-Figure 17: Example Agency Schemes Showing a Hierarchy
+/// figure-caption
+Example Agency Schemes Showing a Hierarchy
+///
 
 Examples of Structure definitions that show how Agencies are used, are
 presented below:
@@ -110,8 +111,9 @@ presented below:
     <com:Name xml:lang="en">Frequency</com:Name>
   </str:Codelist>
 ```
-
-Figure 18: Example Showing Use of Agency Identifiers
+/// figure-caption
+Example Showing Use of Agency Identifiers
+///
 
 Each of these maintenance agencies has a Codelist with an identical id
 'CL\_FREQ'. However, each is uniquely identified by means of the

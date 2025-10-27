@@ -34,8 +34,8 @@ called methods). In this document the operations compartment is not
 shown as there are no operations.
 
 ![](media/image2.svg) 
-/// caption
-Figure 1 Class with operations suppressed
+/// figure-caption
+Class with operations suppressed
 ///
 
 In some diagrams for some classes the attribute compartment is
@@ -48,8 +48,8 @@ and is done to aid clarity of the diagram. The method used is:
     be suppressed from the class for clarity.
 
 ![](media/image3.svg) 
-/// caption
-Figure 2 Class with attributes also suppressed
+/// figure-caption
+Class with attributes also suppressed
 ///
 
 Note that, in any case, attributes inherited from a super class are not
@@ -122,8 +122,8 @@ diagram below shows the sub models of the SDMX-IM that were included in
 the version 1.0 specification.
 
 ![](media/image4.png)
-/// caption
-Figure 3: SDMX Information Model Version 1.0 package structure
+/// figure-caption
+SDMX Information Model Version 1.0 package structure
 ///
 
 ### Version 2.0/2.1
@@ -149,8 +149,8 @@ synonymous. The term Data Structure Definition is used in the model and
 this document.
 
 ![](media/image5.png) 
-/// caption
-Figure 4 SDMX Information Model Version 2.0/2.1 package
+/// figure-caption
+SDMX Information Model Version 2.0/2.1 package
 structure
 ///
 
@@ -167,8 +167,8 @@ confined to the registry, and the registry also makes use of the other
 packages in the Information Model.
 
 ![](media/image6.png)
-/// caption
-Figure 5: SDMX Information Model Version 2.0/2.1 package structure
+/// figure-caption
+SDMX Information Model Version 2.0/2.1 package structure
 including the registry
 ///
 
@@ -182,6 +182,6 @@ Inheritance” in “Figure 11: Basic Inheritance from the Base Structures”.
 The IM packages are largely the same.
 
 ![](media/image7.png)
-/// caption
-Figure 6: SDMX Information Model version 3.0 package structure
+/// figure-caption
+SDMX Information Model version 3.0 package structure
 ///

@@ -22,8 +22,8 @@ The **actor** can be defined as follows:
 The actor is depicted as a stick man as shown below.
 
 ![](media/image75.svg) 
-/// caption
-Figure 49 Actor
+/// figure-caption | 49
+Actor
 ///
 
 The **use case** can be defined as follows:
@@ -33,18 +33,18 @@ The **use case** can be defined as follows:
 > result of value to a particular actor”
 
 ![](media/image76.svg) 
-/// caption
-Figure 50 Use case
+/// figure-caption
+Use case
 ///
 
 ![](media/image77.svg) 
-/// caption
-Figure 51 Actor and use case
+/// figure-caption
+Actor and use case
 ///
 
 ![](media/image78.svg) 
-/// caption
-Figure 52 Extend use cases
+/// figure-caption
+Extend use cases
 ///
 
 An extend use case is where a use case may be optionally extended by a
@@ -63,8 +63,8 @@ In fact, if the UML is used purely as a means of modelling data, then
 there is little difference between a class and an entity.
 
 ![](media/image79.svg) 
-/// caption
-Figure 53 Class and its attributes
+/// figure-caption | 53
+Class and its attributes
 ///
 
 Figure 53 shows that a class is represented by a rectangle split into
@@ -93,8 +93,8 @@ the diagram in this document an abstract class is depicted with its name
 in italics, and coloured white.
 
 ![](media/image80.svg) 
-/// caption
-Figure 54 Abstract and concrete classes
+/// figure-caption
+Abstract and concrete classes
 ///
 
 ## Associations
@@ -112,8 +112,8 @@ used.
 ### Simple Association
 
 ![](media/image81.svg) 
-/// caption
-Figure 55 A simple association
+/// figure-caption
+A simple association
 ///
 
 Here the DataflowDefinition class has an association with the
@@ -135,13 +135,13 @@ most common ones are:
 ### Aggregation
 
 ![](media/image82.svg)
-/// caption
-Figure 56: A simple aggregate association
+/// figure-caption
+A simple aggregate association
 ///
 
 ![](media/image83.svg) 
-/// caption
-Figure 57 A composition aggregate association
+/// figure-caption
+A composition aggregate association
 ///
 
 An association with an aggregation relationship indicates that one class
@@ -167,8 +167,8 @@ the super classes – in this case between the *ItemScheme* and the
 *Item,* and another between Category called /*hierarchy*.
 
 ![](media/image84.svg) 
-/// caption
-Figure 58 Association names and end names
+/// figure-caption | 58
+Association names and end names
 ///
 
 Furthermore, it is possible to give role names to the association-ends
@@ -202,8 +202,8 @@ This is aligned, in general, with the way this is implemented in the XML
 schemas.
 
 ![](media/image85.svg) 
-/// caption
-Figure 59 One way association
+/// figure-caption
+One way association
 ///
 
 Here it is possible to navigate from A to B, but there is no
@@ -219,8 +219,8 @@ attributes in common. Inheritance is shown as a triangle at the super
 class.
 
 ![](media/image86.svg) 
-/// caption
-Figure 60 Inheritance
+/// figure-caption
+Inheritance
 ///
 
 Here the Dimension is derived from Component which itself is derived
@@ -239,8 +239,8 @@ classes from which the sub classes inherit. A derived association is
 shown by “/” preceding the association name e.g. */name*.
 
 ![](media/image87.svg) 
-/// caption
-Figure 61 Derived associations
+/// figure-caption
+Derived associations
 ///
 
 [1] OLAP: On line analytical processing

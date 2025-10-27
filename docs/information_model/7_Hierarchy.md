@@ -39,8 +39,8 @@ The principal features of the Hierarchy are:
 ### Class Diagram
 
 ![](media/image61.png)
-/// caption
-Figure 35: Inheritance class diagram for the Hierarchy
+/// figure-caption | 35
+Inheritance class diagram for the Hierarchy
 ///
 
 ### Explanation of the Diagram
@@ -68,8 +68,8 @@ shown in the relationship section below.
 ### Class Diagram
 
 ![](media/image62.png)
-/// caption
-Figure 36: Relationship class diagram of the Hierarchy
+/// figure-caption
+Relationship class diagram of the Hierarchy
 ///
 
 ### Explanation of the Diagram

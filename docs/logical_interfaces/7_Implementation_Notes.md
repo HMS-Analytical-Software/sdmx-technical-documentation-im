@@ -70,8 +70,8 @@ The following table lists the Maintainable Artefacts.
 | None | Hierarchy | Hierarchical Code |
 | None | Hierarchy Association |  |
 | None | Categorisation |  |
-/// caption
-Table 4: Table of Maintainable Artefacts for Structural Definition
+/// table-caption | 4
+Table of Maintainable Artefacts for Structural Definition
 Metadata
 ///
 
@@ -105,16 +105,16 @@ gives the ability for an application to discover data and metadata by
 #### 7.1.3.2 Structure Usage Schematic
 
 ![](media/image13.png)
-/// caption
-Figure 9: Schematic of Linking the Data and Metadata Flows to Categories
+/// figure-caption | 9
+Schematic of Linking the Data and Metadata Flows to Categories
 and Structure Definitions
 ///
 
 #### 7.1.3.3 Structure Usage Model 
 
 ![](media/image14.png)
-/// caption
-Figure 10: SDMX-IM of links from Structure Usage to Category
+/// figure-caption
+SDMX-IM of links from Structure Usage to Category
 ///
 
 In addition to the maintenance of the Dataflow and the Metadataflow, the
@@ -162,8 +162,8 @@ Data Provider. In terms of the SDMX Information Model, the Data Provider
 is maintained in a Data Provider Scheme.
 
 ![](media/image15.png)
-/// caption
-Figure 11: SDMX-IM of the Data Provider
+/// figure-caption
+SDMX-IM of the Data Provider
 ///
 
 Note that the Data Provider does not inherit the hierarchy association.
@@ -171,17 +171,17 @@ The diagram below shows a logical schematic of the data model classes
 required to maintain provision agreements.
 
 ![](media/image16.png)
-/// caption
-Figure 12: Schematic of the Provision Agreement
+/// figure-caption
+Schematic of the Provision Agreement
 ///
 
 The diagram below is a logical representation of the data required in
 order to maintain Provision Agreements.
-/// caption
+/// figure-caption
 ![](media/image17.png)
 ///
 
-Figure 13: Logical class diagram of the information contained in the
+Logical class diagram of the information contained in the
 Provision Agreement
 
 A Provision Agreement is structural metadata. Each Provision Agreement
@@ -244,16 +244,16 @@ Dimension values already selected).
 ### 7.3.2 Data and Metadata Constraints: Schematic
 
 ![](media/image18.png)
-/// caption
-Figure 14: Schematic of the Constraint and the Artefacts that can be
+/// figure-caption
+Schematic of the Constraint and the Artefacts that can be
 constrained
 ///
 
 ### 7.3.3 Data and Metadata Constraints: Model
 
 ![](media/image19.png)
-/// caption
-Figure 15: Logical class diagram showing inheritance between and
+/// figure-caption
+Logical class diagram showing inheritance between and
 reference to constrainable artefacts
 ///
 
@@ -306,8 +306,8 @@ messages are returned as a registry exception within the response.
 #### 7.4.2.1 Registration Request Schematic 
 
 ![](media/image20.png)
-/// caption
-Figure 16: Schematic of the Objects Concerned with registration
+/// figure-caption
+Schematic of the Objects Concerned with registration
 ///
 
 #### 7.4.2.2 Registration Request Model 
@@ -336,8 +336,8 @@ following values:
 
 
 ![](media/image21.png)
-/// caption
-Figure 17: Logical Class Diagram of Registration of Data and Metadata
+/// figure-caption
+Logical Class Diagram of Registration of Data and Metadata
 ///
 
 The *QueryDatasource* is an abstract class that represents a data
@@ -407,8 +407,8 @@ contain some successful and some failed statuses. The logical model for
 the RegistrationResponse is shown below:
 
 ![](media/image22.png)
-/// caption
-Figure 18: Logical class diagram showing the registration response
+/// figure-caption
+Logical class diagram showing the registration response
 ///
 
 ## 7.5 Subscription and Notification Service 
@@ -438,8 +438,8 @@ the subscription. This is called a “notification”.
 ###  7.5.1 Subscription Logical Class Diagram 
 
 ![](media/image23.png)
-/// caption
-Figure 19: Logical Class Diagram of the Subscription
+/// figure-caption
+Logical Class Diagram of the Subscription
 ///
 
 ###  7.5.2 Subscription Information
@@ -575,8 +575,8 @@ or replacement of an existing registration or a new registration.
 ### 7.6.1 Logical Class Diagram
 
 ![](media/image24.png)
-/// caption
-Figure 20: Logical Class Diagram of the Notification
+/// figure-caption
+Logical Class Diagram of the Notification
 ///
 
 A notification is an XML document that is sent to a user via email or

@@ -24,8 +24,8 @@ that uses it.
 ### Class Diagram – Relationship
 
 ![](media/image63.png)
-/// caption
-Figure 37: Relationship Class diagram of the Structure Map
+/// figure-caption | 37
+Relationship Class diagram of the Structure Map
 ///
 
 ### Explanation of the Diagram
@@ -64,8 +64,8 @@ by multiple ComponentMaps.
 ### Class Diagram – Epoch Mapping and Date Pattern Mapping
 
 ![](media/image64.png)
-/// caption
-Figure 38: Relationship Class diagram of the EpochMap and DatePatternMap
+/// figure-caption
+Relationship Class diagram of the EpochMap and DatePatternMap
 ///
 
 ### Explanation of the Diagram

@@ -21,8 +21,8 @@ All major classes of the SDMX Information model inherit from one of:
 ### 6.1.1 Identification, Naming, Versioning, and Maintenance Model
 
 ![](media/image8.png)
-/// caption
-Figure 5: Class diagram of fundamental artefacts in the SDMX-IM
+/// figure-caption | 5
+Class diagram of fundamental artefacts in the SDMX-IM
 ///
 
 The table below shows the identification and related data attributes to
@@ -56,8 +56,8 @@ be stored in a registry for objects that are one of:
 | serviceURL | C | string | The url of the service that can be queried for this resource. |
 | structureURL | C | string | The url of the resource. |
 | (Maintenance) organisationId | M | string | The object must be linked to a maintenance organisation, i.e.,<br>Agency or Metadata Provider. |
-/// caption
-Table 1: Common Attributes of Object Types
+/// table-caption
+Common Attributes of Object Types
 ///
 
 ## 6.2 Unique identification of SDMX objects 
@@ -69,8 +69,8 @@ itself is a sub class of Organisation Scheme – this is shown in the
 class diagram below.
 
 ![](media/image9.png)
-/// caption
-Figure 6: Agency Scheme Model
+/// figure-caption
+Agency Scheme Model
 ///
 
 The Agency in SDMX is extremely important. The Agency Id system used in
@@ -124,25 +124,29 @@ e.g., the id of EE as an agencyID is AA.DD.EE
 
 An example of this is shown in the XML snippet below:
 
-**&lt;str:Codelists&gt;  
-&lt;str:Codelist id="CL\_FREQ" agencyID="SDMX" version="1.0.0"&gt;  
-&lt;com:Name xml:lang="en"&gt;Standard frequency
-Codelist&lt;/com:Name&gt;  
-&lt;/str:Codelist&gt;  
-&lt;str:Codelist id="CL\_FREQ" agencyID="AA" version="1.0.0"&gt;  
-&lt;com:Name xml:lang="en"&gt;Codelist maintained by agency
-AA&lt;/com:Name&gt;  
-&lt;/str:Codelist&gt;  
-&lt;str:Codelist id="CL\_FREQ" agencyID="AA.CC" version="1.0.0"&gt;  
-&lt;com:Name xml:lang="en"&gt;Codelist maintained by the AA unit
-CC&lt;/com:Name&gt;  
-&lt;/str:Codelist&gt;  
-&lt;str:Codelist id="CL\_FREQ" agencyID="BB.CC" version="1.0.0"&gt;  
-&lt;com:Name xml:lang="en"&gt;Codelist maintained by the BB unit
-CC&lt;/com:Name&gt;  
-&lt;/str:Codelist&gt;**
+```xml
+<str:Codelists>  
+<str:Codelist id="CL\_FREQ" agencyID="SDMX" version="1.0.0">  
+<com:Name xml:lang="en">Standard frequency
+Codelist</com:Name>  
+</str:Codelist>  
+<str:Codelist id="CL\_FREQ" agencyID="AA" version="1.0.0">  
+<com:Name xml:lang="en">Codelist maintained by agency
+AA</com:Name>  
+</str:Codelist>  
+<str:Codelist id="CL\_FREQ" agencyID="AA.CC" version="1.0.0">  
+<com:Name xml:lang="en">Codelist maintained by the AA unit
+CC</com:Name>  
+</str:Codelist>  
+<str:Codelist id="CL\_FREQ" agencyID="BB.CC" version="1.0.0">  
+<com:Name xml:lang="en">Codelist maintained by the BB unit
+CC</com:Name>  
+</str:Codelist>
+```
 
-Figure 8: Example Showing Use of Agency Identifiers
+/// figure-caption
+Example Showing Use of Agency Identifiers
+///
 
 Each of these maintenance agencies has an identical Code list with the
 Id CL\_BOP. However, each is uniquely identified by means of the

@@ -1377,8 +1377,8 @@ of the compound structures. See below the diagram of the VTL data types,
 taken from the VTL User Manual:
 
 ![](media/image16.svg)
-///caption
-Figure 22 – VTL Data Types
+/// figure-caption | 22
+VTL Data Types
 ///
 
 The VTL scalar types are in turn subdivided in basic scalar types, which
@@ -1391,8 +1391,8 @@ structure in terms of supersets/subsets (e.g. "scalar" is the superset
 of all the basic scalar types):
 
 ![](media/image17.svg)
-///caption
-Figure 23 – VTL Basic Scalar Types
+/// figure-caption
+VTL Basic Scalar Types
 ///
 
 ### VTL basic scalar types and SDMX data types
@@ -1499,8 +1499,9 @@ the SDMX data types to the VTL basic scalar types.
 | KeyValues | Metadata type – not applicable |
 | IdentifiableReference | Metadata type – not applicable |
 | DataSetReference | Metadata type – not applicable |
-
-Figure 14 – Mappings from SDMX data types to VTL Basic Scalar Types
+/// figure-caption
+Mappings from SDMX data types to VTL Basic Scalar Types
+///
 
 When VTL takes in input SDMX artefacts, it is assumed that a type
 conversion according to the table above always happens. In case a
@@ -1525,8 +1526,9 @@ scalar types to the SDMX data types .
 | time_period | ReportingTimePeriod (StandardReportingPeriod) | YYYY-Pppp (according to SDMX) |
 | Duration | Duration | Like XML (xs:duration) PnYnMnDTnHnMnS |
 | Boolean | Boolean | Like XML (xs:boolean) with the values "true" or "false" |
-
-Figure 14 – Mappings from SDMX data types to VTL Basic Scalar Types
+/// figure-caption
+Mappings from VTL Basic Scalar Types to SDMX data types
+///
 
 In case a different default conversion is desired, it can be achieved
 through the CustomTypeScheme and CustomType artefacts (see also the
@@ -1544,6 +1546,8 @@ VTL special characters for the formatting masks:
 
 Number:
 
+| VTL Special Character | Description |
+| :---------- | :----------------------------------- |
 | D | one numeric digit (if the scientific notation is adopted, D is only for the mantissa) |
 | E | one numeric digit (for the exponent of the scientific notation) |
 | . (dot) | possible separator between the integer and the decimal parts. |
@@ -1551,6 +1555,8 @@ Number:
 
 Time and duration: 
 
+| VTL Special Character | Description |
+| :---------- | :----------------------------------- |
 | C | century |
 | Y | year |
 | S | semester |
@@ -1575,6 +1581,8 @@ Time and duration:
 
 String:
 
+| VTL Special Character | Description |
+| :---------- | :----------------------------------- |
 | X | any string character |
 | Z | any string character from "A" to "z" |
 | 9 | any string character from "0" to "9" |
@@ -1582,12 +1590,16 @@ String:
 
 Boolean:
 
+| VTL Special Character | Description |
+| :---------- | :----------------------------------- |
 | B | Boolean using "true" for True and "false" for False |
 | 1 | Boolean using "1" for True and "0" for False |
 | 0 | Boolean using "0" for True and "1" for False |
 
 Other qualifiers:
 
+| VTL Special Character | Description |
+| :---------- | :----------------------------------- |
 | * | an arbitrary number of digits (of the preceding type) |
 | + | at least one digit (of the preceding type) |
 | ( ) | optional digits (specified within the brackets) |

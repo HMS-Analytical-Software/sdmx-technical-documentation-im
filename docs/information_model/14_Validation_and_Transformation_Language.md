@@ -5,7 +5,7 @@
 This SDMX model package supports the definition of Transformations,
 which are algorithms to calculate new data starting from already
 existing ones, written using the Validation and Transformation Language
-(VTL)[5].
+(VTL)[^5].
 
 The purpose of this model package is to enable the:
 
@@ -42,8 +42,8 @@ referenced below.
 ### Class Diagram
 
 ![](media/image73.png)
-/// caption
-Figure 47: Class inheritance diagram in the Transformations and
+/// figure-caption | 47
+Class inheritance diagram in the Transformations and
 Expressions Package
 ///
 
@@ -87,8 +87,8 @@ to InternationalString from *NameableArtefact*.
 ### Class Diagram
 
 ![](media/image74.png)
-/// caption
-Figure 48: Relationship diagram in the Transformations and Expressions
+/// figure-caption
+Relationship diagram in the Transformations and Expressions
 Package
 ///
 

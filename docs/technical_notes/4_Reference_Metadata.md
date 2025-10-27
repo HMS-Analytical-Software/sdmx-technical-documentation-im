@@ -28,8 +28,8 @@ related components for creating reference metadata.
 The schematic structure of an MSD is shown below.
 
 ![](media/image2.png)
-/// caption
-Figure 1: Schematic of the Metadata Structure Definition
+/// figure-caption
+Schematic of the Metadata Structure Definition
 ///
 
 The MSD contains one Metadata Attribute Descriptor comprising the
@@ -49,9 +49,10 @@ Metadata Provision Agreement specify the Targets:
   </str: MetadataAttributeDescriptor>
 </str:MetadataStructure>
 ```
-
-Figure 2: The high-level view of the MSD containing one Metadata
+/// figure-caption
+The high-level view of the MSD containing one Metadata
 Attribute Descriptor
+///
 
 ```xml
 <str:Metadataflow agencyID="OECD" id="GENERAL_METADATA" version="1.0.0-draft">
@@ -63,8 +64,9 @@ Attribute Descriptor
     Dataflow=OECD:*(*)</str:Targets>
 </str:Metadataflow>
 ```
-
-Figure 3: Wildcarded Target Objects as specified in a Metadataflow
+/// figure-caption
+Wildcarded Target Objects as specified in a Metadataflow
+///
 
 ```xml
 <str:MetadataProvisionAgreement agencyID="OECD" id="ABS_INDICATORS" version="1.0.0-draft">
@@ -82,9 +84,10 @@ Figure 3: Wildcarded Target Objects as specified in a Metadataflow
     OECD:ABC(*)</str:Target>
 </str:MetadataProvisionAgreement>
 ```
-
-Figure 4: Specific Target Objects as specified in a Metadata Provision
+/// figure-caption
+Specific Target Objects as specified in a Metadata Provision
 Agreement
+///
 
 Note that the SDMX-ML schemas have specific XML elements for each
 identifiable object type because identifying, for instance, a
@@ -124,8 +127,9 @@ An example is shown below.
   </str:MetadataAttributeDescriptor>
 </str:MetadataStructure>
 ```
-
-Figure 5: Example MSD showing specification of some Metadata Attributes
+/// figure-caption
+Example MSD showing specification of some Metadata Attributes
+///
 
 This example shows the following hierarchy of Metadata Attributes:
 
@@ -172,8 +176,9 @@ is shown below.
 </msg:MetadataSet>
 
 ```
-
-Figure 6: Example Metadata Set
+/// figure-caption
+Example Metadata Set
+///
 
 This example shows:
 

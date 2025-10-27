@@ -23,8 +23,8 @@ The absence of an output for an input is interpreted as ‘no output value
 for the given source value(s)’.
 
 ![](media/image66.png)
-/// caption
-Figure 40: Item Scheme Map
+/// figure-caption | 40
+Item Scheme Map
 ///
 
 ### Explanation of the Diagram

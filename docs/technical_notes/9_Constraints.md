@@ -273,15 +273,15 @@ restrict these at various levels to specify the actual code that are
 valid for the object to which the Constraint is attached.
 
 ![](media/image14.png)
-///caption
-Figure 20: Example Scenario for Constraints
+/// figure-caption | 20
+Example Scenario for Constraints
 ///
 
 Constraints are declared as follows:
 
 ![](media/image15.png)
-///caption
-Figure 21: Example Constraints
+/// figure-caption
+Example Constraints
 ///
 
 Notes:
