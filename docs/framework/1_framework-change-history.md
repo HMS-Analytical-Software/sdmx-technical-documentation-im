@@ -31,7 +31,7 @@ syntax.
 
 ## Major Changes from 1.0 to 2.0
 
-- **Reference Metadata**: In addition to describing and specifying
+- **Reference Metadata:** In addition to describing and specifying
     data structures and formats (along with related structural
     metadata), the version 2.0 specification also provides for the
     exchange of metadata which is distinct from the structural metadata
@@ -41,12 +41,12 @@ syntax.
     reporting); metadata related to data provisioning (release calendar
     information, description of the data and metadata provided, etc.);
     and metadata relevant to the exchange of categorization schemes.
-- **SDMX Registry**: Provision is made in the 2.0 standard for
+- **SDMX Registry:** Provision is made in the 2.0 standard for
     standard communication with registry services, to support a
     data-sharing model of statistical exchange. These services include
     registration of data and metadata, querying of registered data and
     metadata, and subscription/notification.
-- **Structural Metadata**: The support for exchange of statistical
+- **Structural Metadata:** The support for exchange of statistical
     data and related structural metadata has been expanded. Some support
     is provided for qualitative data; data cube structures are
     described; hierarchical code lists are supported; relationships
@@ -183,7 +183,7 @@ The principle breaking changes are:
     potentially different Data Structure Definitions. Breaking changes
     similar to those for the SDMX-ML transmission format have been made
     to the structure message.
-- SDMX-CSV - The CSV data and reference metadata messages are not
+- SDMX-CSV -- The CSV data and reference metadata messages are not
     backwardly compatible with those under version 2.1 due to changes to
     the structure of the messages needed to support new features such as
     the improved REST API data queries.

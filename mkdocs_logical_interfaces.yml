@@ -1,4 +1,4 @@
-site_name: SDMX Logical Model
+site_name: logical_model
 
 nav:
   - Identification of SDMX Objects: logical_interfaces/6_Identification_of_SDMX_Objects.md

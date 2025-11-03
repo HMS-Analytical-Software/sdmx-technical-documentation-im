@@ -79,13 +79,12 @@ full Codelist. The way this works is described in section 3.5.3.1 on
 
 #### Definitions
 
-| | | |
-| :--- | :--- | :--- |
-| Class | Feature | Description |
-| Codelist | <p>Inherits from</p><br><p><em>ItemScheme</em></p> | A list from which some statistical concepts (coded concepts) take<br>their values. |
-| Code | <p>Inherits from</p><br><p>Item</p> | A language independent set of letters, numbers or symbols that<br>represent a concept whose meaning is described in a natural<br>language. |
-|  | hierarchy | Associates the parent and the child codes. |
-|  | extends | Associates a Codelist with any Codelists that it may extend. |
+| Class    | Feature   | Description |
+| :---     | :---      | :--- |
+| Codelist | Inherits from: ItemScheme | A list from which some statistical concepts (coded concepts) take their values. |
+| Code     | Inherits from: Item | A language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. |
+|          | hierarchy  | Associates the parent and the child codes. |
+|          | extends    | Associates a Codelist with any Codelists that it may extend. |
 
 ### Class Diagram – Codelist Extension
 
@@ -100,11 +99,14 @@ A Codelist may extend other Codelists via the CodelistExtension class.
 The latter, via the sequence, indicates the order of precedence of the
 extended Codelists for conflict resolution of Codes. Besides that, the
 prefix property is used to ensure uniqueness of inherited Codes in the
-extending[2] Codelist in case conflicting Codes must be included in the
+extending[^1] Codelist in case conflicting Codes must be included in the
 latter. Each CodelistExtension association may include one
 InclusiveCodeSelection or one ExclusiveCodeSelection; those allow
 including or excluding a specific selection of Codes from the extended
 Codelists.
+
+[^1]: The Codelist that extends 0..* Codelists is the 'extending' Codelist, 
+    while the Codelist(s) that are inherited is/are the 'extended' Codelist(s).
 
 The code selection classes may have MemberValues in order to specify the
 subset of the Codes that should be included or excluded from the

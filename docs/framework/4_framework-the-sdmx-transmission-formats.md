@@ -10,11 +10,12 @@ complete coverage.
 
 There are four distinct types of message:
 
-1. *Structure Definition:* For the exchange of structural metadata. A
+1. **Structure Definition:** For the exchange of structural metadata. A
     SDMX-ML structure message can carry details of any number and
     combination of structural metadata artefacts like DSDs, code lists
     and constraints.
-2. *Structure-specific Data:* For the exchange of data. This format is
+
+2. **Structure-specific Data:** For the exchange of data. This format is
     specific to the Data Structure Definitions of the data sets (in
     other terms, it is DSD-specific) and is created by following
     mappings between the metadata constructs defined in the Structure
@@ -24,18 +25,19 @@ There are four distinct types of message:
     parser, and supports the transmission of partial data sets
     (incremental updates) as well as whole data sets.
 
-    > Many XML tools and technologies have expectations about the functions
-    > performed by an XML schema, one of which is a very direct relationship
-    > between the XML constructs described in the XML schema and the tagged
-    > data in the XML instance. Strong data typing is also considered
-    > normal, supporting full validation of the tagged data. These message
-    > types are designed to support validation and other expected XML schema
-    > functions.
+    Many XML tools and technologies have expectations about the functions
+    performed by an XML schema, one of which is a very direct relationship
+    between the XML constructs described in the XML schema and the tagged
+    data in the XML instance. Strong data typing is also considered
+    normal, supporting full validation of the tagged data. These message
+    types are designed to support validation and other expected XML schema
+    functions.
 
-3. *Generic Metadata:* For the exchange of reference metadata sets.
+3. **Generic Metadata:** For the exchange of reference metadata sets.
     'Generic' means the XML elements and XML attributes are the same
     regardless of the metadata set.
-4. *Registry:* All of the possible interactions with the SDMX registry
+
+4. **Registry:** All of the possible interactions with the SDMX registry
     services are supported using SDMX-ML interfaces and REST API calls.
     Submission of structural metadata content, data / metadata
     registrations and subscriptions is performed by a synchronous
@@ -63,17 +65,17 @@ purposes.
 
 There are three distinct message types:
 
-1. *Structure:* For the exchange structural metadata. SDMX-JSON
+1. **Structure:** For the exchange structural metadata. SDMX-JSON
     structure messages follow the same principles as for SDMX-ML in that
     a single message can transmit any number and combination of
     structural metadata artefacts. While the SDMX-ML and SDMX-JSON
     messages are structured differently, it is possible to freely
     convert between them.
-2. *Data:* For the exchange of data. Unlike SDMX-ML, the structure of a
+2. **Data:** For the exchange of data. Unlike SDMX-ML, the structure of a
     SDMX-JSON data message is not specific to the DSDs of the data sets
     so schema validation will not check for compliance of the data with
     the DSDs.
-3. *Metadata*: For the exchange of reference metadata sets.
+3. **Metadata:** For the exchange of reference metadata sets.
 
 ### SDMX-CSV
 
@@ -87,10 +89,10 @@ converted between the CSV and the JSON / XML formats without loss.
 
 There are two distinct message types:
 
-1. *Data*: For the exchange of data. Like SDMX-JSON, SDMX-CSV can
+1. **Data:** For the exchange of data. Like SDMX-JSON, SDMX-CSV can
     include both code IDs and labels which is helpful when using the
     data to create human readable charts and dashboards.
-2. *Metadata*: For the exchange of reference metadata sets.
+2. **Metadata:** For the exchange of reference metadata sets.
 
 ### Formats and Messages Deprecated in Version 3.0
 

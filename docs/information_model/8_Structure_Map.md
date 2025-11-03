@@ -37,10 +37,13 @@ either map a source and target DataStructureDefinition or a source and
 target Dataflow, it cannot mix source and target types. The StructureMap
 contains zero or more ComponentMaps. Each ComponentMap maps one or more
 *Component*s from the source DataStructureDefinition to one or more
-*Component*s in the target DataStructureDefinition[3]. In addition, the
+*Component*s in the target DataStructureDefinition[^1]. In addition, the
 StructureMap contains zero or more FixedValueMaps. In this case, one or
 more *Component*s, from the source or target DataStructureDefinition,
 map to a fixed value.
+
+[^1]: Source and target Data Structure Definition are either directly linked 
+    from the StructureMap or indirectly via the linked source and target Dataflow
 
 The rules pertaining to how reported values map, are maintained in
 either a RepresentationMap, EpochMap, or DatePatternMap. A ComponentMap
@@ -98,33 +101,33 @@ between the frequency Id and the output date format, e.g., A01=YYYY.
 
 #### Definitions
 
-| Class | Feature | Description |
-| :--- | :--- | :--- |
-| StructureMap | Inherits from<br/><br><em>MaintainableArtefact</em> | Links a source and target structure where there is a semantic<br>equivalence between the source and the target structures. |
-|  | +sourceStructure | Association to the source Data Structure. |
-|  | +targetStructure | Association to the target Data Structure |
-|  | +sourceStructureUsage | Association to the source Dataflow. |
-|  | +targetStructureUsage | Association to the target Dataflow. |
-| ComponentMap | Inherits from<br/><br><em>AnnotableArtefact</em> | Links source and target Component(s) where there is a semantic<br>equivalence between the source and the target Components. |
-|  | +source | Association to zero or more source Components. |
-|  | +target | Association to zero or more the target Components. |
-|  | mappingRules | Reference to either a RepresentationMap, an EpochMap or a<br>DatePatternMap. |
-| FixedValueMap | Inherits from<br/><br><em>AnnotableArtefact</em> | Links a Component (source or target) to a fixed value. |
-|  | value | The value that a Component will be fixed in a fixed component<br>map. |
-| <em>DateMap</em> | Inherits from<br/><br><em>IdentifiableArtefact</em> |  |
-|  | freqDimension | The Dimension or Attribute of the target Data Structure Definition<br>which will hold the frequency information for date conversion. Mutually<br>exclusive with targetFrequencyId. |
-|  | yearStart | The date of the start of the year, enabling mapping from high<br>frequency to lower frequency formats. |
-|  | resolvePeriod | Which point in time to resolve to when mapping from low frequency to<br>high frequency periods. |
-|  | mappedFrequencies | A reference to a map of frequency id to date pattern for<br>output. |
-| EpochMap | Inherits from<br/><br><em>DateMap</em> |  |
-|  | basePeriod | Epoch zero starts on this period. |
-|  | targetFrequencyId | The frequency to convert the input date into. Mutually exclusive<br>with freqDimension. |
-|  | epochPeriod | Describes the period of time that each epoch represents. |
-| DatePatternMap | Inherits from<br/><br><em>DateMap</em> | Described a source date based on a string pattern, and how it maps<br>to the target date. |
-|  | locale | The locale on which the input will be parsed according to the<br>pattern. |
-| DateMapping |  |  |
-|  | sourcePattern | Describes the source date using conventions for describing years,<br>months, days, etc. |
-|  | targetFrequencyId | The frequency to convert the input date into. Mutually exclusive<br>with freqDimension. |
-| FrequencyFormatMapping | Inherits from <em>IdentifiableArtefact</em> | Describes the relationship between a frequency Id to the what the<br>output date is formatted |
-|  | frequencyId | The string used to describe the frequency |
-|  | datePattern | The output date pattern for that frequency |
+| Class                | Feature                | Description                                                                                                                                          |
+|----------------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| StructureMap         | Inherits from         | MaintainableArtefact. Links a source and target structure where there is a semantic equivalence between the source and the target structures.         |
+|                      | +sourceStructure      | Association to the source Data Structure.                                                                                                            |
+|                      | +targetStructure      | Association to the target Data Structure.                                                                                                            |
+|                      | +sourceStructureUsage | Association to the source Dataflow.                                                                                                                  |
+|                      | +targetStructureUsage | Association to the target Dataflow.                                                                                                                  |
+| ComponentMap         | Inherits from         | AnnotableArtefact. Links source and target Component(s) where there is a semantic equivalence between the source and the target Components.          |
+|                      | +source               | Association to zero or more source Components.                                                                                                       |
+|                      | +target               | Association to zero or more the target Components.                                                                                                   |
+|                      | mappingRules          | Reference to either a RepresentationMap, an EpochMap or a DatePatternMap.                                                                            |
+| FixedValueMap        | Inherits from         | AnnotableArtefact. Links a Component (source or target) to a fixed value.                                                                            |
+|                      | value                 | The value that a Component will be fixed in a fixed component map.                                                                                   |
+| *DateMap*            | Inherits from         | IdentifiableArtefact.                                                                                                                                |
+|                      | freqDimension         | The Dimension or Attribute of the target Data Structure Definition which will hold the frequency information for date conversion. Mutually exclusive with targetFrequencyId. |
+|                      | yearStart             | The date of the start of the year, enabling mapping from high frequency to lower frequency formats.                                                  |
+|                      | resolvePeriod         | Which point in time to resolve to when mapping from low frequency to high frequency periods.                                                         |
+|                      | mappedFrequencies     | A reference to a map of frequency id to date pattern for output.                                                                                     |
+| EpochMap             | Inherits from         | DateMap.                                                                                                                                            |
+|                      | basePeriod            | Epoch zero starts on this period.                                                                                                                    |
+|                      | targetFrequencyId     | The frequency to convert the input date into. Mutually exclusive with freqDimension.                                                                 |
+|                      | epochPeriod           | Describes the period of time that each epoch represents.                                                                                             |
+| DatePatternMap       | Inherits from         | DateMap. Describes a source date based on a string pattern, and how it maps to the target date.                                                      |
+|                      | locale                | The locale on which the input will be parsed according to the pattern.                                                                               |
+| DateMapping          |                       |                                                                                                                                                      |
+|                      | sourcePattern         | Describes the source date using conventions for describing years, months, days, etc.                                                                 |
+|                      | targetFrequencyId     | The frequency to convert the input date into. Mutually exclusive with freqDimension.                                                                 |
+| FrequencyFormatMapping | Inherits from       | IdentifiableArtefact. Describes the relationship between a frequency Id to what the output date is formatted.                                        |
+|                      | frequencyId           | The string used to describe the frequency.                                                                                                           |
+|                      | datePattern           | The output date pattern for that frequency.                                                                                                          |

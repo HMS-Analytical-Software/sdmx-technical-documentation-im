@@ -1,4 +1,4 @@
-site_name: SDMX Technical Notes
+site_name: technical_notes
 
 nav:
 - Purpose and Structure: technical_notes/0_Purpose_and_Structure.md

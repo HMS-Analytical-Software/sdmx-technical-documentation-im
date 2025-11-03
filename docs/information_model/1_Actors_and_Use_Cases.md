@@ -75,14 +75,14 @@ is unique.
 
 | Actor | Use Case | Description |
 | :--- | :--- | :--- |
-| ![](media/image9.svg) |  | Responsible organisation that administers structural<br>definitions common to the community as a whole. |
-|  | ![](media/image10.svg) | Creation and maintenance of the top-level scheme of<br>maintenance agencies for the Community. |
-| ![](media/image11.svg) |  | <p>Responsible agency for maintaining structural<br>artefacts such as code lists, concept schemes, Data Structure Definition<br>structural definitions, metadata structure definitions, data and<br>metadata provisioning artefacts such as provision agreement, and<br>sub-maintenance agencies.</p><br><p>sub roles are:</p><br><p>Structural Definitions Maintenance Agency</p><br><p>Provisioning Definitions Maintenance Agency</p> |
+| ![](media/image9.svg) |  | Responsible organisation that administers structural definitions common to the community as a whole. |
+|  | ![](media/image10.svg) | Creation and maintenance of the top-level scheme of maintenance agencies for the Community. |
+| ![](media/image11.svg) |  | Responsible agency for maintaining structural artefacts such as code lists, concept schemes, Data Structure Definition structural definitions, metadata structure definitions, data and metadata provisioning artefacts such as provision agreement, and sub-maintenance agencies. Sub roles are: Structural Definitions Maintenance Agency, Provisioning Definitions Maintenance Agency |
 | ![](media/image12.svg) |  | Responsible for maintaining structural definitions. |
-|  | ![](media/image13.svg) | The maintenance of structural definitions. This use case<br>has sub class use cases for each of the structural artefacts that are<br>maintained. |
-|  | <p>![](media/image14.svg)</p><br><p>![](media/image15.svg)</p><br><p>![](media/image16.svg)</p><br><p>![](media/image17.svg)</p><br><p>![](media/image18.svg)</p><br><p>![](media/image19.svg)</p><br><p>![](media/image20.svg)</p><br><p>![](media/image21.svg)</p><br><p>![](media/image22.svg)</p><br><p>![](media/image23.svg)</p><br><p>![](media/image24.svg)</p> | <p>Creation and maintenance of the Data Structure<br>Definition, Metadata Structure Definition, and the supporting artefacts<br>that they use, such as code list and concepts</p><br><p>This includes Agency, Data Provider, Data Consumer, and Organisation<br>Unit Scheme</p> |
-| ![](media/image25.svg) |  | Responsible for maintaining data and metadata provisioning<br>definitions. |  |
-|  | ![](media/image26.svg) | The maintenance of provisioning definitions. |  |
+|  | ![](media/image13.svg) | The maintenance of structural definitions. This use case has subclass use cases for each of the structural artefacts that are maintained. |
+|  | ![](media/image14.svg), ![](media/image15.svg), ![](media/image16.svg), ![](media/image17.svg), ![](media/image18.svg), ![](media/image19.svg), ![](media/image20.svg), ![](media/image21.svg), ![](media/image22.svg), ![](media/image23.svg), ![](media/image24.svg) | Creation and maintenance of the Data Structure Definition, Metadata Structure Definition, and the supporting artefacts that they use, such as code list and concepts. This includes Agency, Data Provider, Data Consumer, and Organisation Unit Scheme. |
+| ![](media/image25.svg) |  | Responsible for maintaining data and metadata provisioning definitions. |
+|  | ![](media/image26.svg) | The maintenance of provisioning definitions. |
 
 ///  figure-caption
 Table of Actors and Use Cases for Maintenance of Structural
@@ -128,11 +128,11 @@ of the source.
 
 | Actor | Use Case | Description |
 | :--- | :--- | :--- |
-| ![](media/image28.svg) |  | Responsible for publishing data according to a specified Data<br>Structure Definition (data structure) definition, and relevant<br>provisioning definitions. |
-|  | ![](media/image29.svg) | Publish a data set. This could mean a physical data set or it could<br>mean to make the data available for access at a data source such as a<br>database that can process a query. |
-| ![](media/image30.svg) |  | The user of the data. It may be a human consumer accessing via a<br>user interface, or it could be an application such as a statistical<br>production system. |
-|  | ![](media/image31.svg) | <p>Use data that is formatted according to the structural<br>definitions and made available according to the provisioning<br>definitions.</p><br><p>Data are often linked to metadata that may reside in a different<br>location and be published and maintained independently.</p> |
-| ![](media/image32.svg) |  | Responsible for publishing reference metadata according to a<br>specified metadata structure definition, and relevant provisioning<br>definitions. |
-|  | ![](media/image33.svg) | Publish a reference metadata set. This could mean a physical<br>metadata set or it could mean to make the reference metadata available<br>for access at a metadata source such as a metadata repository that can<br>process a query. |
-| ![](media/image34.svg) |  | The user of the reference metadata. It may be a human consumer<br>accessing via a user interface, or it could be an application such as a<br>statistical production or dissemination system. |
-|  | ![](media/image35.svg) | Use reference metadata that is formatted according to the structural<br>definitions and made available according to the provisioning<br>definitions. |
+| ![](media/image28.svg) |  | Responsible for publishing data according to a specified Data Structure Definition (data structure) definition, and relevant provisioning definitions. |
+|  | ![](media/image29.svg) | Publish a data set. This could mean a physical data set or it could mean to make the data available for access at a data source such as a database that can process a query. |
+| ![](media/image30.svg) |  | The user of the data. It may be a human consumer accessing via a user interface, or it could be an application such as a statistical production system. |
+|  | ![](media/image31.svg) | Use data that is formatted according to the structural definitions and made available according to the provisioning definitions. Data are often linked to metadata that may reside in a different location and be published and maintained independently. |
+| ![](media/image32.svg) |  | Responsible for publishing reference metadata according to a specified metadata structure definition, and relevant provisioning definitions. |
+|  | ![](media/image33.svg) | Publish a reference metadata set. This could mean a physical metadata set or it could mean to make the reference metadata available for access at a metadata source such as a metadata repository that can process a query. |
+| ![](media/image34.svg) |  | The user of the reference metadata. It may be a human consumer accessing via a user interface, or it could be an application such as a statistical production or dissemination system. |
+|  | ![](media/image35.svg) | Use reference metadata that is formatted according to the structural definitions and made available according to the provisioning definitions. |

@@ -16,7 +16,7 @@ Information Model. The complete set of documents is:
     information model, with the exception of the registry interfaces. It
     is intended for technicians wishing to understand the complete scope
     of the SDMX technical standards in a syntax neutral form.
-- SDMX SECTION 05 REGISTRY SPECIFICATION: LOGICAL INTERFACES: This
+- [SDMX SECTION 05 REGISTRY SPECIFICATION: LOGICAL INTERFACES:](../../logical_model/logical_interfaces/6_Identification_of_SDMX_Objects.md) This
     document provides the logical specification for the registry
     interfaces, including subscription/notification,
     registration/submission of data and metadata, and querying.
@@ -60,10 +60,10 @@ attributes, and associations.
 
 | Class | Feature | Description |
 | :--- | :--- | :--- |
-| ClassName |  |  |
-|  | attributeName |  |
-|  | associationName |  |
-|  | +roleName |  |
+| `ClassName` |  |  |
+|  | `attributeName` |  |
+|  | `associationName` |  |
+|  | `+roleName` |  |
 
 
 The content in the “Feature” column comprises or explains one of the
@@ -73,16 +73,16 @@ following structural features of the class:
     *italic Courier* font.
 - The superclass this class inherits from, if any.
 - The sub classes of this class, if any.
-- Attribute – the attributeName is shown in Courier font.
-- Association – the associationName is shown in Courier font. If the
+- Attribute – the `attributeName` is shown in Courier font.
+- Association – the `associationName` is shown in Courier font. If the
     association is derived from the association between super classes,
-    then the format is /associationName.
-- Role – the +roleName is shown in Courier font.
+    then the format is `/associationName`.
+- Role – the `+roleName` is shown in Courier font.
 
 The Description column provides a short definition or explanation of the
 Class or Feature. UML class names may be used in the description and if
 so, they are presented in normal font with spaces between words. For
-example, the class ConceptScheme will be written as Concept Scheme.
+example, the class `ConceptScheme` will be written as Concept Scheme.
 
 ## Overall Functionality
 
@@ -131,8 +131,10 @@ SDMX Information Model Version 1.0 package structure
 The version 2.0/2.1 model extends the functionality of version 1.0.
 principally in the area of metadata, but also in various ways to define
 structures to support data analysis by systems with knowledge of cube
-type structures such as OLAP[1] systems. The following major constructs
+type structures such as OLAP[^1] systems. The following major constructs
 have been added at version 2.0/2.1
+
+[^1]: OLAP: On line analytical processing
 
 - Metadata structure definition
 - Metadata set

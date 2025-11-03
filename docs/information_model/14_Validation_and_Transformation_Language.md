@@ -1,11 +1,15 @@
-#  Validation and Transformation Language
+# Validation and Transformation Language
 
 ## Introduction
 
 This SDMX model package supports the definition of Transformations,
 which are algorithms to calculate new data starting from already
 existing ones, written using the Validation and Transformation Language
-(VTL)[^5].
+(VTL)[^1].
+
+[^1]: The Validation and Transformation Language is a standard language
+    designed and published under the SDMX initiative. VTL is described
+    in the VTL User and Reference Guides available on the [SDMX website](https://sdmx.org).
 
 The purpose of this model package is to enable the:
 
@@ -112,7 +116,10 @@ syntax is used in defining the transformations of the scheme.
 A Transformation consists of a statement which assigns the outcome of
 the evaluation of a VTL expression to a result (an artefact of the VTL
 Information Model, which in the SDMX context can be a persistent or
-non-persistent Dataflow[6]).
+non-persistent Dataflow[^2]).
+
+[^2]: Or a part of a Dataflow, see also the Section [“Mapping dataflow subsets to distinct VTL data sets” 
+    of the SDMX Technical Notes](../../technical_notes/technical_notes/11_Validation_and_Transformation_Language__VTL_.md#mapping-dataflow-subsets-to-distinct-vtl-data-sets).
 
 For example, assume that D1, D2 and D3 are SDMX Dataflows (called Data
 Sets in VTL) containing information on some goods, specifically: D3 the
@@ -164,7 +171,9 @@ The VTL assumes that non-persistent results are maintained only within
 the same TransformationScheme in which they are produced. Therefore, a
 non-persistent result of a Transformation can be the operand of other
 Transformations of the same TransformationScheme, whereas a persistent
-result can be operand of transformations of any TransformationScheme[7].
+result can be operand of transformations of any TransformationScheme[^3].
+
+[^3]: Provided that the VTL consistency rules are accomplished (see the “Generic Model for Transformations” in the VTL User Manual and its sub-section “Transformation Consistency”)
 
 The TransformationScheme has an association to zero of more
 RulesetScheme, zero or more UserDefinedOperatorScheme, zero or one
@@ -239,7 +248,7 @@ Rulesets (see also the “*Ruleset Scheme*” section above).
 **Name Personalisation Scheme**
 
 In some operations, the VTL assigns by default some standard names to
-some measures and/or attributes of the data structure of the result[8].
+some measures and/or attributes of the data structure of the result[^4].
 The VTL allows also to personalise the names to be assigned. The
 knowledge of the personalised names (if any) is essential for
 understanding the actual behaviour of the Transformation: this is
@@ -247,6 +256,10 @@ achieved through the NamePersonalisationScheme. A NamePersonalisation
 specifies a personalised name that will be assigned in place of a VTL
 default name. The NamePersonalisationScheme is a container for zero or
 more NamePersonalisation.
+
+[^4]: For example, the `check` operator produces some new components in the
+    result called by default `bool_var`, `errorcode`, `errorlevel`, `imbalance`.
+    These names can be personalised if needed.
 
 **VTL Mapping**
 
@@ -260,7 +273,9 @@ actual names (unique identifiers). In the VTL transformations, rulesets,
 user defined operators, the SDMX artefacts are referenced through VTL
 aliases. The alias can be the complete URN of the artefact, an
 abbreviated URN, or another user-defined name, as described in the
-Section 6 of the SDMX Standards.[9]
+Section 6 of the SDMX Standards.[^5]
+
+[^5]: See Section [“References to SDMX artefacts from VTL statements” in the SDMX Technical Notes](../../technical_notes/technical_notes/11_Validation_and_Transformation_Language__VTL_.md#references-to-sdmx-artefacts-from-vtl-statements).
 
 The VTLmapping defines the correspondence between the VTL alias and the
 structured identifier of the SDMX artefact, for each referenced SDMX
@@ -274,7 +289,10 @@ convert the Data Structure of the Dataflow. This kind of conversion can
 happen in two directions, from SDMX to VTL when a SDMX Dataflow is
 accessed by a VTL Transformation (toVtlMappingMethod), or from VTL to
 SDMX when a SDMX derived Dataflow is calculated through VTL
-(fromVtlMappingMethod).[10]
+(fromVtlMappingMethod).[^6]
+
+[^6]: For a more thorough description of these conversions, see the 
+    Section [“Mapping between SDMX and VTL” in the SDMX Technical Notes](../../technical_notes/technical_notes/11_Validation_and_Transformation_Language__VTL_.md#mapping-between-sdmx-and-vtl-data-types).
 
 The default mapping method from SDMX to VTL is called “Basic”. Three
 alternative mapping methods are possible, called “Pivot”, “Basic-A2M”,
@@ -296,7 +314,9 @@ toVtlMappingMethod or fromVtlMappingMethod.
 Although in general one SDMX Dataflow is mapped to one VTL dataset and
 vice-versa, it is also allowed to map distinct parts of a single SDMX
 Dataflow to distinct VTL data sets according to the rules and
-conventions described in the Section 6 of the SDMX Standards.[11]
+conventions described in the Section 6 of the SDMX Standards.[^7]
+
+[^7]: See the Section [“Mapping dataflow subsets to distinct VTL data sets” in the SDMX Technical Notes](../../technical_notes/technical_notes/11_Validation_and_Transformation_Language__VTL_.md#mapping-dataflow-subsets-to-distinct-vtl-data-sets). 
 
 In the direction from SDMX to VTL, this is achieved by fixing the values
 of some predefined Dimensions of the SDMX Data Structure: all the
@@ -321,17 +341,25 @@ Dataflow these classes are not used.
 As already said, a Transformation consists of a statement which assigns
 the outcome of the evaluation of a VTL expression to a result, i.e. an
 artefact of the VTL Information Model. which in the SDMX context can be
-a persistent or non-persistent Dataflow[12]. Therefore, the VTL data
+a persistent or non-persistent Dataflow[^8]. Therefore, the VTL data
 type of the outcome of the VTL expression has to be converted into the
 SDMX data type of the resulting Dataflow. A default conversion table
-from VTL to SDMX data types is assumed[13]. The CustomTypeScheme allows
+from VTL to SDMX data types is assumed[^9]. The CustomTypeScheme allows
 to specify custom conversions that override the default conversion
 table. The CustomTypeScheme is a container for zero or more CustomType.
 A CustomType specifies the custom conversion from a VTL scalar type that
 will override the default conversion. The overriding SDMX data type is
 specified by means of the dataType and outputFormat attributes (the SDMX
 data type assumes the role of external representation in respect to
-VTL[14]).
+VTL[^10]).
+
+[^8]: Or a part of a Dataflow, as described in the previous paragraph.
+
+[^9]: The default conversion table from VTL to SDMX is described in the
+    Section [“Mapping VTL basic scalar types to  SDMX data types” in the SDMX Technical Notes](../../technical_notes/technical_notes/11_Validation_and_Transformation_Language__VTL_.md#mapping-vtl-basic-scalar-types-to-sdmx-data-types).
+
+[^10]: About VTL internal and external representations, see also the 
+    VTL User Manual, section “Basic scalar types”, p.53.
 
 Moreover, the CustomType allows to customize the default format of VTL
 literals and the (possible) SDMX value to be produced when a VTL measure
@@ -366,66 +394,63 @@ basic scalar type).
 #### Definitions
 
 | Class | Feature | Description |
-| :--- | :--- | :--- |
-| Transformation<br/><br>Scheme | <p>Inherits from</p><br><p>ItemScheme</p> | Contains the definitions of transformations meant to produce some<br>derived data and be executed together |
-|  | vtlVersion | The version of the VTL language used for defining<br>transformations |
-| Transformation | <p>Inherits from</p><br><p><em>Item</em></p> | A VTL statement which assigns the outcome of an expression to a<br>result. |
-|  | result | The left-hand side of the VTL statement, which identifies the result<br>artefact. |
-|  | isPersistent | A boolean that indicates whether the result is permanently stored or<br>not, depending on the VTL assignment operator. |
-|  | expression | The right-hand side of the VTL statement that is the expression to<br>be evaluated, which includes the references to the operands of the<br>Transformation. |
-| RulesetScheme | <p>Inherits from</p><br><p><em>ItemScheme</em></p> | Container of rulesets. |
+| --- | --- | --- |
+| Transformation Scheme | Inherits from ItemScheme | Contains the definitions of transformations meant to produce some derived data and be executed together |
+|  | vtlVersion | The version of the VTL language used for defining transformations |
+| Transformation | Inherits from *Item* | A VTL statement which assigns the outcome of an expression to a result. |
+|  | result | The left-hand side of the VTL statement, which identifies the result artefact. |
+|  | isPersistent | A boolean that indicates whether the result is permanently stored or not, depending on the VTL assignment operator. |
+|  | expression | The right-hand side of the VTL statement that is the expression to be evaluated, which includes the references to the operands of the Transformation. |
+| RulesetScheme | Inherits from *ItemScheme* | Container of rulesets. |
 |  | vtlVersion | The version of the VTL language used for defining the rulesets |
-| Ruleset | <p>Inherits from</p><br><p><em>Item</em></p> | A persistent set of rules which can be invoked by means of<br>appropriate VTL operators. |
-|  | rulesetDefinition | A VTL statement for the definition of a ruleset (according to the<br>syntax of the VTL definition language) |
-|  | rulesetType | The VTL type of the ruleset (e.g., in VTL 2.0, datapoint or<br>hierarchical) |
-|  | rulesetScope | The model artefact on which the ruleset is defined (e.g., in VTL<br>2.0, valuedomain or variable) |
-| UserDefinedOperatorScheme | <p>Inherits from</p><br><p><em>ItemScheme</em></p> | Container of user defined operators |
-|  | vtlVersion | The version of the VTL language used for defining the user defined<br>operators |
-| UserDefinedOperator | <p>Inherits from</p><br><p><em>Item</em></p> | Custom VTL operator (not existing in the standard library) that<br>extends the VTL standard library for specific purposes. |
-|  | operatorDefinition | A VTL statement for the definition of a new operator: it specifies<br>the operator name, its parameters and their data types, the VTL<br>expression that defines its behaviour. |
-| NamePersonalisationScheme | <p>Inherits from</p><br><p><em>ItemScheme</em></p> | Container of name personalisations. |
-|  | vtlVersion | The VTL version which the VTL default names to be personalised<br>belong to. |
-| NamePersonalisation | <p>Inherits from</p><br><p><em>Item</em></p> | Definition of personalised name to be used in place of a VTL default<br>name. |
-|  | vtlArtefact | VTL model artefact to which the VTL default name to be personalised<br>refers, e.g. variable, value domain. |
+| Ruleset | Inherits from *Item* | A persistent set of rules which can be invoked by means of appropriate VTL operators. |
+|  | rulesetDefinition | A VTL statement for the definition of a ruleset (according to the syntax of the VTL definition language) |
+|  | rulesetType | The VTL type of the ruleset (e.g., in VTL 2.0, datapoint or hierarchical) |
+|  | rulesetScope | The model artefact on which the ruleset is defined (e.g., in VTL 2.0, valuedomain or variable) |
+| UserDefinedOperatorScheme | Inherits from *ItemScheme* | Container of user defined operators |
+|  | vtlVersion | The version of the VTL language used for defining the user defined operators |
+| UserDefinedOperator | Inherits from *Item* | Custom VTL operator (not existing in the standard library) that extends the VTL standard library for specific purposes. |
+|  | operatorDefinition | A VTL statement for the definition of a new operator: it specifies the operator name, its parameters and their data types, the VTL expression that defines its behaviour. |
+| NamePersonalisationScheme | Inherits from *ItemScheme* | Container of name personalisations. |
+|  | vtlVersion | The VTL version which the VTL default names to be personalised belong to. |
+| NamePersonalisation | Inherits from *Item* | Definition of personalised name to be used in place of a VTL default name. |
+|  | vtlArtefact | VTL model artefact to which the VTL default name to be personalised refers, e.g. variable, value domain. |
 |  | vtlDefaultName | The VTL default name to be personalised. |
-|  | personalisedName | The personalised name to be used in place of the VTL default<br>name. |
-| VtlMappingScheme | <p>Inherits from</p><br><p><em>ItemScheme</em></p> | Container of VTL mappings. |
-| VtlMapping | <p>Inherits from</p><br><p><em>Item</em></p><br><p>Sub classes are:</p><br><p>VtlDataflowMapping</p><br><p>VtlCodelistMapping</p><br><p>VtlConceptMapping</p> | Single mapping between the reference to a SDMX artefact made from<br>VTL transformations, rulesets, user defined operators and the<br>corresponding SDMX structure identifier. |
-| VtlDataflowMapping | <p>Inherits from</p><br><p><em>VtlMapping</em></p> | Single mapping between the reference to a SDMX dataflow and the<br>corresponding SDMX structure identifier |
-|  | dataflowAlias | Alias used in VTL to reference a SDMX dataflow (it can be the URN,<br>the abbreviated URN or a user defined alias). The alias must be<br>univocal: different SDMX artefacts cannot have the same VTL alias. |
-|  | toVtlMappingMethod | Custom specification of the mapping method from SDMX to VTL data<br>structures for the dataflow (overriding the default “basic”<br>method). |
-|  | fromVtlMappingMethod | Custom specification of the mapping method from VTL to SDMX data<br>structures for the dataflow (overriding the default “basic”<br>method). |
-| VtlCodelistMapping | <p>Inherits from</p><br><p><em>VtlMapping</em></p> | Single mapping between the VTL reference to a SDMX codelist and the<br>SDMX structure identifier of the codelist. |
-|  | codelistAlias | Name used in VTL to reference a SDMX codelist. The name/alias must<br>be univocal: different SDMX artefacts cannot have the same VTL<br>alias. |
-| VtlConceptMapping | <p>Inherits from</p><br><p><em>VtlMapping</em></p> | Single mapping between the VTL reference to a SDMX concept and the<br>SDMX structure identifier of the concept. |
-|  | conceptAlias | Name used in VTL to reference a SDMX concept. The name/alias must be<br>univocal: different SDMX artefacts cannot have the same VTL alias. |
-| ToVtlSubspace |  | Subspace of the dimensions of the SDMX dataflow used to identify the<br>parts of the dataflow to be mapped to distinct VTL datasets |
-| ToVtlSpaceKey |  | A dimension of the SDMX dataflow that contributes to identify the<br>parts of the dataflow to be mapped to distinct VTL datasets. |
-|  | Key | The identity of the dimension in the data structure definition of<br>the dataflow that contributes to identify the parts of the dataflow to<br>be mapped to distinct VTL datasets |
-| FromVtlSuperspace |  | Superspace is composed of the dimensions to be added to the data<br>structure of the VTL result dataset in order to obtain the data<br>structure of the derived SDMX dataflow (in case the latter is a superset<br>of distinct VTL datasets calculated independently). |
-| FromVtlSpaceKey |  | A SDMX dimension to be added to the data structure of the VTL result<br>dataset in order to obtain the data structure of the derived SDMX<br>dataflow |
-|  | Key | The identity of the dimension to be added to the data structure of<br>the VTL result dataset in order to obtain the data structure of the<br>derived SDMX dataflow. |
-| CustomTypeScheme | <p>Inherits from</p><br><p><em>ItemScheme</em></p> | Container of custom specifications for VTL basic scalar types. |
+|  | personalisedName | The personalised name to be used in place of the VTL default name. |
+| VtlMappingScheme | Inherits from *ItemScheme* | Container of VTL mappings. |
+| VtlMapping | Inherits from *Item* Sub classes are: VtlDataflowMapping, VtlCodelistMapping, VtlConceptMapping | Single mapping between the reference to a SDMX artefact made from VTL transformations, rulesets, user defined operators and the corresponding SDMX structure identifier. |
+| VtlDataflowMapping | Inherits from *VtlMapping* | Single mapping between the reference to a SDMX dataflow and the corresponding SDMX structure identifier |
+|  | dataflowAlias | Alias used in VTL to reference a SDMX dataflow (it can be the URN, the abbreviated URN or a user defined alias). The alias must be univocal: different SDMX artefacts cannot have the same VTL alias. |
+|  | toVtlMappingMethod | Custom specification of the mapping method from SDMX to VTL data structures for the dataflow (overriding the default “basic” method). |
+|  | fromVtlMappingMethod | Custom specification of the mapping method from VTL to SDMX data structures for the dataflow (overriding the default “basic” method). |
+| VtlCodelistMapping | Inherits from *VtlMapping* | Single mapping between the VTL reference to a SDMX codelist and the SDMX structure identifier of the codelist. |
+|  | codelistAlias | Name used in VTL to reference a SDMX codelist. The name/alias must be univocal: different SDMX artefacts cannot have the same VTL alias. |
+| VtlConceptMapping | Inherits from *VtlMapping* | Single mapping between the VTL reference to a SDMX concept and the SDMX structure identifier of the concept. |
+|  | conceptAlias | Name used in VTL to reference a SDMX concept. The name/alias must be univocal: different SDMX artefacts cannot have the same VTL alias. |
+| ToVtlSubspace |  | Subspace of the dimensions of the SDMX dataflow used to identify the parts of the dataflow to be mapped to distinct VTL datasets |
+| ToVtlSpaceKey |  | A dimension of the SDMX dataflow that contributes to identify the parts of the dataflow to be mapped to distinct VTL datasets. |
+|  | Key | The identity of the dimension in the data structure definition of the dataflow that contributes to identify the parts of the dataflow to be mapped to distinct VTL datasets |
+| FromVtlSuperspace |  | Superspace is composed of the dimensions to be added to the data structure of the VTL result dataset in order to obtain the data structure of the derived SDMX dataflow (in case the latter is a superset of distinct VTL datasets calculated independently). |
+| FromVtlSpaceKey |  | A SDMX dimension to be added to the data structure of the VTL result dataset in order to obtain the data structure of the derived SDMX dataflow |
+|  | Key | The identity of the dimension to be added to the data structure of the VTL result dataset in order to obtain the data structure of the derived SDMX dataflow. |
+| CustomTypeScheme | Inherits from *ItemScheme* | Container of custom specifications for VTL basic scalar types. |
 |  | vtlVersion | The VTL version, which the VTL scalar types belong to. |
-| CustomType | <p>Inherits from</p><br><p><em>Item</em></p> | Custom specification for a VTL basic scalar type. |
+| CustomType | Inherits from *Item* | Custom specification for a VTL basic scalar type. |
 |  | vtlScalarType | VTL scalar type for which the custom specifications are given. |
-|  | outputFormat | Custom specification of the VTL formatting mask needed to obtain to<br>the desired representation, i.e. the desired SDMX format (e.g.<br>YYYY-MM-DD, see also the VTL formatting mask in the VTL Reference Manual<br>and the SDMX Technical Notes). If not specified, the “Default output<br>format” of the default conversion table from VTL to SDMX is used. [^1] |
-|  | datatype | Custom specification of the external (SDMX) data type in which the<br>VTL data type must be converted (e.g. the GregorianDay). If not<br>specified, the “Default SDMX data type” of the default conversion table<br>from VTL to SDMX is used. [^2] |
-|  | nullValue | Custom specification of the SDMX value to be produced for the VTL<br>NULL values, with reference to the vtlScalarType specified above. If no<br>value is specified, no value is produced. |
-|  | vtlLiteralFormat | Custom specification of the format of the VTL literals belonging to<br>the vtlScalarType used in the VTL program (e.g. YYYY-MM-DD)[^3]. If not specified, the “Default<br>output format” of the default conversion table from VTL to SDMX is<br>assumed.[^4] |
+|  | outputFormat | Custom specification of the VTL formatting mask needed to obtain to the desired representation, i.e. the desired SDMX format (e.g. YYYY-MM-DD, see also the VTL formatting mask in the VTL Reference Manual and the SDMX Technical Notes). If not specified, the “Default output format” of the default conversion table from VTL to SDMX is used. [^11] |
+|  | datatype | Custom specification of the external (SDMX) data type in which the VTL data type must be converted (e.g. the GregorianDay). If not specified, the “Default SDMX data type” of the default conversion table from VTL to SDMX is used. [^12] |
+|  | nullValue | Custom specification of the SDMX value to be produced for the VTL NULL values, with reference to the vtlScalarType specified above. If no value is specified, no value is produced. |
+|  | vtlLiteralFormat | Custom specification of the format of the VTL literals belonging to the vtlScalarType used in the VTL program (e.g. YYYY-MM-DD)[^13]. If not specified, the “Default output format” of the default conversion table from VTL to SDMX is assumed.[^14] |
 
-[^1]:
-    See “Mapping VTL basic scalar types to SDMX data types”
-    in the SDMX Technical Notes, chapter “Validation and Transformation
-    Language”.
-[^2]:
-    See “Mapping VTL basic scalar types to SDMX data types”
-    in the SDMX Technical Notes, chapter “Validation and Transformation
-    Language”.
-[^3]:
+[^11]:
+    See [“Mapping VTL basic scalar types to SDMX data types”
+    in the SDMX Technical Notes](../../technical_notes/technical_notes/11_Validation_and_Transformation_Language__VTL_.md#mapping-vtl-basic-scalar-types-to-sdmx-data-types).
+[^12]:
+    See [“Mapping VTL basic scalar types to SDMX data types”
+    in the SDMX Technical Notes](../../technical_notes/technical_notes/11_Validation_and_Transformation_Language__VTL_.md#mapping-vtl-basic-scalar-types-to-sdmx-data-types).
+[^13]:
     See also the VTL formatting mask in the VTL Reference
-    Manual and the SDMX Technical Notes.
-[^4]:
-    See “Mapping VTL basic scalar types to SDMX data types”
-    in the SDMX Technical Notes, chapter “Validation and Transformation
-    Language.
+    Manual and the [SDMX Technical Notes](../../technical_notes/technical_notes/11_Validation_and_Transformation_Language__VTL_.md#mapping-sdmx-data-types-to-vtl-basic-scalar-types).
+[^14]:
+    See [“Mapping VTL basic scalar types to SDMX data types”
+    in the SDMX Technical Notes](../../technical_notes/technical_notes/11_Validation_and_Transformation_Language__VTL_.md#mapping-vtl-basic-scalar-types-to-sdmx-data-types).

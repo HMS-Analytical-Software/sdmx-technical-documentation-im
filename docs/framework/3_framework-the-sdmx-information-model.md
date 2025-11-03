@@ -1,4 +1,4 @@
-
+# The SDMX Information Model
 
 SDMX provides a way of modelling statistical data, and defines the set
 of metadata constructs used for this purpose. Because SDMX specifies a
@@ -68,4 +68,4 @@ this information can also be defined. Chapter 7 has more information on
 VTL and its integration with SDMX.
 
 A full UML conceptual design of the information model is set out in
-Section 2 of the Technical Specifications.
+[Section 2 of the Technical Specifications](../../information_model/information_model/0_Introduction.md).

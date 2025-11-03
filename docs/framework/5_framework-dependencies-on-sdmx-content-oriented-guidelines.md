@@ -1,4 +1,4 @@
-## Dependencies on SDMX content-oriented guidelines
+# Dependencies on SDMX content-oriented guidelines
 
 The technical standards proposed here are designed so that they can be
 used in conjunction with other SDMX guidelines which are more closely
@@ -10,7 +10,7 @@ goal, SDMX creates and maintains guidelines for cross-domain concepts,
 terminology, and structural definitions. There are three major parts to
 this effort.
 
-### Cross-Domain Concepts
+## Cross-Domain Concepts
 
 The SDMX Cross-Domain Concepts is a content guideline concerning
 concepts which are used across statistical domains. This list is
@@ -31,7 +31,7 @@ described above); and to promote the exchange of metadata more widely,
 with a set of harmonized concept names and definitions for other types
 of metadata ("reference metadata", as defined above.)
 
-### Metadata Common Vocabulary
+## Metadata Common Vocabulary
 
 The Metadata Common Vocabulary is an SDMX guideline which provides
 definition of terms to be used for the comparison and mapping of
@@ -45,7 +45,7 @@ Technical Standards.
 The MCV provides definitions for terms on which the SDMX Cross-Domain
 Metadata Concepts work is built.
 
-### Statistical Subject-Matter Domains
+## Statistical Subject-Matter Domains
 
 The Statistical Subject-Matter Domains is a listing of the breadth of
 statistical information for the purposes of organizing widespread
@@ -65,7 +65,7 @@ content of such schemes is supported in SDMX as a Category Scheme.
 SDMX Statistical Subject-Matter Domains will be listed and maintained by
 the SDMX Initiative and will be subject to adjustment.
 
-### SDMX Concept Roles
+## SDMX Concept Roles
 
 These guidelines define the standard set of SDMX Concept Roles and their
 use. This set of standard SDMX Concepts are implemented as a
@@ -73,9 +73,10 @@ cross-domain Concept Scheme that defines the set of concept roles and
 gives examples on concept role implementation in SDMX 2.0, 2.1 and 3.0.
 A concept role gives a particular context to a concept for easy and
 systematic interpretation by machine processing and visualization tools.
-For example, the concepts REPORTING_AREA and COUNTERPART_AREA are
+
+For example, the concepts `REPORTING_AREA` and `COUNTERPART_AREA` are
 different concepts but they are both geographical characteristics,
-therefore they can be associated with the same concept role ID: \"GEO\".
+therefore they can be associated with the same concept role ID: `GEO`.
 This allows visualization systems to interpret these concepts as
 geographical data in order to generate maps. The implementation of
 concept roles is different in versions 2.0 and 2.1/3.0 of the SDMX

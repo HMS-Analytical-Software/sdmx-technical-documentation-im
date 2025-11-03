@@ -1,8 +1,8 @@
 # Change History
 
-### Version 1.0 – initial release September 2004
+## Version 1.0 – initial release September 2004
 
-### Version 2.0 – release November 2005
+## Version 2.0 – release November 2005
 
 Major functional enhancements by addition of new packages:
 
@@ -65,7 +65,7 @@ version 1.0 schema.
 - Revision of Actors and Use Cases to reflect better the functionality
 supported.
 
-### Version 2.1 – release April 2011
+## Version 2.1 – release April 2011
 
 The purpose of this revision is threefold:
 
@@ -74,14 +74,14 @@ The purpose of this revision is threefold:
     however, that the model remains syntax neutral)
 - To correct errors in version 2.0
 
-#### SDMX Base
+### SDMX Base
 
-##### Basic inheritance and patterns
+#### Basic inheritance and patterns
 
 1. The following attributes are added to Maintainable:
-    1. isExternalReference
+    1. `isExternalReference`
     2. structure URL
-    3. serviceURL
+    3. `serviceURL`
 2. Added Nameable Artefact and moved the Name and Description
     associations from Identifiable Artefact to Nameable Artefact. This
     allows an artefact to be identified (with id and urn) without the
@@ -90,13 +90,13 @@ The purpose of this revision is threefold:
     of Maintainable Artefact – this means that only Maintainable objects
     can be versioned, and objects contained in a maintainable object
     cannot be independently versioned.
-4. Renamed MaintenanceAgency to Agency 0 this is its name in the schema
+4. Renamed `MaintenanceAgency` to Agency 0 this is its name in the schema
     and the URN.
 5. Removed abstract class Association as a subclass of Item (as these
     association types are not maintained in Item Schemes). Specific
-    associations are modelled explicitly (e.g. Categorisation,
-    ItemScheme, Item).
-6. Added ActionType to data types.
+    associations are modelled explicitly (e.g. `Categorisation`,
+    `ItemScheme`, `Item`).
+6. Added `ActionType` to data types.
 7. Removed Coded Artefact and Uncoded Artefact and all subclasses (e.g.
     Coded Data Attribute and Uncoded Data Attribute) as the
     “Representation” is more complex than just a distinction between
@@ -107,26 +107,26 @@ The purpose of this revision is threefold:
 10. Removed abstract class Attribute as both Data Attribute and Metadata
     Attribute have different properties. Data Attribute and Metadata
     Attribute inherit directly from Component.
-11. isPartial attribute added to Item Scheme to support partial Item
+11. `isPartial` attribute added to Item Scheme to support partial Item
     Schemes (e.g. partial Code list).
 
-##### Representation
+#### Representation
 
 1. Removed interval and enumeration from Facet.
-2. added facetValueType to Facet.
-3. Re-named DataType to facetValueType.
-4. Added observationalTimePeriod, inclusiveValueRange and
-    exclusiveValueRange to facetValueType.
-5. Added ExtendedFacetType as a sub class of FacetType. This includes
+2. added `facetValueType` to Facet.
+3. Re-named `DataType` to `facetValueType`.
+4. Added `observationalTimePeriod`, `inclusiveValueRange` and
+    `exclusiveValueRange` to `facetValueType`.
+5. Added `ExtendedFacetType` as a sub class of `FacetType`. This includes
     Xhtml as a facet type to support this as an allowed representation
     for a Metadata Attribute
 
-##### Organisations
+#### Organisations
 
 1. Organisation Role is removed and replaced with specific Organisation
     Schemes of Agency, Data Provider, Data Consumer, Organisation Unit.
 
-##### Mapping (Structure Maps)
+#### Mapping (Structure Maps)
 
 Updated Item Scheme Association as follows:
 
@@ -153,7 +153,7 @@ Updated Item Scheme Association as follows:
 13. Added Hybrid Code list Map and Hybrid Code Map to support code
     mappings between a Code list and a Hierarchical Code list.
 
-##### Mapping: Structure Map
+#### Mapping: Structure Map
 
 1. This is a new diagram. Essentially removed inherited /hierarchy
     association between the various maps, as these no longer inherit
@@ -164,11 +164,11 @@ Updated Item Scheme Association as follows:
     Concept Scheme Map and made this association to Item Scheme Map.
 3. Removed hierarchy of Structure Map.
 
-##### Concept
+#### Concept
 
 1. Added association to Representation.
 
-##### Data Structure Definition
+#### Data Structure Definition
 
 1. Added Measure Dimension to support structure-specific renderings of
     the DSD. The Measure Dimension is associated to a Concept Scheme
@@ -182,24 +182,24 @@ Updated Item Scheme Association as follows:
 5. Deleted the derived Data Structure Definition association from Data
     Structure Definition to itself as this is not supported directly in
     DSD.
-6. Deleted attribute GroupKeyDescriptor.isAttachmentConstraint and
+6. Deleted attribute `GroupKeyDescriptor.isAttachmentConstraint` and
     replaced with an association to an Attachment Constraint.
 7. Replaced association from Data Attribute to Attachable Artefact with
     association to Attribute Relationship.
 8. Added a set of classes to support Attribute Relationship.
-9. Renamed KeyDescriptor to DimensionDescriptor to better reflect its
+9. Renamed `KeyDescriptor` to `DimensionDescriptor` to better reflect its
     purpose.
-10. Renamed GroupKeyDescriptor to GroupDimensionDescriptor to better
+10. Renamed `GroupKeyDescriptor` to `GroupDimensionDescriptor` to better
     reflect its purpose.
 
-##### Code list
+#### Code list
 
-1. CodeList classname changed to Codelist.
-2. Removed codevalueLength from Codelist as this is supported by Facet.
-3. Removed hierarchyView association between Code and Hierarchy as this
+1. `CodeList` classname changed to `Codelist`.
+2. Removed `codevalueLength` from `Codelist` as this is supported by Facet.
+3. Removed `hierarchyView` association between Code and Hierarchy as this
     association is not implemented.
 
-##### Metadata Structure Definition(MSD)
+#### Metadata Structure Definition(MSD)
 
 1. Full Target Identifier, Partial Target Identifier, and Identifier
     Component are replaced by Metadata Target and Target Object.
@@ -234,7 +234,7 @@ Updated Item Scheme Association as follows:
 8. The Representation of a Metadata Attribute uses Extended Facet (to
     support Xhtml).
 
-##### Metadata Set
+#### Metadata Set
 
 1. Added link to Data Provider - 0..1 but note that for metadata set
     registration this will be 1.
@@ -249,7 +249,7 @@ Updated Item Scheme Association as follows:
 6. Deleted XML attribute and Contact Details from the inheritance
     diagram.
 
-##### Category Scheme
+#### Category Scheme
 
 1. Added Categorisation. Category no longer has a direct association to
     Dataflow and Metadataflow.
@@ -257,7 +257,7 @@ Updated Item Scheme Association as follows:
     Maintainable Artefact.
 3. Added Reporting Category and associated this to Structure Usage.
 
-##### Data Set
+#### Data Set
 
 1. Removed the association to Provision Agreement from the diagram.
 2. Added association to Data Structure Definition. This association was
@@ -284,21 +284,21 @@ Updated Item Scheme Association as follows:
         series, which means that a value for the Time Dimension is
         reported with the Observation.
 5. Removed Data Set as a sub class of Identifiable – but note that Data
-    Set has a “setId” attribute.
+    Set has a `setId` attribute.
 6. Added coded and uncoded variants of Key Value, Observation, and
     Attribute Value in order to show the relationship between the coded
     values in the data set and the Codelist in the Data Structure
     Definition.
 7. Made Key Value abstract with sub classes for coded, uncoded, measure
-    (MeasureKeyValue) ads time (TimeKeyValue) The Measure Key Value is
+    (`MeasureKeyValue`) ads time (`TimeKeyValue`) The Measure Key Value is
     associated to a Concept as it must take its identify from a Concept.
 
-##### XSDataSet
+#### XSDataSet
 
 1. This is removed and replaced with the single, unified data set
     model.
 
-##### Constraint
+#### Constraint
 
 1. Constraint is made Maintainable (was Identifiable).
 2. Added artefacts that better support and distinguish (from data) the
@@ -308,7 +308,7 @@ Updated Item Scheme Association as follows:
     lists), and actual content (to specify the content of a data or
     metadata source).
 
-##### Process
+#### Process
 
 1. Removed inheritance from Item Scheme and Item: Process inherits
     directly from Maintainable and Process Step from Identifiable.
@@ -323,9 +323,9 @@ Updated Item Scheme Association as follows:
     note that the Transformations and Expressions model is retained,
     though it is not implemented in the schemas.
 
-##### Hierarchical Codelist
+#### Hierarchical Codelist
 
-1. Renamed HierarchicalCodeList to HierarchicalCodelist.
+1. Renamed `HierarchicalCodeList` to `HierarchicalCodelist`.
 2. This is re-modelled to reflect more accurately the way this is
     implemented: this is as an actual hierarchy rather than a set of
     relational associations from which the hierarchy can be derived.
@@ -339,7 +339,7 @@ Updated Item Scheme Association as follows:
 6. Added reference association between Hierarchical Code and Level to
     indicate the Level if the Hierarchy is a level based hierarchy.
 
-##### Provisioning and Registration
+#### Provisioning and Registration
 
 1. Data Provider and Provision Agreement have an association to
     Datasource (was Query Datasource), as the association is to any of
@@ -348,14 +348,14 @@ Updated Item Scheme Association as follows:
     moved to Registration
 3. Registration has a registry assigned Id and indexing attributes.
 
-### Version 2.1 (Revision 2.0) – release June 2020
+## Version 2.1 (Revision 2.0) – release June 2020
 
 The package 13, previously named “Expressions and Transformations” is
 completely reformulated, renamed as “Validation and Transformation
 Language” and implemented also in the other Sections of the SDMX
 standards for actual use.
 
-### Version 3.0 – release September 2021
+## Version 3.0 – release September 2021
 
 New Maintainable Artefacts
 
@@ -376,8 +376,8 @@ New Maintainable Artefacts
 
 New Identifiable Artefacts
 
-- GeoFeatureSetCode
-- GeoGridCode
+- `GeoFeatureSetCode`
+- `GeoGridCode`
 - Metadata Provider
 
 Removed Maintainable Artefacts
@@ -397,12 +397,12 @@ Changed Maintainable Artefacts
 - Metadata Structure Definition – simplified model for reference
     metadata
 - Codelist – support for codelist extension and geospatial specialised
-    codelists (GeographicCodelist, GeoGridCodelist)
+    codelists (`GeographicCodelist`, `GeoGridCodelist`)
 - VTL Mapping Scheme – VTL Concept Mapping Scheme removed to align the
     VTL / SDMX interface with the 3.0 model
 
 New Component Representation Types
 
-- GeospatialInformation – a string type where the value is an
+- `GeospatialInformation` – a string type where the value is an
     expression defining a set of geographical features using a
     purpose-designed syntax

@@ -61,7 +61,10 @@ SimpleDatasource URL.
 
 The diagram below shows in schematic way the essential navigation
 through the SDMX structural artefacts that eventually link to a data or
-metadata registration[4].
+metadata registration[^1].
+
+[^1]: Provider Scheme, Provider, Provision Agreement and Registered source 
+    refer both to data and reference metadata.
 
 ![](media/image71.png)
 ///  figure-caption
