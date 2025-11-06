@@ -18,7 +18,7 @@ may be drilled down to its lower level. The resulting measure (such as
 each individual country for the specific type of road.
 
 Such cube systems rely, not on simple code lists, but on hierarchical
-code sets (see section 8).
+code sets (see Section [Hierarchy](./7_Hierarchy.md)).
 
 ## Support for the Cube in the Information Model
 
@@ -28,11 +28,11 @@ described by a cube definition and can be processed by cube aware
 systems. The SDMX-IM supports the definition of such cubes in the
 following way:
 
-- The Hierarchy defines the (often complex) hierarchies of codes.
+- The `Hierarchy` defines the (often complex) hierarchies of codes.
 - If required:
-    - The StructureMap can group DataStructureDefinition that describe
+    - The `StructureMap` can group `DataStructureDefinition` that describe
         the cube
-    - The HierarchyAssociation can provide a mechanism to apply a
-        Hierarchy to the Codes in the Codelists used by the
-        DataStructureDefinition, providing also the context of which the
-        hierarchy applies (e.g., a Dataflow).
+    - The `HierarchyAssociation` can provide a mechanism to apply a
+        `Hierarchy` to the `Code`s in the `Codelist`s used by the
+        `DataStructureDefinition`, providing also the context of which the
+        hierarchy applies (e.g., a `Dataflow`).

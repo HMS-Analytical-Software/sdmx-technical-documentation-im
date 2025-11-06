@@ -29,7 +29,7 @@ roles and cannot be further specified with additional concept roles.
 The mechanism for maintain and using concept roles is as follows:
 
 1. A standard Concept Scheme maintained in the Global Registry, with
-    the following identification: SDMX:CONCEPT\_ROLES(1.0.0), shall
+    the following identification: `SDMX:CONCEPT_ROLES(1.0.0)`, shall
     include the default roles, specified by the SDMX SWG (as detailed in
     9.5).
 2. Any recognized Agency can have a concept scheme that contains
@@ -63,7 +63,7 @@ The mechanism for maintain and using concept roles is as follows:
 
 The standard roles Concept Scheme, is still a normal Concept Scheme,
 thus it may be used also for the concept identity of a Component, e.g.,
-the 'FREQ':
+the `'FREQ'`:
 
 ```xml
 <str:Dimension id="FREQ">
@@ -77,7 +77,7 @@ interpret the above Dimension to have the role of Frequency.
 
 Using a Concept Scheme that is not the standard roles Concept Scheme
 where it is required to assign a role using the standard roles Concept
-Scheme. Again, FREQ is chosen as the example.
+Scheme. Again, `FREQ` is chosen as the example.
 
 ```xml
 <str:Dimension id="FREQ">
@@ -137,12 +137,12 @@ Concepts:
 
 | COMMENT | Comment | Descriptive text which can be attached to data or metadata. |
 | :--- | :--- | :--- |
-| ENTITY | Entity | Describes the subject of the data set (e.g., a country). |
-| FLAG | Flag | Coded attribute in a data set that represents qualitative information for the cell or partial key (e.g. series) value. |
-| FREQ | Frequency | Time interval at which the source data are collected. |
-| GEO | Geographical | Geographic area to which the measured statistical phenomenon relates. |
-| OPERATION | Statistical operation | Signifies statistical operations have been done on the observations. |
-| VARIABLE | Variable | Characteristic of a unit being observed that may assume more than one of a set of values to which a numerical measure or a category from a classification can be assigned. |
-| MEASURE | Measure | Used for emulating the functionality of the deprecated MeasureDimension. |
-| GEO_FEATURE_SET | Geographical Feature Set | Georeferencing information to describe the location or the shape of a statistical unit, recognizable object or geographical area. |
-| PRIMARY | Primary Measure | Used for backwards compatibility with SDMX 2.1 and back, or when the “Primary Measure” concept is needed. |
+| `ENTITY` | Entity | Describes the subject of the data set (e.g., a country). |
+| `FLAG` | Flag | Coded attribute in a data set that represents qualitative information for the cell or partial key (e.g. series) value. |
+| `FREQ` | Frequency | Time interval at which the source data are collected. |
+| `GEO` | Geographical | Geographic area to which the measured statistical phenomenon relates. |
+| `OPERATION` | Statistical operation | Signifies statistical operations have been done on the observations. |
+| `VARIABLE` | Variable | Characteristic of a unit being observed that may assume more than one of a set of values to which a numerical measure or a category from a classification can be assigned. |
+| `MEASURE` | Measure | Used for emulating the functionality of the deprecated MeasureDimension. |
+| `GEO_FEATURE_SET` | Geographical Feature Set | Georeferencing information to describe the location or the shape of a statistical unit, recognizable object or geographical area. |
+| `PRIMARY` | Primary Measure | Used for backwards compatibility with SDMX 2.1 and back, or when the “Primary Measure” concept is needed. |

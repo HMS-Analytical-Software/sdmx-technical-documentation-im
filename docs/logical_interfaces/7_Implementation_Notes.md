@@ -30,14 +30,13 @@ Structural metadata items
 The level of granularity for the maintenance of SDMX Structural Metadata
 objects in the registry is the Maintainable Artefact. Especially for
 Item Schemes, though, partial maintenance may be performed, i.e., at the
-level of the Item, by submitting an Item Scheme with the 'isPartial'
+level of the Item, by submitting an Item Scheme with the `isPartial`
 flag set and a reduced set of Items.
 
 The following table lists the Maintainable Artefacts.
 
-| <strong>Maintainable Artefacts</strong> |  | <strong>Content</strong> |
+| Abstract Class | Concrete Class | Content |
 | :--- | :--- | :--- |
-| | <strong>Abstract Class</strong> | <strong>Concrete Class</strong> |  |
 | Item Scheme | Codelist | Code |
 |  | Concept Scheme | Concept |
 |  | Category Scheme | Category |
@@ -50,16 +49,16 @@ The following table lists the Maintainable Artefacts.
 |  | Transformation Scheme | Transformation |
 |  | Custom Type Scheme | Custom Type |
 |  | Name Personalisation Scheme | Name Personalisation |
-|  | Vtl Mapping Scheme | <p>Vtl Codelist Mapping</p><br><p>Vtl Concept Mapping</p> |
+|  | Vtl Mapping Scheme | Vtl Codelist Mapping, Vtl Concept Mapping |
 |  | Ruleset Scheme | Ruleset |
 |  | User Defined Operator Scheme | User Defined Operator |
-| Enumerated List | ValueList | Value Item |
-| Structure | Data Structure Definition | <p>Dimension Descriptor</p><br><p>Group Dimension Descriptor</p><br><p>Dimension</p><br><p>Time Dimension</p><br><p>Attribute Descriptor</p><br><p>Data Attribute</p><br><p>Measure Descriptor</p><br><p>Measure</p> |
-|  | Metadata Structure Definition | <p>Metadata Attribute Descriptor</p><br><p>Metadata Attribute</p> |
+| Enumerated List | Value List | Value Item |
+| Structure | Data Structure Definition | Dimension Descriptor, Group Dimension Descriptor, Dimension, Time Dimension, Attribute Descriptor, Data Attribute, Measure Descriptor, Measure |
+|  | Metadata Structure Definition | Metadata Attribute Descriptor, Metadata Attribute |
 | Structure Usage | Dataflow |  |
 |  | Metadataflow |  |
 | None | Process | Process Step |
-| None | Structure Map | <p>Component Map</p><br><p>Epoch Map</p><br><p>Date Pattern Map</p> |
+| None | Structure Map | Component Map, Epoch Map, Date Pattern Map |
 | None | Representation Map | Representation Mapping |
 | Item Scheme Map | Organisation Scheme Map | Item Map |
 |  | Concept Scheme Map | Item Map |
@@ -85,10 +84,12 @@ The artefacts included in the structural definitions are:
     Transformation Scheme, Name Personalisation Scheme, Custom Type
     Scheme, Vtl Mapping Scheme, Ruleset Scheme, User Defined Operator
     Scheme)
-- All types of Enumerated List (ValueList)[^1]
+- All types of Enumerated List (`ValueList`)[^1]
 - All types of Structure (Data Structure Definition, Metadata
     Structure Definition)
 - All types of Structure Usage (Dataflow, Metadataflow)
+
+[^1]: Note that Codelist is also an `EnumeratedList`.
 
 ### 7.1.3 Structure Usage
 
@@ -177,12 +178,12 @@ Schematic of the Provision Agreement
 
 The diagram below is a logical representation of the data required in
 order to maintain Provision Agreements.
-/// figure-caption
-![](media/image17.png)
-///
 
+![](media/image17.png)
+/// figure-caption
 Logical class diagram of the information contained in the
 Provision Agreement
+///
 
 A Provision Agreement is structural metadata. Each Provision Agreement
 must reference a Data Provider or Metadata Provider and a Dataflow or
@@ -267,7 +268,7 @@ Simple Datasource and REST Datasource (via the abstract Query
 Datasource) are all concrete sub-classes of Constrainable Artefact and
 can therefore have Constraints specified. Note that the actual
 Constraint as submitted is associated to the reference classes which
-inherit from ConstrainableRef: these are used to refer to the classes to
+inherit from `ConstrainableRef`: these are used to refer to the classes to
 which the Constraint applies.
 
 The content of the Constraint can be found in the SDMX Information Model
@@ -318,9 +319,9 @@ dataset or metadata set to be registered. The Registration can
 optionally have information, which has been extracted from the
 Registration:
 
-- validFrom
-- validTo
-- lastUpdated
+- `validFrom`
+- `validTo`
+- `lastUpdated`
 
 The last updated date is useful during the discovery process to make
 sure the client knows which data is freshest.
@@ -328,11 +329,11 @@ sure the client knows which data is freshest.
 The Registration has an action attribute which takes one of the
 following values:
 
-| <strong>Action Attribute Value</strong> | <strong>Behaviour</strong> |
+| Action Attribute Value | Behaviour |
 | :--- | :--- |
 | Append | Add this Registration to the registry |
-| Replace | Replace the existing Registration with identified by the id in the<br>Registration of the SubmitRegistrationRequest |
-| Delete | Delete the existing Registration identified by the id in the<br>Registration of the SubmitRegistrationRequest |
+| Replace | Replace the existing Registration with identified by the id in the, Registration of the `SubmitRegistrationRequest` |
+| Delete | Delete the existing Registration identified by the id in the, Registration of the `SubmitRegistrationRequest` |
 
 
 ![](media/image21.png)
@@ -340,71 +341,72 @@ following values:
 Logical Class Diagram of Registration of Data and Metadata
 ///
 
-The *QueryDatasource* is an abstract class that represents a data
+The `QueryDatasource` is an abstract class that represents a data
 source, which can understand an API query (i.e., a RESTful query –
-RESTDatasource) and respond appropriately. Each data source inherits the
-dataURL from *Datasource*, and the *QueryDatasource* has an additional
-URL to locate the specification of the service (specURL) to describe how
+`RESTDatasource`) and respond appropriately. Each data source inherits the
+`dataURL` from `Datasource`, and the `QueryDatasource` has an additional
+URL to locate the specification of the service (`specURL`) to describe how
 to access it. All other supported protocols are assumed to use the
-SimpleDatasource URL.
+`SimpleDatasource` URL.
 
-A SimpleDatasource is used to reference a physical SDMX-ML file that is
+A `SimpleDatasource` is used to reference a physical SDMX-ML file that is
 available at a URL.
 
-The RegistrationRequest has an action attribute which defines whether
-this is a new (append) or updated (replace) Registration, or that the
-Registration is to be deleted (delete). The id is only provided for the
+The `RegistrationRequest` has an action attribute which defines whether
+this is a new (append) or updated (replace) `Registration`, or that the
+`Registration` is to be deleted (delete). The id is only provided for the
 replace and delete actions, as the Registry will allocate the unique id
-of the (new) Registration.
+of the (new) `Registration`.
 
-The Registration includes attributes that state how a SimpleDatasource
+The `Registration` includes attributes that state how a `SimpleDatasource`
 is to be indexed when registered. The Registry registration process must
 act as follows:
 
 Information in the data or metadata set is extracted and placed in one
-or more *Constraint*s (see the *Constraint* model in the SDMX
-Information Model – Section 2 of the SDMX Standards). The information to
+or more `Constraint`s (see the `Constraint` model in the SDMX
+[Information Model  Section](../../information_model/information_model/11_Constraints.md)). 
+The information to
 be extracted is indicated by the Boolean values set on the
-ProvisionAgreement or MetadataProvisionAgreement as shown in the table
+`ProvisionAgreement` or `MetadataProvisionAgreement` as shown in the table
 below.
 
-| <blockquote><br><p><strong>Indexing Required</strong></p><br></blockquote> | <blockquote><br><p><strong>Registration Process Activity</strong></p><br></blockquote> |
+| Indexing Required | Registration Process Activity |
 | :--- | :--- |
-| <blockquote><br><p>indexTimeSeries</p><br></blockquote> | Extract all the series keys and create a KeySet(s) Constraint. |
-| <blockquote><br><p>indexDataSet</p><br></blockquote> | Extract all the codes and other content of the Key value of the<br>Series Key in a Data Set and create one or more Cube Regions containing<br>Member Selections of Dimension Components of the Constraints model in<br>the SDMX-IM, and the associated Selection Value. |
-| <blockquote><br><p>indexReportingPeriod</p><br></blockquote> | <blockquote><br><p>This applies only to a registered <u>dataset</u>.</p><br><p>Extract the Reporting Begin and Reporting End from the Header of the<br>Message containing the data set, and create a Reference Period<br>constraint.</p><br></blockquote> |
-| <blockquote><br><p>indexAttributes</p><br></blockquote> | <blockquote><br><p><strong>Data Set</strong></p><br><p>Extract the content of the Attribute Values in a Data Set and create<br>one or more Cube Regions containing Member Selections of Data Attribute<br>Components of the Constraints model in the SDMXIM, and the associated<br>Selection Value</p><br></blockquote><br><p><strong>Metadata Set</strong></p><br><blockquote><br><p>Indicate the presence of a Reported Attribute by creating one or more<br>Cube Regions containing Member Selections of Metadata Attribute<br>Components of the Constraints model in the SDMX-IM. Note that the<br>content is not stored in the Selection Value.</p><br></blockquote> |
+| `indexTimeSeries` | Extract all the series keys and create a `KeySet`(s) Constraint. |
+| `indexDataSet` | Extract all the codes and other content of the Key value of the Series Key in a Data Set and create one or more Cube Regions containing Member Selections of Dimension Components of the Constraints model in the SDMX-IM, and the associated Selection Value. |
+| `indexReportingPeriod` | This applies only to a registered dataset. Extract the Reporting Begin and Reporting End from the Header of the Message containing the data set, and create a Reference Period constraint. |
+| `indexAttributes` | **Data Set:** Extract the content of the Attribute Values in a Data Set and create one or more Cube Regions containing Member Selections of Data Attribute Components of the Constraints model in the SDMX-IM, and the associated Selection Value. <br> **Metadata Set:** Indicate the presence of a Reported Attribute by creating one or more Cube Regions containing Member Selections of Metadata Attribute Components of the Constraints model in the SDMX-IM. Note that the content is not stored in the Selection Value. |
 
 
-Constraints that specify the contents of a *QueryDatasource* are
+Constraints that specify the contents of a `QueryDatasource` are
 submitted to the Registry via the structure submission service (i.e.,
 the RESTful API).
 
-The Registration must reference the ProvisionAgreement or
-MetadataProvisionAgreement to which it relates.
+The `Registration` must reference the `ProvisionAgreement` or
+`MetadataProvisionAgreement` to which it relates.
 
 ### 7.4.3 Registration Response 
 
 After a registration request has been submitted to the registry, a
 response is returned to the submitter indicating success or failure.
 Given that a registration request can hold many Registrations, then
-there must be a registration status for each Registration. The
-SubmitRegistration class has a status field, which is either set to
+there must be a registration status for each `Registration`. The
+`SubmitRegistration` class has a status field, which is either set to
 “Success”, “Warning” or “Failure”.
 
-If the registration has succeeded, a Registration will be returned –
+If the registration has succeeded, a `Registration` will be returned –
 this holds the Registry-allocated Id of the newly registered
-*Datasource* plus a *Datasource* holding the URL to access the dataset,
+`Datasource` plus a `Datasource` holding the URL to access the dataset,
 metadataset, or query service.
 
-The RegistrationResponse returns set of registration status (one for
-each registration submitted) in terms of a StatusMessage (this is common
+The `RegistrationResponse` returns set of registration status (one for
+each registration submitted) in terms of a `StatusMessage` (this is common
 to all Registry responses) that indicates success or failure. In the
-event of registration failure, a set of MessageText are returned, giving
+event of registration failure, a set of `MessageText` are returned, giving
 the error messages that occurred during registration. It is entirely
 possible when registering a batch of datasets, that the response will
 contain some successful and some failed statuses. The logical model for
-the RegistrationResponse is shown below:
+the `RegistrationResponse` is shown below:
 
 ![](media/image22.png)
 /// figure-caption
@@ -427,7 +429,7 @@ subscription will be identified in the registry by a URN, which is
 returned to the user when the subscription is created. If the user wants
 to delete the subscription at a later point, the subscription URN is
 used as identification. Subscriptions have a validity period expressed
-as a date range (startDate, endDate) and the registry may delete any
+as a date range (`startDate`, `endDate`) and the registry may delete any
 expired subscriptions, and will notify the subscriber on expiry.
 
 When a registry/repository artefact is modified, any subscriptions which
@@ -460,12 +462,12 @@ subscription always contains:
 4. A selector which specifies which type of events are of interest. The
     set of event types is:
 
-| <strong>Event Type</strong> | <strong>Comment</strong> |
+| Event Type | Comment |
 | :--- | :--- |
-| STRUCTURAL_REPOSITORY_EVENTS | Life-cycle changes to Maintainable Artefacts in the structural<br>metadata repository. |
-| DATA_REGISTRATION_EVENTS | Whenever a published dataset is registered. This can be either a<br>SDMXML data file or an SDMX conformant database. |
-| METADATA_REGISTRATION_EVENTS | Whenever a published metadataset is registered. This can be either a<br>SDMXML reference metadata file or an SDMX conformant database. |
-| ALL_EVENTS | All events of the specified EventType |
+| `STRUCTURAL_REPOSITORY_EVENTS` | Life-cycle changes to Maintainable Artefacts in the structural, metadata repository. |
+| `DATA_REGISTRATION_EVENTS` | Whenever a published dataset is registered. This can be either a, SDMXML data file or an SDMX conformant database. |
+| `METADATA_REGISTRATION_EVENTS` | Whenever a published metadataset is registered. This can be either a, SDMXML reference metadata file or an SDMX conformant database. |
+| `ALL_EVENTS` | All events of the specified `EventType` |
 
 
 ###  7.5.3 Wildcard Facility 
@@ -475,59 +477,59 @@ URNs, which are identifiers which have some or all of their component
 parts replaced by the wildcard character \`\*\`. Identifier components
 comprise:
 
-- agencyID
-- id
-- version
+- `agencyID`
+- `id`
+- `version`
 
 Examples of wildcarded identifier components for an identified object
-type of Codelist are shown below:
+type of `Codelist` are shown below:
 
-``` http
-AgencyID = \*
-Id = \*
-Version = \*
+``` text
+AgencyID = *
+Id = *
+Version = *
 ```
 
-This subscribes to all Codelists of all versions for all agencies.
+This subscribes to all `Codelist`s of all versions for all agencies.
 
-``` http
+``` text
 AgencyID = AGENCY1
 Id = CODELIST1
-Version = \*
+Version = *
 ```
 
-This subscribes to all versions of Codelist CODELIST1 maintained by the
-agency AGENCY1.
+This subscribes to all versions of `Codelist` `CODELIST1` maintained by the
+agency `AGENCY1`.
 
-``` http
+``` text
 AgencyID = AGENCY1
-Id = \*
-Version = \*
+Id = *
+Version = *
 ```
 
-This subscribes to all versions of all Codelist objects maintained by
-the agency AGENCY1.
+This subscribes to all versions of all `Codelist` objects maintained by
+the agency `AGENCY1`.
 
-``` http
-AgencyID = \*
+``` text
+AgencyID = *
 Id = CODELIST1
-Version = \*
+Version = *
 ```
 
-This subscribes to all versions of Codelist CODELIST1 maintained by any
+This subscribes to all versions of `Codelist` `CODELIST1` maintained by any
 agency.
 
 Note that if the subscription is to the latest stable version then this
-can be achieved by the + character, i.e.:
+can be achieved by the `+` character, i.e.:
 
-``` http
+``` text
 Version = +
 ```
 
 A subscription to the latest version (whether stable, draft or
-non-versioned) can be achieved by the ~ character, i.e.:
+non-versioned) can be achieved by the `~` character, i.e.:
 
-``` http
+``` text
 Version = ~
 ```
 
@@ -535,12 +537,12 @@ A subscription to the latest stable version within major version 2
 starting with version 2.3.1 can be achieved by adding the + character
 after the minor version number, i.e.:
 
-``` http
+``` text
 Version = 2.3+.1
 ```
 
 The complete SDMX versioning syntax can be found in the SDMX Standards
-Section 6 “Technical Notes”, paragraph “4.3 Versioning”.
+[Section “Technical Notes”, paragraph “Versioning”](../../technical_notes/technical_notes/3_General_Notes_for_Implementers.md#versioning).
 
 ### 7.5.4 Structural Repository Events 
 
@@ -558,13 +560,13 @@ created. A subscription may be observing all data or metadata
 registrations, or it may focus on specific registrations as shown in the
 table below:
 
-| <strong>Selector</strong> | <strong>Comment</strong> |
+| Selector | Comment |
 | :--- | :--- |
-| DataProvider &amp; MetadataProvider | Any datasets or metadata sets registered by the specified data or<br>metadata provider will activate the notification. |
-| ProvisionAgreement &amp; MetadataProvisionAgreement | Any datasets or metadata sets registered for the agreement will<br>activate the notification. |
-| Dataflow &amp; Metadataflow | Any datasets or metadata sets registered for the specified dataflow<br>(or metadataflow) will activate the notification. |
-| DataStructureDefinition &amp; MetadataStructureDefinition | Any datasets or metadata sets registered for those dataflows (or<br>metadataflows) that are based on the specified Data Structure Definition<br>will activate the notification |
-| Category | Any datasets or metadata sets registered for those dataflows,<br>metadataflows, provision agreements that are categorised by the<br>category. |
+| `DataProvider` &amp; `MetadataProvider` | Any datasets or metadata sets registered by the specified data or, metadata provider will activate the notification. |
+| `ProvisionAgreement` &amp; `MetadataProvisionAgreement` | Any datasets or metadata sets registered for the agreement will, activate the notification. |
+| Dataflow &amp; Metadataflow | Any datasets or metadata sets registered for the specified dataflow, (or metadataflow) will activate the notification. |
+| `DataStructureDefinition` &amp; `MetadataStructureDefinition` | Any datasets or metadata sets registered for those dataflows (or, metadataflows) that are based on the specified Data Structure Definition, will activate the notification |
+| Category | Any datasets or metadata sets registered for those dataflows,, metadataflows, provision agreements that are categorised by the, category. |
 
 
 The event will also capture the semantic of the registration: deletion
@@ -596,7 +598,7 @@ notification as detailed below.
 
 ### 7.6.2 Structural Event Component
 
-The notification will contain the MaintainableArtefact that triggered
+The notification will contain the `MaintainableArtefact` that triggered
 the event in a form similar to the SDMX-ML structural message (using
 elements from that namespace).
 
@@ -604,4 +606,3 @@ elements from that namespace).
 
 The notification will contain the Registration.
 
-[^1]: Note that Codelist is also an EnumeratedList.

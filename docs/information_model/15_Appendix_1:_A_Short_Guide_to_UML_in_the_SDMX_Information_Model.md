@@ -21,7 +21,7 @@ The **actor** can be defined as follows:
 
 The actor is depicted as a stick man as shown below.
 
-![](media/image75.svg) 
+![](media/image75.svg)
 /// figure-caption | 49
 Actor
 ///
@@ -70,16 +70,16 @@ Class and its attributes
 Figure 53 shows that a class is represented by a rectangle split into
 three compartments. The top compartment is for the class name, the
 second is for attributes and the last is for operations. Only the first
-compartment is mandatory. The name of the class is Annotation, and it
+compartment is mandatory. The name of the class is `Annotation`, and it
 belongs to the package SDMX-Base. It is common to group related
-artefacts (classes, use-cases, etc.) together in packages. . Annotation
-has three “String” attributes – name, type, and url. The full identity
+artefacts (classes, use-cases, etc.) together in packages. `.Annotation`
+has three “String” attributes – `name`, `type`, and `url`. The full identity
 of the attribute includes its class e.g. the name attribute is
-Annotation.name.
+`Annotation.name`.
 
-Note that by convention the class names use UpperCamelCase – the words
+Note that by convention the class names use `UpperCamelCase` – the words
 are concatenated and the first letter of each word is capitalized. An
-attribute uses lowerCamelCase - the first letter of the first (or only)
+attribute uses `lowerCamelCase` - the first letter of the first (or only)
 word is not capitalized, the remaining words have capitalized first
 letters.
 
@@ -116,11 +116,11 @@ used.
 A simple association
 ///
 
-Here the DataflowDefinition class has an association with the
+Here the `DataflowDefinition` class has an association with the
 DataStructureDefinition class. The diagram shows that a
-DataflowDefinition can have an association with only one
-DataStructureDefinition (1) and that a DataStructureDefinition can be
-linked to many DataflowDefinitions (0..\*). The association is sometimes
+`DataflowDefinition` can have an association with only one
+DataStructureDefinition (1) and that a `DataStructureDefinition` can be
+linked to many `DataflowDefinitions` (0..\*). The association is sometimes
 named to give more semantics.
 
 In UML it is possible to specify a variety of “multiplicity” rules. The
@@ -149,7 +149,6 @@ is a subordinate class (or a part) of another class. In an aggregation
 relationship. There are two types of aggregation, a simple aggregation
 where the child class instance can outlive its parent class, and a
 composition aggregation where
-
 the child class's instance lifecycle is dependent on the parent class's
 instance lifecycle. In the simple aggregation it is usual, in the SDMX
 Information model, for this association to also be a reference to the
@@ -161,10 +160,10 @@ It can be useful to name associations as this gives some more semantic
 meaning to the model i.e. the purpose of the association. It is possible
 for two classes to be joined by two (or more) associations, and in this
 case it is extremely useful to name the purpose of the association.
-Figure 58 shows a simple aggregation between CategoryScheme and Category
-called /*items* (this means it is derived from the association between
-the super classes – in this case between the *ItemScheme* and the
-*Item,* and another between Category called /*hierarchy*.
+Figure 58 shows a simple aggregation between `CategoryScheme` and `Category`
+called `/items` (this means it is derived from the association between
+the super classes – in this case between the `ItemScheme` and the
+`Item`, and another between Category called `/hierarchy`.
 
 ![](media/image84.svg) 
 /// figure-caption | 58
@@ -173,9 +172,9 @@ Association names and end names
 
 Furthermore, it is possible to give role names to the association-ends
 to give more semantic meaning – such as parent and child in a tree
-structure association. The role is shown with “+” preceding the role
+structure association. The role is shown with `+` preceding the role
 name (e.g. in the diagram above the semantic of the association is that
-a Item can have zero or one parent Items and zero or many child Item).
+a `Item` can have zero or one parent `Items` and zero or many child `Item`).
 
 In this model the preference has been to use role names for associations
 between concrete classes and association names for associations between
@@ -206,8 +205,8 @@ schemas.
 One way association
 ///
 
-Here it is possible to navigate from A to B, but there is no
-implementation support for navigation from B to A using this
+Here it is possible to navigate from `A` to `B`, but there is no
+implementation support for navigation from `B` to `A` using this
 association.
 
 ### Inheritance
@@ -223,9 +222,9 @@ class.
 Inheritance
 ///
 
-Here the Dimension is derived from Component which itself is derived
-from *IdentifiableArtefact*. Both Component and IdentifiableArtefact are
-abstract superclasses. The Dimension inherits the attributes and
+Here the `Dimension` is derived from `Component` which itself is derived
+from `IdentifiableArtefact`. Both `Component` and `IdentifiableArtefact` are
+abstract superclasses. The `Dimension` inherits the attributes and
 associations of all of the the super classes in the inheritance tree.
 Note that a super class can be a concrete class (i.e. it exists in its
 own right as well as in the context of one of its sub classes), or an
@@ -236,7 +235,7 @@ abstract class.
 It is often useful in a relationship diagram to show associations
 between sub classes that are derived from the associations of the super
 classes from which the sub classes inherit. A derived association is
-shown by “/” preceding the association name e.g. */name*.
+shown by `/` preceding the association name e.g. `/name`.
 
 ![](media/image87.svg) 
 /// figure-caption

@@ -21,23 +21,23 @@ equivalents.
 
 | SDMX-ML Data Type | XML Schema Data Type | .NET Framework Type | Java Data Type |
 | :--- | :--- | :--- | :--- |
-| <strong>String</strong> | <strong>xsd:string</strong> | <strong>System.String</strong> | <strong>java.lang.String</strong> |
-| <strong>Big Integer</strong> | <strong>xsd:integer</strong> | <strong>System.Decimal</strong> | <strong>java.math.BigInteger</strong> |
-| <strong>Integer</strong> | <strong>xsd:int</strong> | <strong>System.Int32</strong> | <strong>int</strong> |
-| <strong>Long</strong> | <strong>xsd.long</strong> | <strong>System.Int64</strong> | <strong>long</strong> |
-| <strong>Short</strong> | <strong>xsd:short</strong> | <strong>System.Int16</strong> | <strong>short</strong> |
-| <strong>Decimal</strong> | <strong>xsd:decimal</strong> | <strong>System.Decimal</strong> | <strong>java.math.BigDecimal</strong> |
-| <strong>Float</strong> | <strong>xsd:float</strong> | <strong>System.Single</strong> | <strong>float</strong> |
-| <strong>Double</strong> | <strong>xsd:double</strong> | <strong>System.Double</strong> | <strong>double</strong> |
-| <strong>Boolean</strong> | <strong>xsd:boolean</strong> | <strong>System.Boolean</strong> | <strong>boolean</strong> |
-| <strong>URI</strong> | <strong>xsd:anyURI</strong> | <strong>System.Uri</strong> | <strong>Java.net.URI or java.lang.String</strong> |
-| <strong>DateTime</strong> | <strong>xsd:dateTime</strong> | <strong>System.DateTime</strong> | <strong>javax.xml.datatype.XMLGregorianCalendar</strong> |
-| <strong>Time</strong> | <strong>xsd:time</strong> | <strong>System.DateTime</strong> | <strong>javax.xml.datatype.XMLGregorianCalendar</strong> |
-| <strong>GregorianYear</strong> | <strong>xsd:gYear</strong> | <strong>System.DateTime</strong> | <strong>javax.xml.datatype.XMLGregorianCalendar</strong> |
-| <strong>GregorianMonth</strong> | <strong>xsd:gYearMonth</strong> | <strong>System.DateTime</strong> | <strong>javax.xml.datatype.XMLGregorianCalendar</strong> |
-| <strong>GregorianDay</strong> | <strong>xsd:date</strong> | <strong>System.DateTime</strong> | <strong>javax.xml.datatype.XMLGregorianCalendar</strong> |
-| <strong>Day, MonthDay, Month</strong> | <strong>xsd:g*</strong> | <strong>System.DateTime</strong> | <strong>javax.xml.datatype.XMLGregorianCalendar</strong> |
-| <strong>Duration</strong> | <strong>xsd:duration</strong> | <strong>System.TimeSpan</strong> | <strong>javax.xml.datatype.Duration</strong> |
+| `String` | `xsd:string` | `System.String` | `java.lang.String` |
+| `Big Integer` | `xsd:integer` | `System.Decimal` | `java.math.BigInteger` |
+| `Integer` | `xsd:int` | `System.Int32` | `int` |
+| `Long` | `xsd:long` | `System.Int64` | `long` |
+| `Short` | `xsd:short` | `System.Int16` | `short` |
+| `Decimal` | `xsd:decimal` | `System.Decimal` | `java.math.BigDecimal` |
+| `Float` | `xsd:float` | `System.Single` | `float` |
+| `Double` | `xsd:double` | `System.Double` | `double` |
+| `Boolean` | `xsd:boolean` | `System.Boolean` | `boolean` |
+| `URI` | `xsd:anyURI` | `System.Uri` | `Java.net.URI` or `java.lang.String` |
+| `DateTime` | `xsd:dateTime` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `Time` | `xsd:time` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `GregorianYear` | `xsd:gYear` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `GregorianMonth` | `xsd:gYearMonth` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `GregorianDay` | `xsd:date` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `Day`, `MonthDay`, `Month` | `xsd:g*` | `System.DateTime` | `javax.xml.datatype.XMLGregorianCalendar` |
+| `Duration` | `xsd:duration` | `System.TimeSpan` | `javax.xml.datatype.Duration` |
 
 There are also a number of SDMX-ML data types which do not have these
 direct correspondences, often because they are composite representations
@@ -45,63 +45,63 @@ or restrictions of a broader data type. For most of these, there are
 simple types which can be referenced from the SDMX schemas, for others a
 derived simple type will be necessary:
 
-- **AlphaNumeric** (**common:AlphaNumericType**, string which only
-    allows A-z and 0-9)
-- **Alpha** (**common:AlphaType**, string which only allows A-z)
-- **Numeric** (**common:NumericType**, string which only allows 0-9,
+- `AlphaNumeric` (`common:AlphaNumericType`, string which only
+    allows `A-z` and `0-9`)
+- `Alpha` (`common:AlphaType`, string which only allows `A-z`)
+- `Numeric` (`common:NumericType`, string which only allows 0-9,
     but is not numeric so that is can having leading zeros)
-- **Count** (**xs:integer**, a sequence with an interval of "1")
-- **InclusiveValueRange** (**xs:decimal** with the **minValue** and
-    **maxValue** facets supplying the bounds)
-- **ExclusiveValueRange** (**xs:decimal** with the **minValue** and
-    **maxValue** facets supplying the bounds)
-- **Incremental** (**xs:decimal** with a specified **interval**; the
+- `Count` (`xs:integer`, a sequence with an interval of "1")
+- `InclusiveValueRange` (`xs:decimal` with the `minValue` and
+    `maxValue` facets supplying the bounds)
+- `ExclusiveValueRange` (`xs:decimal` with the `minValue` and
+    `maxValue` facets supplying the bounds)
+- `Incremental` (`xs:decimal` with a specified `interval`; the
     interval is typically enforced outside of the XML validation)
-- **TimeRange** (**common:TimeRangeType**, **startDateTime** +
-    **Duration**)
-- **ObservationalTimePeriod** (**common:ObservationalTimePeriodType**,
-    a union of **StandardTimePeriod** and **TimeRange**).
-- **StandardTimePeriod** (**common:StandardTimePeriodType**, a union
-    of **BasicTimePeriod** and **ReportingTimePeriod**).
-- **BasicTimePeriod** (**common:BasicTimePeriodType**, a union of
-    **GregorianTimePeriod** and **DateTime**)
-- **GregorianTimePeriod** (**common:GregorianTimePeriodType**, a union
-    of **GregorianYear**, **GregorianMonth**, and **GregorianDay**)
-- **ReportingTimePeriod** (**common:ReportingTimePeriodType**, a union
-    of **ReportingYear**, **ReportingSemester**, **ReportingTrimester**,
-    **ReportingQuarter**, **ReportingMonth**, **ReportingWeek**, and
-    **ReportingDay**).
-- **ReportingYear** (**common:ReportingYearType**)
-- **ReportingSemester** (**common:ReportingSemesterType**)
-- **ReportingTrimester** (**common:ReportingTrimesterType**)
-- **ReportingQuarter** (**common:ReportingQuarterType**)
-- **ReportingMonth** (**common:ReportingMonthType**)
-- **ReportingWeek** (**common:ReportingWeekType**)
-- **ReportingDay** (**common:ReportingDayType**)
-- **XHTML** (**common:StructuredText**, allows for multi-lingual text
-    content that has **XHTML** markup)
-- **KeyValues** (**common:DataKeyType**)
-- **IdentifiableReference** (types for each IdentifiableObject)
-- **GeospatialInformation** (a geo feature set, according to the
+- `TimeRange` (`common:TimeRangeType`, `startDateTime` +
+    `Duration`)
+- `ObservationalTimePeriod` (`common:ObservationalTimePeriodType`,
+    a union of `StandardTimePeriod` and `TimeRange`).
+- `StandardTimePeriod` (`common:StandardTimePeriodType`, a union
+    of `BasicTimePeriod` and `ReportingTimePeriod`).
+- `BasicTimePeriod` (`common:BasicTimePeriodType`, a union of
+    `GregorianTimePeriod` and `DateTime`)
+- `GregorianTimePeriod` (`common:GregorianTimePeriodType`, a union
+    of `GregorianYear`, `GregorianMonth`, and `GregorianDay`)
+- `ReportingTimePeriod` (`common:ReportingTimePeriodType`, a union
+    of `ReportingYear`, `ReportingSemester`, `ReportingTrimester`,
+    `ReportingQuarter`, `ReportingMonth`, `ReportingWeek`, and
+    `ReportingDay`).
+- `ReportingYear` (`common:ReportingYearType`)
+- `ReportingSemester` (`common:ReportingSemesterType`)
+- `ReportingTrimester` (`common:ReportingTrimesterType`)
+- `ReportingQuarter` (`common:ReportingQuarterType`)
+- `ReportingMonth` (`common:ReportingMonthType`)
+- `ReportingWeek` (`common:ReportingWeekType`)
+- `ReportingDay` (`common:ReportingDayType`)
+- `XHTML` (`common:StructuredText`, allows for multi-lingual text
+    content that has `XHTML` markup)
+- `KeyValues` (`common:DataKeyType`)
+- `IdentifiableReference` (types for each IdentifiableObject)
+- `GeospatialInformation` (a geo feature set, according to the
     pattern in section 7.2)
 
 Data types also have a set of facets:
 
-- **isSequence = true | false** (indicates a sequentially increasing
+- `isSequence = true | false` (indicates a sequentially increasing
     value)
-- **minLength = positive integer** (# of characters/digits)
-- **maxLength = positive integer** (# of characters/digits)
-- **startValue = decimal** (for numeric sequence)
-- **endValue = decimal** (for numeric sequence)
-- **interval = decimal** (for numeric sequence)
-- **timeInterval = duration**
-- **startTime = BasicTimePeriod** (for time range)
-- **endTime = BasicTimePeriod** (for time range)
-- **minValue = decimal** (for numeric range)
-- **maxValue = decimal** (for numeric range)
-- **decimal = Integer** (# of digits to right of decimal point)
-- **pattern =** (a regular expression, as per W3C XML Schema)
-- **isMultiLingual = boolean** (for specifying text can occur in more
+- `minLength = positive integer` (# of characters/digits)
+- `maxLength = positive integer` (# of characters/digits)
+- `startValue = decimal` (for numeric sequence)
+- `endValue = decimal` (for numeric sequence)
+- `interval = decimal` (for numeric sequence)
+- `timeInterval = duration`
+- `startTime = BasicTimePeriod` (for time range)
+- `endTime = BasicTimePeriod` (for time range)
+- `minValue = decimal` (for numeric range)
+- `maxValue = decimal` (for numeric range)
+- `decimal = Integer` (# of digits to right of decimal point)
+- `pattern =` (a regular expression, as per W3C XML Schema)
+- `isMultiLingual = boolean` (for specifying text can occur in more
     than one language)
 
 Note that code lists may also have textual representations assigned to
@@ -149,15 +149,15 @@ maximum number of items within an array is possible in both cases.
 Further to the above, the mapping between the non-native data types is
 presented in the table below:
 
-| **SDMX Facet** | **XML Schema** | **JSON schema "pattern"**[^1] **for "string" type** |
+| SDMX Facet | XML Schema | JSON schema "pattern"[^1] for "string" type |
 | :--- | :--- | :--- |
-| GregorianYear | xsd:gYear | `"^-?([1-9][0-9]{3,}\|0[0-9]{3})(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
-| GregorianMonth | xsd:gYearMonth | `"^-?([1-9][0-9]{3,}\|0[0-9]{3})-(0[1-9]\|1[0-2])(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
-| GregorianDay | xsd:date | `"^-?([1-9][0-9]{3,}\|0[0-9]{3})-(0[1-9]\|1[0-2])-(0[1-9]\|[12][0-9]\|3[01])(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
-| Day | xsd:gDay | `"^---(0[1-9]\|[12][0-9]\|3[01])(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
-| MonthDay | xsd:gMonthDay | `"^--(0[1-9]\|1[0-2])-(0[1-9]\|[12][0-9]\|3[01])(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
-| Month | xsd:Month | `"^--(0[1-9]\|1[0-2])(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
-| Duration | xsd:duration | `"^-?P[0-9]+Y?([0-9]+M)?([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+(\.[0-9]+)?S)?)?$"` |
+| `GregorianYear` | `xsd:gYear` | `"^-?([1-9][0-9]{3,}\|0[0-9]{3})(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
+| `GregorianMonth` | `xsd:gYearMonth` | `"^-?([1-9][0-9]{3,}\|0[0-9]{3})-(0[1-9]\|1[0-2])(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
+| `GregorianDay` | `xsd:date` | `"^-?([1-9][0-9]{3,}\|0[0-9]{3})-(0[1-9]\|1[0-2])-(0[1-9]\|[12][0-9]\|3[01])(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
+| `Day` | `xsd:gDay` | `"^---(0[1-9]\|[12][0-9]\|3[01])(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
+| `MonthDay` | `xsd:gMonthDay` | `"^--(0[1-9]\|1[0-2])-(0[1-9]\|[12][0-9]\|3[01])(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
+| `Month` | `xsd:Month` | `"^--(0[1-9]\|1[0-2])(Z\|(\+\|-)((0[0-9]\|1[0-3]):[0-5][0-9]\|14:00))?$"` |
+| `Duration` | `xsd:duration` | `"^-?P[0-9]+Y?([0-9]+M)?([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+(\.[0-9]+)?S)?)?$"` |
 
 [^1]: Regular expressions, as specified in [W3C XML Schema Definition](https://www.w3.org/TR/xmlschema11-2/).
 
@@ -215,13 +215,13 @@ representation in SDMX-ML messages and the period covered by each of the
 Gregorian time periods are as follows:
 
 - **Gregorian Year:**
-    - Representation: xs:gYear (YYYY)
+    - Representation: `xs:gYear (YYYY)`
     - Period: the start of January 1 to the end of December 31
 - **Gregorian Year Month**:
-    - Representation: xs:gYearMonth (YYYY-MM)
+    - Representation: `xs:gYearMonth (YYYY-MM)`
     - Period: the start of the first day of the month to end of the last day of the month
 - **Gregorian Day**:
-    - Representation: xs:date (YYYY-MM-DD)
+    - Representation: `xs:date (YYYY-MM-DD)`
     - Period: the start of the day (00:00:00) to the end of the day (23:59:59)
 
 ### Date Time
@@ -231,7 +231,7 @@ observation at a single point in time. Therefore, if one wants to use
 SDMX for data which is measured at a distinct point in time rather than
 being reported over a period, the date-time representation can be used.
 
- Representation: xs:dateTime `YYYY-MM-DDThh:mm:ss`[^2]
+ Representation: `xs:dateTime YYYY-MM-DDThh:mm:ss`[^2]
 
 [^2]: The seconds can be reported fractionally
 
@@ -246,7 +246,7 @@ format of a reporting period is as follows:
 
 Where:
 
-- `REPORTING_YEAR` represents the reporting year as four digits (YYYY)
+- `REPORTING_YEAR` represents the reporting year as four digits (`YYYY`)
 - `PERIOD_INDICATOR` identifies the type of period which determines the duration of the period
 - `PERIOD_VALUE` indicates the actual period within the year
 
@@ -254,42 +254,42 @@ The following section details each of the standard reporting periods
 defined in SDMX:
 
 - **Reporting Year**:
-    - Period Indicator: A
-    - Period Duration: P1Y (one year)
+    - Period Indicator: `A`
+    - Period Duration: `P1Y` (one year)
     - Limit per year: 1
-    - Representation: common:ReportingYearType (YYYY-A1, e.g. 2000-A1)
+    - Representation: `common:ReportingYearType` (`YYYY-A1`, e.g. `2000-A1`)
 - **Reporting Semester:**
-    - Period Indicator: S
-    - Period Duration: P6M (six months)
+    - Period Indicator: `S`
+    - Period Duration: `P6M` (six months)
     - Limit per year: 2
-    - Representation: common:ReportingSemesterType (YYYY-Ss, e.g. 2000-S2)
+    - Representation: `common:ReportingSemesterType` (`YYYY-Ss`, e.g. `2000-S2`)
 - **Reporting Trimester:**
-    - Period Indicator: T
-    - Period Duration: P4M (four months)
+    - Period Indicator: `T`
+    - Period Duration: `P4M` (four months)
     - Limit per year: 3
-    - Representation: common:ReportingTrimesterType (YYYY-Tt, e.g. 2000-T3)
+    - Representation: `common:ReportingTrimesterType` (`YYYY-Tt`, e.g. `2000-T3`)
 - **Reporting Quarter:**
-    - Period Indicator: Q
-    - Period Duration: P3M (three months)
+    - Period Indicator: `Q`
+    - Period Duration: `P3M` (three months)
     - Limit per year: 4
-    - Representation: common:ReportingQuarterType (YYYY-Qq, e.g. 2000-Q4)
+    - Representation: `common:ReportingQuarterType` (`YYYY-Qq`, e.g. `2000-Q4`)
 - **Reporting Month**:
-    - Period Indicator: M
-    - Period Duration: P1M (one month)
+    - Period Indicator: `M`
+    - Period Duration: `P1M` (one month)
     - Limit per year: 1
-    - Representation: common:ReportingMonthType (YYYY-Mmm, e.g. 2000-M12)
+    - Representation: `common:ReportingMonthType` (`YYYY-Mmm`, e.g. `2000-M12`)
     - Notes: The reporting month is always represented as two digits, therefore 1-9 are 0 padded (e.g. 01). This allows the values to be sorted chronologically using textual sorting methods.
 - **Reporting Week**:
-    - Period Indicator: W
-    - Period Duration: P7D (seven days)
+    - Period Indicator: `W`
+    - Period Duration: `P7D` (seven days)
     - Limit per year: 53
-    - Representation: common:ReportingWeekType (YYYY-Www, e.g. 2000-W53)
+    - Representation: `common:ReportingWeekType` (`YYYY-Www`, e.g. `2000-W53`)
     - Notes: There are either 52 or 53 weeks in a reporting year. This is based on the ISO 8601 definition of a week (Monday - Saturday), where the first week of a reporting year is defined as the week with the first Thursday on or after the reporting year start day.[^3] The reporting week is always represented as two digits, therefore 1-9 are 0 padded (e.g. 01). This allows the values to be sorted chronologically using textual sorting methods.
 - **Reporting Day**:
-    - Period Indicator: D
-    - Period Duration: P1D (one day)
+    - Period Indicator: `D`
+    - Period Duration: `P1D` (one day)
     - Limit per year: 366
-    - Representation: common:ReportingDayType (YYYY-Dddd, e.g. 2000-D366)
+    - Representation: `common:ReportingDayType` (`YYYY-Dddd`, e.g. `2000-D366`)
     - Notes: There are either 365 or 366 days in a reporting year, depending on whether the reporting year includes leap day (February 29). The reporting day is always represented as three digits, therefore 1-99 are 0 padded (e.g. 001). This allows the values to be sorted chronologically using textual sorting methods.
 
 [^3]: 
@@ -307,8 +307,8 @@ July 1, 2000.
 
 A specialized attribute (reporting year start day) exists for the
 purpose of communicating the reporting year start day. This attribute
-has a fixed identifier (REPORTING\_YEAR\_START\_DAY) and a fixed
-representation (xs:gMonthDay) so that it can always be easily identified
+has a fixed identifier (`REPORTING_YEAR_START_DAY`) and a fixed
+representation (`xs:gMonthDay`) so that it can always be easily identified
 and processed in a data message. Although this attribute exists in
 specialized sub-class, it functions the same as any other attribute
 outside of its identification and representation. It must takes its
@@ -325,123 +325,124 @@ reporting period, it is possible to relate any reporting period to a
 distinct calendar period. The actual Gregorian calendar period covered
 by the reporting period can be computed as follows (based on the
 standard format of
-\[REPROTING\_YEAR\]-\[PERIOD\_INDICATOR\]\[PERIOD\_VALUE\] and the
-reporting year start day as \[REPORTING\_YEAR\_START\_DAY\]):
+`[REPROTING_YEAR]-[PERIOD_INDICATOR][PERIOD_VALUE]` and the
+reporting year start day as `[REPORTING_YEAR_START_DAY]`):
 
-1. **Determine \[REPORTING\_YEAR\_BASE\]:**
+1. Determine `[REPORTING_YEAR_BASE]`:
 
-    Combine \[REPORTING\_YEAR\] of the reporting period value (YYYY) with
-    \[REPORTING\_YEAR\_START\_DAY\] (MM-DD) to get a date (YYYY-MM-DD).
-    This is the \[REPORTING\_YEAR\_START\_DATE\]
+    Combine `[REPORTING_YEAR]` of the reporting period value (`YYYY`) with
+    `[REPORTING_YEAR_START_DAY]` (MM-DD) to get a date (`YYYY-MM-DD`).
+    This is the `[REPORTING_YEAR_START_DATE]`
 
-   1. **If the \[PERIOD\_INDICATOR\] is W:**
+   1. If the `[PERIOD_INDICATOR]` is W:
 
-      1. **If \[REPORTING\_YEAR\_START\_DATE\] is a Friday, Saturday, or
-           Sunday:**
+      1. If `[REPORTING_YEAR_START_DATE]` is a Friday, Saturday, or
+           Sunday:
 
-           Add[^4] (P3D, P2D, or P1D respectively) to the
-           \[REPORTING\_YEAR\_START\_DATE\]. The result is the
-           \[REPORTING\_YEAR\_BASE\].
+           Add[^4] (`P3D`, `P2D`, or `P1D` respectively) to the
+           `[REPORTING_YEAR_START_DATE]`. The result is the
+           `[REPORTING_YEAR_BASE]`.
 
-      2. **If \[REPORTING\_YEAR\_START\_DATE\] is a Monday, Tuesday,
-          Wednesday, or Thursday:**
+      2. **If `[REPORTING_YEAR_START_DATE]` is a Monday, Tuesday,
+          Wednesday, or Thursday:
 
-              Add[^4] (P0D, -P1D, -P2D, or -P3D respectively) to the
-              \[REPORTING\_YEAR\_START\_DATE\]. The result is the
-              \[REPORTING\_YEAR\_BASE\].
+              Add[^4] (`P0D`, `-P1D`, `-P2D`, or `-P3D` respectively) to the
+              `[REPORTING_YEAR_START_DATE]`. The result is the
+              `[REPORTING_YEAR_BASE]`.
 
-   2. **Else:**
+   2. Else:
 
-    The \[REPORTING\_YEAR\_START\_DATE\] is the \[REPORTING\_YEAR\_BASE\].
+    The `[REPORTING_YEAR_START_DATE]` is the `[REPORTING_YEAR_BASE]`.
 
-2. **Determine \[PERIOD\_DURATION\]:**
+2. Determine `[PERIOD_DURATION]`:
 
-    1. If the \[PERIOD\_INDICATOR\] is A, the \[PERIOD\_DURATION\] is
+    1. If the `[PERIOD_INDICATOR]` is A, the `[PERIOD_DURATION]` is
         P1Y.
-    2. If the \[PERIOD\_INDICATOR\] is S, the \[PERIOD\_DURATION\] is
+    2. If the `[PERIOD_INDICATOR]` is S, the `[PERIOD_DURATION]` is
         P6M.
-    3. If the \[PERIOD\_INDICATOR\] is T, the \[PERIOD\_DURATION\] is
+    3. If the `[PERIOD_INDICATOR]` is T, the `[PERIOD_DURATION]` is
         P4M.
-    4. If the \[PERIOD\_INDICATOR\] is Q, the \[PERIOD\_DURATION\] is
+    4. If the `[PERIOD_INDICATOR]` is Q, the `[PERIOD_DURATION]` is
         P3M.
-    5. If the \[PERIOD\_INDICATOR\] is M, the \[PERIOD\_DURATION\] is
+    5. If the `[PERIOD_INDICATOR]` is M, the `[PERIOD_DURATION]` is
         P1M.
-    6. If the \[PERIOD\_INDICATOR\] is W, the \[PERIOD\_DURATION\] is
+    6. If the `[PERIOD_INDICATOR]` is W, the `[PERIOD_DURATION]` is
         P7D.
-    7. If the \[PERIOD\_INDICATOR\] is D, the \[PERIOD\_DURATION\] is
+    7. If the `[PERIOD_INDICATOR]` is D, the `[PERIOD_DURATION]` is
         P1D.
 
-3. **Determine \[PERIOD\_START\]:**
+3. Determine `[PERIOD_START]`:
 
-    Subtract one from the \[PERIOD\_VALUE\] and multiply this by the
-    \[PERIOD\_DURATION\]. Add[^4] this to the \[REPORTING\_YEAR\_BASE\].
-    The result is the \[PERIOD\_START\].
+    Subtract one from the `[PERIOD_VALUE]` and multiply this by the
+    `[PERIOD_DURATION]`. Add[^4] this to the `[REPORTING_YEAR_BASE]`.
+    The result is the `[PERIOD_START]`.
 
-4. **Determine the \[PERIOD\_END\]:**
+4. Determine the `[PERIOD_END]`:
 
-    Multiply the \[PERIOD\_VALUE\] by the \[PERIOD\_DURATION\].
-    Add[^4] this to the \[REPORTING\_YEAR\_BASE\] add[^4]
-    -P1D. The result is the \[PERIOD\_END\].
+    Multiply the `[PERIOD_VALUE]` by the `[PERIOD_DURATION]`.
+    Add[^4] this to the `[REPORTING_YEAR_BASE]` add[^4]
+    -P1D. The result is the `[PERIOD_END]`.
 
 [^4]:
     The rules for adding durations to a date time are described in the W3C XML Schema specification.
     See [w3.org](http://www.w3.org/TR/xmlschema-2/#adding-durations-to-dateTimes) for further details.
 
 For all of these ranges, the bounds include the beginning of the
-\[PERIOD\_START\] (i.e. 00:00:00) and the end of the \[PERIOD\_END\]
+`[PERIOD_START]` (i.e. 00:00:00) and the end of the `[PERIOD_END]`
 (i.e. 23:59:59).
 
-**Examples:**
+#### Examples:
 
-**2010-Q2, REPORTING\_YEAR\_START\_DAY = --07-01 (July 1)**
+??? example "2010-Q2, REPORTING_YEAR_START_DAY = --07-01 (July 1)"
 
-1. \[REPORTING\_YEAR\_START\_DATE\] = 2010-07-01
+    1. `[REPORTING_YEAR_START_DATE] = 2010-07-01`
 
-    case b) \[REPORTING\_YEAR\_BASE\] = 2010-07-01
+        case b) `[REPORTING_YEAR_BASE] = 2010-07-01`
 
-2. \[PERIOD\_DURATION\] = P3M
-3. (2-1) \* P3M = P3M
+    2. `[PERIOD_DURATION] = P3M`
+    3. `(2-1) * P3M = P3M`
 
-    2010-07-01 + P3M = 2010-10-01
+        `2010-07-01 + P3M = 2010-10-01`
 
-    \[PERIOD\_START\] = 2010-10-01
+        `[PERIOD_START] = 2010-10-01`
 
-4. 2 \* P3M = P6M
+    4. `2 * P3M = P6M`
 
-    2010-07-01 + P6M = 2010-13-01 = 2011-01-01
+        `2010-07-01 + P6M = 2010-13-01 = 2011-01-01`
 
-    2011-01-01 + -P1D = 2010-12-31
-    \[PERIOD\_END\] = 2010-12-31
+        `2011-01-01 + -P1D = 2010-12-31`
+          
+        `[PERIOD_END] = 2010-12-31`
 
-    The actual calendar range covered by 2010-Q2 (assuming the reporting
-    year begins July 1) is 2010-10-01T00:00:00/2010-12-31T23:59:59
+        The actual calendar range covered by `2010-Q2` (assuming the reporting
+        year begins July 1) is `2010-10-01T00:00:00`/`2010-12-31T23:59:59`
 
-**2011-W36, REPORTING\_YEAR\_START\_DAY = --07-01 (July 1)**
+??? example "2011-W36, REPORTING\_YEAR\_START\_DAY = --07-01 (July 1)"
 
-1. \[REPORTING\_YEAR\_START\_DATE\] = 2010-07-01
+    1. `[REPORTING_YEAR_START_DATE] = 2010-07-01`
 
-    case a) 2011-07-01 = Friday
+        case a) `2011-07-01 = Friday`
 
-    2011-07-01 + P3D = 2011-07-04
+        `2011-07-01 + P3D = 2011-07-04`
 
-    \[REPORTING\_YEAR\_BASE\] = 2011-07-04
+        `[REPORTING_YEAR_BASE] = 2011-07-04`
 
-2. \[PERIOD\_DURATION\] = P7D
-3. (36-1) \* P7D = P245D
+    2. `[PERIOD_DURATION] = P7D`
+    3. `(36-1) \* P7D = P245D`
 
-    2011-07-04 + P245D = 2012-03-05
+        `2011-07-04 + P245D = 2012-03-05`
 
-    \[PERIOD\_START\] = 2012-03-05
+        `[PERIOD_START] = 2012-03-05`
 
-4. 36 \* P7D = P252D
+    4. `36 * P7D = P252D`
 
-    2011-07-04 + P252D =2012-03-12
+        `2011-07-04 + P252D =2012-03-12`
 
-    2012-03-12 + -P1D = 2012-03-11
+        `2012-03-12 + -P1D = 2012-03-11`
 
-    \[PERIOD\_END\] = 2012-03-11
+        `[PERIOD_END] = 2012-03-11`
 
-    The actual calendar range covered by 2011-W36 (assuming the reporting year begins July 1) is 2012-03-05T00:00:00/2012-03-11T23:59:59
+        The actual calendar range covered by `2011-W36` (assuming the reporting year begins July 1) is `2012-03-05T00:00:00`/`2012-03-11T23:59:59`
 
 ### Distinct Range
 
@@ -462,22 +463,22 @@ the time format attribute in SDMX-ML.
 
 | Code | Format |
 | :--- | :--- |
-| OTP | Observational Time Period: Superset of all SDMX time formats<br>(Gregorian Time Period, Reporting Time Period, and Time Range) |
-| STP | Standard Time Period: Superset of Gregorian and Reporting Time<br>Periods |
+| OTP | Observational Time Period: Superset of all SDMX time formats(Gregorian Time Period, Reporting Time Period, and Time Range) |
+| STP | Standard Time Period: Superset of Gregorian and Reporting TimePeriods |
 | GTP | Superset of all Gregorian Time Periods and date-time |
 | RTP | Superset of all Reporting Time Periods |
-| TR | Time Range: Start time and duration<br>(YYYY-MM-DD(Thh\:mm\:ss)?/&lt;duration&gt;) |
-| GY | Gregorian Year (YYYY) |
-| GTM | Gregorian Year Month (YYYY-MM) |
-| GD | Gregorian Day (YYYY-MM-DD) |
-| DT | Distinct Point: date-time \(YYYY-MM-DDThh\:mm\:ss\) |
-| RY | Reporting Year (YYYY-A1) |
-| RS | Reporting Semester (YYYY-Ss) |
-| RT | Reporting Trimester (YYYY-Tt) |
-| RQ | Reporting Quarter (YYYY-Qq) |
-| RM | Reporting Month (YYYY-Mmm) |
-| RW | Reporting Week (YYYY-Www) |
-| RD | Reporting Day (YYYY-Dddd) |
+| TR | Time Range: Start time and duration(`YYYY-MM-DD(Thh:mm:ss)?/<duration>`) |
+| GY | Gregorian Year (`YYYY`) |
+| GTM | Gregorian Year Month (`YYYY-MM`) |
+| GD | Gregorian Day (`YYYY-MM-DD`) |
+| DT | Distinct Point: date-time (`YYYY-MM-DDThh:mm:ss`) |
+| RY | Reporting Year (`YYYY-A1`) |
+| RS | Reporting Semester (`YYYY-Ss`) |
+| RT | Reporting Trimester (`YYYY-Tt`) |
+| RQ | Reporting Quarter (`YYYY-Qq`) |
+| RM | Reporting Month (`YYYY-Mmm`) |
+| RW | Reporting Week (`YYYY-Www`) |
+| RD | Reporting Day (`YYYY-Dddd`) |
 
 ### Time Zones
 
@@ -518,9 +519,9 @@ representation of a time span. Depending on the format of the data
 message, this resulted in either an element with 2 XML attributes for
 holding the start time and the duration or two separate XML attributes
 based on the underlying Component identifier. For example, if
-REF\_PERIOD were given a representation of time span, then in the
+`REF_PERIOD` were given a representation of time span, then in the
 Compact data format, it would be represented by two XML attributes;
-REF\_PERIODStartTime (holding the start) and REF\_PERIOD (holding the
+`REF_PERIODStartTime` (holding the start) and `REF_PERIOD` (holding the
 duration). If a new simple type is introduced in the SDMX schemas that
 can hold ISO 8601 time intervals, then this will no longer be necessary.
 What was represented as this:
@@ -572,13 +573,13 @@ period resulting from value of the query parameter. The following table
 details how the operators should be interpreted for any time period
 provided as a parameter.
 
-| <strong>Operator</strong> | <strong>Rule</strong> |
+| Operator | Rule |
 | :--- | :--- |
 | Greater Than | Any data after the last moment of the period |
 | Less Than | Any data before the first moment of the period |
 | Greater Than or Equal To | Any data on or after the first moment of the period |
 | Less Than or Equal To | Any data on or before the last moment of the period |
-| Equal To | Any data which falls on or after the first moment of the period and<br>before or on the last moment of the period |
+| Equal To | Any data which falls on or after the first moment of the period and before or on the last moment of the period |
 
 Reporting Time Periods as query parameters are handled like this: any
 data within the bounds of the reporting period for the year is matched,
@@ -591,53 +592,51 @@ have to take into account the actual time period to compare weeks and
 days to higher order report periods. This will be demonstrated in the
 examples to follow.
 
-**Examples:**
+??? example "Gregorian Period"
 
-**Gregorian Period**
+    Query Parameter: Greater than 2010
 
-Query Parameter: Greater than 2010
+    Literal Interpretation: Any data where the start period occurs after
+    2010-12-31T23:59:59.
 
-Literal Interpretation: Any data where the start period occurs after
-2010-12-31T23:59:59.
+    Example Matches:
 
-Example Matches:
+    - 2011 or later
+    - 2011-01 or later
+    - 2011-01-01 or later
+    - 2011-01-01/P\[Any Duration\] or any later start date
+    - 2011-\[Any reporting period\] (any reporting year start day)
+    - 2010-S2 (reporting year start day --07-01 or later)
+    - 2010-T3 (reporting year start day --07-01 or later)
+    - 2010-Q3 or later (reporting year start day --07-01 or later)
+    - 2010-M07 or later (reporting year start day --07-01 or later)
+    - 2010-W28 or later (reporting year start day --07-01 or later)
+    - 2010-D185 or later (reporting year start day --07-01 or later)
 
-- 2011 or later
-- 2011-01 or later
-- 2011-01-01 or later
-- 2011-01-01/P\[Any Duration\] or any later start date
-- 2011-\[Any reporting period\] (any reporting year start day)
-- 2010-S2 (reporting year start day --07-01 or later)
-- 2010-T3 (reporting year start day --07-01 or later)
-- 2010-Q3 or later (reporting year start day --07-01 or later)
-- 2010-M07 or later (reporting year start day --07-01 or later)
-- 2010-W28 or later (reporting year start day --07-01 or later)
-- 2010-D185 or later (reporting year start day --07-01 or later)
+??? example "Reporting Period"
 
-**Reporting Period**
+    Query Parameter: Greater than or equal to 2010-Q3
 
-Query Parameter: Greater than or equal to 2010-Q3
+    Literal Interpretation: Any data with a reporting period where the
+    start period is on or after the start period of 2010-Q3 for the same
+    reporting year start day, or and data where the start period is on or
+    after 2010-07-01.
 
-Literal Interpretation: Any data with a reporting period where the
-start period is on or after the start period of 2010-Q3 for the same
-reporting year start day, or and data where the start period is on or
-after 2010-07-01.
+    Example Matches:
 
-Example Matches:
-
-- 2011 or later
-- 2010-07 or later
-- 2010-07-01 or later
-- 2010-07-01/P\[Any Duration\] or any later start date
-- 2011-\[Any reporting period\] (any reporting year start day)
-- 2010-S2 (any reporting year start day)
-- 2010-T3 (any reporting year start day)
-- 2010-Q3 or later (any reporting year start day)
-- 2010-M07 or later (any reporting year start day)
-- 2010-W27 or later \[reporting year start day --01-01\][^5]
-- 2010-D182 or later (reporting year start day --01-01)
-- 2010-W28 or later \[reporting year start day --07-01\][^6]
-- 2010-D185 or later (reporting year start day --07-01)
+    - 2011 or later
+    - 2010-07 or later
+    - 2010-07-01 or later
+    - 2010-07-01/P\[Any Duration\] or any later start date
+    - 2011-\[Any reporting period\] (any reporting year start day)
+    - 2010-S2 (any reporting year start day)
+    - 2010-T3 (any reporting year start day)
+    - 2010-Q3 or later (any reporting year start day)
+    - 2010-M07 or later (any reporting year start day)
+    - 2010-W27 or later \[reporting year start day --01-01\][^5]
+    - 2010-D182 or later (reporting year start day --01-01)
+    - 2010-W28 or later \[reporting year start day --07-01\][^6]
+    - 2010-D185 or later (reporting year start day --07-01)
 
 [^5]:
     2010-Q3 (with a reporting year start day of --01-01) starts on 2010-07-01. This is day 4 of week 26, therefore the first week matched is week 27.
@@ -657,9 +656,9 @@ an ID of "X", and a version of "1.1.0".
 
 As of SDMX 3.0, the versioning rules are extended to allow for truly
 versioned artefacts through the implementation of the rules of the
-well-known practice called "Semantic Versioning" (<http://semver.org>),
+well-known practice called [Semantic Versioning](http://semver.org),
 in addition to the legacy non-restrictive versioning scheme. In
-addition, the "isFinal" property is removed from *MaintainableArtefact*.
+addition, the `"isFinal"` property is removed from `MaintainableArtefact`.
 According to the legacy versioning, any artefact defined without a
 version is equivalent to following the legacy versioning, thus having
 version ‘1.0’.
@@ -687,22 +686,22 @@ where the SDMX standard itself is the only structural contract between
 data providers and data consumers and where changes in structures can
 only be communicated through the version number increases.
 
-The semantic version number consists of four parts: MAJOR, MINOR, PATCH
-and EXTENSION, the first three parts being separated by a dot (.), the
-last two parts being separated by a hyphen (-):
-MAJOR.MINOR.PATCH-EXTENSION. All versions are ordered.
+The semantic version number consists of four parts: `MAJOR`, `MINOR`, `PATCH`
+and `EXTENSION`, the first three parts being separated by a dot (`.`), the
+last two parts being separated by a hyphen (`-`):
+`MAJOR.MINOR.PATCH-EXTENSION`. All versions are ordered.
 
 The detailed rules for semantic versioning are listed in chapter 14 in
 the annex for “Semantic Versioning”. In short, they define:
 
-Given a version number MAJOR.MINOR.PATCH (without EXTENSION), when
+Given a version number `MAJOR.MINOR.PATCH` (without `EXTENSION`), when
 making changes to that semantically versioned SDMX artefact, then one
 must increment the:
 
-1. MAJOR version when backwards incompatible artefact changes are made,
-2. MINOR version when artefact elements are added in a backwards
+1. `MAJOR` version when backwards incompatible artefact changes are made,
+2. `MINOR` version when artefact elements are added in a backwards
     compatible manner, or
-3. PATCH version when backwards compatible artefact property changes
+3. `PATCH` version when backwards compatible artefact property changes
     are made.
 
 When incrementing a version part, the right-hand side parts are 0-ed
@@ -710,11 +709,11 @@ When incrementing a version part, the right-hand side parts are 0-ed
 
 Extensions can be added, changed or dropped.
 
-Given an extended version number MAJOR.MINOR.PATCH-EXTENSION, when
+Given an extended version number `MAJOR.MINOR.PATCH-EXTENSION`, when
 making changes to that versioned artefact, then one is not required to
 increment the version if those changes are within the allowed scope of
 the version increment from the previous version (if that existed);
-otherwise, the above version increment rules apply. EXTENSIONs can be
+otherwise, the above version increment rules apply. `EXTENSION`s can be
 used e.g., for drafting or a pre-release.
 
 Semantically versioned SDMX artefacts will thus be safe to use. Specific
@@ -727,10 +726,10 @@ version extension facility allows for eased drafting of new SDMX
 artefact versions.
 
 The production versions of identifiable artefacts are assumed stable,
-i.e., they do not have an EXTENSION. This is because once in production,
+i.e., they do not have an `EXTENSION`. This is because once in production,
 an artefact cannot change in any way, or it must change the version. For
 cases where an artefact is not static, like during the drafting, the
-version must indicate this by including an EXTENSION. Draft artefacts
+version must indicate this by including an `EXTENSION`. Draft artefacts
 should not be used outside of a specific system designed to accommodate
 them. For most purposes, all artefacts should become stable before being
 used in production.
@@ -739,7 +738,7 @@ used in production.
 
 Organisations wishing to keep a maximum of backwards compatibility with
 existing implementations can continue using the previous 2-digit
-convention for version numbers (MAJOR.MINOR) as in the past, such as
+convention for version numbers (`MAJOR.MINOR`) as in the past, such as
 '2.3', but without the ‘isFinal’ property. The new SDMX 3.0 standard
 does not add any strict rules or guarantees about changes in those
 artefacts, since the legacy versioning rules were rather loose and
@@ -761,7 +760,7 @@ whereby an artefact may reference:
 - the **latest backward compatible** version of another artefact, or the **latest backward and forward** **compatible** version of another artefact.
 
 References not representing a strict artefact dependency, such as the
-target artefacts defined in a MetadataProvisionAgreement allow for
+target artefacts defined in a `MetadataProvisionAgreement` allow for
 linking to **all currently available** versions of another artefact.
 Another illustrative case for such loose referencing is that of
 Constraints and flows. A Constraint may reference many Dataflows or
@@ -786,11 +785,11 @@ to reference external objects. With the many dependencies within the
 various structural objects in SDMX, it is useful to have a scheme for
 external referencing. This is done at the level of maintainable objects
 (DSDs, Codelists, Concept Schemes, etc.) In an SDMX Structure Message,
-whenever an "isExternalReference" attribute is set to true, then the
-application must resolve the address provided in the associated "uri"
+whenever an `"isExternalReference"` attribute is set to true, then the
+application must resolve the address provided in the associated `"uri"`
 attribute and use the SDMX Structure Message stored at that location for
 the full definition of the object in question. Alternately, if a
-registry "urn" attribute has been provided, the registry can be used to
+registry `"urn"` attribute has been provided, the registry can be used to
 supply the full details of the object.
 
 The detailed rules for dependency management and references are listed

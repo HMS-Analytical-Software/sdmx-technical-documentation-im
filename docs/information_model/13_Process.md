@@ -26,37 +26,37 @@ Transitions
 
 #### Narrative
 
-The Process is a set of hierarchical ProcessSteps. Each ProcessStep can
-take zero or more *IdentifiableArtefact*s as input and output. Each of
-the associations to the input and output *IdentifiableArtefact*s
-(ProcessArtefact) can be assigned a localID.
+The Process is a set of hierarchical `ProcessSteps`. Each `ProcessStep` can
+take zero or more `IdentifiableArtefact`s as input and output. Each of
+the associations to the input and output `IdentifiableArtefact`s
+(`ProcessArtefact`) can be assigned a `localID`.
 
-The computation performed by a ProcessStep is optionally described by a
-Computation, which can identify the software used by the ProcessStep and
-can also be described in textual form (+description) in multiple
+The computation performed by a `ProcessStep` is optionally described by a
+Computation, which can identify the software used by the `ProcessStep` and
+can also be described in textual form (`+description`) in multiple
 language variants. The Transition describes the execution of
-ProcessSteps from +source ProcessStep to +target ProcessStep based on
-the outcome of a +condition that can be described in multiple language
+`ProcessSteps` from `+source` `ProcessStep` to `+target` `ProcessStep` based on
+the outcome of a `+condition` that can be described in multiple language
 variants.
 
 #### Definitions
 
 | Class | Feature | Description |
 | :--- | :--- | :--- |
-| Process | <p>Inherits from</p><br><p>Maintainable</p> | A scheme which defines or documents the operations performed on data<br>or metadata in order to validate data or metadata to derive new<br>information according to a given set of rules. |
-|  | +step | Associates the Process Steps. |
-| ProcessStep | <p>Inherits from</p><br><p><em>IdentifiableArtefact</em></p> | A specific operation, performed on data or metadata in order to<br>validate or to derive new information according to a given set of<br>rules. |
-|  | +input | Association to the Process Artefact that identifies the objects<br>which are input to the Process Step. |
-|  | +output | Association to the Process Artefact that identifies the objects<br>which are output from the Process Step. |
-|  | +child | Association to child Processes that combine to form a part of this<br>Process. |
-|  | +computation | Association to one or more Computations. |
-|  | +transition | Association to one or more Transitions. |
-| Computation |  | Describes in textual form the computations involved in the<br>process. |
-|  | localId | Distinguishes between Computations in the same Process. |
-|  | softwarePackage<br/><br>softwareLanguage<br/><br>softwareVersion | Information about the software that is used to perform the<br>computation. |
-|  | +description | Text describing or giving additional information about the<br>computation. This can be in multiple language variants. |
-| Transition | <p>Inherits from</p><br><p><em>IdentifiableArtefact</em></p> | An expression in a textual or formalised way of the transformation<br>of data between two specific operations (Processes) performed on the<br>data. |
-|  | +target | Associates the Process Step that is the target of the<br>Transition. |
-|  | +condition | Associates a textual description of the Transition. |
-| ProcessArtefact |  | Identification of an object that is an input to or an output from a<br>Process Step. |
-|  | +artefact | Association to an Identifiable Artefact that is the input to or the<br>output from the Process Step. |
+| `Process` | Inherits from `Maintainable` | A scheme which defines or documents the operations performed on data or metadata in order to validate data or metadata to derive new information according to a given set of rules. |
+|  | `+step` | Associates the process steps. |
+| `ProcessStep` | Inherits from `IdentifiableArtefact` | A specific operation, performed on data or metadata in order to validate or to derive new information according to a given set of rules. |
+|  | `+input` | Association to the process artefact that identifies the objects which are input to the process step. |
+|  | `+output` | Association to the process artefact that identifies the objects which are output from the process step. |
+|  | `+child` | Association to child processes that combine to form a part of this process. |
+|  | `+computation` | Association to one or more computations. |
+|  | `+transition` | Association to one or more transitions. |
+| `Computation` |  | Describes in textual form the computations involved in the process. |
+|  | `localId` | Distinguishes between computations in the same process. |
+|  | `softwarePackage` / `softwareLanguage` / `softwareVersion` | Information about the software that is used to perform the computation. |
+|  | `+description` | Text describing or giving additional information about the computation. This can be in multiple language variants. |
+| `Transition` | Inherits from `IdentifiableArtefact` | An expression in a textual or formalised way of the transformation of data between two specific operations (processes) performed on the data. |
+|  | `+target` | Associates the process step that is the target of the transition. |
+|  | `+condition` | Associates a textual description of the transition. |
+| `ProcessArtefact` |  | Identification of an object that is an input to or an output from a process step. |
+|  | `+artefact` | Association to an identifiable artefact that is the input to or the output from the process step. |

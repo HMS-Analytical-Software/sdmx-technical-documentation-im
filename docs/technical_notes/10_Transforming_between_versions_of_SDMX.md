@@ -11,7 +11,7 @@ versions of SDMX.
 The following table provides an overview of the backwards compatibility
 between SDMX 3.0 and 2.1.
 
-| **SDMX 3.0 feature**       | **SDMX 2.1 compatibility**                     | **Comments**                                                                 |
+| SDMX 3.0 feature       | SDMX 2.1 compatibility                     | Comments                                                                 |
 | :-------------------------- | :--------------------------------------------- | :--------------------------------------------------------------------------- |
 | Multiple Measures           | Create a Measure Dimension<br>Or<br>Model Measures as Attributes | For Measure Dimensions, all Concepts must reside in the same Concept Scheme |
 | Arrays for values           | Cannot be supported                            | Arrays are always reported in a verbose format, even if one value is reported |
@@ -25,7 +25,7 @@ between SDMX 3.0 and 2.1.
 The following table illustrates forward compatibility issues from SDMX
 2.1 to 3.0.
 
-| **SDMX 2.1 feature** | **SDMX 3.0 compatibility** | **Comments** |
+| SDMX 2.1 feature | SDMX 3.0 compatibility | Comments |
 | :-------------------- | :------------------------- | :----------- |
-| Measure Dimension     | Create a Dimension with role ‘MEASURE’<br>Or<br>Create multiple Measures from the Measure Dimension Concept Scheme | If the dataset has to resemble that of SDMX 2.1 Structure Specific, then the first option must be used |
-| Primary Measure       | Create one Measure with role ‘PRIMARY’; use id=”OBS_VALUE” | |
+| Measure Dimension     | Create a Dimension with role `‘MEASURE’`<br>Or<br>Create multiple Measures from the Measure Dimension Concept Scheme | If the dataset has to resemble that of SDMX 2.1 Structure Specific, then the first option must be used |
+| Primary Measure       | Create one Measure with role `‘PRIMARY’`; use `id=”OBS_VALUE”` | |

@@ -112,7 +112,7 @@ DSD), subject to the following restrictions:
 
 A Constraint can contain multiple Member Selections (e.g., Dimensions).
 
-- A specific Member Selection (e.g., Dimension FREQ) can only be
+- A specific Member Selection (e.g., Dimension `FREQ`) can only be
     contained in one Cube Region for any one attached object (e.g., a
     specific DSD or specific Dataflow).
 - Component values within a Member Selection may define a validity
@@ -121,7 +121,7 @@ A Constraint can contain multiple Member Selections (e.g., Dimensions).
 - For partial reference resolution purposes (as per the SDMX REST
     API), the latest non-draft Constraint must be considered.
 - A Member Selection may include wildcarding of values (using
-    character ‘%’ to represent zero or more occurrences of any
+    character `‘%’` to represent zero or more occurrences of any
     character), as well as cascading through hierarchic structures
     (e.g., parents in Codelist), or localised values (e.g., text for
     English only). Lack of locale means any language may match.
@@ -132,9 +132,9 @@ A Constraint can contain multiple Member Selections (e.g., Dimensions).
     array data type (i.e., Measures, Attributes or Metadata Attributes),
     will be applied as single values and will not be assessed combined
     with other values to match all possible array values. For example,
-    including the Code ‘A’ for an Attribute will allow any instance of
-    the Attribute that includes ‘A’, like \[‘A’, ‘B’\] or \[‘A’, ‘C’,
-    ‘D’\]. Similarly, if Code ‘A’ was excluded, all those arrays of
+    including the Code `‘A’` for an Attribute will allow any instance of
+    the Attribute that includes `‘A’`, like `[‘A’, ‘B’]` or `[‘A’, ‘C’, ‘D’]`. 
+    Similarly, if Code `‘A’` was excluded, all those arrays of
     values would also be excluded.
 
 #### Key Set
@@ -201,9 +201,9 @@ Constraint at the higher level(s) then:
 - The lower-level Constraint cannot be less restrictive than the
     Constraint specified for the same Member Selection (e.g. Dimension)
     at the next higher level, which constrains that Member Selection.
-    For example, if the Dimension FREQ is constrained to A, Q in a DSD,
+    For example, if the Dimension `FREQ` is constrained to `A, Q` in a DSD,
     then the Constraint at the Dataflow or Provision Agreement cannot be
-    A, Q, M or even just M – it can only further constrain A, Q.
+    `A, Q, M` or even just `M` – it can only further constrain `A, Q`.
 - The Constraint at the lower level for any one Member Selection
     further constrains the content for the same Member Selection at the
     higher level(s).
@@ -238,8 +238,8 @@ Constraint at the higher level(s) then:
     specified at the lower level are not deemed part of the Constraint.
 
 Note that a Key in a Key Set can have wildcarded Components. For
-instance, the Constraint may simply constrain the Dimension FREQ to "A",
-and all keys where the FREQ="A" are therefore valid.
+instance, the Constraint may simply constrain the Dimension `FREQ` to `"A"`,
+and all keys where the `FREQ="A"` are therefore valid.
 
 The following logic explains how the inheritance mechanism works. Note
 that this is conceptual logic and actual systems may differ in the way
@@ -263,10 +263,10 @@ The following scenario is used.
 
 A DSD contains the following Dimensions:
 
-- GEO – Geography
-- SEX – Sex
-- AGE – Age
-- CAS – Current Activity Status
+- `GEO` – Geography
+- `SEX` – Sex
+- `AGE` – Age
+- `CAS` – Current Activity Status
 
 In the DSD, common code lists are used and the requirement is to
 restrict these at various levels to specify the actual code that are
@@ -286,8 +286,8 @@ Example Constraints
 
 Notes:
 
-AGE is constrained for the DSD and is further restricted for the
-Dataflow CENSUS\_CUBE1.
+`AGE` is constrained for the DSD and is further restricted for the
+Dataflow `CENSUS_CUBE1`.
 
 - The same Constraint applies to both Provision Agreements.
 
@@ -295,46 +295,45 @@ The cascade rules elaborated above result as follows:
 
 DSD
 
-- Constrained by eliminating code 001 from the code list for the AGE
+- Constrained by eliminating code `001` from the code list for the `AGE`
     Dimension.
 
-Dataflow CENSUS\_CUBE1
+Dataflow `CENSUS_CUBE1`
 
-- Constrained by restricting the code list for the AGE Dimension to
-    codes 002 and 003 (note that this is a more restrictive constraint
+- Constrained by restricting the code list for the `AGE` Dimension to
+    codes `002` and `003` (note that this is a more restrictive constraint
     than that declared for the DSD which specifies all codes except code
     001).
 
-    - Restricts the CAS codes to 003 and 004.
+    - Restricts the `CAS` codes to `003` and `004`.
 
-Dataflow CENSUS\_CUBE2
+Dataflow `CENSUS_CUBE2`
 
-- Restricts the code list for the CAS Dimension to codes TOT and NAP.
-    - Inherits the AGE constraint applied at the level of the DSD.
+- Restricts the code list for the `CAS` Dimension to codes `TOT` and `NAP`.
+    - Inherits the `AGE` constraint applied at the level of the DSD.
 
-Provision Agreement CENSUS\_CUBE1\_IT
+Provision Agreement `CENSUS_CUBE1_IT`
 
-- Restricts the codes for the GEO Dimension to IT and its children.
-    - Inherits the constraints from Dataflow CENSUS\_CUBE1 for the AGE
-        and CAS Dimensions.
+- Restricts the codes for the `GEO` Dimension to `IT` and its children.
+    - Inherits the constraints from Dataflow `CENSUS_CUBE1` for the `AGE`
+        and `CAS` Dimensions.
 
-Provision Agreement CENSUS\_CUBE2\_IT
+Provision Agreement `CENSUS_CUBE2_IT`
 
-- Restricts the codes for the GEO Dimension to IT and its children.
-    - Inherits the constraints from Dataflow CENSUS\_CUBE2 for the CAS
+- Restricts the codes for the `GEO` Dimension to `IT` and its children.
+    - Inherits the constraints from Dataflow `CENSUS_CUBE2` for the `CAS`
         Dimension.
-    - Inherits the AGE constraint applied at the level of the DSD.
+    - Inherits the `AGE` constraint applied at the level of the DSD.
 
 The Constraints are defined as follows:
 
-DSD Constraint
+DSD Constraint:
 
 ```xml
 <str:DataConstraint agencyID="SDMX" id="DATA_CONSTRAINT" version="1.0.0-draft" type="Allowed">
   <com:Name xml:lang="en">SDMX 3.0 Data Constraint sample</com:Name>
   <str:ConstraintAttachment>
-    <str:DataStructure>urn:sdmx:org.sdmx.infomodel.datastructure.
-      DataStructure=CENSUSHUB:CENSUS(1.0.0)</str:DataStructure>
+    <str:DataStructure>urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=CENSUSHUB:CENSUS(1.0.0)</str:DataStructure>
   </str:ConstraintAttachment>
   <str:CubeRegion include="true">
     <!-- the ability to exclude values is illustrated – i.e., all values valid except this one -->
@@ -345,7 +344,7 @@ DSD Constraint
 </str:DataConstraint>
 ```
 
-Dataflow Constraints
+Dataflow Constraints:
 
 ```xml
 <str:DataConstraint agencyID="SDMX" id="DATA_CONSTRAINT_2" version="1.0.0-draft" type="Allowed">
@@ -381,7 +380,7 @@ Dataflow Constraints
 </str:DataConstraint>
 ```
 
-Provision Agreement Constraint
+Provision Agreement Constraint:
 
 ```xml
 <str:DataConstraint agencyID="SDMX" id="DATA_CONSTRAINT_4" version="1.0.0-draft" type="Allowed">
@@ -409,145 +408,166 @@ section, following a few examples.
 
 Let’s assume a DSD with the following Components:
 
-| Dimension | FREQ |
+| Type | Component |
 | :--- | :--- |
-| Dimension | JD_TYPE |
-| Dimension | JD_CATEGORY |
-| Dimension | VIS_CTY |
-| TimeDimension | TIME_PERIOD |
-| Attribute | OBS_STATUS |
-| Attribute | UNIT |
-| Attribute | COMMENT |
-| MetadataAttribute | CONTACT |
-| Measure | MULTISELECT |
-| Measure | CHOICE |
+| Dimension | `FREQ` |
+| Dimension | `JD_TYPE` |
+| Dimension | `JD_CATEGORY` |
+| Dimension | `VIS_CTY` |
+| TimeDimension | `TIME_PERIOD` |
+| Attribute | `OBS_STATUS` |
+| Attribute | `UNIT` |
+| Attribute | `COMMENT` |
+| MetadataAttribute | `CONTACT` |
+| Measure | `MULTISELECT` |
+| Measure | `CHOICE` |
 
 On the above, let’s assume the following use cases with their
 constraining requirements:
 
 ##### Use Case 1: A Constraint on allowed values for some Dimensions
 
-- R1: Allow monthly and quarterly data
-- R2: Allow Mexico for vis-à-vis country
+- `R1`: Allow monthly and quarterly data
+- `R2`: Allow Mexico for vis-à-vis country
 
-This is expressed with the following CubeRegion:
+This is expressed with the following `CubeRegion`:
 
-| FREQ | M, Q |
+| Dimension | Values |
 | :--- | :--- |
-| VIS_CTY | MX |
+| `FREQ` | `M, Q` |
+| `VIS_CTY` | `MX` |
 
 ##### Use Case 2: A Constraint on allowed combinations for some Dimensions
 
-- R1: Allow monthly data for Germany
-- R2: Allow quarterly data for Mexico
+- `R1`: Allow monthly data for Germany
+- `R2`: Allow quarterly data for Mexico
 
-This is expressed with the following DataKeySet:
+This is expressed with the following `DataKeySet`:
 
-| Key1 | FREQ | M |
+
+| Key | Dimension | Values |
 | :--- | :--- | :--- |
-| Key2 | FREQ | Q |
-| VIS_CTY | MX |
+| `Key1` | `FREQ` | `M` |
+| `Key1` | `VIS_CTY` | `DE` |
+| `Key2` | `FREQ` | `Q` |
+| `Key2` | `VIS_CTY` | `MX` |
 
 ##### Use Case 3: A Constraint on allowed values for some Dimensions combined with allowed values for some Attributes
 
-- R1: Allow monthly and quarterly data
-- R2: Allow Mexico for vis-à-vis country
-- R3: Allow present for status
+- `R1`: Allow monthly and quarterly data
+- `R2`: Allow Mexico for vis-à-vis country
+- `R3`: Allow present for status
 
-This may be expressed with the following CubeRegion:
+This may be expressed with the following `CubeRegion`:
 
-| FREQ | M, Q |
+| Dimensions | Values |
 | :--- | :--- |
-| VIS_CTY | MX |
-| OBS_STATUS | A |
+| `FREQ` | `M, Q` |
+| `VIS_CTY` | `MX` |
+| `OBS_STATUS` | `A` |
 
 ##### Use Case 4: A Constraint on allowed combinations for some Dimensions combined with specific Attribute values
 
-- R1: Allow monthly data, for Germany, with unit euro
-- R2: Allow quarterly data, for Mexico, with unit usd
+- `R1`: Allow monthly data, for Germany, with unit euro
+- `R2`: Allow quarterly data, for Mexico, with unit usd
 
-This is may be expressed with the following DataKeySet:
+This is may be expressed with the following `DataKeySet`:
 
-| Key1 | FREQ | M |
+| Key | Dimension | Values |
 | :--- | :--- | :--- |
-| Key2 | FREQ | Q |
-| VIS_CTY | MX |
-| UNIT | USD |
+| `Key1` | `FREQ` | `M` |
+| `Key1` | `VIS_CTY` | `DE` |
+| `Key1` | `UNIT` | `EUR` |
+| `Key2` | `FREQ` | `Q` |
+| `Key2` | `VIS_CTY` | `MX` |
+| `Key2` | `UNIT` | `USD` |
 
 ##### Use Case 5: A Constraint on allowed values for some Dimensions together with some combination of Dimension values
 
-- R1: For annually and quarterly data, for Mexico and Germany, only A status is allowed
-- R2: For monthly data, for Mexico and Germany, only F status is allowed
+- `R1`: For annually and quarterly data, for Mexico and Germany, only `A` status is allowed
+- `R2`: For monthly data, for Mexico and Germany, only `F` status is allowed
 
-Considering the above examples, the following CubeRegions would be
+Considering the above examples, the following `CubeRegions` would be
 created:
 
-| CubeRegion1 | FREQ | Q, A |
+| CubeRegion | Dimension | Values |
 | :--- | :--- | :--- |
-| CubeRegion2 | FREQ | M |
-| VIS_CTY | MX, DE |
-| OBS_STATUS | F |
+| `CubeRegion1` | `FREQ` | `Q, A` |
+| `CubeRegion1` | `VIS_CTY` | `MX, DE` |
+| `CubeRegion1` | `OBS_STATUS` | `A` |
+| `CubeRegion2` | `FREQ` | `M` |
+| `CubeRegion2` | `VIS_CTY` | `MX, DE` |
+| `CubeRegion2` | `OBS_STATUS` | `F` |
 
 The problem with this approach is that according to the business rule
-for Constraints, only one should be specified per Component. Thus, if a
+for `Constraints`, only one should be specified per `Component`. Thus, if a
 software would perform some conflict resolution would end up with empty
-sets for FREQ and OBS\_STATUS (as they do not share any values).
+sets for `FREQ` and `OBS_STATUS` (as they do not share any values).
 
 Nevertheless, there is a much easier approach to that; this is the
-cascading mechanism of Constraints (as shown in 10.3.4.1). Hence, these
+cascading mechanism of Constraints (as shown in 
+[Data Constraint and Cascading](#data-constraint-and-cascading)). Hence, these
 rules would be expressed into two levels of Constraints, e.g., DSD and
 Dataflows:
 
-DSD CubeRegion:
+DSD `CubeRegion`:
 
-| FREQ | M, Q, A |
+| Dimension | Value |
 | :--- | :--- |
-| VIS_CTY | MX, DE |
-| OBS_STATUS | A, F |
+| `FREQ` | `M, Q, A` |
+| `VIS_CTY` | `MX, DE` |
+| `OBS_STATUS` | `A, F` |
 
-Dataflow1 CubeRegion:
+Dataflow1 `CubeRegion`:
 
-| FREQ | Q, A |
+| Dimension | Value |
 | :--- | :--- |
-| VIS_CTY | MX, DE |
-| OBS_STATUS | F |
+| `FREQ` | `Q, A` |
+| `VIS_CTY` | `MX, DE` |
+| `OBS_STATUS` | `F` |
 
-Dataflow2 CubeRegion:
+Dataflow2 `CubeRegion`:
 
-| FREQ | M |
+| Dimension | Value |
 | :--- | :--- |
-| VIS_CTY | MX, DE |
-| OBS_STATUS | A |
+| `FREQ` | `M` |
+| `VIS_CTY` | `MX, DE` |
+| `OBS_STATUS` | `A` |
 
 ##### Use case 6: A Constraint on allowed values for some Dimensions combined with allowed values for Measures
 
-- R1: Allow monthly data, for Germany, with unit euro, and measure choice is 'A'
-- R2: Allow quarterly data, for Mexico, with unit usd, and measure choice is 'B'
+- `R1`: Allow monthly data, for Germany, with unit euro, and measure choice is 'A'
+- `R2`: Allow quarterly data, for Mexico, with unit usd, and measure choice is 'B'
 
-This is may be expressed with the following DataKeySet:
+This is may be expressed with the following `DataKeySet`:
 
-| Key1 | FREQ | M |
+| Key | Dimension | Value |
 | :--- | :--- | :--- |
-| Key2 | FREQ | Q |
-| VIS_CTY | MX |
-| UNIT | USD |
-| CHOICE | B |
+| `Key1` | `FREQ` | `M` |
+| `Key1` | `VIS_CTY` | `DE` |
+| `Key1` | `UNIT` | `EUR` |
+| `Key1` | `CHOICE` | `A` |
+| `Key2` | `FREQ` | `Q` |
+| `Key2` | `VIS_CTY` | `MX` |
+| `Key2` | `UNIT` | `USD` |
+| `Key2` | `CHOICE` | `B` |
 
 ##### Use Case 7: A Constraint with wildcards for Codes and removePrefix property
 
-For this example, we assume that the VIS\_CTY representation has been
-prefixed with prefix ‘AREA\_’. In this Constraint, we need to remove the
+For this example, we assume that the `VIS_CTY` representation has been
+prefixed with prefix `‘AREA_’`. In this Constraint, we need to remove the
 prefix.
 
-- R1: Allow monthly and quarterly data
-- R2: Allow vis-à-vis countries that start with M
-- R3: Remove the prefix ‘AREA\_’
+- `R1`: Allow monthly and quarterly data
+- `R2`: Allow vis-à-vis countries that start with `M`
+- `R3`: Remove the prefix `‘AREA_’`
 
-This may be expressed with the following CubeRegion:
+This may be expressed with the following `CubeRegion`:
 
-| FREQ | M, Q |
+| Dimension | Value|
 | :--- | :--- |
-| VIS_CTY (removePrefix=’AREA_’) | M% |
+| `FREQ` | `M, Q` |
+| `VIS_CTY (removePrefix=’AREA_’)` | `M%` |
 
 ##### Use Case 8: A Constraint with multilingual support on Attributes
 
@@ -555,48 +575,51 @@ This may be expressed with the following CubeRegion:
 - R2: Allow Mexico for vis-à-vis country
 - R3: Allow a comment, in English, which includes the term adjusted for status
 
-This may be expressed with the following CubeRegion:
+This may be expressed with the following `CubeRegion`:
 
-| FREQ | M, Q |
+| Dimension | Value|
 | :--- | :--- |
-| VIS_CTY | MX |
-| COMMENT (lang=’en’) | %adjusted% |
+| `FREQ` | `M, Q` |
+| `VIS_CTY` | `MX` |
+| `COMMENT (lang=’en’)` | `%adjusted%` |
 
 ##### Use Case 9: A Constraint on allowed values for Dimensions combined with allowed values for Metadata Attributes
 
-- R1: Allow monthly and quarterly data
-- R2: Allow Mexico for vis-à-vis country
-- R3: Allow John Doe for contact
+- `R1`: Allow monthly and quarterly data
+- `R2`: Allow Mexico for vis-à-vis country
+- `R3`: Allow John Doe for contact
 
-This may be expressed with the following CubeRegion:
+This may be expressed with the following `CubeRegion`:
 
-| FREQ | M, Q |
+| Dimension | Value|
 | :--- | :--- |
-| VIS_CTY | MX |
-| CONTACT | John Doe |
+| `FREQ` | `M, Q` |
+| `VIS_CTY` | `MX` |
+| `CONTACT` | `John Doe` |
 
 #### Other constraining terms
 
 Beyond the cube regions and keysets, there is one more constraining
-term, i.e., the ReleaseCalendar.
+term, i.e., the `ReleaseCalendar`.
 
-The ReleaseCalendar is the only term that does not apply on Components;
+The `ReleaseCalendar` is the only term that does not apply on Components;
 it specifies the schedule of publication or reporting of the dataset or
 metadataset.
 
-For example, the ReleaseCalendar for Provider BIS, is specified in the
+For example, the `ReleaseCalendar` for `Provider` `BIS`, is specified in the
 three following terms:
 
 - Periodicity: how often data should be reported, e.g., monthly
-- Offset: the number of days between the 1<sup>st</sup> of January and
+- Offset: the number of days between the 1st of January and
     the first release of data, e.g., 10 days
 - Tolerance: the maximum allowed of days that data may be considered,
     without being considered as late, e.g., 5 days
 
-With the above terms, BIS would need to report data between the
-10<sup>th</sup> and 15<sup>th</sup> of every month.
+With the above terms, `BIS` would need to report data between the
+10th and 15th of every month.
 
-NOTE: The SDMX 2.1 constraining term ReferencePeriod has been deprecated
-in SDMX 3.0; thus, the TimeDimension and any Dimension with a time
-Representation can be constrained within a CubeRegion or
-MetadataTargetRegion, using the TimeRangeValue.
+!!! note 
+    The SDMX 2.1 constraining term `ReferencePeriod` has been deprecated
+    in SDMX 3.0; thus, the `TimeDimension` and any `Dimension` with a time
+    `Representation` can be constrained within a `CubeRegion` or
+    `MetadataTargetRegion`, using the `TimeRangeValue`.

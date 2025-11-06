@@ -16,7 +16,7 @@ Information Model. The complete set of documents is:
     information model, with the exception of the registry interfaces. It
     is intended for technicians wishing to understand the complete scope
     of the SDMX technical standards in a syntax neutral form.
-- [SDMX SECTION 05 REGISTRY SPECIFICATION: LOGICAL INTERFACES:](../../logical_model/logical_interfaces/6_Identification_of_SDMX_Objects.md) This
+- [SDMX SECTION 05 REGISTRY SPECIFICATION: LOGICAL INTERFACES:](../../logical_interfaces/logical_interfaces/6_Identification_of_SDMX_Objects.md) This
     document provides the logical specification for the registry
     interfaces, including subscription/notification,
     registration/submission of data and metadata, and querying.
