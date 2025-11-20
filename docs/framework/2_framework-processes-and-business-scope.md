@@ -187,7 +187,7 @@ The SDMX standards offer a common model, a choice of syntax and, for
 XML, a choice of data formats which support the exchange of any type of
 statistical data meeting the definition above; several optimized formats
 are specified based on the specific requirements of each implementation,
-as described below in the [SDMX-ML section](../../SDMX-ML/index.md).
+as described below in the [SDMX-ML section](../../ml/index.md).
 
 The formal objects in the information model are presented schematically
 in Figure 1, and are discussed in more detail elsewhere in this
@@ -462,7 +462,8 @@ SDMX does not require a particular technology implementation of the
 registry -- instead, it specifies the standard interfaces which may be
 supported by a registry. Thus, users may implement an SDMX-conformant
 registry in any fashion they choose, provided the interfaces are
-supported as specified in the [Registry Specification Section](../../sdmx-registry-specification/registry_specification/1_Introduction.md). 
+supported as specified in the
+[Registry Specification Section](../../registry_specification/registry_specification/1_Introduction.md). 
 These interfaces are expressed as XML documents, but also REST API
 request/response messages
 

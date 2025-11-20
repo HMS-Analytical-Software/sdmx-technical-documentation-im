@@ -8,7 +8,7 @@ with data, i.e., Data Structure Definitions and Data Sets. This section
 is intended to provide information that will help users of SDMX
 understand and implement the standards. It is not normative, and it does
 not provide any rules for the use of the standards, such as those found
-in [SDMX-ML: Schema and Documentation](../../SDMX-ML/index.md).
+in [SDMX-ML: Schema and Documentation](../../ml/index.md).
 
 ## SDMX Information Model for Format Implementers
 
