@@ -12,17 +12,8 @@ context of the artefact to which the `Constraint` is attached e.g.,
 `DataStructureDefinition`, `Dataflow`, `ProvisionAgreement`,
 `MetadataStructureDefinition`, `Metadataflow`, `MetadataProvisionAgreement`.
 
-Note that in this metamodel the term data source refers to both data and
-metadata sources, and data provider refers to both data and metadata
+Note that in this metamodel the term data provider refers to both data and metadata
 providers.
-
-A data source may be a simple file of data or metadata (in SDMX-ML, JSON
-or other format), or a database or metadata repository. A data source
-may contain data for many data or metadata flows (called `Dataflow`, and
-`Metadataflow` in the model), and the mechanisms described in this section
-allow an organisation to specify precisely the scope of the content of
-the data source where this data source is registered (`SimpleDataSource`,
-`QueryDataSource`).
 
 The `Dataflow` and `Metadataflow`, themselves may be specified as containing
 only a subset of all the possible keys that could be derived from a
@@ -52,16 +43,12 @@ metadata attached are:
 
 - `Dataflow`
 - `ProvisionAgreement`
-- `DataProvider` – this is restricted to release calendar
+- `DataProvider`
 - `DataStructureDefinition`
 - `Metadataflow`
-- `MetaDataProvider` – this is restricted to release calendar
+- `MetaDataProvider`
 - `MetadataProvisionAgreement`
-- `MetadataSetMetadataStructureDefinition`
-- `SimpleDataSource` – this is a registered data source where the
-    registration references the actual Data Set or Metadata Set
-
-`QueryDataSource`
+- `MetadataStructureDefinition`
 
 Note that, because the `Constraint` can specify a subset of the
 component values implied by a specific `Structure` (such as a specific
@@ -70,10 +57,10 @@ component values implied by a specific `Structure` (such as a specific
 Therefore, whilst the `Constraint` itself may not be linked directly to
 a `DataStructureDefinition` or `MetadataStructureDefinition`, the artefact
 that it is constraining will be linked to a `DataStructureDefinition` or
-`MetadataStructureDefinition`. As a `DataProvider` or a `MetadataProvider`
-does not link to any one specific DSD or MSD the type of information
-that can be contained in a Constraint linked to a
-`DataProvider`/`MetadataProvider` is restricted to `ReleaseCalendar`.
+`MetadataStructureDefinition`. A `DataProvider` and `MetadataProvider` indirectly
+reference DSDs and MSDs through their associated Data and Metadata Provision
+Agreements as such these Constraints are restricted to Cube Regions and are
+applicable only to the DSDs / MSDs which contain the Components being restricted.
 
 ## Constraints
 
@@ -89,7 +76,7 @@ Relationship class diagram showing constraint metadata
 #### Narrative
 
 The constraint mechanism allows specific constraints to be attached to a
-`ConstrainableArtefact`. With the exception of `ReleaseCalendar` these
+`ConstrainableArtefact`. These
 constraints specify a subset of the total set of values or keys that may
 be present in any of the `ConstrainableArtefacts`.
 
@@ -109,38 +96,21 @@ it.
 
 A `ConstrainableArtefact` can have two types of `Constraint`s:
 
-1. `DataConstraint` – is used as a mechanism to specify, either the
-    available set of keys (`DataKeySet`), or set of component values
-    (`CubeRegion`) in a `DataSource` such as a `Simpledatasource` or a
-    database (`QueryDatasource`), or the allowable keys that can be
-    constructed from a `DataStructureDefinition`. Multiple such
-    `DataConstraints` may be present for a `ConstrainableArtefact`. For
-    instance, there may be a `DataConstraint` that specifies the values
-    allowed for the `ConstrainableArtefact` (role is `allowableContent`)
-    which can be used for validation or for constructing a partial code
-    list for one Dimension, while another provides the validation for
-    another Dimension within the same DSD.
-2. `MetadataConstraint` – is used as a mechanism to specify a set of
-    component values (`MetadatTargetRegion`) in a `DataSource` such as a
-    `MetadataSet` or a database (`QueryDatasource`). Multiple such
-    `MetadataConstraints` may be present for a `ConstrainableArtefact`.
-    For instance, there may be a `MetadataConstraint` that specifies the
-    values allowed for the `ConstrainableArtefact` (role is
-    `allowableContent`) which can be used for validation or for
-    constructing a partial code list, whilst another `MetadataConstraint`
-    can specify the actual content of a metadata source (role is
-    `actualContent`).
+1. `DataConstraint` – is used as a mechanism to specify the set of keys
+    (`DataKeySet`), or set of component values (`CubeRegion`) that can be reported
+    against the target `ConstrainableArtefact`. Multiple such `DataConstraints` may
+    be present for a `ConstrainableArtefact`.
+2. `MetadataConstraint` – is used as a mechanism to specify a set of component
+    values (`MetadatTargetRegion`) that can be reported against the target
+    `ConstrainableArtefact`. Multiple such `MetadataConstraints` may be present
+    for a `ConstrainableArtefact`.
 
-In addition to `DataKeySet` and/or `CubeRegion`/`MetadataTargetRegion` a
-Constraint can have a `ReleaseCalendar` specifying when data or metadata
-are released for publication or reporting.
-
-Note also that another possible type of a `DataConstraint` is available;
-that is a `DataConstraint` with the role of `actualContent` where it
-describes the data that an SDMX Web Service contains. This type of
-`DataConstraint` is not maintained in a Registry and is always a response
-to the data availability SDMX REST API. Thus, its identification is
-auto-generated by the service responding to a data availability request.
+Note also that another possible type of a `Constraint` is available; that is a
+`AvailableDataConstraint`, this is used to report the data that exists in a data
+source. An `AvailableDataConstraint` is not a Maintainable Artefact as it is
+generated dynamically based on the query.  An `AvailableDataConstraint` contains
+only 1 `CubeRegion` which is used to specify the valid values per Dimension of
+the DSD that it is attached to.
 
 ### Relationship Class Diagram – Detail
 
@@ -162,20 +132,25 @@ A `DataConstraint` has a choice of two ways of specifying value subsets:
     structure when contained in a `DataSet`. In addition, each
     `DataKeySet` may also include `MemberSelections` for `AttributeComponents`
     or Measures.
-2. As a set of `CubeRegions` each of which defines a “slice” of the total
-    structure (`MemberSelection`) in terms of one or more `MemberValues`
-    that may be present for a `Component` of a structure when contained
-    in a `DataSet`.
+2. As a `CubeRegion` whose `MemberSelections` `SelectionValues` define a subset of
+    allowed/disallowed values for a `Component` when contained in a
+    `DataSet`/`MetadataSet`. A `DataConstraint` is restricted to a maximum of 2
+    `CubeRegions`, one to define included (allowable) content, and the other to
+    define disallowed content (`isIncluded=false`).
 
-The difference between (1) and (2) above is that in (1) a complete key
-is defined whereas in (2) above the “slice” defines a list of possible
-values for each of the `Component`s but does not specify specific key
-combinations. In addition, in (1) the association between `Component`
-and `DataKeyValue` is constrained to the components that comprise the key,
-whereas in (2) it can contain other component types (such as
-`AttributeComponents` or Measures). By adding `MemberSelections` to the
-`DataKeySets` of (1), `AttributeComponents` and Measures are constrained for
-the related `DataKeys`.
+The difference between (1) and (2) above is that :
+
+1. Defines a combination of `Dimension` values, which are assessed in combination
+    to reference one or more `Series` in a `Dataset`.  This combination of values
+    can be used to explicitly include or exclude the Series from being reported
+    (via the `isIncluded` property).  In addition, once a set of Series are
+    targeted by a `DataKey` restrictions can be applied to `Attribute` and `Measure`
+    values by defining subsets of values that are either allowed or disallowed.
+    The `DataKeySet` targets its rules to specific Series.
+2. Defines a subset of values that are allowed for a `Component`. Each `CubeRegion`
+    `MemberSelection` defines a single Component to define a set of allowed or
+    disallowed values, the `MemberSelections` are processed independently of
+    each other. The Cube Region supplies global rules, not series specific rules.
 
 A `MetadataConstraint` has only one way of specifying value subsets:
 
@@ -287,7 +262,3 @@ or value is constrained.
 | `EndPeriod` | Inherits from `TimeRangeValue` | The period to which the constrained selection is valid. |
 |  | `isInclusive` | Indication of whether the date is inclusive in the period. |
 |  | `period` | The time period which acts as the end of the range |
-| `ReleaseCalendar` |  | The schedule of publication or reporting of the data or metadata |
-|  | `periodicity` | The time period between the releases of the data or metadata |
-|  | `offset` | Interval between January 1st and the first release of the data |
-|  | `tolerance` | Period after which the data or metadata may be deemed late. |

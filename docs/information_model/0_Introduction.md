@@ -93,7 +93,7 @@ which syntax specific implementations are developed. The model is
 constructed as a set of functional packages which assist in the
 understanding, re-use and maintenance of the model.
 
-In addition to this, in order to aid understanding each package can be
+In addition to this, to aid understanding each package can be
 considered to be in one of three conceptual layers:
 
 - the SDMX Base layer comprises fundamental building blocks which are used
@@ -187,3 +187,9 @@ The IM packages are largely the same.
 /// figure-caption
 SDMX Information Model version 3.0 package structure
 ///
+
+### Version 3.1
+
+Whilst some additional properties have been added to Dataflow, DSD,
+Data Constraint, SDMX v3.1 does not change the high level information model,
+it remains as it is in Figure 6.

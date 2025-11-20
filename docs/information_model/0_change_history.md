@@ -406,3 +406,15 @@ New Component Representation Types
 - `GeospatialInformation` – a string type where the value is an
     expression defining a set of geographical features using a
     purpose-designed syntax
+
+## Version 3.1 - release March 2025
+
+Changed Maintainable Artefacts 
+
+- Availability Constraint no longer a Maintainable, inherits from Annotatable
+- Categorisation – added a fixed version of 1.0
+- Data Constraint
+    - Advanced Release Calendar: removed 
+    - Attachment: removed data source attachments
+- Data Structure new property: Evolving Structure
+- Dataflow new property: Dimension Constraint 
