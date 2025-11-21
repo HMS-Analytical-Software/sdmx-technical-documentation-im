@@ -1,10 +1,10 @@
-# SDMX 3.0 Technical Documentation - Information Model Component
+# SDMX 3.1 Technical Documentation - Information Model Component
 
 [![Under Restructuring](https://img.shields.io/badge/status-Under%20Restructuring-red?style=flat-square)](https://github.com/HMS-Analytical-Software/sdmx-technical-documentation-im)
 [![SDMX 3.0](https://img.shields.io/badge/SDMX-3.0-blue?style=flat-square)](https://sdmx.org)
 [![Documentation](https://img.shields.io/badge/docs-MkDocs-green?style=flat-square)](https://www.mkdocs.org/)
 
-This repository contains the **SDMX 3.0 Technical Specifications** documentation for the **Information Model** component and related sections. The Statistical Data and Metadata Exchange (SDMX) initiative provides international standards for exchanging statistical data and metadata.
+This repository contains the **SDMX 3.1 Technical Specifications** documentation for the **Information Model** component and related sections. The Statistical Data and Metadata Exchange (SDMX) initiative provides international standards for exchanging statistical data and metadata.
 
 > **Note:** This repository is currently under active restructuring for SDMX version 3.0.0.
 
@@ -63,14 +63,7 @@ Detailed implementation guidance for developers:
 
 ## 🎯 SDMX Version
 
-**Current Version:** SDMX 3.0.0 (under development)
-
-### Major Changes from SDMX 2.1
-- ✅ **New**: Semantic versioning for structural metadata artefacts
-- ✅ **Enhanced**: VTL 2.0 support with improved transformation capabilities
-- ✅ **Modernized**: RESTful API with richer data query syntax
-- ⚠️ **Breaking**: Structure mapping and reference metadata redesigned
-- ❌ **Deprecated**: EDI format, SOAP APIs, some XML data messages
+**Current Version:** SDMX 3.1.0 (under development)
 
 ## 🛠️ Building Documentation
 
@@ -223,10 +216,3 @@ Essential files for understanding the documentation structure:
 ## 📧 Contact
 
 For questions about SDMX specifications, please refer to the [SDMX website](https://sdmx.org) or contact the SDMX Technical Working Group.
-
----
-
-**Status**: Under active development for SDMX 3.0.0 release  
-**Branch**: `feature/initial-3.0-creation`  
-**Repository**: HMS-Analytical-Software/sdmx-technical-documentation-im
-
