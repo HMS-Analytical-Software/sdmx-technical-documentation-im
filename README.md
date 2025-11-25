@@ -1,16 +1,24 @@
-# SDMX 3.0 Technical Documentation - Information Model Component
+# SDMX 3.1 Technical Documentation - Information Model Component
 
 [![Under Restructuring](https://img.shields.io/badge/status-Under%20Restructuring-red?style=flat-square)](https://github.com/HMS-Analytical-Software/sdmx-technical-documentation-im)
 [![SDMX 3.0](https://img.shields.io/badge/SDMX-3.0-blue?style=flat-square)](https://sdmx.org)
 [![Documentation](https://img.shields.io/badge/docs-MkDocs-green?style=flat-square)](https://www.mkdocs.org/)
 
-This repository contains the **SDMX 3.0 Technical Specifications** documentation for the **Information Model** component and related sections. The Statistical Data and Metadata Exchange (SDMX) initiative provides international standards for exchanging statistical data and metadata.
+!!! note Only the information model section contains the content for SDMX
+version 3.1. All other material still refers to SDMX 3.0.
 
-> **Note:** This repository is currently under active restructuring for SDMX version 3.0.0.
+This repository contains the **SDMX 3.1 Technical Specifications** documentation
+for the **Information Model** component and related sections. The Statistical
+Data and Metadata Exchange (SDMX) initiative provides international standards
+for exchanging statistical data and metadata.
+
+> **Note:** This repository is currently under active restructuring for SDMX
+> version 3.1.0.
 
 ## 📚 Documentation Sections
 
-This repository comprises four interconnected documentation sections covering different aspects of the SDMX standard:
+This repository comprises four interconnected documentation sections covering
+different aspects of the SDMX standard:
 
 ### Section 1: Framework for SDMX Technical Standards
 
@@ -25,21 +33,25 @@ High-level introduction to the SDMX technical standards, including:
 
 ### Section 2: SDMX Information Model (Core Content)
 
-**Location:** `docs/information_model/` | **Config:** `mkdocs_information_model.yml`
+**Location:** `docs/information_model/` | **Config:**
+`mkdocs_information_model.yml`
 
 Complete UML-based specification of the SDMX Information Model:
 
-- **Base Package**: Foundation classes (Annotable→Identifiable→Nameable→Versionable→Maintainable)
+- **Base Package**: Foundation classes
+  (Annotable→Identifiable→Nameable→Versionable→Maintainable)
 - **Item Schemes**: Codelists, Concepts, Categories, Organizations
 - **Data Structures**: Data Structure Definitions (DSD) and Datasets
-- **Metadata Structures**: Metadata Structure Definitions (MSD) and Metadata Sets
+- **Metadata Structures**: Metadata Structure Definitions (MSD) and Metadata
+  Sets
 - **Advanced Features**: Hierarchies, Structure Mapping, Constraints, Cubes
 - **VTL Support**: Validation and Transformation Language integration
 - **UML Appendix**: Guide to UML notation used throughout
 
 ### Section 5: SDMX Registry Specification - Logical Interfaces
 
-**Location:** `docs/logical_interfaces/` | **Config:** `mkdocs_logical_interfaces.yml`
+**Location:** `docs/logical_interfaces/` | **Config:**
+`mkdocs_logical_interfaces.yml`
 
 Registry specifications including:
 
@@ -63,31 +75,32 @@ Detailed implementation guidance for developers:
 
 ## 🎯 SDMX Version
 
-**Current Version:** SDMX 3.0.0 (under development)
-
-### Major Changes from SDMX 2.1
-- ✅ **New**: Semantic versioning for structural metadata artefacts
-- ✅ **Enhanced**: VTL 2.0 support with improved transformation capabilities
-- ✅ **Modernized**: RESTful API with richer data query syntax
-- ⚠️ **Breaking**: Structure mapping and reference metadata redesigned
-- ❌ **Deprecated**: EDI format, SOAP APIs, some XML data messages
+**Current Version:** SDMX 3.1.0 (under development)
 
 ## 🛠️ Building Documentation
 
-The SDMX documentation is built **jointly from multiple repositories** as a unified documentation site. This repository is combined with:
+The SDMX documentation is built **jointly from multiple repositories** as a
+unified documentation site. This repository is combined with:
 
 - **sdmx-twg/sdmx-rest** - REST API specifications
 - **sdmx-twg/sdmx-ml** - SDMX-ML (XML format) specifications
 - **sdmx-twg/sdmx-json** - SDMX-JSON specifications
 - **sdmx-twg/sdmx-csv** - SDMX-CSV specifications
 
-The overall build process is coordinated in the **SDMX documentation repository** (link will be inserted once available).
+The overall build process is coordinated in the **SDMX documentation
+repository** (link will be inserted once available).
 
-**Note:** The MkDocs configuration files in this repository (`mkdocs_framework.yml`, `mkdocs_information_model.yml`, `mkdocs_logical_interfaces.yml`, `mkdocs_technical_notes.yml`) are used to **define the navigation structure** for their respective sections within the unified documentation. They are not intended for standalone local builds of individual sections.
+**Note:** The MkDocs configuration files in this repository
+(`mkdocs_framework.yml`, `mkdocs_information_model.yml`,
+`mkdocs_logical_interfaces.yml`, `mkdocs_technical_notes.yml`) are used to
+**define the navigation structure** for their respective sections within the
+unified documentation. They are not intended for standalone local builds of
+individual sections.
 
 ## ✍️ Markdown Formatting Conventions
 
-This documentation uses standard Markdown with specific conventions and extensions:
+This documentation uses standard Markdown with specific conventions and
+extensions:
 
 ### File Naming
 
@@ -102,10 +115,8 @@ Files use **numbered prefixes** to control navigation order:
 Diagrams are stored in `docs/*/media/` folders as SVG (preferred) or PNG:
 
 ```markdown
-![](media/image36.png){ width="550" }
-/// figure-caption | 10
-SDMX Identification, Maintenance and Versioning
-///
+![](media/image36.png){ width="550" } /// figure-caption | 10 SDMX
+Identification, Maintenance and Versioning ///
 ```
 
 - `/// figure-caption` blocks use a custom MkDocs extension
@@ -118,12 +129,12 @@ SDMX Identification, Maintenance and Versioning
 Standardized table format for UML classes:
 
 ```markdown
-| Class | Feature | Description |
-| :--- | :--- | :--- |
-| `ClassName` |  |  |
-|  | `attributeName` |  |
-|  | `associationName` |  |
-|  | `+roleName` |  |
+| Class       | Feature           | Description |
+| :---------- | :---------------- | :---------- |
+| `ClassName` |                   |             |
+|             | `attributeName`   |             |
+|             | `associationName` |             |
+|             | `+roleName`       |             |
 ```
 
 - Abstract classes: `*AnnotableArtefact*` (italic monospace)
@@ -141,19 +152,24 @@ Use **relative paths** for internal links:
 
 ### Terminology Standards
 
-- **Data Structure Definition (DSD)** - Standard term; "Key Family" is legacy synonym
+- **Data Structure Definition (DSD)** - Standard term; "Key Family" is legacy
+  synonym
 - **Maintainable Artefact** - British spelling ("artefact" not "artifact")
 - **Information Model (SDMX-IM)** - Refers to UML conceptual design
-- Always use backticks for class/attribute names in prose: `` The `DataStructureDefinition` class... ``
+- Always use backticks for class/attribute names in prose:
+  ``The `DataStructureDefinition` class...``
 
 ## 🔍 Markdown Linting
 
-**A Markdown linter is strongly recommended** to maintain consistency and catch formatting issues.
+**A Markdown linter is strongly recommended** to maintain consistency and catch
+formatting issues.
 
 ### Recommended Tools
 
-- **[markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)** - Command-line tool
-- **[VS Code markdownlint extension](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)** - Editor integration
+- **[markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)** -
+  Command-line tool
+- **[VS Code markdownlint extension](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)** -
+  Editor integration
 
 ### Installation
 
@@ -175,7 +191,8 @@ Key rules to enforce:
 - **MD040**: Fenced code blocks should have language specified
 - **MD051**: Link fragments should be valid
 
-Note: Some custom MkDocs syntax (like `/// figure-caption`) may trigger linter warnings - these can be safely ignored or configured as exceptions.
+Note: Some custom MkDocs syntax (like `/// figure-caption`) may trigger linter
+warnings - these can be safely ignored or configured as exceptions.
 
 ## 🤝 Contributing
 
@@ -183,7 +200,8 @@ Note: Some custom MkDocs syntax (like `/// figure-caption`) may trigger linter w
 
 1. Review existing content structure in the appropriate `docs/*/` folder
 2. Check `.github/copilot-instructions.md` for detailed conventions
-3. Ensure UML precision - class names, attributes, and cardinalities are normative
+3. Ensure UML precision - class names, attributes, and cardinalities are
+   normative
 4. Maintain consistent cross-referencing with relative paths
 
 ### Editing Checklist
@@ -205,7 +223,8 @@ Essential files for understanding the documentation structure:
 - **SDMX overview**: `docs/framework/0_framework-introduction.md`
 - **Foundation classes**: `docs/information_model/2_SDMX_Base_Package.md`
 - **Version history**: `docs/information_model/0_change_history.md`
-- **UML notation guide**: `docs/information_model/15_Appendix_1:_A_Short_Guide_to_UML_in_the_SDMX_Information_Model.md`
+- **UML notation guide**:
+  `docs/information_model/15_Appendix_1:_A_Short_Guide_to_UML_in_the_SDMX_Information_Model.md`
 
 ## 🔗 Related Resources
 
@@ -218,15 +237,10 @@ Essential files for understanding the documentation structure:
 
 ## 📜 License
 
-[License information to be added - typically the SDMX specifications are openly available]
+[License information to be added - typically the SDMX specifications are openly
+available]
 
 ## 📧 Contact
 
-For questions about SDMX specifications, please refer to the [SDMX website](https://sdmx.org) or contact the SDMX Technical Working Group.
-
----
-
-**Status**: Under active development for SDMX 3.0.0 release  
-**Branch**: `feature/initial-3.0-creation`  
-**Repository**: HMS-Analytical-Software/sdmx-technical-documentation-im
-
+For questions about SDMX specifications, please refer to the
+[SDMX website](https://sdmx.org) or contact the SDMX Technical Working Group.

@@ -159,6 +159,10 @@ and
 [Data Provisioning](./12_Data_Provisioning.md)). Each `Dataflow` has a maximum of one
 `DataStructureDefinition` specified which defines the structure of any
 `DataSets` to be reported/disseminated.
+A `Dataflow` may optionally define which `Dimensions` it uses, by defining a
+`DimensionConstraint` (this is a mandatory requirement if the
+`DataStructureDefinition` sets its `evolvingStructure` property to `‘true’` and 
+is semantically referenced by the `Dataflow`).
 
 There are two types of dimensions each having a common association to
 `Concept`:
@@ -305,8 +309,10 @@ A `DataStructureDefinition` can be extended to form a derived
 | `StructureUsage` |  | See "SDMX Base". |
 | `Dataflow` | Inherits from `StructureUsage` | Abstract concept (the structure without any data) of a flow of data that providers will provide for different reference periods. |
 |  | `/structure` | Associates a `Dataflow` to the `DataStructureDefinition`. |
+|  | `dimensionConstraint` | A list of Dimensions which the `Dataflow` uses. This is only required when the referenced `DataStructureDefinition` has the `evolvingStructure` property set to `true` and when the association to the `DataStructureDefinition` is on the latest minor version.[^1] |
 | `DataStructureDefinition` |  | A collection of metadata concepts, their structure and usage when used to collect or disseminate data. |
 |  | `/grouping` | An association to a set of metadata concepts that have an identified structural role in a `DataStructureDefinition`. |
+|  | `evolvingStructure` | An optional boolean property, defaulting to `false`. When `true` the DataStructureDefinition may have new Dimensions added without having to change its major version number.  |
 | `GroupDimensionDescriptor` | Inherits from `ComponentList` | A set of metadata concepts that define a partial key derived from the `DimensionDescriptor` in a `DataStructureDefinition`. |
 |  | `/components` | An association to the `Dimension` components that comprise the group. |
 | `DimensionDescriptor` | Inherits from `ComponentList` | An ordered set of metadata concepts that, combined, classify a statistical series, and whose values, when combined (the key) in an instance such as a data set, uniquely identify a specific observation. |
@@ -316,7 +322,7 @@ A `DataStructureDefinition` can be extended to form a derived
 | `MeasureDescriptor` | Inherits from `ComponentList` | A metadata concept that defines the `Measure`s of a `DataStructureDefinition`. |
 |  | `/components` | An association to a `Measure` component. |
 | `DimensionComponent` | Inherits from `Component`<br>Sub class: `Dimension`, `TimeDimension` | An abstract class representing any component that can be used for identifying observations. |
-|  | `order` | Specifies the order of the `DimensionComponent`s within the DSD. The property is used to indicate the position of the `DimensionComponent` and determines the key for identifying observations or series. The `TimeDimension`, when specified, must be the last within the `DimensionDescriptor`. |
+|  | `Order` | Specifies the order of the `DimensionComponent`s within the DSD. The property is used to indicate the position of the `DimensionComponent` and determines the key for identifying observations or series. The `TimeDimension`, when specified, must be the last within the `DimensionDescriptor`. |
 | `Dimension` | Inherits from `DimensionComponent` | A metadata concept used (often together with other metadata concepts) to classify a statistical series, e.g., a statistical concept indicating a certain economic activity or a geographical reference area. |
 |  | `/role` | Association to the `Concept` that specifies the role that the `Dimension` plays in the `DataStructureDefinition`. |
 |  | `/conceptIdentity` | An association to the metadata concept which defines the semantic of the `Dimension`. |
@@ -325,14 +331,14 @@ A `DataStructureDefinition` can be extended to form a derived
 |  | `/role` | Association to the `Concept` that specifies the role that the `DataAttribute` plays in the `DataStructureDefinition`. |
 |  | `minOccurs` | Defines the minimum required occurrences for the attribute. When equal to zero, the attribute is conditional. |
 |  | `maxOccurs` | Defines the maximum allowed occurrences for the attribute. |
-|  | `usage` | Defines whether a `DataAttribute` must be reported or not. |
+|  | `Usage` | Defines whether a `DataAttribute` must be reported or not. |
 |  | `+relatedTo` | Association to an `AttributeRelationship`. |
 |  | `/conceptIdentity` | An association to the `Concept` which defines the semantic of the component. |
 | `Measure` | Inherits from `Component` | The metadata concept that is the phenomenon to be measured in a data set. In a data set the instance of the measure is often called the observation. |
 |  | `/conceptIdentity` | An association to the `Concept` which carries the values of the measures. |
 |  | `minOccurs` | Defines the minimum required occurrences for the `Measure`. When equal to zero, the `Measure` is conditional. |
 |  | `maxOccurs` | Defines the maximum allowed occurrences for the `Measure`. |
-|  | `usage` | Defines whether a `Measure` must be reported or not. |
+|  | `Usage` | Defines whether a `Measure` must be reported or not. |
 | `AttributeRelationship` | Abstract class<br>Sub classes: `ObservationRelationship`, `GroupRelationship`, `DimensionRelationship` | Specifies the type of artefact to which a `DataAttribute` can be attached in a data set. |
 | `ObservationRelationship` |  | The `DataAttribute` is related to the observations of the data set. |
 | `GroupRelationship` |  | The `DataAttribute` is related to a `GroupDimensionDescriptor` construct. |
@@ -347,6 +353,10 @@ A `DataStructureDefinition` can be extended to form a derived
 |  | `+name` | An association of a sentinel value to a multilingual name. |
 |  | `+description` | An association of a sentinel value to a multilingual description. |
 
+[^1]:
+    Referencing the latest minor version of the Data Structure is achieved by the
+    reference including the plus operator on the minor version to indicate it links
+    to the latest stable version, for example 2.0+.0 will resolve to the highest version 2.x.y.
 
 The explanation of the classes, attributes, and associations comprising
 the `Representation` is described in the section on the [SDMX Base](./2_SDMX_Base_Package.md).

@@ -395,7 +395,7 @@ used to build a set of `IdentifiableArtefacts` that are `+categorisedBy` the
 same `Category`. Note that there is no navigation (i.e. no embedded
 reference) to the Categorisation from the `Category`. From an
 implementation perspective this is necessary as Categorisation has no
-affect on the versioning of either the `Category` or the
+effect on the versioning of either the `CategoryScheme` or the
 `IdentifiableArtefact`.
 
 #### Definitions

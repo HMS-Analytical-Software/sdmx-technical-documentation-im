@@ -28,8 +28,8 @@ found in the SDMX Registry Interface document. (Section [Registry Specification]
 A `ProvisionAgreement` / `MetadataProvisionAgreement` links the artefact
 that defines how data / metadata are structured and classified
 (`StructureUsage`) to the `DataProvider` / `MetadataProvider`. By means of a
-data or metadata registration, it references the `Datasource` (this can
-be data or metadata), whether this be an SDMX conformant file on a
+data registration, it references the `Datasource` (data only), 
+whether this be an SDMX conformant file on a
 website (`SimpleDatasource`) or a database service capable of supporting
 an SDMX query and responding with an SDMX conformant document
 (`QueryDatasource`).
@@ -42,10 +42,10 @@ scheme, by which the `StructureUsage` can be classified. This can assist
 in drilling down from subject matter domains to find the data or
 metadata that may be relevant.
 
-The `SimpleDatasource` links to the actual `DataSet` or `MetadataSet` on a
+The `SimpleDatasource` links to the actual `DataSet` on a
 website (this is shown on the diagram as a dependency called
 “references”). The `sourceURL` is obtained during the registration process
-of the `DataSet` or the `MetadataSet`. Additional information about the
+of the `DataSet`. Additional information about the
 content of the `SimpleDatasource` is stored in the registry in terms of a
 `Constraint` (see the Section [Constraints](./11_Constraints.md)) for the Registration.
 
@@ -89,8 +89,8 @@ metadata registration
 |  | `+source` | Association to reference metadata source, which can process a metadata query. |
 | `Datasource` | Abstract class. Sub classes are: `SimpleDatasource`, `QueryDatasource` | Identification of the location or service from where data or reference metadata can be obtained. |
 |  | `+sourceURL` | The URL of the data or reference metadata source (a file or a web service). |
-| `SimpleDatasource` |  | An SDMX dataset or metadataset accessible as a file at a URL. |
-| `QueryDatasource` | Abstract class. Inherits from: `Datasource`. Sub classes are: `RESTDatasource` | A data or reference metadata source, which can process a data or metadata query. |
-| `RESTDatasource` |  | A data or reference metadata source that is accessible via a RESTful web services interface. |
+| `SimpleDatasource` |  | An SDMX dataset accessible as a file at a URL. |
+| `QueryDatasource` | Abstract class. Inherits from: `Datasource`. Sub classes are: `RESTDatasource` | A data source, which can process a data query. |
+| `RESTDatasource` |  | A data source that is accessible via a RESTful web services interface. |
 |  | `+specificationURL` | Association to the URL for the specification of the web service. |
-| `Registration` |  | This is not detailed here but is shown as the link between the SDMX-IM and the `RegistryServiceAPI`. It denotes a data or metadata registration document. |
+| `Registration` |  | This is not detailed here but is shown as the link between the SDMX-IM and the `RegistryServiceAPI`. It denotes a data registration document. |

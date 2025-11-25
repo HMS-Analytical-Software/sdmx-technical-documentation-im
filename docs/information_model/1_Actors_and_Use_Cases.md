@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In order to develop the data models it is necessary to understand the
+In order to develop the data models, it is necessary to understand the
 functions to be supported resulting from the requirements definition.
 These are defined in a use case model. The use case model comprises
 actors and use cases and these are defined below.
