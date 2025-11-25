@@ -101,7 +101,7 @@ A `ConstrainableArtefact` can have two types of `Constraint`s:
     against the target `ConstrainableArtefact`. Multiple such `DataConstraints` may
     be present for a `ConstrainableArtefact`.
 2. `MetadataConstraint` – is used as a mechanism to specify a set of component
-    values (`MetadatTargetRegion`) that can be reported against the target
+    values (`MetadataTargetRegion`) that can be reported against the target
     `ConstrainableArtefact`. Multiple such `MetadataConstraints` may be present
     for a `ConstrainableArtefact`.
 
