@@ -69,6 +69,9 @@ The following table lists the Maintainable Artefacts.
 | None | Hierarchy | Hierarchical Code |
 | None | Hierarchy Association |  |
 | None | Categorisation |  |
+| Constraint | Data Constraint | DataKeySet |
+|  |  | CubeRegion |
+| Constraint | Metadata Constraint | MetadataTargetRegion |
 /// table-caption | 4
 Table of Maintainable Artefacts for Structural Definition
 Metadata
@@ -203,14 +206,13 @@ list of keys or a list of content (usually code values) of a specific
 component such as a dimension or attribute.
 
 Constraints comprise the specification of subsets of key or attribute
-values that are contained in a data source, or is to be provided for a
+values that are to be provided for a
 Dataflow or Metadataflow, or directly attached to a Data Structure
 Definition or Metadata Structure Definition. This is important metadata
 because, for example, the full range of possibilities which is implied
 by the Data Structure Definition (e.g., the complete set of valid keys
 is the Cartesian product of all the values in the code lists for each of
-the Dimensions) is often more than is actually present in any specific
-data source, or more than is intended to be supplied according to a
+the Dimensions) is often more than is intended to be supplied according to a
 specific Dataflow.
 
 Often a Data Provider will not be able to provide data for all key
@@ -221,7 +223,8 @@ source (at the level of the Provision Agreement or the Data Provider) by
 supplying metadata that defines the key combinations or cube regions
 that are available. This is done by means of a Constraint. The
 Constraint is also used to define a code list subset which is used to
-populate a partial code list.
+populate a partial code list, and in generating a schema for data reporters
+to validate their datasets against.
 
 Furthermore, it is often useful to define subsets or views of the Data
 Structure Definition which restrict values in some code lists,
@@ -233,14 +236,11 @@ Whenever data is published or made available by a Data Provider, it must
 conform to a Dataflow (and hence to a Data Structure Definition). The
 Dataflow is thus a means of enabling content based processing.
 
-In addition, Constraints can be extremely useful in a data visualisation
+In addition, DataAvailabilityConstraints can be extremely useful in a data visualisation
 system, such as dissemination of statistics on a website. In such a
 system a Cube Region can be used to specify the Dimension codes that
 actually exist in a data source (these can be used to build relevant
-selection tables), and the Key Set can be used to specify the keys that
-exist in a data source (these can be used to guide the user to select
-only those Dimension code values that will return data based on the
-Dimension values already selected).
+selection tables).
 
 ### 7.3.2 Data and Metadata Constraints: Schematic
 
@@ -263,18 +263,17 @@ constrainable artefacts
 
 The class diagram above shows that Data Provider, Metadata Provider,
 Dataflow, Metadataflow, Provision Agreement, Metadata Provision
-Agreement, Data Structure Definition, Metadata Structure Definition,
-Simple Datasource and REST Datasource (via the abstract Query
-Datasource) are all concrete sub-classes of Constrainable Artefact and
-can therefore have Constraints specified. Note that the actual
-Constraint as submitted is associated to the reference classes which
-inherit from `ConstrainableRef`: these are used to refer to the classes to
+Agreement, Data Structure Definition, Metadata Structure Definition
+are all concrete sub-classes of Constrainable Artefact and
+can therefore have Data Constraints specified. Note that the actual
+Constraint as submitted is associated to the reference classes defines
+in the Constraint Attachment. These are used to refer to the classes to
 which the Constraint applies.
 
 The content of the Constraint can be found in the SDMX Information Model
 document.
 
-## 7.4 Data and Metadata Registration
+## 7.4 Data Registration
 
 ### 7.4.1 Basic Concepts
 
@@ -295,8 +294,8 @@ has agreed to make available.
 The same mechanism can be used to report or make available a metadata
 set.
 
-SDMX-RR supports dataset and metadata set registration via the
-Registration Request, which can be created by the Data/Metadata Provider
+SDMX-RR supports dataset registration via the
+Registration Request, which can be created by the Data Provider
 (giving the Data Provider maximum control). The registry responds to the
 registration request with a registration response which indicates if the
 registration was successful. In the event of an error, the error
@@ -315,7 +314,7 @@ Schematic of the Objects Concerned with registration
 
 The following UML diagram shows the composition of the registration
 request. Each request is made up of one or more Registrations, one per
-dataset or metadata set to be registered. The Registration can
+dataset to be registered. The Registration can
 optionally have information, which has been extracted from the
 Registration:
 
@@ -362,13 +361,9 @@ The `Registration` includes attributes that state how a `SimpleDatasource`
 is to be indexed when registered. The Registry registration process must
 act as follows:
 
-Information in the data or metadata set is extracted and placed in one
-or more `Constraint`s (see the `Constraint` model in the SDMX
+Information in the dataset is extracted and made available via the availability 
+REST API as documented in the SDMX
 [Information Model  Section](../../information_model/information_model/11_Constraints.md)). 
-The information to
-be extracted is indicated by the Boolean values set on the
-`ProvisionAgreement` or `MetadataProvisionAgreement` as shown in the table
-below.
 
 | Indexing Required | Registration Process Activity |
 | :--- | :--- |
@@ -382,8 +377,7 @@ Constraints that specify the contents of a `QueryDatasource` are
 submitted to the Registry via the structure submission service (i.e.,
 the RESTful API).
 
-The `Registration` must reference the `ProvisionAgreement` or
-`MetadataProvisionAgreement` to which it relates.
+The `Registration` must reference the `ProvisionAgreement` to which it relates.
 
 ### 7.4.3 Registration Response 
 
@@ -397,7 +391,7 @@ there must be a registration status for each `Registration`. The
 If the registration has succeeded, a `Registration` will be returned –
 this holds the Registry-allocated Id of the newly registered
 `Datasource` plus a `Datasource` holding the URL to access the dataset,
-metadataset, or query service.
+or query service.
 
 The `RegistrationResponse` returns set of registration status (one for
 each registration submitted) in terms of a `StatusMessage` (this is common
@@ -562,12 +556,11 @@ table below:
 
 | Selector | Comment |
 | :--- | :--- |
-| `DataProvider` &amp; `MetadataProvider` | Any datasets or metadata sets registered by the specified data or, metadata provider will activate the notification. |
-| `ProvisionAgreement` &amp; `MetadataProvisionAgreement` | Any datasets or metadata sets registered for the agreement will, activate the notification. |
-| Dataflow &amp; Metadataflow | Any datasets or metadata sets registered for the specified dataflow, (or metadataflow) will activate the notification. |
-| `DataStructureDefinition` &amp; `MetadataStructureDefinition` | Any datasets or metadata sets registered for those dataflows (or, metadataflows) that are based on the specified Data Structure Definition, will activate the notification |
-| Category | Any datasets or metadata sets registered for those dataflows,, metadataflows, provision agreements that are categorised by the, category. |
-
+| `DataProvider` | Any datasets registered by the specified dataprovider will activate the notification. |
+| `ProvisionAgreement` | Any datasets for the agreement will activate the notification. |
+| `Dataflow` | Any datasets for the specified dataflow will activate the notification. |
+| `DataStructureDefinition` | Any datasets for those dataflows that are based on the specified Data Structure Definition will activate the notification. |
+| `Category` | Any datasets registered for those dataflows, provision agreements that are categorised by the category. |
 
 The event will also capture the semantic of the registration: deletion
 or replacement of an existing registration or a new registration.

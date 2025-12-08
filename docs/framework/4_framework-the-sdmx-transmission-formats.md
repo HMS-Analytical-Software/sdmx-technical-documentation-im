@@ -39,7 +39,7 @@ There are four distinct types of message:
 
 4. **Registry:** All of the possible interactions with the SDMX registry
     services are supported using SDMX-ML interfaces and REST API calls.
-    Submission of structural metadata content, data / metadata
+    Submission of structural metadata content, data
     registrations and subscriptions is performed by a synchronous
     exchange of documents -- a "request" message answered by a
     "response" message.

@@ -29,6 +29,10 @@ is also not backwardly compatible, but benefits from a rationalisation
 and better organisations of resources, and a much richer data query URL
 syntax.
 
+The 3.1 version provides supports for data models to increase dimensionality
+over time without impacting existing data collections. The Data Constraint
+model was adjusted to separate concerns of data reporting and data dissemination.
+
 ## Major Changes from 1.0 to 2.0
 
 - **Reference Metadata:** In addition to describing and specifying
@@ -201,3 +205,22 @@ The principle breaking changes are:
 
 The SDMX 3.0 Major Changes document provides more information including
 an analysis of the breaking changes.
+
+## Major Changes from 3.0 to 3.1
+
+Information Model
+
+- Addition of Dimension Constraint property to a Dataflow
+- Addition of evolving structure property to a Data Structure Definition
+- Remove version property on Categorisation
+- Simplification of Constraints
+    - Removal of Advanced Release Calendar
+    - Removal of Role, Data Constraints only restrict data that can be reported
+    - Restrict constraint targets to Identifiable structures (not URLs)
+    - Addition of Availability Constraint to define actual data
+
+Documentation
+
+- Registering Reference Metadata removed from documentation, to align with XML
+  Registration object which is unable to reference a Metadata Provision, and
+  REST API which is unable to query for registered reference metadata sources.

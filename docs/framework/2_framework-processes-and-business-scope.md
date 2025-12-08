@@ -263,14 +263,13 @@ from more than one data provider. Provision agreements are the objects
 which tell you which data providers are supplying what data to which
 data flows. Similarly, metadata provision agreements for metadata flows.
 
-Provision agreements allow for a variety of information to be made
-available: the schedule by which statistical data or metadata is
-reported or published, the specific topics about which data or metadata
-is reported within the theoretically possible set of data (as described
-by a data structure definition or reference metadata structure
-definition), and the time period covered by the statistical data and
-metadata. This set of information is termed "constraint" in the SDMX
-Information Model.
+Provision Agreements allow for data collection restrictions to be applied
+at the level of the Data Provider in the context of the collection (data flow),
+this set of information is termed a ‘Data Constraint’ in the SDMX Information Model.
+Additionally, in a dissemination environment, data can be queried at the level
+of the Provision Agreement, this can be a complete dataset as supplied by a
+specific Data Provider for the Dataflow, a subset of data, or information
+about what data exists (Data Availability).
 
 A brief summary of the objects described in the information model
 includes:
@@ -376,11 +375,17 @@ includes:
     outside the scope of a technical specification). In version 3.0,
     metadata provision agreement and data provision agreement are two
     separate artefacts.
-- **Constraint:** Data and Metadata Constraints describe a subset of
-    a data source or metadata source, and may also provide information
-    about scheduled releases of data. They are associated with data /
-    metadata providers, provision agreements, data flows, metadataflows,
-    data structure definitions and metadata structure definitions.
+- **Data Constraint**: Used to restrict content (such as enumerations) and are
+    used by provision agreements, data flows, data structure definitions in
+    order to provide a set of reporting restrictions in the context of a collection
+- **Metadata Constraint**: Used to restrict content (such as enumerations) and
+    are used by metadata provision agreements, metadata flows, metadata
+    structure definitions in order to provide a set of reporting restrictions
+    in the context of a collection
+- **Available Data Constraint**: Used to report the set of Component values that
+    have data reported against them in the context of a Data Query. This
+    structure allows a user to know what valid filters can be applied to a
+    cube of data, such that the resulting cube will contain data.
 - **Structure Map:** Structure maps describes a mapping between data
     structure definitions or dataflows for the purpose of transforming a
     data set into a different structure. The mapping rules are defined
@@ -463,7 +468,7 @@ registry -- instead, it specifies the standard interfaces which may be
 supported by a registry. Thus, users may implement an SDMX-conformant
 registry in any fashion they choose, provided the interfaces are
 supported as specified in the
-[Registry Specification Section](../../registry_specification/registry_specification/1_Introduction.md). 
+[Registry Specification Section](../../registry_specification/registry_specification/1_Introduction.md).
 These interfaces are expressed as XML documents, but also REST API
 request/response messages
 
@@ -477,7 +482,7 @@ The registry services discussed here can be briefly summarized:
     such as a code list, and for this stub to reference the actual
     location from where the metadata can be retrieved, either from a
     file or a structural metadata resource, such as another registry.
-- **Registration of Data and Metadata Sources:** This registry
+- **Registration of Data Sources:** This registry
     service allows users with maintenance agency access privileges to
     inform the registry of the existence and location (for retrieval) of
     data sets and reference metadata sets. The registry stores metadata
@@ -507,7 +512,7 @@ package exchanged data; for describing web services to one another, to
 allow for easy integration into applications that use other web services
 as data resources.
 
-Version 3.0 has standardized on RESTful web services with a OpenAPI
+Version 3.1 has standardized on RESTful web services with a OpenAPI
 specification published on the [SDMX Technical Working Group's GitHub
 repository](https://github.com/sdmx-twg). There are five 'resources':
 
@@ -518,6 +523,8 @@ repository](https://github.com/sdmx-twg). There are five 'resources':
 - availability — retrieval of information on the data available for a
     Dataflow
 - metadata — retrieval of reference metadata
+- registration – retrieval of data locations (URL) for specific provision 
+    agreements 
 
 The following conceptual example uses the 'data' resource to query a
 data repository for a series identified by the key 'M.USD.EUR.SP00.A' in
