@@ -4,9 +4,6 @@
 [![SDMX 3.0](https://img.shields.io/badge/SDMX-3.0-blue?style=flat-square)](https://sdmx.org)
 [![Documentation](https://img.shields.io/badge/docs-MkDocs-green?style=flat-square)](https://www.mkdocs.org/)
 
-!!! note Only the information model section contains the content for SDMX
-version 3.1. All other material still refers to SDMX 3.0.
-
 This repository contains the **SDMX 3.1 Technical Specifications** documentation
 for the **Information Model** component and related sections. The Statistical
 Data and Metadata Exchange (SDMX) initiative provides international standards
