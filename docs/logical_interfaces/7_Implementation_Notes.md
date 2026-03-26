@@ -1,8 +1,8 @@
-# 7 Implementation Notes
+# Implementation Notes
 
-## 7.1 Structural Definition Metadata
+## Structural Definition Metadata
 
-### 7.1.1 Introduction
+### Introduction
 
 The SDMX Registry must have the ability to support agencies in their
 role of defining and disseminating structural metadata artefacts. These
@@ -74,7 +74,7 @@ Table of Maintainable Artefacts for Structural Definition
 Metadata
 ///
 
-### 7.1.2 Item Scheme, Structure
+### Item Scheme, Structure
 
 The artefacts included in the structural definitions are:
 
@@ -91,9 +91,9 @@ The artefacts included in the structural definitions are:
 
 [^1]: Note that Codelist is also an `EnumeratedList`.
 
-### 7.1.3 Structure Usage
+### Structure Usage
 
-#### 7.1.3.1 Structure Usage: Basic Concepts
+#### Structure Usage: Basic Concepts
 
 The Structure Usage defines, in its concrete classes of Dataflow and
 Metadataflow, which flows of data and metadata use which specific
@@ -103,7 +103,7 @@ one or more Category Scheme using the Categorisation mechanism. This
 gives the ability for an application to discover data and metadata by
 “drilling down” the Category Schemes.
 
-#### 7.1.3.2 Structure Usage Schematic
+#### Structure Usage Schematic
 
 ![](media/image13.png)
 /// figure-caption | 9
@@ -111,7 +111,7 @@ Schematic of Linking the Data and Metadata Flows to Categories
 and Structure Definitions
 ///
 
-#### 7.1.3.3 Structure Usage Model 
+#### Structure Usage Model 
 
 ![](media/image14.png)
 /// figure-caption
@@ -129,9 +129,9 @@ The following links may be created by means of a Categorisation
 - Categorisation to Dataflow and Category
 - Categorisation to Metadataflow and Category
 
-## 7.2 Data and Metadata Provisioning
+## Data and Metadata Provisioning
 
-### 7.2.1 Provisioning Agreement: Basic concepts
+### Provisioning Agreement: Basic concepts
 
 Data/Metadata provisioning defines a framework in which the provision of
 different types of statistical data and metadata by various
@@ -155,7 +155,7 @@ gateway scenarios), or in a dissemination environment. It should be
 noted, too, that in any exchange scenario, the registry functions as a
 repository of structural metadata.
 
-### 7.2.2 Provisioning Agreement Model – pull use case
+### Provisioning Agreement Model – pull use case
 
 An organisation which publishes statistical data or reference metadata
 and wishes to make it available to an SDMX enabled community is called a
@@ -191,9 +191,9 @@ Metadataflow Definition. The Data/Metadata Provider and the
 Dataflow/Metadataflow must exist already in order to set up a Metadata
 Provision or Provision Agreement.
 
-## 7.3 Data and Metadata Constraints
+## Data and Metadata Constraints
 
-### 7.3.1 Data and Metadata Constraints: Basic Concepts
+### Data and Metadata Constraints: Basic Concepts
 
 Constraints are, effectively, lists of the valid or actual content of
 data and metadata. Constraints can be used to specify a subset of the
@@ -242,7 +242,7 @@ exist in a data source (these can be used to guide the user to select
 only those Dimension code values that will return data based on the
 Dimension values already selected).
 
-### 7.3.2 Data and Metadata Constraints: Schematic
+### Data and Metadata Constraints: Schematic
 
 ![](media/image18.png)
 /// figure-caption
@@ -250,7 +250,7 @@ Schematic of the Constraint and the Artefacts that can be
 constrained
 ///
 
-### 7.3.3 Data and Metadata Constraints: Model
+### Data and Metadata Constraints: Model
 
 ![](media/image19.png)
 /// figure-caption
@@ -274,9 +274,9 @@ which the Constraint applies.
 The content of the Constraint can be found in the SDMX Information Model
 document.
 
-## 7.4 Data and Metadata Registration
+## Data and Metadata Registration
 
-### 7.4.1 Basic Concepts
+### Basic Concepts
 
 A Data Provider has published a new dataset conforming to an existing
 Dataflow (and hence Data Structure Definition). This is implemented as
@@ -302,16 +302,16 @@ registration request with a registration response which indicates if the
 registration was successful. In the event of an error, the error
 messages are returned as a registry exception within the response.
 
-### 7.4.2 The Registration Request 
+### The Registration Request 
 
-#### 7.4.2.1 Registration Request Schematic 
+#### Registration Request Schematic 
 
 ![](media/image20.png)
 /// figure-caption
 Schematic of the Objects Concerned with registration
 ///
 
-#### 7.4.2.2 Registration Request Model 
+#### Registration Request Model 
 
 The following UML diagram shows the composition of the registration
 request. Each request is made up of one or more Registrations, one per
@@ -385,7 +385,7 @@ the RESTful API).
 The `Registration` must reference the `ProvisionAgreement` or
 `MetadataProvisionAgreement` to which it relates.
 
-### 7.4.3 Registration Response 
+### Registration Response 
 
 After a registration request has been submitted to the registry, a
 response is returned to the submitter indicating success or failure.
@@ -413,7 +413,7 @@ the `RegistrationResponse` is shown below:
 Logical class diagram showing the registration response
 ///
 
-## 7.5 Subscription and Notification Service 
+## Subscription and Notification Service 
 
 The contents of the SDMX Registry/Repository will change regularly: new
 code lists and key families will be published and new datasets and
@@ -437,14 +437,14 @@ are observing the object are activated, and either an email or HTTP POST
 is instigated to report details of the changes to the user specified in
 the subscription. This is called a “notification”.
 
-###  7.5.1 Subscription Logical Class Diagram 
+### Subscription Logical Class Diagram 
 
 ![](media/image23.png)
 /// figure-caption
 Logical Class Diagram of the Subscription
 ///
 
-###  7.5.2 Subscription Information
+### Subscription Information
 
 Regardless of the type of registry/repository events being observed, a
 subscription always contains:
@@ -470,7 +470,7 @@ subscription always contains:
 | `ALL_EVENTS` | All events of the specified `EventType` |
 
 
-###  7.5.3 Wildcard Facility 
+### Wildcard Facility 
 
 Subscription notification supports wildcarded identifier components
 URNs, which are identifiers which have some or all of their component
@@ -544,7 +544,7 @@ Version = 2.3+.1
 The complete SDMX versioning syntax can be found in the SDMX Standards
 [Section “Technical Notes”, paragraph “Versioning”](../../technical_notes/technical_notes/3_General_Notes_for_Implementers.md#versioning).
 
-### 7.5.4 Structural Repository Events 
+### Structural Repository Events 
 
 Whenever a maintainable artefact (data structure definition, concept
 scheme, codelist, metadata structure definition, category scheme, etc.)
@@ -553,7 +553,7 @@ repository, a structural metadata event is triggered. Subscriptions may
 be set up to monitor all such events, or focus on specific artefacts
 such as a Data Structure Definition.
 
-### 7.5.5 Registration Events 
+### Registration Events 
 
 Whenever a dataset or metadata-set is registered a registration event is
 created. A subscription may be observing all data or metadata
@@ -572,9 +572,9 @@ table below:
 The event will also capture the semantic of the registration: deletion
 or replacement of an existing registration or a new registration.
 
-## 7.6 Notification
+## Notification
 
-### 7.6.1 Logical Class Diagram
+### Logical Class Diagram
 
 ![](media/image24.png)
 /// figure-caption
@@ -596,13 +596,13 @@ triggered, the following common information is in the message:
 Additionally, supplementary information may be contained in the
 notification as detailed below.
 
-### 7.6.2 Structural Event Component
+### Structural Event Component
 
 The notification will contain the `MaintainableArtefact` that triggered
 the event in a form similar to the SDMX-ML structural message (using
 elements from that namespace).
 
-###  7.6.3 Registration Event Component
+### Registration Event Component
 
 The notification will contain the Registration.
 
